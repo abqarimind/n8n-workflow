@@ -1,0 +1,1790 @@
+{
+  "active": false,
+  "connections": {
+    "Cron Trigger - Every 5 min": {
+      "main": [
+        [
+          {
+            "node": "Read Assets READY_FOR_ANALYSIS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Assets READY_FOR_ANALYSIS": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Update Status to ANALYZING",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer Renommage": {
+      "main": [
+        [
+          {
+            "node": "Update metadata Frameio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update metadata Frameio": {
+      "main": [
+        [
+          {
+            "node": "Update asset name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mapping": {
+      "main": [
+        [
+          {
+            "node": "Préparer Renommage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent Nomenclature": {
+      "main": [
+        [
+          {
+            "node": "Mapping",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Status to ANALYZING": {
+      "main": [
+        [
+          {
+            "node": "Analyse Vidéo/Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update asset name": {
+      "main": [
+        [
+          {
+            "node": "Needs Drive Operations?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Needs Drive Operations?": {
+      "main": [
+        [
+          {
+            "node": "Update READY_FOR_FINALIZE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Status to DONE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyse Vidéo/Image": {
+      "main": [
+        [
+          {
+            "node": "Agent Nomenclature",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent Nomenclature",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-14T07:53:09.678Z",
+  "id": "FWoF9CYRetkaijXO",
+  "isArchived": false,
+  "meta": null,
+  "name": "WF2 - Video Analysis & Metadata Update",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "90d92216-d49f-4cab-9a2e-6d9c08342eb5",
+              "leftValue": "={{ $('Read Assets READY_FOR_ANALYSIS').item.json.requires_drive_ops }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "6af3c3e6-f7b5-4176-86e9-9d79e26d3747",
+      "name": "Needs Drive Operations?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        4240,
+        -64
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1211841085,
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0/edit#gid=1211841085"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "frameio_asset_id": "={{ $json.data.id }}",
+            "status": "READY_FOR_FINALIZE",
+            "updated_at": "={{ new Date().toISOString() }}",
+            "video_title": "={{ $('Agent Nomenclature').item.json.output.video_title }}",
+            "avatar_gender": "={{ $('Agent Nomenclature').item.json.output.gender }}",
+            "main_concept": "={{ $('Agent Nomenclature').item.json.output.main_concept }}",
+            "avatar_ethnicity": "={{ $('Agent Nomenclature').item.json.output.ethnicity }}",
+            "avatar_skin_tones": "={{ $('Agent Nomenclature').item.json.output.skin_tones }}",
+            "avatar_age_range": "={{ $('Agent Nomenclature').item.json.output.age_range }}",
+            "product_presented": "={{ $('Agent Nomenclature').item.json.output.product_presented }}",
+            "detailed_concept_description": "={{ $('Agent Nomenclature').item.json.output.detailed_concept_description }}"
+          },
+          "matchingColumns": [
+            "frameio_asset_id"
+          ],
+          "schema": [
+            {
+              "id": "frameio_asset_id",
+              "displayName": "frameio_asset_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "frameio_project_id",
+              "displayName": "frameio_project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "drive_file_id",
+              "displayName": "drive_file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "idempotency_key",
+              "displayName": "idempotency_key",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "requires_drive_ops",
+              "displayName": "requires_drive_ops",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_name_original",
+              "displayName": "file_name_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_size_bytes",
+              "displayName": "file_size_bytes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "mime_type",
+              "displayName": "mime_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_efficient_url",
+              "displayName": "frameio_efficient_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_thumb_url",
+              "displayName": "frameio_thumb_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "retry_count",
+              "displayName": "retry_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_code",
+              "displayName": "last_error_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_message",
+              "displayName": "last_error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "next_retry_at",
+              "displayName": "next_retry_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "video_title",
+              "displayName": "video_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "main_concept",
+              "displayName": "main_concept",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "avatar_gender",
+              "displayName": "avatar_gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "avatar_ethnicity",
+              "displayName": "avatar_ethnicity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "avatar_age_range",
+              "displayName": "avatar_age_range",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "avatar_skin_tones",
+              "displayName": "avatar_skin_tones",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "product_presented",
+              "displayName": "product_presented",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "detailed_concept_description",
+              "displayName": "detailed_concept_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "ad88f47c-733d-43ee-af6f-126ffe078662",
+      "name": "Update READY_FOR_FINALIZE",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        4464,
+        -160
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4Wm2Xjg29dAttfqc",
+          "name": "Satyn - Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $env.SPREADSHEET_ID }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "assets"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "status": "ERROR",
+            "retry_count": "={{ Number($('filter_retry_time').item.json.retry_count || 0) + 1 }}",
+            "last_error_code": "={{ $json.error?.code || 'UNKNOWN' }}",
+            "last_error_message": "={{ $json.error?.message || $json.error || 'Analysis failed' }}",
+            "next_retry_at": "={{ new Date(Date.now() + Math.min(Math.pow(2, Number($('filter_retry_time').item.json.retry_count || 0)) * 60000, 3600000)).toISOString() }}",
+            "updated_at": "={{ $now.toISO() }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "31009e75-978e-412a-89ef-82bb7dd9bb63",
+      "name": "Update Error Status",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        2944,
+        224
+      ],
+      "alwaysOutputData": true,
+      "disabled": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1211841085,
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0/edit#gid=1211841085"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "status",
+              "lookupValue": "=READY_FOR_ANALYSIS"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        1840,
+        -64
+      ],
+      "id": "523455b9-9e64-4492-aa3c-88d7100ffa04",
+      "name": "Read Assets READY_FOR_ANALYSIS",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4Wm2Xjg29dAttfqc",
+          "name": "Satyn - Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        1616,
+        -64
+      ],
+      "id": "72ccd975-6bab-4629-99e9-a1f6cdd5bb4d",
+      "name": "Cron Trigger - Every 5 min"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4b183fe2-866c-40bf-8e6d-4acb25e9454e",
+              "leftValue": "={{ $json.next_retry_at }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "b307854d-888e-4ada-8507-e03647b5fa58",
+              "leftValue": "={{ $json.next_retry_at }}",
+              "rightValue": "={{ new Date().toISOString() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "before"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        2272,
+        -64
+      ],
+      "id": "c48632b6-309c-45fb-8085-f1ac94de7761",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "=15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1211841085,
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0/edit#gid=1211841085"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "frameio_asset_id": "={{ $json.frameio_asset_id }}",
+            "status": "ANALYZING",
+            "updated_at": "={{ new Date().toISOString() }}",
+            "frameio_efficient_url": "={{ $json.frameio_efficient_url }}"
+          },
+          "matchingColumns": [
+            "frameio_asset_id"
+          ],
+          "schema": [
+            {
+              "id": "frameio_asset_id",
+              "displayName": "frameio_asset_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "frameio_project_id",
+              "displayName": "frameio_project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "drive_file_id",
+              "displayName": "drive_file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "idempotency_key",
+              "displayName": "idempotency_key",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "requires_drive_ops",
+              "displayName": "requires_drive_ops",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_name_original",
+              "displayName": "file_name_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_size_bytes",
+              "displayName": "file_size_bytes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "mime_type",
+              "displayName": "mime_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_efficient_url",
+              "displayName": "frameio_efficient_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "frameio_thumb_url",
+              "displayName": "frameio_thumb_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "retry_count",
+              "displayName": "retry_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_code",
+              "displayName": "last_error_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_message",
+              "displayName": "last_error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "next_retry_at",
+              "displayName": "next_retry_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "video_title",
+              "displayName": "video_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "main_concept",
+              "displayName": "main_concept",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "avatar_gender",
+              "displayName": "avatar_gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "avatar_ethnicity",
+              "displayName": "avatar_ethnicity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "avatar_age_range",
+              "displayName": "avatar_age_range",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "avatar_skin_tones",
+              "displayName": "avatar_skin_tones",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "product_presented",
+              "displayName": "product_presented",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "detailed_concept_description",
+              "displayName": "detailed_concept_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "76b2c2b4-916a-411e-a866-97d3060a8cba",
+      "name": "Update Status to ANALYZING",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        2496,
+        -64
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4Wm2Xjg29dAttfqc",
+          "name": "Satyn - Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5e20f2c7-6c48-42a2-a8d4-2a9017dce4d5",
+              "name": "ouput",
+              "value": "={{ $json.data }}",
+              "type": "string"
+            },
+            {
+              "id": "61e1caa1-e568-457f-9ab0-cc8987007884",
+              "name": "asset_name",
+              "value": "={{ $('Agent Nomenclature').item.json.output.video_title }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "id": "01282042-17a1-4238-ad16-dc98f7f9303f",
+      "name": "Préparer Renommage",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        3568,
+        -64
+      ],
+      "typeVersion": 3.4,
+      "notes": "Prépare les données pour le renommage et conserve l'extension originale"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.frame.io/v4/accounts/a8d19374-1e6a-4bec-b3ee-2535c1e4d51c/projects/f5f637ed-1e39-4810-a492-162670ca7b7a/metadata/values",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"data\": {{ $json.ouput }}\n} ",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3792,
+        -64
+      ],
+      "id": "076df408-09cf-49c3-96b2-1dcb7aafc73c",
+      "name": "Update metadata Frameio",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "UQm6obX5OEHbcJCu",
+          "name": "Frame.io Jad"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.frame.io/v4/accounts/a8d19374-1e6a-4bec-b3ee-2535c1e4d51c/files/{{ $('Read Assets READY_FOR_ANALYSIS').first().json.frameio_asset_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api-version",
+              "value": "4.0"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"name\": \"{{ $('Préparer Renommage').item.json.asset_name }}\"\n  }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        4016,
+        -64
+      ],
+      "id": "2007a247-dcd4-4c54-bfe9-e7aac9462b7b",
+      "name": "Update asset name",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "UQm6obX5OEHbcJCu",
+          "name": "Frame.io Jad"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// === Inputs ===\nconst assetId = $('Read Assets READY_FOR_ANALYSIS').first().json.frameio_asset_id;\nconst extracted = $input.first().json.output || {};\n\n// === Helpers ===\nconst toArray = (v) => Array.isArray(v) ? v : String(v ?? '').split(',').map(s => s.trim()).filter(Boolean);\nconst lower = (s) => String(s ?? '').trim().toLowerCase();\nconst resolveId = (opts, label) => {\n  if (!label) return undefined;\n  if (opts[label]) return opts[label];\n  const k = Object.keys(opts).find(x => x.toLowerCase() === String(label).toLowerCase());\n  return k ? opts[k] : undefined;\n};\nconst isNAish = (v) => v == null || lower(v) === 'na' || String(v).trim() === '';\n\n// === Field map (IDs conforme à ton dump) ===\nconst FIELDS = {\n  detailed_concept_description: {\n    field_definition_id: \"17ce0b40-da67-4a89-9488-5b804fd71706\",\n    type: \"text\"\n  },\n  main_concept: {\n    field_definition_id: \"8a0c6275-d8ae-4678-8cf7-854355d60f97\",\n    type: \"select\",\n    options: {\n      \"UGC\": \"1455917a-ce07-4118-a882-32017ae720ae\",\n      \"Product focused\": \"f450cb60-9dc5-4643-b5c0-8672276d5edc\",\n      \"Street interview\": \"7563642a-a0c1-4c5f-b8e0-c41933722de4\",\n      \"Podcast\": \"7a800b96-3b97-4db3-a4de-fc76fd1881a1\",\n      \"Founder\": \"596a27d7-b56d-48a5-831c-6fac44ed43fc\",\n      \"NA\": \"a9cf7157-fe5c-41d1-89a5-121b425e98fe\"\n    }\n  },\n  product_presented: {\n    field_definition_id: \"047f7d5c-4926-42d4-8a6f-9b6c367f49bd\",\n    type: \"select_multi\",\n    options: {\n      \"SatynCap\": \"19962e15-53f9-423b-a2e5-cf77646067f2\",\n      \"SatynCap V2\": \"f5434cbe-fe2c-42d5-9bdb-fd81a1e03607\",\n      \"Dana-Cap\": \"94acbc9c-3118-4d65-a153-381ceabb1afe\",\n      \"ST Cap Heritage\": \"f95b74ae-1072-42b1-acec-0cea036d548d\",\n      \"Satyn Studio Cap\": \"d26a7a21-998f-404c-acba-301d777fd842\",\n      \"S-Cap\": \"11d85d85-bd08-4816-827e-c49e8271434b\",\n      \"Satyn Bob\": \"9969103d-e100-47dc-ae9c-6eb88549ea2b\",\n      \"S-Daily Cap\": \"5d30985b-6c94-454b-bc4a-212b63c18719\",\n      \"SatynBeanie\": \"f4322d35-b722-47f6-98b8-ab919eefa7e6\",\n      \"SatynCosy\": \"91aed737-6976-4052-b8a8-42530fb89b5a\",\n      \"Skullcap\": \"e66e0d5f-c157-4669-a057-ede4e179b60c\",\n      \"Washed Hoodie\": \"999077a9-dbbf-4c88-877b-8676b439517d\",\n      \"Hoodie Zip V2\": \"f6d1d25b-76b8-4d75-8770-ffec6eeb5c73\",\n      \"Hoodie Zip V1\": \"2272c27e-c812-44f1-b9a3-e44778ec3452\",\n      \"TWWNS Tee\": \"6fdbdc2b-fed3-4ee3-8f37-8bd8712d8d58\",\n      \"Bloom Tee\": \"dc53a06d-5b0f-47b3-bc3f-1c1f53f7d3a8\",\n      \"NA\": \"1f48e814-aa2c-46eb-b79b-4ecd5a3f62f2\"\n    }\n  },\n  ethnicity: {\n    field_definition_id: \"6fbbd50e-fff8-40e4-bd66-3e6bc6d26f1f\",\n    type: \"select\",\n    options: {\n      \"Asian\": \"44e54135-edcf-4b25-bc6c-ea54ce9305e0\",\n      \"Black\": \"4e4f0a5a-7c26-484d-98da-5fe0b8c4577e\",\n      \"Caucasian\": \"16db295a-86fd-4cdc-867b-499662dddd02\",\n      \"Latino/Hispanic\": \"c6f237fb-caa6-4b43-b0f3-c13a7d2d81d5\",\n      \"Mixed\": \"499fd214-1731-4a34-bd7c-e1d68ab8722a\",\n      \"Middle Eastern\": \"dfb1d8c6-2da4-4a0f-8b57-853a8ce347be\",\n      \"Other\": \"fc5d1258-dead-439b-a9fc-8f85fa11fee0\",\n      \"NA\": \"2ba24eae-8d25-4781-8a50-6164b8e75276\",\n      \"White\": \"861f4506-62c8-4508-a10f-ee79173673d7\"\n    }\n  },\n  age_range: {\n    field_definition_id: \"ef690846-ba3e-4d63-af4b-151f2920a4e8\",\n    type: \"select\",\n    options: {\n      \"13-17\": \"8bdf932d-78a4-4451-8a88-e287b55ed254\",\n      \"18-24\": \"42ae355f-e38e-43a6-ac02-57047191e93f\",\n      \"25-34\": \"a3c36731-c82e-4c52-b453-7e573202d7d9\",\n      \"35-44\": \"8c43060d-e189-4268-869b-5937cbd58492\",\n      \"45-54\": \"448a5172-f590-4a2b-8d60-b28d157244c0\",\n      \"55-64\": \"5678f62c-edf0-4f7e-8b1f-b878f3861beb\",\n      \"65+\": \"af159ccb-61c5-48b4-9565-657998cd8cea\",\n      \"NA\": \"4f734226-e087-426a-aa93-f76a826e662b\"\n    }\n  },\n  gender: {\n    field_definition_id: \"b44a4eff-85bd-4741-a956-4ddc31d2d6b2\",\n    type: \"select\",\n    options: {\n      \"Male\": \"ab68cc23-096c-439e-93c5-0ce493733e38\",\n      \"Female\": \"43667e1c-ee32-496a-87c3-f482732bac76\",\n      \"NA\": \"c4626d45-7bb7-46e5-a53a-a53d9fbecc59\"\n    }\n  },\n  skin_tones: { // Skin Color\n    field_definition_id: \"094c3d52-ae5d-4bd7-afd9-bac21ece6b1f\",\n    type: \"select\",\n    options: {\n      \"White\": \"458ba7e2-28aa-4d2d-985c-4bf63c8898f3\",\n      \"Black\": \"2e305500-8461-4c7a-8911-33011c021c6e\",\n      \"Tanned\": \"11887ea9-8e16-46a7-8af9-4723cb6bc831\",\n      \"NA\": \"040c2d25-9f90-4088-8552-89a6428f5109\"\n    }\n  }\n};\n\n// === Order (7 champs garantis) ===\nconst orderedKeys = [\n  'detailed_concept_description',\n  'main_concept',\n  'product_presented',\n  'skin_tones',\n  'ethnicity',\n  'age_range',\n  'gender',\n];\n\n// === Build values (alpha-proof) ===\nconst values = orderedKeys.map((key) => {\n  const m = FIELDS[key];\n  const raw = extracted[key];\n\n  if (m.type === 'text') {\n    const v = isNAish(raw) ? 'NA' : String(raw);\n    return { field_definition_id: m.field_definition_id, value: v };\n  }\n\n  if (m.type === 'select') {\n    const label = isNAish(raw) ? 'NA' : String(raw);\n    const id = resolveId(m.options, label) || m.options['NA'];\n    return { field_definition_id: m.field_definition_id, value: [id] }; // <- ARRAY obligatoire\n  }\n\n  if (m.type === 'select_multi') {\n    let labels;\n    if (isNAish(raw)) {\n      labels = ['NA'];\n    } else {\n      labels = toArray(raw);\n      if (!labels.length) labels = ['NA'];\n    }\n    const ids = Array.from(new Set(\n      labels.map(l => resolveId(m.options, l) || (lower(l) === 'na' ? m.options['NA'] : undefined))\n           .filter(Boolean)\n    ));\n    return { field_definition_id: m.field_definition_id, value: ids.length ? ids : [m.options['NA']] };\n  }\n\n  // Fallback ultra-sécurisé\n  return { field_definition_id: m.field_definition_id, value: ['NA'] };\n});\n\n// (optionnel) petite assertion pour éviter d’envoyer un payload incomplet\nif (values.length !== 7) {\n  throw new Error(`Frame.io payload guard: expected 7 values, got ${values.length}`);\n}\n\nreturn [{\n  json: {\n    data: {\n      file_ids: [assetId],\n      values\n    }\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3344,
+        -64
+      ],
+      "id": "48086b39-8b73-402e-9194-f32a6a44773b",
+      "name": "Mapping"
+    },
+    {
+      "parameters": {
+        "text": "=Here is the video analysis for footage review: {{ $json.content.parts[0].text }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "video_title",
+              "description": "Concise description of the video (max 100 characters).",
+              "required": true
+            },
+            {
+              "name": "gender",
+              "description": "Gender of the main avatar. Options: Male, Female, NA.",
+              "required": true
+            },
+            {
+              "name": "ethnicity",
+              "description": "Ethnicity of the main avatar. Options: Asian, Black, Caucasian, Latino/Hispanic, Mixed, Middle Eastern, Other, NA.",
+              "required": true
+            },
+            {
+              "name": "age_range",
+              "description": "Age range of the main avatar. Options: 13-17, 18-24, 25-34, 35-44, 45-54, 55-64, 65+, NA.",
+              "required": true
+            },
+            {
+              "name": "skin_tones",
+              "description": "Skin tone of the main avatar. Options: White, Black, Tanned, NA.",
+              "required": true
+            },
+            {
+              "name": "main_concept",
+              "description": "Category of the video's main concept. Options: UGC, Product focused, Street interview, Podcast, Founder, NA.",
+              "required": true
+            },
+            {
+              "name": "product_presented",
+              "description": "List of Satyn.fr products identified in the video. Multi-select field. Options: Washed hoodie, Hoodie zip v1, Hoodie zip v2, SatynCap, SatynCap V2, SatynBeanie, SatynCosy, Skullcap, ST Cap Heritage, Dana-Cap, Satyn Studio Cap, S-Cap, Satyn Bob, S-Daily Cap, TWWNS Tee, Bloom Tee, NA.",
+              "required": true
+            },
+            {
+              "name": "detailed_concept_description",
+              "description": "One-sentence description of the specific video concept.",
+              "required": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1.2,
+      "position": [
+        2944,
+        -64
+      ],
+      "id": "38a9c30d-4e1f-4a6c-8a9a-acf12f5503f1",
+      "name": "Agent Nomenclature"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1211841085,
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0/edit#gid=1211841085"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "frameio_asset_id": "={{ $json.data.id }}",
+            "status": "DONE",
+            "updated_at": "={{ new Date().toISOString() }}",
+            "video_title": "={{ $('Agent Nomenclature').item.json.output.video_title }}",
+            "avatar_gender": "={{ $('Agent Nomenclature').item.json.output.gender }}",
+            "main_concept": "={{ $('Agent Nomenclature').item.json.output.main_concept }}",
+            "avatar_ethnicity": "={{ $('Agent Nomenclature').item.json.output.ethnicity }}",
+            "avatar_skin_tones": "={{ $('Agent Nomenclature').item.json.output.skin_tones }}",
+            "avatar_age_range": "={{ $('Agent Nomenclature').item.json.output.age_range }}",
+            "product_presented": "={{ $('Agent Nomenclature').item.json.output.product_presented }}",
+            "detailed_concept_description": "={{ $('Agent Nomenclature').item.json.output.detailed_concept_description }}"
+          },
+          "matchingColumns": [
+            "frameio_asset_id"
+          ],
+          "schema": [
+            {
+              "id": "frameio_asset_id",
+              "displayName": "frameio_asset_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "frameio_project_id",
+              "displayName": "frameio_project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "drive_file_id",
+              "displayName": "drive_file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "idempotency_key",
+              "displayName": "idempotency_key",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "requires_drive_ops",
+              "displayName": "requires_drive_ops",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_name_original",
+              "displayName": "file_name_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_size_bytes",
+              "displayName": "file_size_bytes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "mime_type",
+              "displayName": "mime_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_efficient_url",
+              "displayName": "frameio_efficient_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_thumb_url",
+              "displayName": "frameio_thumb_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "retry_count",
+              "displayName": "retry_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_code",
+              "displayName": "last_error_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_message",
+              "displayName": "last_error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "next_retry_at",
+              "displayName": "next_retry_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "video_title",
+              "displayName": "video_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "main_concept",
+              "displayName": "main_concept",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "avatar_gender",
+              "displayName": "avatar_gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "avatar_ethnicity",
+              "displayName": "avatar_ethnicity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "avatar_age_range",
+              "displayName": "avatar_age_range",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "avatar_skin_tones",
+              "displayName": "avatar_skin_tones",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "product_presented",
+              "displayName": "product_presented",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "detailed_concept_description",
+              "displayName": "detailed_concept_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "64c710e4-7ca8-48d5-aa22-9fca44da2ddf",
+      "name": "Update Status to DONE",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        4464,
+        32
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4Wm2Xjg29dAttfqc",
+          "name": "Satyn - Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "text": "**Video Analysis Guide (Footage Review & Tagging)**\n\n**Objective:** Accurately analyze video content to generate structured metadata, facilitating automated footage review and asset tagging.\n\n**Detailed Instructions for the AI:**\n\n1.  **ROLE:** You are a video content analyst specializing in e-commerce raw footage review and metadata generation. Your task is to extract key information from video assets to facilitate efficient tagging and categorization.\n\n2.  **CONTEXT:** You are processing raw video clips for the Satyn.fr brand. These clips will be used for marketing on social media platforms.\n\n3.   3. **TASK:**\n\nAnalyze the provided video content and output the requested fields **in plain text** (not JSON, no markdown, no code fences).\n\nEach field must appear on its own line using the exact format:\n\n```\nkey: value\n\n```\n\nFor `product_presented`, return multiple products separated by `;` if needed (choose only from the allowed list).\n\n**Required keys (in this exact order):**\n\n-   `video_title`: Concise description of the video (max 100 characters)\n    \n-   `gender`: Male | Female | Non-Binary | NA\n    \n-   `ethnicity`: Asian | Black | Caucasian | Latino/Hispanic | Mixed | Middle Eastern | Other | NA\n    \n-   `age_range`: 13-17 years | 18-24 years | 25-34 years | 35-44 years | 45-54 years | 55-64 years | 65 years and over | NA\n    \n-   `skin_tones`: White | Black | Tanned | NA\n    \n-   `main_concept`: UGC | Product focused | Street interview | Podcast | Founder | NA\n    \n-   `product_presented`: List of products separated by `;` (choose only from:  \n    Washed hoodie, Hoodie zip v1, Hoodie zip v2, SatynCap, SatynCap V2, SatynBeanie, SatynCosy, Skullcap, ST Cap Heritage, Dana-Cap, Satyn Studio Cap, S-Cap, Satyn Bob, S-Daily Cap, TWWNS Tee, Bloom Tee, Other, None)\n    \n-   `detailed_concept_description`: One sentence describing the core concept of the video\n    \n\n**Example (format only, not content):**\n\n```\nvideo_title: Man showcasing Satyn cap in studio\ngender: Male\nethnicity: Black\nage_range: 18-24 years\nskin_tones: Black\nmain_concept: UGC\nproduct_presented: SatynCap V2; Skullcap\ndetailed_concept_description: A man presents the features of the SatynCap V2 in detail.\n\n4.  **RULES & SPECIFICATIONS:**\n    * **`video_title`:** Provide a concise description, a maximum of 10 words and 100 characters.\n    * **`main_avatar`:** Identify the primary person in the video.\n        * **`gender`:** Choose one from `Male`, `Female`, `Non-Binary`, or `NA` if not applicable.\n        * **`ethnicity`:** Choose one from `Asian`, `Black`, `Caucasian`, `Latino/Hispanic`, `Mixed`, `Middle Eastern`, `Other`, or `NA`.\n        * **`age_range`:** Estimate the age range from the provided list, or `NA`.\n        * **`skin_tones`:** This is a **multi-select** field. Identify all relevant skin tones from `White`, `Black`, `Tanned`, or use `NA` if not applicable or multiple tones are not distinguishable.\n    * **`main_concept`:** Categorize the video based on the following definitions:\n        * **UGC:** Any video showing a person using the product naturally.\n        * **Product focused:** The video focuses exclusively on the product itself.\n        * **Street interview:** A person is interviewing someone in a street setting.\n        * **Podcast:** A conversation between two or more people.\n        * **Founder:** The brand owner is speaking about the product, brand, or packing products.\n        * If none of these apply, use `NA`.\n    * **`product_presented`:** This is a **multi-select** field. Identify all Satyn.fr products shown in the video.\n        * **`Washed hoodie`:** An oversized, washed-black hoodie made of a matte, textured fabric. The hoodie features a hood, dropped shoulders, voluminous sleeves with ribbed cuffs, a front kangaroo pocket, and a ribbed hem. A small, tonal \"Satyn\" logo is embroidered in script on the center of the chest. The outfit includes light-gray washed-denim jeans with a straight-leg silhouette, constructed with prominent vertical seams down the front that have heavily frayed, exposed edges.\nColors: green/black/pink/black.\n        * **`Hoodie zip v1`:** A black zip-up hoodie with an oversized silhouette, dropped shoulders, and voluminous sleeves. It features a silver-toned metal zipper that runs from the hem to the base of the attached hood. The hoodie has a split kangaroo pocket on the front and is finished with ribbed cuffs and a ribbed bottom hem. On the left chest, there is white text printed in a lowercase sans-serif font that reads \"/sa tyn\".\nColors: black/pink/cyan.\n        * **`Hoodie zip v2`:** A black zip-up hoodie with a matte-textured exterior and a hood lined with shiny black satin. The hoodie has a full-front silver-toned metal zipper. A white woven tag is visible at the neckline, featuring the word \"Satyn\" in stylized black text, with smaller text below it reading \"DESIGNED IN P\" and a size \"L\" designation within a circle.\nColors: black/pink/cyan.\n        * **`SatynCap`:** A black, structured, trucker-style baseball cap with a curved visor. The front panels and visor are made of a solid black fabric, while the side and back panels are made of a black mesh. A fabric-covered button sits at the top of the crown. The front of the cap features the word \"Satyn\" in large, raised, black, 3D embroidery in a stylized cursive script.\nColors: pink/black/white/violet/beige-kaki.\n        * **`SatynCap V2`:** A black, structured baseball cap with a curved brim and a tonal button on top. The front features a large, raised, and glossy black logo in a stylized script that reads \"Satyn\". Below the main logo is a smaller, horizontal black bar with some text. The cap is shown with water running over its surface, giving it a wet, glistening appearance.\nColors: Black (tone-on-tone embroidery), Pink (white embroidery + pink satin), White (white embroidery + grey satin).\n        * **`SatynBeanie`:** A black, fine-gauge knit beanie with a close-fitting, rounded shape and a straight, uncuffed hem. A large, grey jacquard-knit graphic wraps around the lower part of the beanie, featuring the word \"Satyn\" in a stylized, graffiti-like script.\nColors: black (logo grey), grey (logo white), brown (logo light brown/kaki), blue (logo light blue), pink (logo white/light pink).\n        * **`SatynCosy`:** A black ribbed knit beanie with a wide, folded cuff. The body of the beanie has a vertical ribbed texture that gathers at the crown. A small, rectangular black woven label is sewn onto the cuff, featuring the word \"Satyn\" in a white stylized script.\nColor: black (with white satyn).\n        * **`Skullcap`:** A black, form-fitting skull cap made of a smooth knit fabric with a cuffed brim. On the front of the cuff, the word \"Satyn\" is embroidered in a stylized white script. A vertical seam is visible at the top center of the cap.\nVariants: 1) skull light (reflective logo, stitch logo, 1 black color) 2) skullcap (black, gray, pink, with white embroidered logo).\n        * **`ST Cap Heritage`:** A baseball cap with a multi-colored houndstooth pattern in shades of brown, black, and off-white. The cap is constructed with multiple panels that meet at a fabric-covered button on the crown and features a curved brim. A large, white, three-dimensional embroidered monogram is centered on the front, showing a stylized, intertwined 'S' and 'T'.\n        * **`Dana-Cap`:** A cap made of a woven plaid fabric featuring a pattern of brown, beige, and black intersecting lines. The cap has a rounded crown, a short, soft brim, and is lined with a light tan, fuzzy material that is visible on the interior and on the edges of the ear flaps. Centered on the front is a white embroidered emblem of a symmetrical, stylized butterfly-like design.\nColors: Blue plaid / Brown plaid.\n        * **`Satyn Studio Cap`:** An olive green five-panel cap with a flat brim, constructed from a smooth-textured fabric. Visible tonal stitching outlines the panels and runs in multiple parallel rows across the brim. A rectangular black woven patch is sewn onto the front panel, featuring a white embroidered graphic of a stylized, symmetrical butterfly-like design. Below the graphic, the words \"SATYN STUDIO\" are embroidered in white, uppercase letters.\nColor: Olive green.\n        * **`S-Cap`:** A black baseball cap with a structured front, a curved brim, and a button on top. The front of the cap features a large, stylized letter \"S\" in white embroidery. The side panels of the cap are made of a perforated material. Partial white branding is visible on the right side of the cap. The image shows clear liquid splashed across the top of the cap, running down the front and onto the brim.\n        * **`Satyn Bob`:** A black bucket hat made of a woven fabric with a wide, downward-sloping brim that has a raw, frayed edge. A wide, smooth black band encircles the base of the crown, featuring a silver-toned metallic emblem at the front that resembles two interconnected 'S' shapes. A thin black cord acts as an adjustable chin strap, held together by a small, silver-toned metallic slide.\n        * **`S-Daily Cap`:** A black unstructured baseball-style cap with a matte finish, featuring a classic silhouette with a curved brim and a coordinating black button on top. On the front of the crown, the word \"Satyn\" is embroidered in a white script font.\nColors: Black / Blue / Brown.\n        * **`TWWNS Tee`:** Heavyweight 240gsm or 320gsm oversized tee with “The Whole World Needs Satyn” print on the back. Colors: Black, White.\n        * **`Bloom Tee`:** An oversized black t-shirt made from a matte cotton-like fabric. It has a relaxed silhouette with dropped shoulders and wide, elbow-length sleeves. A large graphic is printed on the back in a thick, white outline, featuring a five-petaled flower with a long stem that loops at the bottom to spell out \"satyn\" in a cursive script.\nColors: white, blue, pink, black.\n        * If a product is present but not on this list, use `NA`. If no product is shown, use `NA`.\n    * **`detailed_concept_description`:** Provide a single sentence that concisely describes the core concept or action of the video.",
+        "videoUrls": "={{ $json.frameio_efficient_url }}",
+        "options": {}
+      },
+      "id": "2dabd849-f569-4f97-964a-9557234c1d52",
+      "name": "Analyse Vidéo/Image",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "position": [
+        2720,
+        -64
+      ],
+      "typeVersion": 1,
+      "retryOnFail": true,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ny4MRPhHqLPpNzoo",
+          "name": "Satyn API Gemini (My First Project) "
+        }
+      },
+      "notes": "Gemini analyse le contenu vidéo et extrait les caractéristiques"
+    },
+    {
+      "parameters": {
+        "content": "## 🧠 WF2 - Analysis & Metadata\n├── Cron Trigger → Read Sheets (READY_FOR_ANALYSIS)\n├── Update Status → Gemini Analysis\n├── Agent Nomenclature → Map to Frame.io IDs\n├── PATCH Frame.io Metadata → Rename Asset\n└── Route: Drive Operations? → Update Status",
+        "height": 176,
+        "width": 448
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        -352
+      ],
+      "id": "02c53454-6749-40bc-9455-a8cc3c424b28",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        2048,
+        -64
+      ],
+      "id": "146dbc15-c90a-4d3b-869a-713fba88e6d0",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        3056,
+        96
+      ],
+      "id": "a6caf7b4-47a9-49e5-b7d1-fe55f95ddb31",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "QwJBQXFZHYn9CVTv",
+          "name": "OpenRouter account - SATYN (WF2 ANALYSIS)"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {
+    "Read Assets READY_FOR_ANALYSIS": [
+      {
+        "json": {
+          "row_number": 44,
+          "frameio_asset_id": "3cd8bab4-6a47-4aca-84a0-9ea87ec15c13",
+          "frameio_project_id": "f5f637ed-1e39-4810-a492-162670ca7b7a",
+          "drive_file_id": "11QPMlBnscUvR-W8JVcfB4G_-rRGJmfiK",
+          "idempotency_key": "11QPMlBnscUvR-W8JVcfB4G_-rRGJmfiK_5f9de9b4bcf4fa9d16cbf9017e849bcf",
+          "source": "Drive",
+          "requires_drive_ops": "true",
+          "file_name_original": "Copy of IMG_0276.MOV_Rendu_007.mp4",
+          "file_size_bytes": "4432368",
+          "mime_type": "video/mp4",
+          "frameio_efficient_url": "https://assets.frame.io/encode/3cd8bab4-6a47-4aca-84a0-9ea87ec15c13/h264_360.mp4?response-content-disposition=attachment%3B+filename%3D%22Copy+of+IMG_0276.MOV_Rendu_007.mp4%22%3B+filename%2A%3D%22Copy+of+IMG_0276.MOV_Rendu_007.mp4%22&response-content-type=video%2Fmp4&x-amz-meta-project_id=f5f637ed-1e39-4810-a492-162670ca7b7a&x-amz-meta-resource_type=asset&x-amz-meta-resource_id=3cd8bab4-6a47-4aca-84a0-9ea87ec15c13&Expires=1759060800&Signature=oTCtx-Wq02sqMMM-GRZSI0gOGKx2XMTvVxqf7hUIFt~mDIkMzTf27fU347xewE5-~AiOkgDDDaEDIX85zAoX~eBfFbb4P~mhnKw8q7Fr3RXiFvvaBHXcTyA7NQIw5rAchEPRsB1gcXB52F~6ikaDQH35Dd7Z6q38Tepe9QZau-bT1uRIvhgO-bqWrlCLGF3enBkKCeZu4ByypVBmZtfxvvI66t4jflgDZWYKRZKqgg31XzEf3SRXwV97w-iu3lw8iNnzdnV5D9OiZ6wENLFO5W35fJeHXf2kreusIZrLiQ7Mmn6bBeGvmRujqyeDlAmSWmeZj8Y8iIQoi3Rb4hRUKQ__&Key-Pair-Id=K1XW5DOJMY1ET9",
+          "frameio_thumb_url": "https://picture2.frame.io/image/s3://frameio-assets-production/image/3cd8bab4-6a47-4aca-84a0-9ea87ec15c13/image_small_86.jpg?alg=HS256&sig=GcZiHDBAs0U1cCBZYOMyT3qpUZMRMAvKPssOt4W95rg&exp=1759060800&signed=format&exp=1759060800&max_height=540&format=png",
+          "status": "READY_FOR_ANALYSIS",
+          "retry_count": "0",
+          "last_error_code": "",
+          "last_error_message": "",
+          "next_retry_at": "",
+          "video_title": "",
+          "main_concept": "",
+          "avatar_gender": "",
+          "avatar_ethnicity": "",
+          "avatar_age_range": "",
+          "avatar_skin_tones": "",
+          "product_presented": "",
+          "detailed_concept_description": "",
+          "created_at": "2025-09-27T13:10:59.704Z",
+          "updated_at": "2025-09-27T13:11:27.721Z",
+          "notes": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 45,
+          "frameio_asset_id": "df8efdce-ccb8-4b04-93a9-22fb05a2be63",
+          "frameio_project_id": "f5f637ed-1e39-4810-a492-162670ca7b7a",
+          "drive_file_id": "1nvbsJslr4EdOiNzHF64Itf9G_HwNAke1",
+          "idempotency_key": "1nvbsJslr4EdOiNzHF64Itf9G_HwNAke1_acb94a78be284e1a82be49d67d7c6d57",
+          "source": "Drive",
+          "requires_drive_ops": "true",
+          "file_name_original": "Copy of IMG_0276.MOV_Rendu_009.mp4",
+          "file_size_bytes": "1763267",
+          "mime_type": "video/mp4",
+          "frameio_efficient_url": "https://assets.frame.io/encode/df8efdce-ccb8-4b04-93a9-22fb05a2be63/h264_360.mp4?response-content-disposition=attachment%3B+filename%3D%22Copy+of+IMG_0276.MOV_Rendu_009.mp4%22%3B+filename%2A%3D%22Copy+of+IMG_0276.MOV_Rendu_009.mp4%22&response-content-type=video%2Fmp4&x-amz-meta-project_id=f5f637ed-1e39-4810-a492-162670ca7b7a&x-amz-meta-resource_type=asset&x-amz-meta-resource_id=df8efdce-ccb8-4b04-93a9-22fb05a2be63&Expires=1759060800&Signature=IAQwG1OBIAUJA0PvTQ1X7eB73xXL3Ny-h7i5NOsStYYnqMJWp1RjxFrJCp9kxUyucOPhTNZAKbsqbINJqvmYBRqXdy32vZ-ck9w3hg9vS9uj-MLozbDQ8N4YRPKcSQkqNVbbBlitqCJtJ5Tk~7FyFzX9Gx6AS2VJy-cpCV9zEmOReU9tN8l~yXgsY6MDrNkPSg249rbdXcZI9urCCi8BuwcBB14-SYdRO4bOazWQI4jMkrg-Y-y4pDTASSLo1NAfktiYeDY8YuPSsUKS3ZHFNcckjlCzG8fLtNAXyHXS7DiuCpZRF3t~wGtLrXuzPttTayTNS~dRFWvbUIB3-l6j-A__&Key-Pair-Id=K1XW5DOJMY1ET9",
+          "frameio_thumb_url": "https://picture2.frame.io/image/s3://frameio-assets-production/image/df8efdce-ccb8-4b04-93a9-22fb05a2be63/image_small_31.jpg?alg=HS256&sig=G9vn04nwZ8X3dZArneWWZvd7VHtj6FpgcdHJasXQW5g&exp=1759060800&signed=format&exp=1759060800&max_height=540&format=png",
+          "status": "READY_FOR_ANALYSIS",
+          "retry_count": "0",
+          "last_error_code": "",
+          "last_error_message": "",
+          "next_retry_at": "",
+          "video_title": "",
+          "main_concept": "",
+          "avatar_gender": "",
+          "avatar_ethnicity": "",
+          "avatar_age_range": "",
+          "avatar_skin_tones": "",
+          "product_presented": "",
+          "detailed_concept_description": "",
+          "created_at": "2025-09-27T13:15:59.113Z",
+          "updated_at": "2025-09-27T13:16:25.051Z",
+          "notes": ""
+        }
+      },
+      {
+        "json": {
+          "row_number": 46,
+          "frameio_asset_id": "531a24a9-2a38-4d70-a782-72afbe30daf4",
+          "frameio_project_id": "f5f637ed-1e39-4810-a492-162670ca7b7a",
+          "drive_file_id": "1mBzpwHPPC_w1Ax6n0SNZBWK9a2H-w9_4",
+          "idempotency_key": "1mBzpwHPPC_w1Ax6n0SNZBWK9a2H-w9_4_5f9de9b4bcf4fa9d16cbf9017e849bcf",
+          "source": "Drive",
+          "requires_drive_ops": "true",
+          "file_name_original": "Copy of IMG_0276.MOV_Rendu_007.mp4",
+          "file_size_bytes": "4432368",
+          "mime_type": "video/mp4",
+          "frameio_efficient_url": "https://assets.frame.io/encode/531a24a9-2a38-4d70-a782-72afbe30daf4/h264_360.mp4?response-content-disposition=attachment%3B+filename%3D%22Copy+of+IMG_0276%252EMOV_Rendu_007.mp4%22%3B+filename%2A%3D%22Copy+of+IMG_0276%252EMOV_Rendu_007.mp4%22&response-content-type=video%2Fmp4&x-amz-meta-project_id=f5f637ed-1e39-4810-a492-162670ca7b7a&x-amz-meta-resource_type=asset&x-amz-meta-resource_id=531a24a9-2a38-4d70-a782-72afbe30daf4&Expires=1761825600&Signature=Gk75A9RupmW1YlNgv8GQS1qFuzj2xdaeVrzA-hL9yZw1sipz9bt0Z0NuVnN94h~VbVuCN8rkgZ1Ba4I5ZdF9etTq7iUEaoZuqSUBRuuiY2g7duNdRy~4CIjVT9jUGMUz0OBu~vpVky9xunglXAUC9m4FM3W5RIydwZE7d4A1QoBrheKNRrwQzr2Mru3qR8rm7HlKFzShn1c3p29lQ38JUaHPkEwn9TYlUvUoXVWN2SwxHdCk-8GxMsEqSuGu7An~gENcYZdSaPF1l28LyCaVLW-a6A3zyPH4YFO4kZNw8kL-mKlf1aZ3GleY1-XZ4Sy8F~JOb9j-tf6-ap6dsJ124A__&Key-Pair-Id=K1XW5DOJMY1ET9",
+          "frameio_thumb_url": "https://picture2.frame.io/image/s3://frameio-assets-production/image/531a24a9-2a38-4d70-a782-72afbe30daf4/image_small_86.jpg?alg=HS256&sig=hpEhTw46zS1g89i1ARvBroJkTF-BIYhWPOZRtH36QRI&signed=format&exp=1761825600&max_height=540&format=png",
+          "status": "READY_FOR_ANALYSIS",
+          "retry_count": "0",
+          "last_error_code": "",
+          "last_error_message": "",
+          "next_retry_at": "",
+          "video_title": "",
+          "main_concept": "",
+          "avatar_gender": "",
+          "avatar_ethnicity": "",
+          "avatar_age_range": "",
+          "avatar_skin_tones": "",
+          "product_presented": "",
+          "detailed_concept_description": "",
+          "created_at": "2025-10-29T13:53:58.888Z",
+          "updated_at": "2025-10-29T13:54:31.329Z",
+          "notes": ""
+        }
+      }
+    ],
+    "Cron Trigger - Every 5 min": [
+      {
+        "json": {
+          "timestamp": "2025-10-29T14:55:36.367+01:00",
+          "Readable date": "October 29th 2025, 2:55:36 pm",
+          "Readable time": "2:55:36 pm",
+          "Day of week": "Wednesday",
+          "Year": "2025",
+          "Month": "October",
+          "Day of month": "29",
+          "Hour": "14",
+          "Minute": "55",
+          "Second": "36",
+          "Timezone": "Europe/Berlin (UTC+01:00)"
+        }
+      }
+    ],
+    "Filter": [
+      {
+        "json": {
+          "row_number": 44,
+          "frameio_asset_id": "3cd8bab4-6a47-4aca-84a0-9ea87ec15c13",
+          "frameio_project_id": "f5f637ed-1e39-4810-a492-162670ca7b7a",
+          "drive_file_id": "11QPMlBnscUvR-W8JVcfB4G_-rRGJmfiK",
+          "idempotency_key": "11QPMlBnscUvR-W8JVcfB4G_-rRGJmfiK_5f9de9b4bcf4fa9d16cbf9017e849bcf",
+          "source": "Drive",
+          "requires_drive_ops": "true",
+          "file_name_original": "Copy of IMG_0276.MOV_Rendu_007.mp4",
+          "file_size_bytes": "4432368",
+          "mime_type": "video/mp4",
+          "frameio_efficient_url": "https://assets.frame.io/encode/3cd8bab4-6a47-4aca-84a0-9ea87ec15c13/h264_360.mp4?response-content-disposition=attachment%3B+filename%3D%22Copy+of+IMG_0276.MOV_Rendu_007.mp4%22%3B+filename%2A%3D%22Copy+of+IMG_0276.MOV_Rendu_007.mp4%22&response-content-type=video%2Fmp4&x-amz-meta-project_id=f5f637ed-1e39-4810-a492-162670ca7b7a&x-amz-meta-resource_type=asset&x-amz-meta-resource_id=3cd8bab4-6a47-4aca-84a0-9ea87ec15c13&Expires=1759060800&Signature=oTCtx-Wq02sqMMM-GRZSI0gOGKx2XMTvVxqf7hUIFt~mDIkMzTf27fU347xewE5-~AiOkgDDDaEDIX85zAoX~eBfFbb4P~mhnKw8q7Fr3RXiFvvaBHXcTyA7NQIw5rAchEPRsB1gcXB52F~6ikaDQH35Dd7Z6q38Tepe9QZau-bT1uRIvhgO-bqWrlCLGF3enBkKCeZu4ByypVBmZtfxvvI66t4jflgDZWYKRZKqgg31XzEf3SRXwV97w-iu3lw8iNnzdnV5D9OiZ6wENLFO5W35fJeHXf2kreusIZrLiQ7Mmn6bBeGvmRujqyeDlAmSWmeZj8Y8iIQoi3Rb4hRUKQ__&Key-Pair-Id=K1XW5DOJMY1ET9",
+          "frameio_thumb_url": "https://picture2.frame.io/image/s3://frameio-assets-production/image/3cd8bab4-6a47-4aca-84a0-9ea87ec15c13/image_small_86.jpg?alg=HS256&sig=GcZiHDBAs0U1cCBZYOMyT3qpUZMRMAvKPssOt4W95rg&exp=1759060800&signed=format&exp=1759060800&max_height=540&format=png",
+          "status": "READY_FOR_ANALYSIS",
+          "retry_count": "0",
+          "last_error_code": "",
+          "last_error_message": "",
+          "next_retry_at": "",
+          "video_title": "",
+          "main_concept": "",
+          "avatar_gender": "",
+          "avatar_ethnicity": "",
+          "avatar_age_range": "",
+          "avatar_skin_tones": "",
+          "product_presented": "",
+          "detailed_concept_description": "",
+          "created_at": "2025-09-27T13:10:59.704Z",
+          "updated_at": "2025-09-27T13:11:27.721Z",
+          "notes": ""
+        }
+      }
+    ],
+    "Update Status to ANALYZING": [
+      {
+        "json": {
+          "frameio_asset_id": "3cd8bab4-6a47-4aca-84a0-9ea87ec15c13",
+          "status": "ANALYZING",
+          "updated_at": "2025-10-29T13:55:39.513Z",
+          "frameio_efficient_url": "https://assets.frame.io/encode/3cd8bab4-6a47-4aca-84a0-9ea87ec15c13/h264_360.mp4?response-content-disposition=attachment%3B+filename%3D%22Copy+of+IMG_0276.MOV_Rendu_007.mp4%22%3B+filename%2A%3D%22Copy+of+IMG_0276.MOV_Rendu_007.mp4%22&response-content-type=video%2Fmp4&x-amz-meta-project_id=f5f637ed-1e39-4810-a492-162670ca7b7a&x-amz-meta-resource_type=asset&x-amz-meta-resource_id=3cd8bab4-6a47-4aca-84a0-9ea87ec15c13&Expires=1759060800&Signature=oTCtx-Wq02sqMMM-GRZSI0gOGKx2XMTvVxqf7hUIFt~mDIkMzTf27fU347xewE5-~AiOkgDDDaEDIX85zAoX~eBfFbb4P~mhnKw8q7Fr3RXiFvvaBHXcTyA7NQIw5rAchEPRsB1gcXB52F~6ikaDQH35Dd7Z6q38Tepe9QZau-bT1uRIvhgO-bqWrlCLGF3enBkKCeZu4ByypVBmZtfxvvI66t4jflgDZWYKRZKqgg31XzEf3SRXwV97w-iu3lw8iNnzdnV5D9OiZ6wENLFO5W35fJeHXf2kreusIZrLiQ7Mmn6bBeGvmRujqyeDlAmSWmeZj8Y8iIQoi3Rb4hRUKQ__&Key-Pair-Id=K1XW5DOJMY1ET9"
+        }
+      }
+    ],
+    "Limit": [
+      {
+        "json": {
+          "row_number": 44,
+          "frameio_asset_id": "3cd8bab4-6a47-4aca-84a0-9ea87ec15c13",
+          "frameio_project_id": "f5f637ed-1e39-4810-a492-162670ca7b7a",
+          "drive_file_id": "11QPMlBnscUvR-W8JVcfB4G_-rRGJmfiK",
+          "idempotency_key": "11QPMlBnscUvR-W8JVcfB4G_-rRGJmfiK_5f9de9b4bcf4fa9d16cbf9017e849bcf",
+          "source": "Drive",
+          "requires_drive_ops": "true",
+          "file_name_original": "Copy of IMG_0276.MOV_Rendu_007.mp4",
+          "file_size_bytes": "4432368",
+          "mime_type": "video/mp4",
+          "frameio_efficient_url": "https://assets.frame.io/encode/3cd8bab4-6a47-4aca-84a0-9ea87ec15c13/h264_360.mp4?response-content-disposition=attachment%3B+filename%3D%22Copy+of+IMG_0276.MOV_Rendu_007.mp4%22%3B+filename%2A%3D%22Copy+of+IMG_0276.MOV_Rendu_007.mp4%22&response-content-type=video%2Fmp4&x-amz-meta-project_id=f5f637ed-1e39-4810-a492-162670ca7b7a&x-amz-meta-resource_type=asset&x-amz-meta-resource_id=3cd8bab4-6a47-4aca-84a0-9ea87ec15c13&Expires=1759060800&Signature=oTCtx-Wq02sqMMM-GRZSI0gOGKx2XMTvVxqf7hUIFt~mDIkMzTf27fU347xewE5-~AiOkgDDDaEDIX85zAoX~eBfFbb4P~mhnKw8q7Fr3RXiFvvaBHXcTyA7NQIw5rAchEPRsB1gcXB52F~6ikaDQH35Dd7Z6q38Tepe9QZau-bT1uRIvhgO-bqWrlCLGF3enBkKCeZu4ByypVBmZtfxvvI66t4jflgDZWYKRZKqgg31XzEf3SRXwV97w-iu3lw8iNnzdnV5D9OiZ6wENLFO5W35fJeHXf2kreusIZrLiQ7Mmn6bBeGvmRujqyeDlAmSWmeZj8Y8iIQoi3Rb4hRUKQ__&Key-Pair-Id=K1XW5DOJMY1ET9",
+          "frameio_thumb_url": "https://picture2.frame.io/image/s3://frameio-assets-production/image/3cd8bab4-6a47-4aca-84a0-9ea87ec15c13/image_small_86.jpg?alg=HS256&sig=GcZiHDBAs0U1cCBZYOMyT3qpUZMRMAvKPssOt4W95rg&exp=1759060800&signed=format&exp=1759060800&max_height=540&format=png",
+          "status": "READY_FOR_ANALYSIS",
+          "retry_count": "0",
+          "last_error_code": "",
+          "last_error_message": "",
+          "next_retry_at": "",
+          "video_title": "",
+          "main_concept": "",
+          "avatar_gender": "",
+          "avatar_ethnicity": "",
+          "avatar_age_range": "",
+          "avatar_skin_tones": "",
+          "product_presented": "",
+          "detailed_concept_description": "",
+          "created_at": "2025-09-27T13:10:59.704Z",
+          "updated_at": "2025-09-27T13:11:27.721Z",
+          "notes": ""
+        }
+      }
+    ]
+  },
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Cron Trigger - Every 5 min": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2025-07-08T22:28:02.757Z",
+      "updatedAt": "2025-07-29T12:07:55.106Z",
+      "id": "bQLQ4DR5rdAWJC6Y",
+      "name": "production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-29T14:29:46.000Z",
+  "versionId": "e0ee441c-ea3d-49bc-b424-c6b7d72d597d"
+}
