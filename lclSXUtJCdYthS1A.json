@@ -1,0 +1,162 @@
+{
+  "active": false,
+  "connections": {
+    "Nomenclature Facebook Ads": {
+      "main": [
+        [
+          {
+            "node": "Mise à jour Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Déclencheur Quotidien": {
+      "main": [
+        [
+          {
+            "node": "Nomenclature Facebook Ads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-25T19:27:32.985Z",
+  "id": "lclSXUtJCdYthS1A",
+  "isArchived": true,
+  "meta": null,
+  "name": "Satyn - Nomenclature Créatives Facebook Ads",
+  "nodes": [
+    {
+      "id": "trigger_quotidien",
+      "name": "Déclencheur Quotidien",
+      "type": "n8n-nodes-base.interval",
+      "position": [
+        200,
+        300
+      ],
+      "parameters": {
+        "unit": "hours",
+        "interval": 24
+      },
+      "typeVersion": 1
+    },
+    {
+      "id": "nomenclature_satyn",
+      "name": "Nomenclature Facebook Ads",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        400,
+        300
+      ],
+      "parameters": {
+        "mode": "manual",
+        "options": {
+          "dotNotation": false
+        },
+        "assignments": {
+          "fields": [
+            {
+              "id": "brand",
+              "name": "brand",
+              "type": "string",
+              "value": "SATYN"
+            },
+            {
+              "id": "product_line",
+              "name": "product_line",
+              "type": "string",
+              "value": "BONNET"
+            },
+            {
+              "id": "creative_type",
+              "name": "creative_type",
+              "type": "string",
+              "value": "VID"
+            },
+            {
+              "id": "format",
+              "name": "format",
+              "type": "string",
+              "value": "SQ"
+            },
+            {
+              "id": "hook_angle",
+              "name": "hook_angle",
+              "type": "string",
+              "value": "TESTIMONIAL"
+            },
+            {
+              "id": "version",
+              "name": "version",
+              "type": "string",
+              "value": "V1"
+            },
+            {
+              "id": "date_short",
+              "name": "date_short",
+              "type": "string",
+              "value": "{{ $now.format('MMDD') }}"
+            },
+            {
+              "id": "nomenclature_template",
+              "name": "nomenclature_template",
+              "type": "string",
+              "value": "SATYN_BONNET_VID_SQ_TESTIMONIAL_V1_{{ $now.format('MMDD') }}"
+            },
+            {
+              "id": "video_file_id",
+              "name": "video_file_id",
+              "type": "string",
+              "value": "REMPLACER_PAR_ID_FICHIER_VIDEO"
+            }
+          ]
+        },
+        "includeOtherFields": false
+      },
+      "typeVersion": 3.4
+    },
+    {
+      "id": "google_drive_update",
+      "name": "Mise à jour Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        600,
+        300
+      ],
+      "parameters": {
+        "fileId": {
+          "mode": "list",
+          "value": "{{ $json.video_file_id }}"
+        },
+        "resource": "file",
+        "operation": "update",
+        "updateFields": {
+          "name": "{{ $json.nomenclature_template }}"
+        },
+        "authentication": "oAuth2"
+      },
+      "typeVersion": 3
+    }
+  ],
+  "origin": "n8n",
+  "pinData": null,
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Paris",
+    "saveManualExecutions": true,
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-29T12:01:08.000Z",
+  "versionId": "3e8c25c8-a96c-47a3-9abc-9c79af8637e7"
+}
