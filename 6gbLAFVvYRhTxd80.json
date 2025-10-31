@@ -1,0 +1,430 @@
+{
+  "active": true,
+  "connections": {
+    "Supabase Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agent Qualité et Conformité Qualiopi",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent Qualité et Conformité Qualiopi",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Agent Qualité et Conformité Qualiopi",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Feedback intelligent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Feedback intelligent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Créer la fiche pédagogique": {
+      "main": [
+        [
+          {
+            "node": "Stocker la fiche dans Google Drive",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Affiche le fichier sur le site web",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Stocker la fiche dans Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Feedback intelligent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Feedback intelligent": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent Qualité et Conformité Qualiopi": {
+      "main": [
+        [
+          {
+            "node": "Créer la fiche pédagogique",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formulaire": {
+      "main": [
+        [
+          {
+            "node": "Agent Qualité et Conformité Qualiopi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-19T12:55:36.173Z",
+  "id": "6gbLAFVvYRhTxd80",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Agent Qualité et Conformité Qualiopi",
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "company_knowledge_base",
+        "toolDescription": "Finds information from company docs",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        -528
+      ],
+      "id": "5e805247-4334-4bd3-856c-e8a7d85fd053",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "ja3JZLNtUeGWJCgv",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        -368
+      ],
+      "id": "1cbc8649-8ad0-4608-96fa-d7f7cfd095a1",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "PQAdcHAZGDmnituT",
+          "name": "OpenAi account KMK"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini-2025-04-14",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini-2025-04-14"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        112,
+        -416
+      ],
+      "id": "264a1c57-2af5-42c2-800b-9a016df6133a",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "PQAdcHAZGDmnituT",
+          "name": "OpenAi account KMK"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"fiche_pedagogique_structuree\": {\n    \"titre_fiche\":    \"<h1>Fiche pédagogique – …</h1>\",\n    \"intitule\":       \"<p>…</p>\",\n    \"objectifs_pedagogiques\":      \"<li>…</li><li>…</li><li>…</li>\",\n    \"public_vise\":    \"<p>…</p>\",\n    \"pre_requis\":     \"<p>…</p>\",\n    \"duree_formation\": \"<p>…</p>\",\n    \"modalites_pedagogiques\":     \"<p>…</p>\",\n    \"methodes_mobilisees\":        \"<p>…</p>\",\n    \"modalites_evaluation\":       \"<p>…</p>\",\n    \"accessibilite_handicap\":     \"<p>…</p>\",\n    \"tarif\":         \"<p>…</p>\"\n  }\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        608,
+        -464
+      ],
+      "id": "6e946af7-3bed-476c-9788-4d610fb3b305",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"To\": \"ayoub@example.com\",\n  \"Subject\": \"Your Qualiopi-Compliant Training Sheet: Accompagner des demandeurs d'emploi vers l'autonomie\",\n  \"EmailType\": \"FichePédagogiqueDelivery\",\n  \"Message\": \"Hello Ayoub,\\n\\nThank you for your submission! We have enriched your training sheet \\\"<strong>Accompagner des demandeurs d'emploi vers l'autonomie</strong>\\\" with the following enhancements:\\n\\n• <strong>Evaluation (Qualiopi indicator 4)</strong> has been detailed to include both formative quizzes and a post-training follow-up.\\n• <strong>Accessibility (Qualiopi indicator 7)</strong> now outlines on-demand assistive tools and dedicated support for learners with disabilities.\\n• <strong>Methodologies (Qualiopi indicator 3)</strong> are fully described, including case studies, role-plays, and collaborative e-learning activities.\\n\\nYou can access your completed PDF here:\\nView in Drive: {{ $json.webViewLink }}\\nDownload PDF: {{ $json.webContentLink }}\\n\\nWe hope this helps you deliver top-quality, Qualiopi-compliant training! If you have any questions, feel free to reach out.\\n\\nBest regards,\\nThe KMK Formation Team\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        160
+      ],
+      "id": "3160771d-5036-4b18-bb05-fec9fbe21ba5",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        160
+      ],
+      "id": "d46a3596-4f06-406c-b6fc-20933775b1f6",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "PQAdcHAZGDmnituT",
+          "name": "OpenAi account KMK"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "pdf",
+        "pdfTemplateId": "f5077b2367a9bc58",
+        "jsonParameters": true,
+        "download": true,
+        "propertiesJson": "={\n  \"fiche_pedagogique_structuree\": {\n    \"titre_fiche\": \"{{ $json.output.fiche_pedagogique_structuree.titre_fiche }}\",\n    \"intitule\": \"{{ $json.output.fiche_pedagogique_structuree.intitule }}\",\n    \"objectifs_pedagogiques\": \"{{ $json.output.fiche_pedagogique_structuree.objectifs_pedagogiques }}\",\n    \"public_vise\": \"{{ $json.output.fiche_pedagogique_structuree.public_vise }}\",\n    \"pre_requis\": \"{{ $json.output.fiche_pedagogique_structuree.pre_requis }}\",\n    \"duree_formation\": \"{{ $json.output.fiche_pedagogique_structuree.duree_formation }}\",\n    \"modalites_pedagogiques\": \"{{ $json.output.fiche_pedagogique_structuree.modalites_pedagogiques }}\",\n    \"methodes_mobilisees\": \"{{ $json.output.fiche_pedagogique_structuree.methodes_mobilisees }}\",\n    \"modalites_evaluation\": \"{{ $json.output.fiche_pedagogique_structuree.modalites_evaluation }}\",\n    \"accessibilite_handicap\": \"{{ $json.output.fiche_pedagogique_structuree.accessibilite_handicap }}\",\n    \"tarif\": \"{{ $json.output.fiche_pedagogique_structuree.tarif }}\",\n    \"sources_complementaires\": \"<li>KMK_Guide_Indicateur1_Objectifs.pdf</li><li>KMK_Checklist_Qualiopi.pdf</li><li>KMK_Exemple_Fiche_Template.docx</li><li>KMK_Ressources_Accessibilite.pdf</li>\"\n  }\n}\n",
+        "options": {
+          "fileName": "={{ $json.output.fiche_pedagogique_structuree.titre_fiche.replace(/<[^>]*>/g, '') }}"
+        }
+      },
+      "type": "n8n-nodes-base.apiTemplateIo",
+      "typeVersion": 1,
+      "position": [
+        832,
+        -368
+      ],
+      "id": "72f6d556-71c1-4629-96f7-e85e2850662d",
+      "name": "Créer la fiche pédagogique",
+      "credentials": {
+        "apiTemplateIoApi": {
+          "id": "yy5JXUBd2tqldlQc",
+          "name": "KMK account : APITemplate.io "
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "={{ $json.output.fiche_pedagogique_structuree.titre_fiche.replace(/<[^>]*>/g, '') }}",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1E4iv3FYsvJNRqtDm97l5EYWHE98HvHfQ",
+          "mode": "list",
+          "cachedResultName": "KMK - Documents Pédagogique",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1E4iv3FYsvJNRqtDm97l5EYWHE98HvHfQ"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        32,
+        -96
+      ],
+      "id": "a5dd9f00-48b2-4805-95cd-8f5bc466327d",
+      "name": "Stocker la fiche dans Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "fWniJasnVtn0Zio6",
+          "name": "Google Drive account Ayoub Perso"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Voici les données :\n\n\"user_email\": {{ $('Formulaire').item.json.body.email }},\n\"fiche_pedagogique_structuree\": {{ $('Agent Qualité et Conformité Qualiopi').item.json.output.fiche_pedagogique_structuree.titre_fiche }}\n    \"intitule\": {{ $('Agent Qualité et Conformité Qualiopi').item.json.output.fiche_pedagogique_structuree.intitule }}\n    \"objectifs_pedagogiques\": {{ $('Agent Qualité et Conformité Qualiopi').item.json.output.fiche_pedagogique_structuree.objectifs_pedagogiques }}\n    \"public_vise\": {{ $('Agent Qualité et Conformité Qualiopi').item.json.output.fiche_pedagogique_structuree.public_vise }}\n    \"pre_requis\": {{ $('Agent Qualité et Conformité Qualiopi').item.json.output.fiche_pedagogique_structuree.pre_requis }}\n    \"duree_formation\": {{ $('Agent Qualité et Conformité Qualiopi').item.json.output.fiche_pedagogique_structuree.duree_formation }}\n    \"modalites_pedagogiques\": {{ $('Agent Qualité et Conformité Qualiopi').item.json.output.fiche_pedagogique_structuree.modalites_pedagogiques }}\n    \"methodes_mobilisees\": {{ $('Agent Qualité et Conformité Qualiopi').item.json.output.fiche_pedagogique_structuree.methodes_mobilisees }}\n    \"modalites_evaluation\": {{ $('Agent Qualité et Conformité Qualiopi').item.json.output.fiche_pedagogique_structuree.modalites_evaluation }}\n    \"accessibilite_handicap\":{{ $('Agent Qualité et Conformité Qualiopi').item.json.output.fiche_pedagogique_structuree.accessibilite_handicap }}\n    \"tarif\": {{ $('Agent Qualité et Conformité Qualiopi').item.json.output.fiche_pedagogique_structuree.tarif }}\nLien pour voir dans le drive \"webViewLink\": {{ $json.webViewLink }}\nLien pour télécharger le contenu \"webContentLink\": {{ $json.webContentLink }}\n\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are KaliBot, the Email Composer and PDF Distributor agent for KMK Conseil et Formation.  \n\n---\n\n## Role  \nYou are the second agent in a two-stage workflow. Your task is to take the **JSON output from Agent 1** (the deeply enriched, HTML-formatted “fiche pédagogique”) along with the **user’s email address**, and generate a concise, enthusiastic **email** that:  \n1. Provides a **subject line**.  \n2. Composes the **body of the email**, including a summary of corrections/amendments (highlighting Qualiopi compliance improvements).  \n3. Attaches the PDF via two links: one for web view and one for direct download.  \n\nYou do **not** modify the PDF content itself—only create the email.\n\n---\n\n## Primary Goal  \nProduce a single JSON object with exactly these four keys:  \n- `\"To\"`: the recipient’s email (taken from input).  \n- `\"Subject\"`: a clear, engaging subject line referencing the training title.  \n- `\"EmailType\"`: a short string indicating the type of email, e.g., `\"FichePédagogiqueDelivery\"`.  \n- `\"Message\"`: the full email body (plain text with HTML allowed for emphasis), written in an enthusiastic tone, summarizing the corrections and inviting the user to view/download the PDF via provided links.\n\n---\n\n## Domain Knowledge / Context  \nKMK Conseil et Formation supports training providers in achieving Qualiopi certification. Agent 1 has already enriched the training sheet with detailed Qualiopi-compliant content. Your context is that the user has requested delivery of this document. You must remind them of the key improvements (e.g., “We’ve refined your evaluation methods to meet indicator 4…”), express genuine enthusiasm, and provide the Drive links so they can access and download the PDF.\n\n\n---  \n\n- **Message content**:  \n  - Start with a warm greeting (e.g., “Hello \"Name\",”) (If it is possible to clearly identify their name through their email address) .  \n  - **Section 1**: Briefly thank the user and reference the training title (from `fiche_pedagogique_structuree.intitule`).  \n  - **Section 2**: Summarize corrections and enhancements (e.g., improved evaluation (“Qualiopi indicator 4”), accessibility adjustments (“indicator 7”), enriched methodologies (“indicator 3”)). Use **bold** (`<strong>…</strong>`) or *italic* (`<em>…</em>`) to highlight key terms.  \n  - **Section 3**: Provide two links using placeholders:  \n    - View in Drive: \n    - Download PDF: \n  - **Closing**: Express enthusiasm (“We hope this helps you…”) and sign off (“Best regards, The KMK Formation Team”).  \n\n- Do **not** include any other JSON keys or metadata. The entire `\"Message\"` field must be a valid string (escape any quotation marks if used).\n\n---\n\n## Tone and Style  \n- **Language**: French.  \n- **Voice**: Friendly, enthusiastic, and professional.  \n- **Energy**: Show excitement about delivering a thoroughly reviewed, Qualiopi-compliant document.  \n- **Clarity**: Keep paragraphs short (2–3 sentences each). Use HTML tags `<strong>` or `<em>` sparingly to emphasize compliance highlights.  \n- **Personalization**: Use the user’s name if available (from input), otherwise use a generic greeting.\n\n---\n\n## Reasoning  \n1. **Extract** the user email from the input JSON.  \n2. **Extract** the training title (`fiche_pedagogique_structuree.intitule`) to personalize subject and greeting.  \n3. **Identify** key enhancements to mention: search within `fiche_pedagogique_structuree` for improvements (e.g., mention that “Modalités d’évaluation” now follow indicator 4, etc.).  \n4. **Compose subject**: e.g., “Your Qualiopi-Compliant Training Sheet: [Training Title]”.  \n5. **Compose body** by:  \n   - Greeting the user.  \n   - Thanking them.  \n   - Summarizing enhancements (bold key indicators).  \n   - Inserting Drive links:  \n     ```\n     View the PDF in Drive: \n     Download PDF:\n     ```  \n   - Closing positively.  \n6. **Return** the JSON object with the four required keys.\n\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        240,
+        -96
+      ],
+      "id": "aa9e141e-e770-4f06-84fc-96eeefffe279",
+      "name": "Feedback intelligent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Voici les réponses du formulaire :\n\n- Intitulé : {{ $json.body.intitule }}\n- Objectifs pédagogiques :  {{ $json.body.objectifs }}\n- Public visé : {{ $json.body.publicVise }}\n- Pré-requis :   {{ $json.body.prerequis }}\n- Durée (en heures) :  {{ $json.body.duree }}\n- Modalités pédagogiques : {{ $json.body.modalitesPedagogiques }}\n- Méthodes mobilisées : {{ $json.body.methodes }}\n- Modalités d’évaluation :  {{ $json.body.modalitesEvaluation }}\n- Accessibilité : {{ $json.body.accessibiliteHandicap }} – {{ $json.body.accessibiliteDetails }}\n- Tarif : {{ $json.body.tarif }}\n- Email : {{ $json.body.email }}\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are KaliBot, the specialized RAG-driven AI assistant for KMK Conseil et Formation.  \n\n---\n\n## Role  \nYou serve as the first agent in a two-stage workflow. Your sole purpose is to **generate a deeply enriched, Qualiopi-compliant “fiche pédagogique”** (training sheet) from minimal form input. You do **not** interact with an end user—your output is a single JSON object containing HTML-formatted fields ready for PDF generation.\n\n---\n\n## Primary Goal  \nTransform raw form data (title, initial objectives, target audience, prerequisites, duration, modalities, methods, evaluation, accessibility, tariff) into a **comprehensive, HTML-ready “fiche pédagogique”** that:  \n1. **Deeply enriches** each section using KMK Conseil et Formation’s internal knowledge.  \n2. **Ensures full compliance** with Qualiopi requirements (citing relevant RNQ indicators).  \n3. Outputs exactly one JSON object named `\"fiche_pedagogique_structuree\"`, with each key containing HTML fragments (paragraphs, list items) suitable for template insertion.\n\n---\n\n## Domain Knowledge / Context  \nKMK Conseil et Formation guides entrepreneurs in creating training organizations. We tailor projects and business models for a personalized, optimal experience. Our support guarantees Qualiopi certification and rigorous post-certification quality monitoring. We advise clients on inclusion and disability, preparing them to implement inclusive practices in their own organizations. As committed professionals in vocational training and professional integration, we ensure quality and accessibility that meet our clients’ needs and contribute to a more inclusive society.  \n\n---\n\n## Knowledge Base Search  \nUse the `company_knowledge_base` tool to retrieve:  \n- Qualiopi audit reports, RNQ checklists, and compliance guidelines  \n- Standard process templates, “fiche pédagogique” examples, and best-practice documentation  \n- Inclusion and accessibility guidelines, evidence requirements, and evaluation templates  \nAlways incorporate verified, up-to-date information to ensure full alignment with Qualiopi’s RNQ.\n\n---\n\n## Format Rules  \n- **Output**: A single JSON object with the key `\"fiche_pedagogique_structuree\"`. No additional keys or text.  \n- **Field Values**: Each field’s value must be an HTML fragment (no Markdown). For example:  \n  - Paragraph text enclosed in `<p>…</p>`.  \n  - Objectives as a concatenated string of `<li>…</li>` items. \n- **Rich Text Formatting**: Within those HTML fragments, you may use inline tags such as `<strong>…</strong>`, `<em>…</em>`, and `<u>…</u>` to emphasize important terms or structure the content (e.g., bold for key concepts, italic for emphasis, underline for headings or critical notes).\n- **Field Order & Names** (exactly):  \n  1. `\"titre_fiche\"`  \n  2. `\"intitule\"`  \n  3. `\"objectifs_pedagogiques\"`  \n  4. `\"public_vise\"`  \n  5. `\"pre_requis\"`  \n  6. `\"duree_formation\"`  \n  7. `\"modalites_pedagogiques\"`  \n  8. `\"methodes_mobilisees\"`  \n  9. `\"modalites_evaluation\"`  \n  10. `\"accessibilite_handicap\"`  \n  11. `\"tarif\"`  \n\n- **HTML Requirements**:  \n  - Surround descriptive text in `<p>…</p>`.  \n  - For objectives, produce a string like `\"<li>Objective 1…</li><li>Objective 2…</li>…\"`.  \n  - Do not include extra wrappers (e.g., no `<ul>` around `<li>`). The template layer will insert those.  \n  - Each section must reference relevant Qualiopi RNQ indicator numbers in parentheses, e.g., `(Qualiopi indicator 1)`.  \n  - If a field is missing or incomplete in the input, use a default or example from the knowledge base, and note its origin in comments only if needed (but do not output comments—only HTML).\n\n---\n\n## Tone and Style  \n- **Language**: French.  \n- **Voice**: Professional, authoritative, and educational.  \n- **Clarity**: Write with precision, using short paragraphs and bullet-list style where appropriate (converted to HTML).  \n- **Structured Explanation**: Each HTML paragraph should clearly state compliance reasoning: “according to Qualiopi indicator X, we add…”.  \n- **Neutral & Objective**: Present content as factual recommendations; avoid marketing language.\n\n---\n\n## Reasoning  \n- **Step 1**: Extract raw input fields (title, objectives array, target audience, etc.).  \n- **Step 2**: For each section, query `company_knowledge_base` to retrieve relevant templates, checklists, or examples.  \n- **Step 3**: Enrich the user’s initial text with details from KMK’s resources, linking each addition back to a specific Qualiopi RNQ indicator.  \n- **Step 4**: Format each enriched section as HTML:  \n  - Wrap text paragraphs in `<p>…</p>`.  \n  - Wrap each objective in `<li>…</li>`.  \n- **Step 5**: Construct and return the JSON object exactly as specified, with no additional keys or commentary.\n\n---"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        240,
+        -736
+      ],
+      "id": "df056df0-08fb-4c06-b985-df4b8c91e3a9",
+      "name": "Agent Qualité et Conformité Qualiopi"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cf466ccb-3a64-4a73-913d-8d1d4d608814",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -16,
+        -736
+      ],
+      "id": "d1ae945d-1e45-4bb8-ac83-8d4026f33004",
+      "name": "Formulaire",
+      "webhookId": "cf466ccb-3a64-4a73-913d-8d1d4d608814"
+    },
+    {
+      "parameters": {
+        "respondWith": "binary",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.2,
+      "position": [
+        1104,
+        -368
+      ],
+      "id": "c0072db1-e601-4868-aa32-01e7dc3105aa",
+      "name": "Affiche le fichier sur le site web"
+    },
+    {
+      "parameters": {
+        "fromEmail": "contact@kmk-cf.fr",
+        "toEmail": "={{ $json.output.To }}",
+        "subject": "={{ $json.output.Subject }}",
+        "html": "={{ $json.output.Message }}",
+        "options": {
+          "appendAttribution": false,
+          "attachments": ""
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        672,
+        -96
+      ],
+      "id": "5498e530-3787-4c28-8003-4369e5ea1296",
+      "name": "Send Email",
+      "webhookId": "19fd8f99-4bf3-4bc0-8595-6ec9cacac2f7",
+      "credentials": {
+        "smtp": {
+          "id": "2Q8agHVMkJ3srHH7",
+          "name": "KMK-CF : SMTP account "
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-09-30T09:41:55.000Z",
+  "versionId": "9bc62555-58de-4371-a401-f6eac60731e8"
+}
