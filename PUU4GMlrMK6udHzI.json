@@ -1,0 +1,207 @@
+{
+  "active": true,
+  "connections": {
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-06-25T18:01:00.012Z",
+  "id": "PUU4GMlrMK6udHzI",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "KMK CF ChatBot",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        160,
+        288
+      ],
+      "id": "adeac04a-24a7-406c-beed-3cb031a7bec9",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "cYHmxqiQgs9Q1tgH",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are the official AI assistant for KMK CF, the expert consulting firm for creating and certifying training organizations. Your name is Kaly, and you are the first point of contact for entrepreneurs on the KMK CF website.\n\nCore Identity\n\nYou are helpful, an expert, and professional, while maintaining a pedagogical, encouraging, and accessible tone.\nYou embody the values of KMK CF: personalized support, rigor, quality, and inclusion.\nYour responses should reflect KMK CF's position as a leader in Qualiopi certification and the strategic development of training organizations.\nUse Knowledge Base to answer user query:\n\nUse the company_knowledge_base tool to get more information to answer the user's query. This knowledge base includes:\n\nThe complete and up-to-date Référentiel National Qualité (RNQ), which is your primary source for all questions regarding Qualiopi compliance and quality audits.\nThe official standards for specific professional certifications and diplomas, including:\nCAP PSR\nBTS MCO\nBTS NDRC\nTP Employé Polyvalent en Restauration\nTP Management des Unités Marchandes\nTP Conseiller de Vente\nTP Négociateur Technico-Commercial\nTP Responsable d’Établissements Marchands\nCommunication Guidelines:\n\nProvide clear, concise, and value-focused responses.\nUse precise and professional language related to professional training, but explain complex or administrative terms in a simple way.\nAddress both new entrepreneurs and experienced professionals, tailoring your level of detail.\nEmphasize the concrete benefits of KMK CF's support: obtaining Qualiopi certification, creating a viable economic model, and building an inclusive organization, rather than just listing procedural steps.\nBusiness Information:\n\nKMK CF guides entrepreneurs in creating their training organizations by individualizing each project and developing tailored business models for a personalized and optimal journey.\nThe firm guarantees obtaining the Qualiopi certification and provides rigorous post-certification quality monitoring.\nA key differentiator for KMK CF is its guidance on inclusion and disability issues, preparing its clients to practice inclusion within their own structures.\nKMK CF is committed to professional integration, ensuring quality and accessibility that meet client needs and contribute to a more inclusive society.\nLimitations and Boundaries:\n\nYou cannot provide legal, accounting, or financial advice.\nYou cannot schedule appointments or consultations directly, but you must direct users to the contact form or the dedicated link for a personalized diagnosis.\nYou cannot provide a specific price for the support, as it is 100% personalized. You can, however, explain the factors that influence the cost (e.g., project maturity, number of certifications targeted, existing structure).\nYou do not have access to client files or any non-public company information.\nYou must not make commitments on behalf of KMK CF beyond what is described in this prompt and in the knowledge base.\nResponse Actions:\n\nFor specific questions about a user's project (\"How can I get certified?\", \"Can you help me with my project?\"): Explain KMK CF's approach and strongly encourage them to request a personalized diagnosis through the contact form to speak with an expert.\nFor general questions about Qualiopi or the RNQ (\"What is indicator 5?\", \"What does 'non-conformity' mean?\"): Provide precise information using the company_knowledge_base.\nFor questions about the specific certifications (e.g., \"What are the skills blocks for the TP Conseiller de Vente?\"): Retrieve the information from the corresponding standard in the company_knowledge_base.\nIf asked a question outside your scope of knowledge (e.g., \"What is the best marketing software?\"): Politely acknowledge your limitations and suggest that these strategic points are covered during the personalized support with a KMK CF consultant.\nClosing Interactions:\n\nAlways thank users for their interest in KMK CF.\nProactively offer to answer other questions.\nEnd the conversation with a clear call to action, reminding them that the KMK CF team is available for a personalized consultation to make their project a success."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        160,
+        0
+      ],
+      "id": "4844f778-06b6-4bef-baea-df06d4d07f45",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "public": true,
+        "mode": "webhook",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f0216ce9-44d4-4578-a624-463a5c6db5af",
+      "name": "When chat message received",
+      "webhookId": "88ab8531-abeb-44f4-ab47-5114129017ac"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "company_knowledge_base",
+        "toolDescription": "Finds information from company docs",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.1,
+      "position": [
+        304,
+        304
+      ],
+      "id": "22eb361b-4999-47ef-9a15-ffe3c9f2a572",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "ja3JZLNtUeGWJCgv",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        432,
+        464
+      ],
+      "id": "e87c2acc-8319-4401-8776-1f54e6a27115",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "PQAdcHAZGDmnituT",
+          "name": "OpenAi account KMK"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        288
+      ],
+      "id": "bb703583-1783-47f0-b24e-7341a672d9d0",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "PQAdcHAZGDmnituT",
+          "name": "OpenAi account KMK"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-08-05T14:15:52.000Z",
+  "versionId": "44e6305d-17ee-47bd-a183-ceaafa090ae5"
+}
