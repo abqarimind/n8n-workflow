@@ -1,0 +1,1450 @@
+{
+  "active": false,
+  "connections": {
+    "Surveillance Google Drive": {
+      "main": [
+        []
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Frame.io - Demande Upload URL": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Environnement": {
+      "main": [
+        [
+          {
+            "node": "Frame.io - Demande Upload URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Frame.io - Upload Binaire multiple",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Frame.io - Upload Binaire multiple": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Lookup Asset in Sheets of",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Asset Exists?": {
+      "main": [
+        [
+          {
+            "node": "Update Existing Asset",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append New Asset",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lookup Asset in Sheets of": {
+      "main": [
+        [
+          {
+            "node": "Asset Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders in : À TRAITER",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Information on drive file": {
+      "main": [
+        [
+          {
+            "node": "Set Environnement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append New Asset": {
+      "main": [
+        [
+          {
+            "node": "Move file : EN COURS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders in : À TRAITER": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit 1": {
+      "main": [
+        [
+          {
+            "node": "Get Information on drive file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Limit 1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Move file : À TRAITER MANNUELLEMENT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-10T13:15:06.433Z",
+  "id": "80YXQ7sGyGh7NkqJ",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "WF1.1 - Video Ingestion - Drive to Frame.io",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "value": 5,
+              "unit": "minutes"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1kCOO67VYTDf2wUHIAsZhK2IlioDLkLXP",
+          "mode": "list",
+          "cachedResultName": "Vidéo en cours de Traitement",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1kCOO67VYTDf2wUHIAsZhK2IlioDLkLXP"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "id": "8ae62289-c9bb-48aa-b9e4-e711d7a93531",
+      "name": "Surveillance Google Drive",
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "position": [
+        208,
+        160
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "SLFtR95QAltJSXd0",
+          "name": "Google Drive account Satyn"
+        }
+      },
+      "disabled": true,
+      "notes": "Se déclenche automatiquement quand une nouvelle vidéo est ajoutée au dossier"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Limit 1').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1776,
+        576
+      ],
+      "id": "f8d4dd1d-6247-4157-9367-38879bf41ab7",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "SLFtR95QAltJSXd0",
+          "name": "Google Drive account Satyn"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.BASE_URL }}/v4/accounts/{{ $json.ACCOUNT_ID }}/folders/fe168541-6299-4f9c-b937-c04c4d75c497/files/local_upload",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api-version",
+              "value": "4.0"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"name\":\"{{ $('Get Information on drive file').item.json.originalFilename }}\",\n    \"file_size\":{{ $('Get Information on drive file').item.json.size }}\n  }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1552,
+        576
+      ],
+      "id": "04ce31c4-f7f6-4805-9a6f-feba8a1b4584",
+      "name": "Frame.io - Demande Upload URL",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "UQm6obX5OEHbcJCu",
+          "name": "Frame.io Jad"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c609c7da-7075-4a56-b5c5-17b79978a8fb",
+              "name": "BASE_URL",
+              "value": "https://api.frame.io",
+              "type": "string"
+            },
+            {
+              "id": "f3c62917-85ce-4d40-ba5d-cd11b6210db2",
+              "name": "ACCOUNT_ID",
+              "value": "a8d19374-1e6a-4bec-b3ee-2535c1e4d51c",
+              "type": "string"
+            },
+            {
+              "id": "d63e4aa2-47c5-4457-a104-015c5f054927",
+              "name": "WORKSPACE_ID",
+              "value": "f5334ef4-7cad-4b16-a085-735a4863c2bf",
+              "type": "string"
+            },
+            {
+              "id": "d78d6b08-a3b1-4c55-83ce-d323fafdd916",
+              "name": "PROJECT_ID",
+              "value": "=f5f637ed-1e39-4810-a492-162670ca7b7a",
+              "type": "string"
+            },
+            {
+              "id": "2f005aac-8fa2-4c3d-97c7-c885903f7d9d",
+              "name": "ROOT_FOLDER_ID",
+              "value": "ab9377e4-3c06-4c31-be4f-e023e18bca83",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1328,
+        576
+      ],
+      "id": "78b60344-4191-4da6-92d1-73ecec6e104c",
+      "name": "Set Environnement"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ⚙️ Paramètres\nconst binaryProp = 'data'; // Nom du champ binaire dans l'item d'entrée\nconst uploadUrls = $('Frame.io - Demande Upload URL').item.json.data.upload_urls;\n\n// ✅ Étape 1 : Lire le fichier binaire\nconst item = items[0];\nconst binaryData = item.binary?.[binaryProp];\nif (!binaryData) {\n\tthrow new Error(`Fichier binaire manquant dans '${binaryProp}'`);\n}\n\nconst base64 = binaryData.data;\nconst buffer = Buffer.from(base64, 'base64');\n\n// ✅ Étape 2 : Découper le buffer en fonction des tailles des URLs\nlet offset = 0;\nconst parts = [];\n\nfor (let i = 0; i < uploadUrls.length; i++) {\n\tconst size = uploadUrls[i].size;\n\n\t// On découpe les bons octets\n\tconst chunk = buffer.slice(offset, offset + size);\n\n\t// On encode en base64 pour N8N (sera reconverti lors de l'upload)\n\tconst chunkBase64 = chunk.toString('base64');\n\n\tparts.push({\n\t\tjson: { partIndex: i },\n\t\tbinary: {\n\t\t\tpart: {\n\t\t\t\tdata: chunkBase64,\n\t\t\t\tmimeType: binaryData.mimeType,\n\t\t\t\tfileName: `chunk_${i + 1}_${binaryData.fileName}`,\n\t\t\t}\n\t\t}\n\t});\n\n\toffset += size;\n}\n\n// ✅ Étape 3 : Retourner les morceaux comme nouveaux items\nreturn parts;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2000,
+        576
+      ],
+      "id": "fefb4ae7-2719-41af-a5de-4a69088efef1",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "={{ $('Frame.io - Demande Upload URL').item.json.data.upload_urls[$json.partIndex].url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "={{ $('Frame.io - Demande Upload URL').item.json.data.media_type }}"
+            },
+            {
+              "name": "x-amz-acl",
+              "value": "private"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "part",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2448,
+        672
+      ],
+      "id": "57eaa3c8-2d65-4c84-b773-33f100f6381d",
+      "name": "Frame.io - Upload Binaire multiple",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2224,
+        576
+      ],
+      "id": "a01819a2-bfdc-49f6-8bfe-50b3330b44be",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2448,
+        480
+      ],
+      "id": "dde42a8b-e7cb-4633-862f-4efdcd945c49",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "7b4c1684-0221-4404-b65f-6891dfaea529",
+              "leftValue": "={{ $json.frameio_asset_id }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "152662c4-7d81-46e3-85e2-a8b904a8e60e",
+      "name": "Asset Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2896,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "=15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1211841085,
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0/edit#gid=1211841085"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "frameio_asset_id": "={{ $('Frame.io - Demande Upload URL').item.json.data.id }}",
+            "frameio_project_id": "={{ $('Frame.io - Demande Upload URL').item.json.data.project_id }}",
+            "drive_file_id": "={{ $('Get Information on drive file').item.json.id }}",
+            "file_name_original": "={{ $('Get Information on drive file').item.json.originalFilename }}",
+            "file_size_bytes": "={{ $('Get Information on drive file').item.json.size }}",
+            "mime_type": "={{ $('Get Information on drive file').item.json.mimeType }}",
+            "updated_at": "={{ new Date().toISOString() }}",
+            "idempotency_key": "={{ $('Get Information on drive file').item.json.id + '_' + $('Get Information on drive file').item.json.md5Checksum}}",
+            "source": "Drive",
+            "requires_drive_ops": "true",
+            "status": "WAITING_MEDIA_LINKS"
+          },
+          "matchingColumns": [
+            "frameio_asset_id"
+          ],
+          "schema": [
+            {
+              "id": "frameio_asset_id",
+              "displayName": "frameio_asset_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "frameio_project_id",
+              "displayName": "frameio_project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "drive_file_id",
+              "displayName": "drive_file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "idempotency_key",
+              "displayName": "idempotency_key",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "requires_drive_ops",
+              "displayName": "requires_drive_ops",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "file_name_original",
+              "displayName": "file_name_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "file_size_bytes",
+              "displayName": "file_size_bytes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "mime_type",
+              "displayName": "mime_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "frameio_efficient_url",
+              "displayName": "frameio_efficient_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_thumb_url",
+              "displayName": "frameio_thumb_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "retry_count",
+              "displayName": "retry_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_code",
+              "displayName": "last_error_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_message",
+              "displayName": "last_error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "next_retry_at",
+              "displayName": "next_retry_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "video_title",
+              "displayName": "video_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "main_concept",
+              "displayName": "main_concept",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "avatar_gender",
+              "displayName": "avatar_gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "avatar_ethnicity",
+              "displayName": "avatar_ethnicity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "avatar_age_range",
+              "displayName": "avatar_age_range",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "avatar_skin_tones",
+              "displayName": "avatar_skin_tones",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "product_presented",
+              "displayName": "product_presented",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "detailed_concept_description",
+              "displayName": "detailed_concept_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "73890b6d-66cd-43ee-8034-e735e16ba6e1",
+      "name": "Update Existing Asset",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        3120,
+        384
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4Wm2Xjg29dAttfqc",
+          "name": "Satyn - Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1211841085,
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0/edit#gid=1211841085"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "frameio_asset_id",
+              "lookupValue": "={{ $('Frame.io - Demande Upload URL').item.json.data.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        2672,
+        480
+      ],
+      "id": "e3a62606-cb60-4f78-b1d7-c60ff2baec4d",
+      "name": "Lookup Asset in Sheets of",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4Wm2Xjg29dAttfqc",
+          "name": "Satyn - Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "=15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1211841085,
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15YmxLxE8e8uI0g3gHNDGYrOKlUxvqWQCF9kp6sCoBw0/edit#gid=1211841085"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "frameio_asset_id": "={{ $('Frame.io - Demande Upload URL').item.json.data.id }}",
+            "frameio_project_id": "={{ $('Frame.io - Demande Upload URL').item.json.data.project_id }}",
+            "drive_file_id": "={{ $('Get Information on drive file').item.json.id }}",
+            "file_name_original": "={{ $('Get Information on drive file').item.json.originalFilename }}",
+            "file_size_bytes": "={{ $('Get Information on drive file').item.json.size }}",
+            "mime_type": "={{ $('Get Information on drive file').item.json.mimeType }}",
+            "updated_at": "={{ new Date().toISOString() }}",
+            "idempotency_key": "={{ $('Get Information on drive file').item.json.id + '_' + $('Get Information on drive file').item.json.md5Checksum}}",
+            "source": "Drive",
+            "requires_drive_ops": "true",
+            "status": "WAITING_MEDIA_LINKS",
+            "created_at": "={{ new Date().toISOString() }}",
+            "retry_count": "0"
+          },
+          "matchingColumns": [
+            "frameio_asset_id"
+          ],
+          "schema": [
+            {
+              "id": "frameio_asset_id",
+              "displayName": "frameio_asset_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "frameio_project_id",
+              "displayName": "frameio_project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "drive_file_id",
+              "displayName": "drive_file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "idempotency_key",
+              "displayName": "idempotency_key",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "requires_drive_ops",
+              "displayName": "requires_drive_ops",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "file_name_original",
+              "displayName": "file_name_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "file_size_bytes",
+              "displayName": "file_size_bytes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "mime_type",
+              "displayName": "mime_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "frameio_efficient_url",
+              "displayName": "frameio_efficient_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_thumb_url",
+              "displayName": "frameio_thumb_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "retry_count",
+              "displayName": "retry_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "last_error_code",
+              "displayName": "last_error_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_message",
+              "displayName": "last_error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "next_retry_at",
+              "displayName": "next_retry_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "video_title",
+              "displayName": "video_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "main_concept",
+              "displayName": "main_concept",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "avatar_gender",
+              "displayName": "avatar_gender",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "avatar_ethnicity",
+              "displayName": "avatar_ethnicity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "avatar_age_range",
+              "displayName": "avatar_age_range",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "avatar_skin_tones",
+              "displayName": "avatar_skin_tones",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "product_presented",
+              "displayName": "product_presented",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "detailed_concept_description",
+              "displayName": "detailed_concept_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "a704b2d6-3113-4b1b-bb43-62dec8fbc4fb",
+      "name": "Append New Asset",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        3120,
+        576
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4Wm2Xjg29dAttfqc",
+          "name": "Satyn - Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 📥 WF1.1 - Ingestion\n├── Google Drive Trigger → Filter Videos\n├── Set Environment Variables  \n├── Frame.io Create Upload → Download from Drive\n├── Code: Chunk File → Split In Batches\n├── Loop: Upload Chunks → Aggregate\n└── Google Sheets: Lookup & Upsert",
+        "height": 192,
+        "width": 416
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        352
+      ],
+      "id": "3cf52e43-868a-4a54-9b0d-6be4bd7b17c6",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        720
+      ],
+      "id": "bd923f75-dd74-43b4-8b74-e4b720505eb0",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "=https://www.googleapis.com/drive/v3/files/{{ $json.id }}?fields=id,originalFilename,size,mimeType,md5Checksum",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1104,
+        576
+      ],
+      "id": "875af6d4-b5c5-4be3-8809-437f7f99a184",
+      "name": "Get Information on drive file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "SLFtR95QAltJSXd0",
+          "name": "Google Drive account Satyn"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Get Information on drive file').item.json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1ejzdDOmCIOaOzxJvAAHtmr5KObKDBYyO",
+          "mode": "list",
+          "cachedResultName": "EN COURS",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1ejzdDOmCIOaOzxJvAAHtmr5KObKDBYyO"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        3344,
+        576
+      ],
+      "id": "90f0ef57-902c-48b9-825c-f0ad36657329",
+      "name": "Move file : EN COURS",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "SLFtR95QAltJSXd0",
+          "name": "Google Drive account Satyn"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "1kCOO67VYTDf2wUHIAsZhK2IlioDLkLXP",
+            "mode": "list",
+            "cachedResultName": "À TRAITER",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/1kCOO67VYTDf2wUHIAsZhK2IlioDLkLXP"
+          }
+        },
+        "options": {
+          "fields": [
+            "*"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        432,
+        720
+      ],
+      "id": "e0d73b28-5dae-415a-bf96-ccaf3115c2fa",
+      "name": "Search files and folders in : À TRAITER",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "SLFtR95QAltJSXd0",
+          "name": "Google Drive account Satyn"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        880,
+        576
+      ],
+      "id": "53917045-92f3-4a6a-b3b2-87d9d4dd000a",
+      "name": "Limit 1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.size.toNumber() }}",
+                    "rightValue": 104857600,
+                    "operator": {
+                      "type": "number",
+                      "operation": "lt"
+                    },
+                    "id": "88467b4d-4c31-4911-927e-0f2ea15d2525"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "size < 100Mo"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "eafd8e70-e1d2-4839-a3d5-c3b60e526504",
+                    "leftValue": "={{ $json.size.toNumber() }}",
+                    "rightValue": 104857600,
+                    "operator": {
+                      "type": "number",
+                      "operation": "gte"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "size > 100Mo"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        656,
+        720
+      ],
+      "id": "4a318b0f-9592-493f-9c68-6f13b1910afc",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "move",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1gj-CKWDah3d-HRrXwcaQoZWJsjxIzoSH",
+          "mode": "list",
+          "cachedResultName": "À TRAITER MANUELLLEMENT",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1gj-CKWDah3d-HRrXwcaQoZWJsjxIzoSH"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1104,
+        768
+      ],
+      "id": "3273566b-848b-42b5-a023-fb4242293cc7",
+      "name": "Move file : À TRAITER MANNUELLEMENT",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "SLFtR95QAltJSXd0",
+          "name": "Google Drive account Satyn"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        880,
+        768
+      ],
+      "id": "4afbc091-e30b-4bff-ba54-2ed8a4e46a67",
+      "name": "Limit"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Paris",
+    "saveManualExecutions": true,
+    "errorWorkflow": ""
+  },
+  "staticData": {
+    "node:Surveillance Google Drive": {
+      "lastTimeChecked": "2025-08-15T00:23:54Z"
+    },
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2025-07-08T22:28:02.757Z",
+      "updatedAt": "2025-07-29T12:07:55.106Z",
+      "id": "bQLQ4DR5rdAWJC6Y",
+      "name": "production"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-30T13:58:00.000Z",
+  "versionId": "5680044a-5254-42b3-bbad-a088af2c37c9"
+}
