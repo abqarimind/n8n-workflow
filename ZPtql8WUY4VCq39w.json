@@ -1,0 +1,216 @@
+{
+  "active": false,
+  "connections": {
+    "Reminders Agent": {
+      "main": [
+        [
+          {
+            "node": "Response1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Try Again",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "Reminders Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Reminders Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Reminders Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-11T21:42:22.445Z",
+  "id": "ZPtql8WUY4VCq39w",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "RemindersAgent",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('When Executed by Another Workflow').first().json.noteDetails }}",
+        "options": {
+          "systemMessage": "=Current date/time: {{ $now }}\n\n## Core Function\nYou manage time-based reminders with precision and reliability.\n\n## Tools available\n- Create new reminders\n- List upcoming reminders\n- Update existing reminders\n- Delete/cancel reminders\n\nMake sure to pass Title, Notes and ScheduledTime to the tool while creating a new reminder. If all the tool calls succeed, tell the user that you successfully performed the given task. If any tool call fails, say you failed to perform the task along with some details.\n\n## Operation Guidelines\n1. **Reminder Creation Requirements**:\n   - Title: Brief description of reminder (required)\n   - Notes: Additional details or context (optional)\n   - ScheduledTime: When to trigger the reminder (required)\n\n2. **Time Handling**:\n   - Accept natural language time references (\"tomorrow at 3pm\")\n   - Convert all times to ISO format for storage\n   - Present times in user-friendly format in responses\n   - Default to user's timezone unless specified\n\n3. **Dynamic Schema Adaptation**:\n   - Work with the Airtable schema as provided\n   - Adapt to available fields without assuming structure\n   - Use only fields that exist in the current schema\n\n4. **Record Deletion**:\n   - To delete an entry, we need to first fetch the records, find the matching record and use that record's id to delete it.\n\n## Response Format\n1. **Action Confirmation**: What was done with the reminder\n2. **Key Details**: Essential information about the reminder\n3. **Timing**: When the reminder will trigger\n4. **Record ID**: Reference ID if available\n\n## Error Handling\n- For timing issues, request clarification\n- For schema mismatches, explain the limitation\n- For invalid inputs, specify what needs correction\n\n## Example Responses\n\"I've created a reminder 'Team meeting preparation' scheduled for May 22nd at 9:00 AM.\"\n\n\"Here are your upcoming reminders: 1) 'Call client' today at 2PM, 2) 'Submit report' tomorrow at 10AM.\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -1040,
+        40
+      ],
+      "id": "87506df3-2b2b-41eb-9698-eb1c872b0f00",
+      "name": "Reminders Agent",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sseEndpoint": "https://n8n.srv860867.hstgr.cloud/mcp/airtable/sse"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        360
+      ],
+      "id": "fcbfac74-d10b-46bc-a0f3-ae34e1fb8d47",
+      "name": "MCP Client"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "noteDetails"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1340,
+        40
+      ],
+      "id": "9a416141-4cab-4382-8d68-393e8448c413",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4f360190-a717-4a93-8336-d03ea65975d5",
+              "name": "response",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -540,
+        -120
+      ],
+      "id": "1a637c3e-f7b7-4ad6-aaca-2824f7814956",
+      "name": "Response1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4f360190-a717-4a93-8336-d03ea65975d5",
+              "name": "response",
+              "value": "An error occurred. Please try again.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -540,
+        120
+      ],
+      "id": "9732e7d5-d775-4306-b6f2-4fdbbbc0690d",
+      "name": "Try Again"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1080,
+        360
+      ],
+      "id": "47b79c6b-3249-43e0-8ce7-e9acc3926cf7",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Reminders Agent",
+        "height": 280,
+        "width": 460,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1120,
+        -60
+      ],
+      "id": "f6d50839-9f14-4b03-93ec-3a3aebbe1efe",
+      "name": "Sticky Note"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-19T15:06:39.000Z",
+  "versionId": "65ef3e2e-2dc1-4a18-bece-1bb2f7363617"
+}
