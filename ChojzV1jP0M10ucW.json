@@ -1,0 +1,763 @@
+{
+  "active": false,
+  "connections": {
+    "Parse Markdown Pages": {
+      "main": [
+        [
+          {
+            "node": "Append or update row (page) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "List files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List files": {
+      "main": [
+        [
+          {
+            "node": "Filter the book with his Name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a file": {
+      "main": [
+        [
+          {
+            "node": "Parse Markdown Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row (page) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Information Extractor": {
+      "main": [
+        [
+          {
+            "node": "Append or update row (page) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Information Extractor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row (page) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter the book with his Name": {
+      "main": [
+        [
+          {
+            "node": "Get a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Information Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-27T08:22:06.455Z",
+  "id": "ChojzV1jP0M10ucW",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Book-GPT - WF1 - Extraction Markdown vers Google Sheets",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const results = [];\n\nfor (const item of items) {\n  // 1. Récupérer le contenu binaire décodé\n  let markdownContent = '';\n  if (item.binary && item.binary.data) {\n    const data = item.binary.data;\n    markdownContent = Buffer.from(data.data, data.encoding || 'base64').toString('utf8');\n  } else if (item.json.content) {\n    markdownContent = item.json.content;\n  } else {\n    markdownContent = JSON.stringify(item.json, null, 2);\n  }\n\n  // 2. Découper en pages par ---\n  const pages = markdownContent.split(/\\n---\\n/).filter(p => p.trim().length > 0);\n\n  pages.forEach((pageContent, index) => {\n    if (pageContent.trim()) {\n      // 3. Extraction\n      const chapterMatch = pageContent.match(/^# (.+)$/m);\n      const chapter = chapterMatch ? chapterMatch[1].trim() : '';\n\n      const titleMatch = pageContent.match(/^## (.+)$/m);\n      const title = titleMatch ? titleMatch[1].trim() : '';\n\n      const subtitleMatch = pageContent.match(/^### (.+)$/m);\n      const subtitle = subtitleMatch ? subtitleMatch[1].trim() : '';\n\n      const proTipMatch = pageContent.match(/\\*\\*Pro tip:\\*\\*\\s*(.+?)(?=\\n\\n|$)/s);\n      const proTip = proTipMatch ? proTipMatch[1].trim() : '';\n\n      // 4. Remaining content nettoyé\n      let remainingContent = pageContent\n        .replace(/^# .+$/m, '')       // remove chapter\n        .replace(/^## .+$/m, '')      // remove title\n        .replace(/^### .+$/m, '')     // remove subtitle\n        .replace(/\\*\\*Pro tip:\\*\\*\\s*.+?(?=\\n\\n|$)/s, '') // remove pro tip\n        .replace(/\\n---\\n/g, '')      // remove delimiters\n        .trim();\n\n      // 5. ID unique\n      const pageId = 'PAGE' + String(index + 1).padStart(3, '0') + '_' + Date.now();\n\n      // 6. Push résultat\n      results.push({\n        json: {\n          pageId,\n          chapter,\n          title,\n          subtitle,\n          proTip,\n          remainingContent,\n          rawContent: pageContent.trim(),\n          status: 'To Do'\n        }\n      });\n    }\n  });\n}\n\nreturn results;\n"
+      },
+      "id": "ffae3111-c253-4bd7-8101-f90a351a5a5b",
+      "name": "Parse Markdown Pages",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        128,
+        -448
+      ]
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -768,
+        -448
+      ],
+      "id": "9142681e-2e15-4f08-99fb-18cc03ef7980",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "list",
+        "owner": {
+          "__rl": true,
+          "value": "gauthiervasseur",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "Md_Books",
+          "mode": "list",
+          "cachedResultName": "Md_Books",
+          "cachedResultUrl": "https://github.com/gauthiervasseur/Md_Books"
+        },
+        "filePath": "data pionnier"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        -544,
+        -448
+      ],
+      "id": "51ae954c-95c7-43d7-9921-e1b7e3210148",
+      "name": "List files",
+      "webhookId": "88f158eb-ba3f-4b0c-b5db-02d5e1053f5c",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "EUHRCVUYC415lQGe",
+          "name": "GitHub account Abqarimind"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "gauthiervasseur",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "Md_Books",
+          "mode": "name"
+        },
+        "filePath": "={{ $json.path }}",
+        "additionalParameters": {}
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        -96,
+        -448
+      ],
+      "id": "05013094-6adc-437c-96aa-9d6afb4a47f8",
+      "name": "Get a file",
+      "webhookId": "96fe1caa-4080-4cd7-a060-0e105781ce32",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "EUHRCVUYC415lQGe",
+          "name": "GitHub account Abqarimind"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI",
+          "mode": "list",
+          "cachedResultName": "Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Page ID": "={{ $json.pageId }}",
+            "Chapter": "={{ $json.chapter }}",
+            "Remaining Content": "={{ $json.remainingContent }}",
+            "Title": "={{ $json.title }}",
+            "Pro Tip": "={{ $json.proTip }}",
+            "Subtitle": "={{ $json.subtitle }}",
+            "Status": "To Do",
+            "Raw Content": "={{ $json.rawContent }}",
+            "Created At": "={{$now.toISO()}}"
+          },
+          "matchingColumns": [
+            "Page ID"
+          ],
+          "schema": [
+            {
+              "id": "Page ID",
+              "displayName": "Page ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Chapter",
+              "displayName": "Chapter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Remaining Content",
+              "displayName": "Remaining Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Raw Content",
+              "displayName": "Raw Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Subtitle",
+              "displayName": "Subtitle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Pro Tip",
+              "displayName": "Pro Tip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Educational Content",
+              "displayName": "Educational Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Business Story",
+              "displayName": "Business Story",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image URL",
+              "displayName": "Image URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AI Confidence",
+              "displayName": "AI Confidence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Created At",
+              "displayName": "Created At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        352,
+        -448
+      ],
+      "id": "6e900fb9-5d0f-410e-b95a-02220649f8d6",
+      "name": "Append or update row (page) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "da64974e-4913-45fc-b1ae-6382ce67be44",
+              "leftValue": "={{ $json.Chapter }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        576,
+        -448
+      ],
+      "id": "cc92c2d4-0460-4596-8a31-fbd5350b245e",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json['Raw Content'] }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "educationalContent",
+              "description": "Write ~160 words (±10%) of plain prose that explains the concepts found ONLY in the input text: definitions, key ideas, and how-to guidance. Be didactic and actionable. Do not invent external facts. Do not use headings, bullets, lists, quotes, emojis, URLs, or references. Do not repeat “Pro tip” verbatim; integrate its idea. Keep the SAME LANGUAGE as the input. If the input does not support an educational summary, return an empty string \"\".",
+              "required": true
+            },
+            {
+              "name": "businessStory",
+              "description": "Write ~140 words (±10%) of plain prose: a short anecdote/case/example that illustrates the same ideas from the input for a business reader. Base ONLY on the input; no external facts. No headings, bullets, lists, quotes, emojis, URLs, or references. Keep the SAME LANGUAGE as the input. If the input does not support a story, return an empty string \"\".",
+              "required": true
+            },
+            {
+              "name": "newProTip",
+              "description": "Write ~80 words of plain prose in the SAME LANGUAGE as the input. Reframe or expand the existing Pro tip idea if present, or create a new complementary practical tip if none exists. The tip should be pragmatic, actionable, and easy to apply. Do not use headings, bullets, lists, quotes, emojis, or references. Keep the tone concise and professional.",
+              "required": true
+            }
+          ]
+        },
+        "options": {
+          "batching": {
+            "batchSize": 10
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1.2,
+      "position": [
+        1008,
+        -448
+      ],
+      "id": "eceb3e6f-0da9-4194-9b03-56e019b8aaf3",
+      "name": "Information Extractor",
+      "retryOnFail": true,
+      "waitBetweenTries": 2000
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1088,
+        -224
+      ],
+      "id": "5e914ebc-6c28-4447-b972-121ccf30a30d",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI",
+          "mode": "list",
+          "cachedResultName": "Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Page ID": "={{ $('Limit').item.json['Page ID'] }}",
+            "Status": "Ready for Refine",
+            "Created At": "={{$now.toISO()}}",
+            "New Pro Tip": "={{ $json.output.newProTip }}",
+            "Educational Content": "={{ $json.output.educationalContent }}",
+            "Business Story": "={{ $json.output.businessStory }}"
+          },
+          "matchingColumns": [
+            "Page ID"
+          ],
+          "schema": [
+            {
+              "id": "Page ID",
+              "displayName": "Page ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Chapter",
+              "displayName": "Chapter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Remaining Content",
+              "displayName": "Remaining Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Raw Content",
+              "displayName": "Raw Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Subtitle",
+              "displayName": "Subtitle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Pro Tip",
+              "displayName": "Pro Tip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "New Pro Tip",
+              "displayName": "New Pro Tip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Educational Content",
+              "displayName": "Educational Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Business Story",
+              "displayName": "Business Story",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image URL",
+              "displayName": "Image URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AI Confidence",
+              "displayName": "AI Confidence",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Created At",
+              "displayName": "Created At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1376,
+        -448
+      ],
+      "id": "b92a216c-481e-481b-8d6b-29e16eacaf4a",
+      "name": "Append or update row (page) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b692b417-4917-4336-958d-0d6313442f96",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "Vasseur_Data pionnier.md",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -320,
+        -448
+      ],
+      "id": "b28c6dca-ae86-48c8-bdc3-798e2f4b2baf",
+      "name": "Filter the book with his Name"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        800,
+        -448
+      ],
+      "id": "646d6d68-60a0-415e-939a-e3cd57ab5aa8",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "content": "## Documentation Ressource Link\n[**Google Sheet Documentation**](https://docs.n8n.io/integrations/builtin/credentials/google/oauth-single-service/?utm_source=n8n_app&utm_medium=credential_settings&utm_campaign=create_new_credentials_modal)\n[**Github Documentation**](https://docs.n8n.io/integrations/builtin/credentials/github/?utm_source=n8n_app&utm_medium=credential_settings&utm_campaign=create_new_credentials_modal#using-oauth2)\n[**OpenAI Documentation**](https://docs.n8n.io/integrations/builtin/credentials/openai/?utm_source=n8n_app&utm_medium=credential_settings&utm_campaign=create_new_credentials_modal#related-resources)",
+        "width": 1200
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -768,
+        -736
+      ],
+      "id": "8751e5a9-5989-443f-ac80-04357b3578e4",
+      "name": "Sticky Note"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-06T11:00:04.000Z",
+  "versionId": "38eff89d-4918-422d-ba33-a11b989ccc6f"
+}
