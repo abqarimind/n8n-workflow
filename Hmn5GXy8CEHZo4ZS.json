@@ -1,0 +1,561 @@
+{
+  "active": false,
+  "connections": {
+    "Failed Flows": {
+      "main": [
+        []
+      ]
+    },
+    "Starting message": {
+      "main": [
+        [
+          {
+            "node": "Get many workflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On clicking 'execute'": {
+      "main": [
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Completed notification",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Globals": {
+      "main": [
+        [
+          {
+            "node": "Starting message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List files": {
+      "main": [
+        [
+          {
+            "node": "github",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many workflows": {
+      "main": [
+        [
+          {
+            "node": "Workflows",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "n8n",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflows": {
+      "main": [
+        [
+          {
+            "node": "List files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "n8n": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "github": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-30T13:45:58.107Z",
+  "id": "Hmn5GXy8CEHZo4ZS",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Save n8n Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "423502079991218186",
+          "mode": "id"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1433759549856157766",
+          "mode": "id"
+        },
+        "content": "=:x: Failed to backup {{ $('Loop Over Items').item.json.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1776,
+        -256
+      ],
+      "id": "7358f1d4-b7fb-4f37-b9b6-dc225617c76d",
+      "name": "Failed Flows",
+      "webhookId": "90d183a5-f99b-4776-bd9e-d8c3b0594aab",
+      "credentials": {
+        "discordOAuth2Api": {
+          "id": "KwpxfzAHcwPPonjD",
+          "name": "Discord account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "423502079991218186",
+          "mode": "id"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1433759549856157766",
+          "mode": "id"
+        },
+        "content": "=✅ Backup has completed - {{ $('Get many workflows').all().length }} workflows have been processed.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1824,
+        32
+      ],
+      "id": "5c403751-d7af-4549-a144-e846569174fe",
+      "name": "Completed notification",
+      "webhookId": "90d183a5-f99b-4776-bd9e-d8c3b0594aab",
+      "credentials": {
+        "discordOAuth2Api": {
+          "id": "KwpxfzAHcwPPonjD",
+          "name": "Discord account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "423502079991218186",
+          "mode": "id"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1433759549856157766",
+          "mode": "id"
+        },
+        "content": "=:information_source:  Starting Workflow Backup [{{ $execution.id }}]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        656,
+        208
+      ],
+      "id": "aa27af87-47ab-4004-9de3-87de5a0aa5b8",
+      "name": "Starting message",
+      "webhookId": "90d183a5-f99b-4776-bd9e-d8c3b0594aab",
+      "credentials": {
+        "discordOAuth2Api": {
+          "id": "KwpxfzAHcwPPonjD",
+          "name": "Discord account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "42ba3722-9a91-47f1-8bae-64878c4400f5",
+      "name": "On clicking 'execute'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        272,
+        96
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": "={{ $node[\"Loop Over Items\"].context[\"done\"] }}"
+        }
+      },
+      "id": "7ab265b3-0c10-4391-bffa-8febe3582d3f",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "position": [
+        1600,
+        208
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7
+            }
+          ]
+        }
+      },
+      "id": "15dd513c-85f6-45c2-8f7e-fc55b00e19d6",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        272,
+        304
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "content": "## Backup to GitHub \nThis workflow will backup all instance workflows to GitHub and also deleted it if was deleted in n8n.\n\nThe files are saved `ID.json` for the filename.\n\n### Setup\nOpen `Globals` node and update the values below 👇\n\n- **repo.owner:** your Github username\n- **repo.name:** the name of your repository\n\n\nIf your username was `john-doe` and your repository was called `n8n-backups`:\n\n- repo.owner - john-doe\n- repo.name - n8n-backups\n\n\nThe workflow calls itself using a subworkflow, to help reduce memory usage.",
+        "height": 601,
+        "width": 371,
+        "color": 4
+      },
+      "id": "f8179fe0-a9a7-48b5-a6ab-f2c188ddaad1",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -208,
+        -64
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "=rrqgFQ1aEQU5G86n",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {}
+      },
+      "id": "0c6ae719-fdf1-4ba4-a73b-6b77610811ba",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "position": [
+        1824,
+        208
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6cf546c5-5737-4dbd-851b-17d68e0a3780",
+              "name": "repo.owner",
+              "type": "string",
+              "value": "abqarimind"
+            },
+            {
+              "id": "452efa28-2dc6-4ea3-a7a2-c35d100d0382",
+              "name": "repo.name",
+              "type": "string",
+              "value": "n8n-workflow"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2a5e0465-d410-4c01-9e93-cf43bf497814",
+      "name": "Globals",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        496,
+        208
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "list",
+        "owner": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Globals').item.json.repo.owner }}"
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Globals').item.json.repo.name }}"
+        }
+      },
+      "id": "589db355-d442-43c4-a0d0-97f9871af598",
+      "name": "List files",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        1200,
+        304
+      ],
+      "webhookId": "244ea8da-851f-4afb-980c-5e5973b6a1af",
+      "executeOnce": true,
+      "typeVersion": 1.1,
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "EUHRCVUYC415lQGe",
+          "name": "GitHub account Abqarimind"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "filters": {},
+        "requestOptions": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "id": "f1346ecd-6425-4da1-9264-0d93fe7b3bd2",
+      "name": "Get many workflows",
+      "type": "n8n-nodes-base.n8n",
+      "position": [
+        816,
+        208
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "n8nApi": {
+          "id": "RHeCtDLT47TtJPjN",
+          "name": "n8n account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "f1b260d9-e2da-4a1d-9662-71d4feaf540c",
+      "name": "Workflows",
+      "type": "n8n-nodes-base.aggregate",
+      "position": [
+        1024,
+        304
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5e73d2e7-4b1a-4180-8af2-047e52eb8a0a",
+              "name": "repo.owner",
+              "type": "string",
+              "value": "={{ $('Globals').item.json.repo.owner }}"
+            },
+            {
+              "id": "22445c28-5431-45a5-86ca-0ab2ff26cff5",
+              "name": "repo.name",
+              "type": "string",
+              "value": "={{ $('Globals').item.json.repo.name }}"
+            },
+            {
+              "id": "232d9947-a43f-48a9-b385-da1aa8f5139e",
+              "name": "origin",
+              "type": "string",
+              "value": "n8n"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "46dc3f13-34aa-4499-b211-a9395c601f44",
+      "name": "n8n",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1376,
+        96
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5e73d2e7-4b1a-4180-8af2-047e52eb8a0a",
+              "name": "repo.owner",
+              "type": "string",
+              "value": "={{ $('Globals').item.json.repo.owner }}"
+            },
+            {
+              "id": "22445c28-5431-45a5-86ca-0ab2ff26cff5",
+              "name": "repo.name",
+              "type": "string",
+              "value": "={{ $('Globals').item.json.repo.name }}"
+            },
+            {
+              "id": "232d9947-a43f-48a9-b385-da1aa8f5139e",
+              "name": "origin",
+              "type": "string",
+              "value": "github"
+            },
+            {
+              "id": "456ec816-8c15-498b-bbc5-a96abce95d59",
+              "name": "workflows",
+              "type": "array",
+              "value": "={{ $('Workflows').item.json.data }}"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "9bfa0be6-5ee0-49de-9017-b788bf81c79b",
+      "name": "github",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1376,
+        304
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "content": "## Edit this node 👇",
+        "height": 80,
+        "width": 150,
+        "color": 4
+      },
+      "id": "d2139b68-6f0b-4594-bb00-7506519ad3b9",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        480,
+        48
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Main workflow loop",
+        "height": 601,
+        "width": 1831,
+        "color": 7
+      },
+      "id": "6b375eb5-c112-431e-8c51-cc29d3f37fa9",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        192,
+        -64
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-31T11:28:20.000Z",
+  "versionId": "faa2d21a-f504-4c80-b2c2-a206c1588882"
+}
