@@ -1,0 +1,205 @@
+{
+  "active": false,
+  "connections": {
+    "Entrepreneur Quest Webhook": {
+      "main": [
+        [
+          {
+            "node": "Islamic Entrepreneurship AI Coach",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Islamic Entrepreneurship AI Coach": {
+      "main": [
+        [
+          {
+            "node": "Format AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ],
+      "error": [
+        [
+          {
+            "node": "Format Error Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format AI Response": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Error Response": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-21T20:31:11.603Z",
+  "id": "hdmCohUeS64eDipm",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "AI Sub-Task Generator - Islamic Entrepreneurship",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "entrepreneur-quest",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook_trigger",
+      "name": "Entrepreneur Quest Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        112,
+        304
+      ],
+      "webhookId": "44e47869-f43f-4074-b359-dd8f8f60b990",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "messages": {
+          "message": [
+            {
+              "content": "Vous êtes un expert coach en entrepreneuriat islamique spécialisé dans le développement d'entreprises halal et les ventures communautaires.\n\nVotre expertise inclut :\n• Principes commerciaux halal et pratiques conformes à la Shariah\n• Entrepreneuriat centré sur la communauté et impact social\n• Construction d'entreprises durables alignées avec les valeurs islamiques\n• Résolution de problèmes pratique avec considérations éthiques\n• Compréhension de la finance islamique et éthique commerciale\n\nQuand un utilisateur partage son étape entrepreneuriale, ses défis actuels et son contexte, générez 3-5 micro-tâches ultra-spécifiques qui :\n✅ Prennent ≤30 minutes chacune à compléter\n✅ Sont ordonnées par potentiel d'impact (priorité 1 = impact le plus élevé)\n✅ S'alignent avec les principes commerciaux islamiques (halal, éthique, centré sur la communauté)\n✅ Adressent le défi spécifique mentionné\n✅ Sont immédiatement actionnables avec des étapes claires\n✅ Considèrent le niveau de compétence, temps disponible et ressources de l'utilisateur\n\nIMPORTANT: Répondez UNIQUEMENT avec du JSON valide dans ce format exact :\n[\n  {\"task\": \"Description de tâche actionnable spécifique\", \"priority\": 1, \"estimated_minutes\": 25, \"islamic_principle\": \"Construction communautaire\"},\n  {\"task\": \"Une autre tâche spécifique\", \"priority\": 2, \"estimated_minutes\": 15, \"islamic_principle\": \"Marketing éthique\"}\n]\n\nN'incluez aucune explication, markdown ou texte supplémentaire - seulement le tableau JSON.",
+              "role": "system"
+            },
+            {
+              "content": "=Étape: {{ $json.body.current_step }}\nDéfi/Note: {{ $json.body.note }}\nRaison d'échec: {{ $json.body.fail_reason || 'N/A' }}\n\nProfil utilisateur:\n• Nom: {{ $json.body.user.name }}\n• Niveau d'expérience: {{ $json.body.user.level }}\n• Domaine: {{ $json.body.user.domain }}\n• Heures disponibles/semaine: {{ $json.body.user.hours }}\n• Budget: {{ $json.body.user.budget }}\n• Compétences clés: {{ $json.body.user.skills }}\n• Objectif pourcentage Waqf: {{ $json.body.user.waqfPct }}%\n• Intention commerciale: {{ $json.body.user.intention }}\n\nGénérez des micro-tâches spécifiquement pour la situation de cet entrepreneur."
+            }
+          ]
+        },
+        "options": {},
+        "requestOptions": {}
+      },
+      "id": "perplexity_ai",
+      "name": "Islamic Entrepreneurship AI Coach",
+      "type": "n8n-nodes-base.perplexity",
+      "typeVersion": 1,
+      "position": [
+        400,
+        304
+      ],
+      "credentials": {
+        "perplexityApi": {
+          "id": "LH8JEWUiTJkWKNjR",
+          "name": "Perplexity account Ayoub"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "try {\n  // Récupérer la réponse Perplexity avec la bonne structure\n  const perplexityResponse = $input.first().json;\n  let aiContent = '';\n  \n  // Extraire le contenu de la réponse Perplexity\n  if (perplexityResponse && Array.isArray(perplexityResponse) && perplexityResponse.length > 0) {\n    // Structure: [{ choices: [{ message: { content: \"...\" } }] }]\n    const choice = perplexityResponse[0];\n    if (choice && choice.choices && choice.choices.length > 0) {\n      aiContent = choice.choices[0].message.content || '';\n    }\n  } else if (perplexityResponse && perplexityResponse.choices && perplexityResponse.choices.length > 0) {\n    // Structure alternative: { choices: [{ message: { content: \"...\" } }] }\n    aiContent = perplexityResponse.choices[0].message.content || '';\n  } else {\n    // Fallback pour d'autres structures possibles\n    aiContent = perplexityResponse.text || perplexityResponse.content || '';\n  }\n  \n  console.log('Contenu AI brut:', aiContent);\n  \n  // Nettoyer le contenu - retirer <think>...</think> et autres balises\n  let cleanedContent = aiContent\n    .replace(/<think>[\\s\\S]*?<\\/think>/g, '') // Retirer <think>...</think>\n    .replace(/```json\\n?|```\\n?/g, '') // Retirer markdown code blocks\n    .trim();\n  \n  console.log('Contenu nettoyé:', cleanedContent);\n  \n  // Extraire le JSON (chercher les crochets [ ])\n  let jsonMatch = cleanedContent.match(/\\[[\\s\\S]*\\]/);\n  let tasks;\n  \n  try {\n    if (jsonMatch) {\n      const jsonString = jsonMatch[0];\n      console.log('JSON extrait:', jsonString);\n      tasks = JSON.parse(jsonString);\n    } else {\n      throw new Error('Aucun JSON trouvé dans la réponse');\n    }\n    \n    // Valider la structure\n    if (!Array.isArray(tasks)) {\n      throw new Error('La réponse n\\'est pas un tableau');\n    }\n    \n    // S'assurer que chaque tâche a les champs requis\n    tasks = tasks.map((task, index) => ({\n      task: task.task || `Tâche ${index + 1}`,\n      priority: task.priority || index + 1,\n      estimated_minutes: task.estimated_minutes || 30,\n      islamic_principle: task.islamic_principle || 'Guidance générale'\n    }));\n    \n    console.log('Tâches parsées avec succès:', tasks);\n    \n  } catch (parseError) {\n    console.log('Erreur de parsing JSON:', parseError.message);\n    console.log('Tentative d\\'extraction manuelle...');\n    \n    // Fallback : extraire les tâches manuellement si le JSON est malformé\n    const taskPattern = /\"task\":\\s*\"([^\"]+)\"/g;\n    const extractedTasks = [];\n    let match;\n    let priority = 1;\n    \n    while ((match = taskPattern.exec(cleanedContent)) !== null && extractedTasks.length < 5) {\n      extractedTasks.push({\n        task: match[1],\n        priority: priority++,\n        estimated_minutes: 20,\n        islamic_principle: \"Guidance générale\"\n      });\n    }\n    \n    if (extractedTasks.length > 0) {\n      tasks = extractedTasks;\n      console.log('Tâches extraites manuellement:', tasks);\n    } else {\n      // Dernier fallback avec tâches prédéfinies en français\n      tasks = [\n        {\n          task: \"Revisez et affinez votre proposition de valeur en gardant les principes islamiques à l'esprit\",\n          priority: 1,\n          estimated_minutes: 20,\n          islamic_principle: \"Vérité dans les affaires\"\n        },\n        {\n          task: \"Identifiez et contactez 3 partenaires communautaires ou mentors potentiels\",\n          priority: 2,\n          estimated_minutes: 25,\n          islamic_principle: \"Collaboration communautaire\"\n        },\n        {\n          task: \"Recherchez une entreprise halal réussie dans votre domaine pour vous inspirer\",\n          priority: 3,\n          estimated_minutes: 15,\n          islamic_principle: \"Apprendre des autres\"\n        }\n      ];\n      console.log('Utilisation des tâches fallback:', tasks);\n    }\n  }\n  \n  // Limiter à 5 tâches maximum\n  tasks = tasks.slice(0, 5);\n  \n  return [{\n    json: {\n      success: true,\n      source: 'ai_generated',\n      total_tasks: tasks.length,\n      estimated_total_minutes: tasks.reduce((sum, task) => sum + task.estimated_minutes, 0),\n      tasks: tasks,\n      metadata: {\n        generated_at: new Date().toISOString(),\n        workflow_version: '1.0',\n        ai_model: 'perplexity-sonar-pro'\n      }\n    }\n  }];\n  \n} catch (error) {\n  console.error('Erreur générale dans format_success_response:', error);\n  \n  // Retour de fallback complet\n  return [{\n    json: {\n      success: false,\n      source: 'fallback',\n      error: 'Traitement IA échoué',\n      total_tasks: 3,\n      estimated_total_minutes: 60,\n      tasks: [\n        {\n          task: \"Passez 20 minutes à réfléchir sur votre défi actuel et notez 3 obstacles spécifiques\",\n          priority: 1,\n          estimated_minutes: 20,\n          islamic_principle: \"Auto-réflexion et conscience de soi\"\n        },\n        {\n          task: \"Recherchez une étude de cas d'entreprise similaire et identifiez 2 leçons apprises\",\n          priority: 2,\n          estimated_minutes: 25,\n          islamic_principle: \"Apprendre des autres\"\n        },\n        {\n          task: \"Connectez-vous avec une personne de votre réseau qui pourrait offrir des conseils ou du soutien\",\n          priority: 3,\n          estimated_minutes: 15,\n          islamic_principle: \"Soutien communautaire\"\n        }\n      ],\n      metadata: {\n        generated_at: new Date().toISOString(),\n        workflow_version: '1.0',\n        ai_model: 'fallback'\n      }\n    }\n  }];\n}"
+      },
+      "id": "format_success_response",
+      "name": "Format AI Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        768,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Generate fallback tasks when AI completely fails\nconst userStep = $input.first().json.current_step || 'general';\nconst userNote = $input.first().json.note || '';\n\n// Step-specific fallback tasks\nconst stepFallbacks = {\n  'build_mvp': [\n    {\n      task: \"Listez les 3 fonctionnalités les plus essentielles que votre MVP doit avoir pour résoudre le problème principal\",\n      priority: 1,\n      estimated_minutes: 20,\n      islamic_principle: \"Focus sur l'essentiel\"\n    },\n    {\n      task: \"Identifiez un early adopter potentiel et planifiez un appel de feedback de 10 minutes\",\n      priority: 2,\n      estimated_minutes: 25,\n      islamic_principle: \"Engagement communautaire\"\n    },\n    {\n      task: \"Recherchez un outil ou une plateforme low-cost qui pourrait accélérer le développement de votre MVP\",\n      priority: 3,\n      estimated_minutes: 15,\n      islamic_principle: \"Débrouillardise\"\n    }\n  ],\n  'find_customers': [\n    {\n      task: \"Créez un sondage simple d'une question sur le plus gros point de douleur de votre audience cible\",\n      priority: 1,\n      estimated_minutes: 20,\n      islamic_principle: \"Compréhension des besoins communautaires\"\n    },\n    {\n      task: \"Rejoignez 2 communautés en ligne où vos clients cibles se rassemblent et présentez-vous\",\n      priority: 2,\n      estimated_minutes: 25,\n      islamic_principle: \"Construction communautaire\"\n    },\n    {\n      task: \"Contactez 3 contacts existants qui pourraient connaître vos clients cibles\",\n      priority: 3,\n      estimated_minutes: 15,\n      islamic_principle: \"Exploitation des relations\"\n    }\n  ],\n  'validate_idea': [\n    {\n      task: \"Interviewez une personne qui a le problème que vous essayez de résoudre\",\n      priority: 1,\n      estimated_minutes: 30,\n      islamic_principle: \"Recherche de connaissance et compréhension\"\n    },\n    {\n      task: \"Recherchez 3 solutions existantes et identifiez ce qui leur manque\",\n      priority: 2,\n      estimated_minutes: 20,\n      islamic_principle: \"Apprendre du marché\"\n    },\n    {\n      task: \"Rédigez un résumé d'une page de votre proposition de valeur et partagez-le avec un conseiller de confiance\",\n      priority: 3,\n      estimated_minutes: 25,\n      islamic_principle: \"Recherche de conseil\"\n    }\n  ]\n};\n\n// Get appropriate fallback tasks\nconst fallbackTasks = stepFallbacks[userStep] || [\n  {\n    task: \"Prenez 20 minutes pour définir clairement votre plus grand défi actuel par écrit\",\n    priority: 1,\n    estimated_minutes: 20,\n    islamic_principle: \"Clarté et conscience de soi\"\n  },\n  {\n    task: \"Identifiez une personne qui a réussi dans une venture similaire et étudiez son approche\",\n    priority: 2,\n    estimated_minutes: 25,\n    islamic_principle: \"Apprendre d'exemples réussis\"\n  },\n  {\n    task: \"Listez 3 petites actions immédiates que vous pouvez entreprendre aujourd'hui pour avancer\",\n    priority: 3,\n    estimated_minutes: 15,\n    islamic_principle: \"Prendre des actions cohérentes\"\n  }\n];\n\nreturn [{\n  json: {\n    success: true,\n    source: 'fallback_system',\n    total_tasks: fallbackTasks.length,\n    estimated_total_minutes: fallbackTasks.reduce((sum, task) => sum + task.estimated_minutes, 0),\n    tasks: fallbackTasks,\n    metadata: {\n      generated_at: new Date().toISOString(),\n      workflow_version: '1.0',\n      ai_model: 'fallback_system',\n      reason: 'Service IA indisponible',\n      user_step: userStep\n    },\n    notice: \"Service IA temporairement indisponible. Voici des tâches adaptées à votre étape.\"\n  }\n}];\n"
+      },
+      "id": "format_error_response",
+      "name": "Format Error Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        816,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1392,
+        288
+      ],
+      "id": "ba7a921b-557a-4f26-af0e-749b4328e329",
+      "name": "Send Response",
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {
+    "Islamic Entrepreneurship AI Coach": [
+      {
+        "json": {
+          "id": "cdf4f0c4-7695-42d5-8ebb-864b3adc4ef1",
+          "model": "r1-1776",
+          "created": 1753147153,
+          "usage": {
+            "prompt_tokens": 559,
+            "completion_tokens": 919,
+            "total_tokens": 1478
+          },
+          "object": "chat.completion",
+          "choices": [
+            {
+              "index": 0,
+              "finish_reason": "stop",
+              "message": {
+                "role": "assistant",
+                "content": "<think>\nNous sommes à l'étape \"find_idea\" avec le défi de créer des sites e-commerce spécialisés pour les marques, mais l'offre n'est pas assez nichée ou différenciée. L'utilisateur Ayoub est un débutant en IA et Marketing Digital, avec 10h/semaine et un budget de 100€. Il veut offrir un cadre de vie islamique à ses enfants, avec 10% de waqf.\n\nObjectifs clés :\n1. Trouver une niche halal différenciée pour les sites e-commerce.\n2. Aligner avec les valeurs islamiques (cadre de vie islamique).\n3. Considérer ses compétences en IA et Marketing Digital.\n\nMicro-tâches proposées (spécifiques, ≤30 min, actionnables, alignées halal) :\n\n1. **Recherche de niches halal sous-exploitées** (priorité 1) : \n   - Explorer des marchés comme les jouets éducatifs islamiques, la mode modeste durable, ou les services numériques pour familles musulmanes. \n   - Utiliser des outils gratuits (Google Trends, questions Reddit). \n   - 25 min, principe : \"Recherche de marché éthique\".\n\n2. **Analyse concurrentielle ciblée** (priorité 2) : \n   - Étudier 3 concurrents dans une niche potentielle (ex: livres islamiques pour enfants). \n   - Noter ce qui leur manque (qualité, authenticité). \n   - 20 min, principe : \"Amélioration continue (Ihsan)\".\n\n3. **Brainstorming de différentiation IA** (priorité 3) : \n   - Lister 5 façons d'utiliser l'IA pour ajouter de la valeur (ex: chatbots pour conseils halal, personnalisation de contenu islamique). \n   - 15 min, principe : \"Innovation au service de la communauté\".\n\n4. **Validation de l'idée avec la communauté** (priorité 4) : \n   - Poser une question dans un groupe Facebook de parents musulmans sur leurs besoins non comblés. \n   - 15 min, principe : \"Consultation (Shura)\".\n</think>\n[\n  {\n    \"task\": \"Recherchez 3 niches halal sous-exploitées en utilisant Google Trends et des groupes Facebook musulmans locaux. Ciblez des produits/services liés à l'éducation islamique enfantine ou au cadre de vie familial (ex: jouets éducatifs coraniques, décoration intérieure islamique). Notez les demandes récurrentes.\",\n    \"priority\": 1,\n    \"estimated_minutes\": 25,\n    \"islamic_principle\": \"Satisfaction des besoins communautaires (Maslaha)\"\n  },\n  {\n    \"task\": \"Analysez 2 concurrents dans votre niche potentielle avec SimilarWeb. Identifiez leur lacune principale (ex: manque de personnalisation culturelle) et notez une opportunité de différentiation halal immédiate (ex: sélections de produits certifiés par des savants).\",\n    \"priority\": 2,\n    \"estimated_minutes\": 20,\n    \"islamic_principle\": \"Amélioration continue (Ihsan)\"\n  },\n  {\n    \"task\": \"Esquissez un concept d'IA différenciateur en 5 points : utilisez vos compétences pour créer un outil simple type quiz d'apprentissage islamique enfant ou configurateur de tenues modestes. Priorisez une fonctionnalité réalisable en 1 semaine.\",\n    \"priority\": 3,\n    \"estimated_minutes\": 15,\n    \"islamic_principle\": \"Innovation responsable\"\n  },\n  {\n    \"task\": \"Contactez 3 parents musulmans via des communautés en ligne. Demandez : 'Quel produit/service numérique faciliterait votre transmission des valeurs islamiques à vos enfants ?' Notez leurs réponses brutes.\",\n    \"priority\": 4,\n    \"estimated_minutes\": 15,\n    \"islamic_principle\": \"Consultation (Shura)\"\n  }\n]"
+              },
+              "delta": {
+                "role": "assistant",
+                "content": ""
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "saveManualExecutions": true
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-29T12:05:57.000Z",
+  "versionId": "94e35311-ce37-4b31-8b14-f49e14b47857"
+}
