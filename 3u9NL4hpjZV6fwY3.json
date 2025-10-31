@@ -1,0 +1,1313 @@
+{
+  "active": false,
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Refined Content ",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Refined Content ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update page in sheet Done": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Pages": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        []
+      ]
+    },
+    "Auto-fixing Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Refined Content ",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Auto-fixing Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Auto-fixing Output Parser",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Refined Content ": {
+      "main": [
+        [
+          {
+            "node": "Update page in sheet Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Choose Your Prompt": {
+      "main": [
+        []
+      ]
+    },
+    "Get All Pages done": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Create a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Refined Content 1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auto-fixing Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Refined Content 1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Auto-fixing Output Parser1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Auto-fixing Output Parser1",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get One Specific Page": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Refined Content 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Refined Content 1": {
+      "main": [
+        [
+          {
+            "node": "Update page in sheet Done1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-06T11:32:25.445Z",
+  "id": "3u9NL4hpjZV6fwY3",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Book-GPT - WF2.2 - Raffinement Intelligent et Traduction + Compilation",
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1680,
+        224
+      ],
+      "id": "9366b819-5db1-47b1-af6c-f64a0746d8c8",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4",
+          "mode": "list",
+          "cachedResultName": "New_Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 477951468,
+          "mode": "list",
+          "cachedResultName": "New_Book-AI-ML.md",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit#gid=477951468"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Page ID": "={{ $json['Page ID'] }}",
+            "Status": "={{ $json.Status }}",
+            "Text": "={{ $json.Text }}",
+            "Updated At": "={{$now.toISO()}}",
+            "Created At": "={{$now.toISO()}}"
+          },
+          "matchingColumns": [
+            "Page ID"
+          ],
+          "schema": [
+            {
+              "id": "Page ID",
+              "displayName": "Page ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Text",
+              "displayName": "Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "New Text",
+              "displayName": "New Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Final Text",
+              "displayName": "Final Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Updated At",
+              "displayName": "Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Created At",
+              "displayName": "Created At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1360,
+        16
+      ],
+      "id": "71dbc975-e741-46b2-b289-f4d88aa3e088",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4",
+          "mode": "list",
+          "cachedResultName": "New_Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 477951468,
+          "mode": "list",
+          "cachedResultName": "New_Book-AI-ML.md",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit#gid=477951468"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Done",
+            "Updated At": "={{$now.toISO()}}",
+            "Page ID": "={{ $('Update row in sheet').item.json['Page ID'] }}",
+            "New Text": "={{ $json.output.newText }}"
+          },
+          "matchingColumns": [
+            "Page ID"
+          ],
+          "schema": [
+            {
+              "id": "Page ID",
+              "displayName": "Page ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Text",
+              "displayName": "Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "New Text",
+              "displayName": "New Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Final Text",
+              "displayName": "Final Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Updated At",
+              "displayName": "Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Created At",
+              "displayName": "Created At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2112,
+        16
+      ],
+      "id": "7b96e502-4b29-4090-a9c6-215fcc00f3c0",
+      "name": "Update page in sheet Done",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1088,
+        0
+      ],
+      "id": "cbf0511f-810f-4a3a-9ef2-e2fb9179c087",
+      "name": "Loop Over Items",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4",
+          "mode": "list",
+          "cachedResultName": "New_Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 477951468,
+          "mode": "list",
+          "cachedResultName": "New_Book-AI-ML.md",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit#gid=477951468"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status",
+              "lookupValue": "Ready For Refine"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        544,
+        0
+      ],
+      "id": "6b4e3ac9-9bbb-47d6-8d9d-a83266956878",
+      "name": "Get All Pages",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        416
+      ],
+      "id": "f9c418d8-4e5f-4241-9707-ee9045f8e8e2",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+      "typeVersion": 1,
+      "position": [
+        1776,
+        224
+      ],
+      "id": "d02da801-034a-4e86-9632-1e94b829e449",
+      "name": "Auto-fixing Output Parser"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-nano",
+          "mode": "list",
+          "cachedResultName": "gpt-5-nano"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1648,
+        432
+      ],
+      "id": "57d79ebd-b8cc-462c-aa33-8082c93a4fb3",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"newText\": \"Artificial intelligence is often misunderstood as a monolithic concept, but in reality it is a set of methods that allow systems to learn from data, recognize patterns, and support decision-making.\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1920,
+        432
+      ],
+      "id": "297ad6d3-d992-4065-918f-5af221b031a0",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2112,
+        432
+      ],
+      "id": "65ac77ff-73b9-414e-8e4a-e96a3b4f2a0f",
+      "name": "Wait",
+      "webhookId": "8ba351ec-7b8c-46af-85fe-5bac5d07af71"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Here is Contents of each Page\n\nText Content : {{ $json.Text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "={{ $('Choose Your Prompt').item.json['Prompt Final New Book'] }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1584,
+        16
+      ],
+      "id": "206c9faf-cdec-49e4-ad09-6fba9728636e",
+      "name": "Refined Content "
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "14dda9fd-e1d6-41a9-a130-61cc4db1f5c5",
+              "name": "Prompt complet translate",
+              "value": "Role You are a Senior Business Book Editor with 15+ years of experience publishing best-selling management and strategy books. You write in a style that is clear, practical, and engaging, similar to New York Times bestsellers.  Context You receive a chunk of text in Markdown format. The text is originally written in French. Your task is to translate it into English, while preserving the Markdown structure (headings #, ##, ###, bold **...**, italics *...*, links [text](url), code fences ...).  Task  Translate the content faithfully from French to English.  Refine the writing to match the tone of a business book bestseller: clear, smooth, and engaging.  Do not change the meaning, but improve clarity, flow, and narrative style.  Keep all Markdown elements intact. Do not remove or invent formatting.  Constraints  Do not invent external facts.  No lists, bullets, emojis, or extraneous commentary unless already present in the Markdown.  Respect all existing Markdown syntax exactly.  Return only the translated Markdown text.",
+              "type": "string"
+            },
+            {
+              "id": "a086dd05-df1a-407d-8459-1821b199ab0b",
+              "name": "Prompt simplifié translate",
+              "value": "Role You are a professional translator.  Context You receive a chunk of text in Markdown format. The text is in French.  Task  Translate the text into English.  Keep the Markdown structure 100% identical (#, ##, ###, **bold**, *italic*, [links], code fences).  Do not refine, rewrite, or change style—just produce a fluent, accurate translation.  Constraints  Do not invent facts.  Do not add or remove formatting.  Return only the translated Markdown text, nothing else.",
+              "type": "string"
+            },
+            {
+              "id": "6abd4fdc-3f9c-4134-9e79-bdb0efb9b83f",
+              "name": "New Refined prompt translate",
+              "value": "Role You are a Senior Business Book Writer with 15+ years of experience publishing best-selling management and strategy books. You write in a style that is clear, practical, and engaging, similar to New York Times bestsellers. You are writing books on data, analytics and AI that are appreciated by your international audience for their clarity, tone, touches of humor and pragmatism, engrained in a solid professional and academic experience.  Context You receive a chunk of text in Markdown format. The text is originally written in French. Your task is to translate it into English, while preserving the Markdown structure (headings #, ##, ###, bold *..., italics *..., links [text](url), code fences ...).  Task \t•\tTranslate the content faithfully from French to English. \t•\tRefine the writing to match the tone of a business book bestseller: clear, smooth, and engaging. \t•\tDo not change the meaning, but improve clarity, flow, and narrative style. \t•\tKeep all Markdown elements intact. Do not remove or invent formatting.  Constraints \t•\tDo not invent external facts. \t•\tNo lists, bullets, emojis, or extraneous commentary unless already present in the Markdown. \t•\tRespect all existing Markdown syntax exactly. \t•\tReturn only the translated Markdown text.",
+              "type": "string"
+            },
+            {
+              "id": "2e2eb308-e461-4f13-8bb1-65954f4a7a61",
+              "name": "Prompt Final New Book",
+              "value": "## Role  You are a **Senior Business Book Editor** with 15+ years of experience publishing best-selling management and strategy books.   You write in a style that is **clear, practical, and engaging**, similar to New York Times bestsellers.  ----------  ## Action  Your task is to **refine and rewrite draft business book fragments** extracted from Google Sheets.   Each input comes as a single block of text (`text` column).   You must output the rewritten version as **Markdown** in the `New Text` column.  ----------  ## Context  -   Input: One block of raw text from Google Sheets (`text`).      -   This block may include:          -   `# Chapter` (H1)              -   `## Title` (H2)              -   `### Subtitle` (H3)              -   Educational content              -   Business story              -   Pro tip (marked with `Pro tip:`)          -   **Chain of Thought (CoT)** reasoning steps you must follow before writing:          1.  **Identify structure** of the page:                  -   If the block contains only a **single H1 title**, it is a **chapter page** → return only the H1 title.                      -   If the block contains **H2 + H3 + content**, it is a **content page** → return the rewritten page with H2, H3, educational content, business story, and pro tip if present.                  2.  **Refine and rewrite** all existing elements for clarity, style, and flow.              3.  **Respect length constraints**:                  -   H1 ≤ 12 words                      -   H2 ≤ 12 words                      -   H3 ≤ 16 words                      -   Educational content: 150–170 words                      -   Business story: 130–150 words                      -   Pro tip: ~80 words              -   **Few-shot example** (content page):       ### Input (raw text block)  ``` ## Data Models: The Core of Advanced Analytics ### I’d Rather Build Data Models Than Model Raw Data As explored in \"Thrive with Business Intelligence,\" robust analytics start with... Pro tip: Even if the next pages feel technical, read them closely...  ```  ### Expected Output (Markdown)  ```markdown ## Data Models: The Core of Advanced Analytics  ### I’d Rather Build Data Models Than Model Raw Data  As explored in \"Thrive with Business Intelligence,\" robust analytics start with well-structured observations captured in tables and connected by keys. How you join those keys determines what data survives your queries and how metrics compute. Inner joins keep only matching keys; left joins retain all rows from the base table; right and full joins expand differently. Cross joins multiply rows and are rarely appropriate for transactional data. Cardinality matters as much as join type. One-to-many joins are typical; many-to-many joins can inflate counts and distort averages. Confirm that primary keys are unique, foreign keys are cleansed, and data types align. Be explicit about your join conditions, especially when multiple keys define a relationship. Before scaling, validate results on small samples, compare row counts before and after, and check whether totals change unexpectedly. Good models minimize ambiguity, prevent duplication, and make downstream analysis simpler, faster, and consistently accurate. Also watch for null keys, mismatched grain, and implicit many-to-many bridges.  **Pro tip:** Even if the next pages feel technical, read them closely. As your BI solutions grow, you will create more joins, and small misunderstandings compound into silent errors and misleading reports. Slow down to specify join type and cardinality before you click run. Test on a small slice, compare row counts, and scan for duplicates and null keys. When results surprise you, inspect the join logic first. A few extra minutes here can save weeks of rework and credibility loss.  ```  ----------  ## Execute  1.  Analyze the input block.      2.  Apply the CoT rules: decide if it is a **chapter page** (H1 only) or a **content page** (H2 + H3 + body).      3.  Rewrite and refine all existing fields, respecting the length constraints and style.      4.  Output only the **final Markdown text** (no JSON, no explanations, no metadata).      5.  Do not invent facts beyond the input.      6.  No lists, bullets, quotes, emojis, URLs, or inline markdown beyond headers and the bold marker for `Pro tip:`.",
+              "type": "string"
+            },
+            {
+              "id": "48ba7497-26c4-4267-9147-4944abb6cca7",
+              "name": "Prompt Refined With Gauthier",
+              "value": "## **R — Role**      You are a **Senior Business Book Editor** with 15+ years of experience publishing best-selling management and strategy books.  You write in a style that is **clear, practical, and engaging**, similar to New York Times bestsellers.  ----------  ## **A — Action**      Your task is to **refine and rewrite draft business book fragments** extracted from Google Sheets.  Each input comes as a single block of text (text column).  You must output the rewritten version as **Markdown** in the New Text column.  ----------  ## **C — Context**  -   Input: One block of raw text from Google Sheets (text).      -   This block may include:          -   # Chapter (H1)              -   ## Title (H2)              -   ### Subtitle (H3)              -   Educational content              -   Business story              -   Pro tip (marked with Pro tip:)               -   **Chain of Thought (CoT)** reasoning steps you must follow before writing:          1.  **Identify structure** of the page:                  -   If the block contains only a **single H1 title**, it is a **chapter page** → return only the H1 title.                      -   If the block contains **H2 + H3 + content**, it is a **content page** → return the rewritten page with H2, H3, educational content, business story, and pro tip if present. and if business story, and pro tip is not present make one up based on the educational content.                           2.  **Refine and rewrite** all existing elements for clarity, style, and flow.              3.  **Respect length constraints**:                  -   H1 ≤ 12 words                      -   H2 ≤ 12 words                      -   H3 ≤ 16 words                      -   Educational content: 150–170 words                      -   Business story: 130–150 words                      -   Pro tip: ~80 words                            -   **Few-shot example** (content page):           ### **Input (raw text block)**  ``` ## Data Models: The Core of Advanced Analytics ### I’d Rather Build Data Models Than Model Raw Data As explored in \"Thrive with Business Intelligence,\" robust analytics start with... Pro tip: Even if the next pages feel technical, read them closely... ```  ### **Expected Output (Markdown)**  ``` ## Data Models: The Core of Advanced Analytics  ### I’d Rather Build Data Models Than Model Raw Data  As explored in \"Thrive with Business Intelligence,\" robust analytics start with well-structured observations captured in tables and connected by keys. How you join those keys determines what data survives your queries and how metrics compute. Inner joins keep only matching keys; left joins retain all rows from the base table; right and full joins expand differently. Cross joins multiply rows and are rarely appropriate for transactional data. Cardinality matters as much as join type. One-to-many joins are typical; many-to-many joins can inflate counts and distort averages. Confirm that primary keys are unique, foreign keys are cleansed, and data types align. Be explicit about your join conditions, especially when multiple keys define a relationship. Before scaling, validate results on small samples, compare row counts before and after, and check whether totals change unexpectedly. Good models minimize ambiguity, prevent duplication, and make downstream analysis simpler, faster, and consistently accurate. Also watch for null keys, mismatched grain, and implicit many-to-many bridges.  **Business Story:** An internal analytics team once proposed a \"company-wide AI initiative\" that promised smarter forecasts and autonomous inventory decisions. The pitch secured funding based on the buzz, but when work began the team realized the real job was cleaning, integrating and instrumenting decades of operational data—foundational engineering rather than a novel algorithm. Executives expected immediate gains from a black-box model; engineers needed months to create reliable inputs. Timeline slipped, costs rose and trust eroded. The turning point came when leaders reframed the effort as data infrastructure plus targeted machine learning pilots with clear milestones and agreed evaluation metrics. Early wins on small pilots demonstrated value, outcomes improved, and the team regained credibility. The lesson was simple: a bold AI label can open doors, but transparency about the method, maturity and deliverables is what produces sustainable results.  **Pro tip:** Even if the next pages feel technical, read them closely. As your BI solutions grow, you will create more joins, and small misunderstandings compound into silent errors and misleading reports. Slow down to specify join type and cardinality before you click run. Test on a small slice, compare row counts, and scan for duplicates and null keys. When results surprise you, inspect the join logic first. A few extra minutes here can save weeks of rework and credibility loss. ```  ----------  ## **E — Execute**  1.  Analyze the input block.      2.  Apply the CoT rules: decide if it is a **chapter page** (H1 only) or a **content page** (H2 + H3 + body).      3.  Rewrite and refine all existing fields, respecting the length constraints and style.      4.  Output only the **final Markdown text** (no JSON, no explanations, no metadata).      5.  Do not invent facts beyond the input for the educational content.      6.  No lists, bullets, quotes, emojis, URLs, or inline markdown beyond headers and the bold marker for Pro tip: and Business Story:.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        0
+      ],
+      "id": "5170dabe-9d49-453a-a846-96e9b838f23b",
+      "name": "Choose Your Prompt"
+    },
+    {
+      "parameters": {
+        "jsCode": "let book = '';\nfor (const item of items) {\n  const pageText = item.json['Final Text'] || '';\n  if (pageText.trim()) {\n    // Ajoute un séparateur entre pages\n    book += pageText.trim() + \"\\n\\n---\\n\\n\";\n  }\n}\n\nreturn [\n  {\n    json: { book },\n    binary: {\n      data: {\n        data: Buffer.from(book, 'utf8').toString('base64'),\n        mimeType: 'text/markdown',\n        fileName: 'compiled-book.md'\n      }\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        352,
+        960
+      ],
+      "id": "281bd014-e8d8-4430-81e2-c4e430c03619",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4",
+          "mode": "list",
+          "cachedResultName": "New_Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 477951468,
+          "mode": "list",
+          "cachedResultName": "New_Book-AI-ML.md",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit#gid=477951468"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        128,
+        960
+      ],
+      "id": "b6ca6bf5-6658-4e9d-9b0c-563be63d5984",
+      "name": "Get All Pages done",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "gauthiervasseur",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "Md_Books",
+          "mode": "list",
+          "cachedResultName": "Md_Books",
+          "cachedResultUrl": "https://github.com/gauthiervasseur/Md_Books"
+        },
+        "filePath": "=data pionnier/compiled-book-{{ $now.format('yyyy-LL-dd') }}.md",
+        "binaryData": true,
+        "commitMessage": "New Draft Book Translated (2 pages only)"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        560,
+        960
+      ],
+      "id": "45f68c44-9044-4f42-970d-1beca7274c16",
+      "name": "Create a file",
+      "webhookId": "88f158eb-ba3f-4b0c-b5db-02d5e1053f5c",
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "EUHRCVUYC415lQGe",
+          "name": "GitHub account Abqarimind"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Compilation\nDefine the name of the file in the **GitHub node**\n> eg. : compiled-book-2025-09-06.md \nNew text if no revision \nFinal Text if revision ",
+        "height": 384,
+        "width": 704,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        64,
+        784
+      ],
+      "id": "657d19fa-4b87-4e44-9503-7807d4d65b26",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Prompt List\n- Prompt complete\n- Prompt simplify ( trad only)",
+        "height": 336,
+        "width": 320,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -144
+      ],
+      "id": "1e6bf9b8-5b1e-4deb-9248-d99a923a80f0",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Raffinement Intelligent et Traduction",
+        "height": 816,
+        "width": 1872,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        496,
+        -144
+      ],
+      "id": "c0d32790-ac53-48f4-a7e3-4b5f0b6e9e5e",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## First Step ▲\n\n\n\n\n\n\n\n\n\n\n\n\n\n---\n\n\n\n\n\n\n\n\n\n\n\n\n\n## Second Step ▼",
+        "height": 480,
+        "width": 480
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -416,
+        240
+      ],
+      "id": "de7972c9-1f60-4fd0-8308-3ca586acc45e",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1088,
+        -720
+      ],
+      "id": "b00da1c2-9bb9-4a67-ae73-ecb34c6155c5",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+      "typeVersion": 1,
+      "position": [
+        1024,
+        -544
+      ],
+      "id": "23a76061-d642-4c3c-9a87-b2195133a181",
+      "name": "Auto-fixing Output Parser1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-nano",
+          "mode": "list",
+          "cachedResultName": "gpt-5-nano"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        912,
+        -640
+      ],
+      "id": "b4aadc42-b675-4342-8c3c-93d7c5312fba",
+      "name": "OpenAI Chat Model3",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"finalText\": \"Artificial intelligence is often misunderstood as a monolithic concept, but in reality it is a set of methods that allow systems to learn from data, recognize patterns, and support decision-making.\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1280,
+        -640
+      ],
+      "id": "40816815-f1b1-43f1-8696-c58f1f19daca",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Here is Contents of each Page\n\nText Content : {{ $json['New Text'] }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "={{ $('Choose Your Prompt').item.json['Prompt Final New Book'] }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1024,
+        -400
+      ],
+      "id": "88404881-de59-4571-a2f6-9430069aec90",
+      "name": "Refined Content 1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4",
+          "mode": "list",
+          "cachedResultName": "New_Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 477951468,
+          "mode": "list",
+          "cachedResultName": "New_Book-AI-ML.md",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit#gid=477951468"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "=In Progress",
+            "Updated At": "={{$now.toISO()}}",
+            "row_number": "={{ $json.row_number }}",
+            "Page ID": "={{ $json['Page ID'] }}",
+            "Text": "={{ $json.Text }}",
+            "New Text": "={{ $json['New Text'] }}"
+          },
+          "matchingColumns": [
+            "Page ID"
+          ],
+          "schema": [
+            {
+              "id": "Page ID",
+              "displayName": "Page ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Text",
+              "displayName": "Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "New Text",
+              "displayName": "New Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Final Text",
+              "displayName": "Final Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated At",
+              "displayName": "Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Created At",
+              "displayName": "Created At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        736,
+        -400
+      ],
+      "id": "eece6ac3-7a97-404b-ba29-0189dbeb40de",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4",
+          "mode": "list",
+          "cachedResultName": "New_Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 477951468,
+          "mode": "list",
+          "cachedResultName": "New_Book-AI-ML.md",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit#gid=477951468"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Page ID",
+              "lookupValue": "2"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        544,
+        -400
+      ],
+      "id": "9ddcf661-d1da-4155-a1e8-d29dc5e18af7",
+      "name": "Get One Specific Page",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4",
+          "mode": "list",
+          "cachedResultName": "New_Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 477951468,
+          "mode": "list",
+          "cachedResultName": "New_Book-AI-ML.md",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit#gid=477951468"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Final",
+            "Updated At": "={{$now.toISO()}}",
+            "Page ID": "={{ $('Update row in sheet1').item.json['Page ID'] }}",
+            "Final Text": "={{ $json.output.finalText }}"
+          },
+          "matchingColumns": [
+            "Page ID"
+          ],
+          "schema": [
+            {
+              "id": "Page ID",
+              "displayName": "Page ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Text",
+              "displayName": "Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "New Text",
+              "displayName": "New Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Final Text",
+              "displayName": "Final Text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Updated At",
+              "displayName": "Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Created At",
+              "displayName": "Created At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1520,
+        -400
+      ],
+      "id": "d8fd9b02-7129-4fa5-b42c-3fde2bbba7a7",
+      "name": "Update page in sheet Done1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Semi-Automated Update [REVISION]",
+        "height": 592,
+        "width": 1648
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        496,
+        -784
+      ],
+      "id": "b4871d24-a286-45a2-b84e-6bd24e66cadc",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "maxItems": 2
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        784,
+        0
+      ],
+      "id": "efedb5bb-d384-4a4e-8421-f237308d1f03",
+      "name": "Limit"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-07-07T17:04:32.733Z",
+      "updatedAt": "2025-07-29T12:08:01.871Z",
+      "id": "MsNN7NfDxicUYrVv",
+      "name": "draft"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-12T18:50:14.000Z",
+  "versionId": "96220d89-b2f3-4b1f-bbaf-b9f38cd005ac"
+}
