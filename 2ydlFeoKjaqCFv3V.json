@@ -1,0 +1,536 @@
+{
+  "active": false,
+  "connections": {
+    "Topic Insights & Core Angle Synthesizer": {
+      "main": [
+        [
+          {
+            "node": "Competitor Identification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Competitor Identification": {
+      "main": [
+        [
+          {
+            "node": "Authoritative Resource Link Finder Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini 2.5 Pro": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Topic Insights & Core Angle Synthesizer",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Competitor Identification",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Authoritative Resource Link Finder Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Competitor Identification",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Authoritative Resource Link Finder Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pro_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Competitor Identification",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Authoritative Resource Link Finder Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Output Parse": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Competitor Identification",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "output parse": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Authoritative Resource Link Finder Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Output parse": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Topic Insights & Core Angle Synthesizer",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Authoritative Resource Link Finder Agent": {
+      "main": [
+        [
+          {
+            "node": "Get All Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Topic Insights & Core Angle Synthesizer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Data": {
+      "main": [
+        [
+          {
+            "node": "Return",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-15T16:27:43.280Z",
+  "id": "2ydlFeoKjaqCFv3V",
+  "isArchived": true,
+  "meta": null,
+  "name": "Analysis and Verification",
+  "nodes": [
+    {
+      "parameters": {
+        "notice": "",
+        "promptType": "define",
+        "text": "={{JSON.stringify($json)}}",
+        "hasOutputParser": true,
+        "needsFallback": false,
+        "messages": {
+          "messageValues": [
+            {
+              "type": "SystemMessagePromptTemplate",
+              "message": "=## RÔLE & OBJECTIF\nVous êtes un Maître Stratège de Contenu et Rédacteur en Chef, réputé pour votre capacité à distiller des recherches complexes et multifacettes en une vision unique et puissante pour un contenu qui domine les classements de recherche et captive les lecteurs.\n\n## CONTEXTE & MISSION\nVotre input est un unique objet JSON consolidé nommé `full_research_data`. Cet objet contient trois sections clés : `original_campaign_details`, `initial_broad_research_synthesis`, et `deep_dive_keyword_analysis`.\n\nVotre tâche critique est de synthétiser les informations provenant des TROIS sources de données pour définir la direction stratégique du futur article. Votre analyse doit être perspicace, actionnable et entièrement axée sur la création de la ressource de référence n°1. Vous recherchez des thèmes récurrents, des besoins globaux des utilisateurs, et un angle unique qui lie le tout.\n\n## PLAN D'EXÉCUTION\nEn vous basant sur l'intégralité des données fournies, vous DEVEZ produire les éléments stratégiques suivants :\n\n1.  **overarching_article_topic :** À partir de l'ensemble de la recherche, déduisez et énoncez le sujet principal et global que l'article prévu doit aborder.\n2.  **critical_themes_to_cover :** Analysez les thèmes clés des recherches large et approfondie pour identifier les 3 à 5 piliers les plus critiques qui doivent former les sections principales de l'article.\n3.  **core_article_angle_uvp :** Ceci est primordial. Définissez un Angle d'Article Principal ou une Proposition de Valeur Unique (UVP) convaincant et unique. Cet angle doit différencier l'article, aborder les points de douleur les plus importants des utilisateurs, et offrir une promesse de valeur claire au lecteur.\n4.  **primary_target_audience_persona :** Synthétisez toutes les informations disponibles sur l'audience pour décrire le lecteur cible principal de cet article en 2-3 phrases.\n5.  **top_user_pain_points_to_solve :** Passez en revue toutes les recherches pour lister les 3 à 5 problèmes utilisateurs les plus importants et récurrents que l'article DOIT aborder de manière exhaustive.\n6.  **most_sought_after_solutions_to_detail :** Passez en revue toutes les recherches pour lister les 3 à 5 solutions ou méthodes les plus importantes que l'article DOIT expliquer.\n7.  **key_eeat_opportunities :** Identifiez les 2 à 3 opportunités E-E-A-T les plus percutantes, en tirant parti des forces spécifiques du client et des sources faisant autorité découvertes lors de la recherche.\n\n## Date & Heure Actuelles pour référence : {{ new Date($now).toLocaleString('fr-FR', {\n  day: '2-digit',\n  month: 'short',\n  year: 'numeric',\n  hour: '2-digit',\n  minute: '2-digit',\n  hour12: false,\n  timeZone: 'Europe/Paris' // Optionnel : pour l'heure locale correcte\n}).replace(',', '') }}\n\n**## INSTRUCTION FINALE DE SORTIE**\nAprès avoir complété toutes les étapes et les appels d'outils, votre *seule* réponse doit être la sortie structurée complète.\n\n**INSTRUCTION FINALE CRITIQUE : Votre réponse finale DOIT être une chaîne de caractères (string) unique contenant un bloc de code JSON. N'envoyez JAMAIS un objet JSON directement. Votre réponse doit commencer par ```json et se terminer par ```.**"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        780,
+        640
+      ],
+      "id": "dad2df7e-d4b3-482e-b3c5-9c3aaec67bb8",
+      "name": "Topic Insights & Core Angle Synthesizer"
+    },
+    {
+      "parameters": {
+        "aiAgentStarterCallout": "",
+        "agent": "toolsAgent",
+        "promptType": "define",
+        "text": "={\n  \"nom_du_client\": \"{{ $('Start').item.json.['Client/Brand Name'] }}\",\n  \"site_web_du_client\": \"{{ $('Start').item.json.['Website url'] }}\",\n  \"concurrents_cles\": \"{{ $('Start').item.json.body['Competitors (optional)'] || '' }}\",\n  \"sujet_principal_du_contenu\": \"{{ $('Start').item.json.MainContentTopic }}\",\n  \"sujet_global_de_larticle\": \"{{ $json.output.overarching_article_topic }}\",\n  \"angle_principal_uvp_de_larticle\": \"{{ $json.output.core_article_angle_uvp }}\",\n  \"themes_critiques_a_couvrir\": \"{{ $json.output.critical_themes_to_cover ? (Array.isArray($json.output.critical_themes_to_cover) ? $json.output.critical_themes_to_cover.join(', ') : $json.output.critical_themes_to_cover) : '' }}\"\n}",
+        "hasOutputParser": true,
+        "notice": "",
+        "options": {
+          "systemMessage": "=## RÔLE & OBJECTIF\nVous êtes un Analyste Expert en Veille Concurrentielle SEO. Votre mission est d'identifier et d'analyser les 3 à 5 meilleurs articles de concurrents organiques qui sont en concurrence directe pour l'attention de l'utilisateur sur le sujet prévu. Vous utiliserez le brief stratégique fourni pour guider votre recherche et votre analyse.\n\n## CONTEXTE\nVotre input contient des données client et la vision centrale pour l'article. Vous recevrez :\n- `client_name`: Le nom de l'entreprise cliente\n- `client_website`: Le domaine du client à exclure des résultats\n- `key_competitors`: Une liste de noms de concurrents (peut être vide)\n- `main_content_topic`: Le sujet principal\n- `overarching_article_topic`: La description complète du sujet\n- `core_article_angle_uvp`: L'angle/proposition de valeur unique\n- `critical_themes_to_cover`: Les thèmes à couvrir\n\nVous utiliserez `overarching_article_topic` et `core_article_angle_uvp` pour formuler vos requêtes de recherche.\n**Si des concurrents sont mentionnés dans `key_competitors`, donnez la priorité à la recherche de contenu de ces concurrents spécifiques.**\n\n## VOS OUTILS DISPONIBLES\n- `simple_search` - pour les recherches web basiques et la découverte initiale.\n- `pro_search` - pour l'analyse approfondie.\n\n### LIMITES D'UTILISATION DES OUTILS\nBudget strict :\n* **`simple_search`**: 2 appels maximum\n* **`pro_search`**: 1 appel maximum\n\n## PLAN DE MISSION\n\n1.  **Analyse de l'Input :** Extraire le sujet, les concurrents et le domaine client.\n2.  **Découverte :** Utiliser 1-2 `simple_search` pour trouver des articles concurrents pertinents.\n3.  **Analyse Approfondie :** Utiliser 1 `pro_search` pour analyser en détail le concurrent le plus sérieux.\n4.  **Identification des Lacunes :** Utiliser les recherches pour noter ce qui manque chez les concurrents.\n5.  **Synthèse :** Compiler toutes les informations pour remplir le rapport final.\n\n## FORMAT DE SORTIE STRICT\n\nVotre seule et unique sortie doit être une chaîne de caractères contenant un bloc de code JSON valide, comme montré dans cet exemple. Respectez scrupuleusement les types de données et les contraintes de chaque champ.\n\n\n{\n  \"overall_competitor_landscape_summary\": \"Un résumé de 1-2 phrases sur l'intensité concurrentielle et les stratégies communes observées.\",\n  \"top_identified_competitors\": [\n    {\n      \"competitor_name\": \"Nom de la Marque/Site (ou le domaine si inconnu)\",\n      \"url\": \"L'URL complète de l'article concurrent\",\n      \"content_main_angle_and_focus\": \"Une seule phrase décrivant leur message/angle principal.\",\n      \"key_subtopics_covered_by_competitor\": [\"tableau de chaînes de caractères listant les sous-thèmes couverts\"],\n      \"observed_strengths\": [\"tableau de forces spécifiques (ex: 'Données complètes étayées par des études')\"],\n      \"observed_weaknesses_or_gaps\": [\"tableau de faiblesses ou lacunes (ex: 'Manque d'exemples pratiques')\"]\n    }\n  ],\n  \"strategic_recommendations_to_outperform\": [\n    \"Recommandation stratégique actionnable 1\",\n    \"Recommandation stratégique actionnable 2\",\n    \"Recommandation stratégique actionnable 3\"\n  ]\n}\n\n\n**INSTRUCTION FINALE CRITIQUE : Votre réponse finale DOIT être une chaîne de caractères (string) unique contenant un bloc de code JSON. N'envoyez JAMAIS un objet JSON directement. Votre réponse doit commencer par ```json et se terminer par ```.**",
+          "maxIterations": 20
+        },
+        "credentials": ""
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1140,
+        640
+      ],
+      "id": "3f9a1c6a-11e5-417b-b353-26b8b712232d",
+      "name": "Competitor Identification"
+    },
+    {
+      "parameters": {
+        "notice": "",
+        "modelName": "models/gemini-2.5-pro",
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        880,
+        760
+      ],
+      "id": "384f697e-a0e6-4afc-bd3a-99da2c912a1d",
+      "name": "Gemini 2.5 Pro",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "IaxShIVI5GMeNwws",
+          "name": "Google Gemini(PaLM) Api account Pre Etat Date"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Makes an HTTP request and returns the response data in a valid JSON",
+        "curlImport": "",
+        "method": "POST",
+        "url": "https://api.perplexity.ai/chat/completions",
+        "authentication": "none",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "=Authorization",
+              "value": "=Bearer {{ $('Start').first().json._firstItem['Perplexity API Key'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sonar\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a Local SERP Analyst. Your function is to provide a concise, factual summary of the top search results for a local query. Identify the primary companies and the type of content ranking (e.g., service pages, directories). Be objective and data-focused.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $fromAI('simple_search') }}\"\n    }\n  ]\n}",
+        "options": {},
+        "optimizeResponse": false,
+        "infoMessage": ""
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1240,
+        760
+      ],
+      "id": "483462a8-a327-4c5f-b5b3-0e911f109aba",
+      "name": "Simple_search"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Makes an HTTP request and returns the response data in a valid JSON",
+        "curlImport": "",
+        "method": "POST",
+        "url": "https://api.perplexity.ai/chat/completions",
+        "authentication": "none",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Start').first().json._firstItem['Perplexity API Key'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sonar-pro\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are an investigative researcher. Answer the user's specific question directly and factually based on web search results. CITE YOUR SOURCES. Provide only the direct answer and its source.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $fromAI('pro_search') }}\"\n    }\n  ]\n}",
+        "options": {},
+        "optimizeResponse": false,
+        "infoMessage": ""
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1600,
+        760
+      ],
+      "id": "5f012308-69ed-4b54-b8e3-89845cb142a6",
+      "name": "Pro_search"
+    },
+    {
+      "parameters": {
+        "notice": "",
+        "schemaType": "fromJson",
+        "jsonSchemaExample": "{\n  \"overall_competitor_landscape_summary\": \"Un résumé de 1-2 phrases sur l'intensité concurrentielle et les stratégies communes observées.\",\n  \"top_identified_competitors\": [\n    {\n      \"competitor_name\": \"Nom de la Marque/Site (si identifiable, sinon le domaine)\",\n      \"url\": \"URL du concurrent\",\n      \"content_main_angle_and_focus\": \"Quel est leur message/angle principal pour ce contenu ?\",\n      \"key_subtopics_covered_by_competitor\": [\"tableau de sous-thèmes\"],\n      \"observed_strengths\": [\"tableau de forces spécifiques\"],\n      \"observed_weaknesses_or_gaps\": [\"tableau de faiblesses ou de lacunes de contenu\"]\n    }\n  ],\n  \"strategic_recommendations_to_outperform\": [\n    \"Recommandation stratégique 1\",\n    \"Recommandation stratégique 2\",\n    \"Recommandation stratégique 3\"\n  ]\n}",
+        "autoFix": false
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        1280,
+        520
+      ],
+      "id": "c523fb85-670b-4300-936d-b5001feba44b",
+      "name": "Output Parse"
+    },
+    {
+      "parameters": {
+        "notice": "",
+        "schemaType": "fromJson",
+        "jsonSchemaExample": "{\n  \"approved_authoritative_external_links\": [\n    {\n      \"url\": \"string // The full, verified URL\",\n      \"title\": \"string // The actual page title from the source\",\n      \"source_name\": \"string // The name of the organization (e.g., 'U.S. Environmental Protection Agency')\",\n      \"brief_justification_for_inclusion\": \"string // A 1-2 sentence explanation of why this source is authoritative and relevant. e.g., 'Official .gov resource providing research-backed data on water contaminants relevant to shower quality.'\",\n      \"suggested_contextual_anchor_text\": \"string // A concise, descriptive anchor text. e.g., 'EPA guidelines on water contaminants'\"\n    }\n  ]\n}",
+        "autoFix": false
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        1600,
+        520
+      ],
+      "id": "3165daf3-63ad-48e5-9866-5a1e038ee290",
+      "name": "output parse"
+    },
+    {
+      "parameters": {
+        "notice": "",
+        "schemaType": "fromJson",
+        "jsonSchemaExample": "{\n  \"overarching_article_topic\": \"The Comprehensive Impact of Hard Water on Skin and Hair Health and the Role of Certified Filtration Systems\",\n  \"critical_themes_to_cover\": [\n    \"The Science of Water Contaminants (Chlorine & Minerals)\",\n    \"Proven Health & Beauty Benefits of Filtration\",\n    \"Understanding and Choosing the Right Filter Technology\",\n    \"The Importance of Third-Party Certification for Trust\"\n  ],\n  \"core_article_angle_uvp\": \"Beyond Marketing Claims: A Data-Driven Guide to How Certified Shower Filters Protect Your Hair and Skin, Featuring Verifiable Testing and Real-World Results\",\n  \"primary_target_audience_persona\": \"Health-conscious individuals likely experiencing persistent skin or hair issues. They are beginners on the topic of water filtration but are analytical and value scientific evidence and trusted certifications over hype.\",\n  \"top_user_pain_points_to_solve\": [\n    \"Persistent dry, itchy, or sensitive skin (eczema, acne)\",\n    \"Dull, frizzy, or brittle hair that breaks easily\",\n    \"Costly color-treated hair fading too quickly\"\n  ],\n  \"most_sought_after_solutions_to_detail\": [\n    \"Effective removal of chlorine and its irritating effects\",\n    \"Neutralizing the negative impact of hard water minerals (limescale)\",\n    \"Finding a trustworthy, certified, and tested filtration product\"\n  ],\n  \"key_eeat_opportunities\": [\n    \"Leverage client's specific testing (Centre Testing Int., Hechuan) as a key differentiator against competitors who only cite general NSF standards\",\n    \"Structure the article to directly answer the top 5 'People Also Ask' questions discovered in the research, establishing topical authority\",\n    \"Cite the health.com and dermatology-focused articles found in the research to build credibility with external, authoritative sources\"\n  ]\n}",
+        "autoFix": false
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        880,
+        520
+      ],
+      "id": "ddfe6aa6-b957-4b26-a00f-a9f196fff87a",
+      "name": "Output parse"
+    },
+    {
+      "parameters": {
+        "aiAgentStarterCallout": "",
+        "agent": "toolsAgent",
+        "promptType": "define",
+        "text": "=Sujet global de l'article : \"{{ $('Topic Insights & Core Angle Synthesizer').first().json.output?.overarching_article_topic || '' }}\"\n---\nThèmes critiques à explorer : \"{{ ($('Topic Insights & Core Angle Synthesizer').item.json.output?.critical_themes_to_cover || []).join(', ') }}\n\"\n---\nURLs de concurrents à éviter : \"{{ ($('Competitor Identification').item.json.output?.top_identified_competitors || []).map(x => x?.url).filter(Boolean).join(', ') }}\"\n",
+        "hasOutputParser": true,
+        "notice": "",
+        "options": {
+          "systemMessage": "=## RÔLE & OBJECTIF\nVous êtes un Spécialiste Expert en Curation de Ressources E-E-A-T et un Bibliothécaire Numérique. Votre mission est d'identifier 3 à 5 URLs externes de haute autorité, non commerciales et non concurrentes, qui serviraient d'excellentes citations ou de \"lectures complémentaires\" pour un article sur le sujet fourni.\n\n## CONTEXTE\nVotre input est un objet `resource_finding_brief`. Vous utiliserez `overarching_article_topic` et `critical_themes_to_explore` pour formuler des requêtes de recherche. Vous DEVEZ impérativement éviter toutes les URLs de la liste `competitor_urls_to_avoid`.\n\n## VOS OUTILS DISPONIBLES\n- `simple_search` - pour découvrir des ressources faisant autorité\n- `pro_search` - pour les recherches avancées et la vérification de la crédibilité des sources\n\n### LIMITES D'UTILISATION DES OUTILS\nVous avez un budget strict pour les appels d'outils sur cette tâche. Ne dépassez pas les limites suivantes :\n* **`simple_search`**: 2 appels\n* **`pro_search`**: 1 appels\n\n**Règles Critiques de Format d'Input :**\n- Utilisez UNIQUEMENT du texte simple avec des lettres, des chiffres et des espaces\n- **N'INCLUEZ PAS ces symboles :** \" ' ; \\ p [ ] - / ? | : } { P ou tout autre caractère spécial\n- **Bon exemple :** `etude scientifique effets eau dermatite site gouv`\n- **Mauvais exemple :** `\"etude scientifique\" site:.gouv.fr`\n\n## PLAN DE MISSION\n\n1.  **Formuler les Requêtes de Recherche :**\n    -   Créez 3-4 requêtes précises axées sur des sources faisant autorité\n    -   Ciblez les organismes gouvernementaux, les institutions académiques et les organisations à but non lucratif respectées\n    -   Convertissez les recherches spécifiques à un site en langage naturel :\n        * Au lieu de `site:.gouv.fr` → incluez `gouvernement officiel` ou `ANSES` dans la requête\n        * Au lieu de `site:.edu` → incluez `recherche universitaire` ou `étude académique`\n        * Au lieu de `site:.org` → incluez `organisation à but non lucratif` ou des noms d'organisations spécifiques\n\n    **Exemples de Requêtes :**\n    -   `normes qualité eau ANSES réduction chlore officiel`\n    -   `recherche universitaire eau calcaire dermatite atopique étude`\n    -   `norme NSF ANSI 177 réduction chlore explication`\n\n2.  **Exécution Stratégique de la Recherche :**\n    -   Utilisez `simple_search` pour une découverte large de sources faisant autorité\n    -   Utilisez `pro_search` pour vérifier la crédibilité et la pertinence des sources prometteuses\n    -   Recherchez des indicateurs spécifiques d'autorité dans les résultats de recherche :\n        * Domaines gouvernementaux et publications officielles\n        * Articles académiques et ressources universitaires\n        * Organismes de normalisation et agences de régulation\n        * Organisations à but non lucratif bien établies et expertes\n\n3.  **Stratégie de Vérification du Contenu :**\n    -   Utilisez `pro_search` avec des requêtes ciblées pour vérifier la qualité de la source\n    -   Recherchez la réputation et l'autorité de l'organisation\n    -   Confirmez que le contenu est éducatif/informatif, et non commercial\n    -   Exemple de recherche de vérification : `crédibilité autorité normes eau potable ANSES`\n\n4.  **Filtrer et Sélectionner :**\n    -   À partir de toutes les recherches, identifiez 5 à 10 URLs prometteuses\n    -   Écartez immédiatement toute URL correspondant à `competitor_urls_to_avoid`\n    -   Donnez la priorité aux sources qui sont :\n        * **Faisant autorité :** Agences gouvernementales, universités, principales organisations à but non lucratif\n        * **Non commerciales :** Objectif éducatif sans promotion de produit\n        * **Pertinentes :** Abordent directement les thèmes critiques\n\n5.  **Synthétiser le Rapport Final :**\n    -   Sélectionnez les 3 à 5 meilleures URLs qui répondent à tous les critères\n    -   La qualité prime sur la quantité - mieux vaut 3 excellentes sources que 5 médiocres\n    -   Compilez dans le format JSON requis\n\n## CONSEILS D'OPTIMISATION DE LA RECHERCHE\n-   Combinez les indicateurs d'autorité avec les mots-clés du sujet\n-   Utilisez les noms d'organisations lorsqu'ils sont connus (ANSES, CNRS, etc.)\n-   Incluez des termes comme \"officiel\", \"recherche\", \"normes\", \"directives\"\n-   Variez les termes de recherche pour capturer différents angles faisant autorité\n\n## Date & Heure Actuelles pour référence :\n{{ new Date($now).toLocaleString('fr-FR', {\n  day: '2-digit',\n  month: 'short',\n  year: 'numeric',\n  hour: '2-digit',\n  minute: '2-digit',\n  hour12: false,\n  timeZone: 'Europe/Paris'\n}).replace(',', '') }}\n\n## INSTRUCTION FINALE DE SORTIE\nAprès avoir complété toutes les étapes de recherche et les appels d'outils, votre *seule* réponse doit être la sortie structurée complète.\n\nSi, après avoir suivi le plan, tu ne trouves aucune source pertinente qui correspond aux critères, ton rapport final doit contenir un tableau approved_authoritative_external_links vide ([]). Ne termine jamais ta réponse sans fournir une structure JSON valide.\n\n**INSTRUCTION FINALE CRITIQUE : Votre réponse finale DOIT être une chaîne de caractères (string) unique contenant un bloc de code JSON. N'envoyez JAMAIS un objet JSON directement. Votre réponse doit commencer par ```json et se terminer par ```.**",
+          "maxIterations": 20
+        },
+        "credentials": ""
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1500,
+        640
+      ],
+      "id": "f83ac665-cb0f-463c-9d3b-efd2fec661c2",
+      "name": "Authoritative Resource Link Finder Agent"
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7d5675ae-a097-4f99-9f9d-64fb88b93640",
+              "name": "Master Research & Synthesis Agent",
+              "value": "={{ $('Start').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "142e5875-e8b9-4169-b7b3-9d6c1c22356b",
+              "name": "SEvO Keyword & Content Strategy Synthesizer",
+              "value": "={{ $('Start').item.json.SEvO_Keyword__Content_Strategy_Synthesizer_output_1 }}",
+              "type": "object"
+            },
+            {
+              "id": "246727f0-93bf-4f19-8ac4-637969eaf29b",
+              "name": "Deep-Dive Keyword Analyst",
+              "value": "={{ $('Start').item.json.DeepDive_Keyword_Analyst_output_1 }}",
+              "type": "object"
+            },
+            {
+              "id": "a43f08f4-9f94-4176-8713-c58953287fb5",
+              "name": "Topic Insights & Core Angle Synthesizer",
+              "value": "={{ $('Topic Insights & Core Angle Synthesizer').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "a43addbd-b7b5-4037-bef1-dda1a7ad45ea",
+              "name": "Competitor Identification",
+              "value": "={{ $('Competitor Identification').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "f72e7a07-7951-4805-92ed-80c17f555865",
+              "name": "Authoritative Resource Link Finder Agent",
+              "value": "={{ $json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "744569fa-0246-447a-9622-898252916e36",
+              "name": "Campaign input",
+              "value": "={{ $('Start').first().json.Set_Data_allItems }}",
+              "type": "string"
+            },
+            {
+              "id": "71531b4d-3c75-4449-b164-4832b66e40f9",
+              "name": "Client Data",
+              "value": "={{ $('Start').first().json._Set_Client_Data_allItems }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": false,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1880,
+        520
+      ],
+      "id": "d4cfa1db-275f-4abe-980b-f76a59afee34",
+      "name": "Get All Data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f1db78d7-a651-452a-bb59-b91e432f468e",
+              "name": "output",
+              "value": "={{ $('Topic Insights & Core Angle Synthesizer').item.json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "bd681eba-93a1-481a-85c8-3ea5db0f43dd",
+              "name": "Competitor_Identification_output",
+              "value": "={{ $('Competitor Identification').item.json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "71cd2e8d-a253-479d-838b-ded893d46b60",
+              "name": "Authoritative_Resource_Link_Finder_Agent_output",
+              "value": "={{ $('Authoritative Resource Link Finder Agent').item.json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2100,
+        520
+      ],
+      "id": "5fdce031-9524-4b0e-a4ce-525c9688bc81",
+      "name": "Return"
+    },
+    {
+      "id": "25392421-15d3-4f94-9c81-6aefee0f2e9e",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        560,
+        640
+      ],
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "MainContentTopic",
+              "type": "any"
+            },
+            {
+              "name": "",
+              "type": "any"
+            },
+            {
+              "name": "body",
+              "type": "any"
+            },
+            {
+              "name": "_firstItem",
+              "type": "any"
+            },
+            {
+              "name": "output",
+              "type": "any"
+            },
+            {
+              "name": "SEvO_Keyword__Content_Strategy_Synthesizer_output_1",
+              "type": "any"
+            },
+            {
+              "name": "DeepDive_Keyword_Analyst_output_1",
+              "type": "any"
+            },
+            {
+              "name": "Set_Data_allItems",
+              "type": "any"
+            },
+            {
+              "name": "_Set_Client_Data_allItems",
+              "type": "any"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": null,
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-16T13:22:48.000Z",
+  "versionId": "796b6454-9c63-4023-8fe7-a6b2392ac9a8"
+}
