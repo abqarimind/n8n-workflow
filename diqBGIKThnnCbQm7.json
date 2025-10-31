@@ -1,0 +1,530 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Limit 20",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qdrant Vector Store": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader1": {
+      "ai_document": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Qdrant Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit 20": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI2": {
+      "ai_embedding": [
+        [
+          {
+            "node": "search_assets",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "search_assets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Create a page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a page": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-10-17T15:25:29.145Z",
+  "id": "diqBGIKThnnCbQm7",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "PS - RAG System",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        240
+      ],
+      "id": "d218947a-9d10-469b-8b49-6747331f6d4d",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "19BPPeN1DtmvV0eHxquhUzvlyK5uB2Kn5nvTeSYrXiks",
+          "mode": "list",
+          "cachedResultName": "RAG TEST - Frame.io Asset Registry ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19BPPeN1DtmvV0eHxquhUzvlyK5uB2Kn5nvTeSYrXiks/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19BPPeN1DtmvV0eHxquhUzvlyK5uB2Kn5nvTeSYrXiks/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "status",
+              "lookupValue": "DONE"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -128,
+        240
+      ],
+      "id": "db62ba85-b96e-438a-9a7b-1d3817ff7a95",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        320,
+        240
+      ],
+      "id": "76f42329-f2f7-46dc-b5e8-6121b75ffdad",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "assets-media-petiscope",
+          "mode": "id"
+        },
+        "options": {
+          "collectionConfig": ""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.3,
+      "position": [
+        768,
+        240
+      ],
+      "id": "01e1e9ae-b535-4d03-acda-3fa3660e73bf",
+      "name": "Qdrant Vector Store",
+      "credentials": {
+        "qdrantApi": {
+          "id": "CWQS0tGNBZLw6emi",
+          "name": "QdrantApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        784,
+        464
+      ],
+      "id": "07431d41-e183-41d6-857f-28f2bc253ca6",
+      "name": "Embeddings OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.pageContent }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "id",
+                "value": "={{ $json.metadata.id }}"
+              },
+              {
+                "name": "title",
+                "value": "={{ $json.metadata.title }}"
+              },
+              {
+                "name": "environnement",
+                "value": "={{ $json.metadata.environnement }}"
+              },
+              {
+                "name": "effet_wow",
+                "value": "={{ $json.metadata.effet_wow }}"
+              },
+              {
+                "name": "acteurs_principaux",
+                "value": "={{ $json.metadata.acteurs_principaux }}"
+              },
+              {
+                "name": "url",
+                "value": "={{ $json.metadata.url }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        912,
+        464
+      ],
+      "id": "75122423-3fbe-4e4d-bf5d-855c4b23f0a4",
+      "name": "Default Data Loader1"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  const r = item.json;\n  return {\n    json: {\n      pageContent: String(r.detailed_concept_description || \"\").trim(),\n      metadata: {\n        id: r.frameio_asset_id || r.idempotency_key || r.drive_file_id,\n        title: r.video_title || \"\",\n        environnement: r.environnement || \"\",\n        effet_wow: r.effet_wow || \"\",\n        observation: r.observation || \"\",\n        acteurs_principaux: r.acteurs_principaux || \"\",\n        url: r.URL || \"\"\n      }\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        160
+      ],
+      "id": "ed87ec49-e42f-45bc-9f61-a07972a06e76",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "maxItems": 10
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        96,
+        240
+      ],
+      "id": "40dbdffc-bf47-4fa1-b7db-2f072cc05124",
+      "name": "Limit 20"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=R — Role :\nTu es un créatif-stratège IA spécialisé en publicité Meta/TikTok et contenus UGC pour la marque Petiscope, leader français des microscopes éducatifs pour enfants.\nTon rôle : imaginer des concepts vidéo performants et retrouver dans la base média les vidéos les plus proches pour servir d’inspiration au montage ou au script.\n\nA — Action :\n\nGénère une idée ou un script simple de créa vidéo Petiscope (pub, UGC, démonstration…).\n\nUtilise l’outil search_assets(query) pour chercher les vidéos les plus similaires dans la base “assets-media-petiscope”.\n\nPour chaque vidéo trouvée, affiche :\n\nson titre\n\nsa description\n\nson URL\n\net pourquoi elle correspond à ton idée.\n\nTermine en résumant comment ces vidéos pourraient inspirer un script publicitaire cohérent.\n\nC — Contexte :\nTu disposes d’un vector store contenant les descriptions détaillées de centaines de vidéos classées par :\n\ntitle\n\nenvironnement\n\neffet_wow\n\nobservation\n\nacteurs_principaux\n\nurl\n\nCes données décrivent les vidéos tournées pour Petiscope et servent à retrouver les assets les plus pertinents.\n\nE — Exemple :\n\nBrief utilisateur : “Je veux une vidéo publicitaire émotionnelle sur le lien parent-enfant.”\n\nTon raisonnement :\n\nAngle marketing : “Lien familial et apprentissage partagé.”\n\nAppelle search_assets(\"parent enfant microscope découverte\")\n\nRésultats : 3 vidéos où un enfant découvre un insecte ou une fleur avec son parent.\n\nScript suggéré : “Une mère et son fils explorent le monde invisible ensemble. Un moment de complicité et d’émerveillement.”\n\nFournis les URLs des vidéos correspondantes.\n\n\nOUTILS :\n\n'search_assets' → Recherche dans la base “assets-media-petiscope” les vidéos dont la description est la plus proche du texte fourni.\nRetourne : title, description, url, et métadonnées associées."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -80,
+        768
+      ],
+      "id": "42114500-b574-4b8f-bdd0-59045e68bc4b",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-20250514",
+          "cachedResultName": "Claude 4 Sonnet"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        -128,
+        992
+      ],
+      "id": "e703b143-2f19-47ed-b7ed-3a9956e8ad94",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": "HvX2s13mqSlZk632",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        992
+      ],
+      "id": "b76efe19-9441-43cb-8bde-606085e3c88b",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -352,
+        768
+      ],
+      "id": "1a695138-096b-4e38-b5b2-afd382a34897",
+      "name": "When chat message received",
+      "webhookId": "f5546206-8bef-4989-95d3-f4975435b51d"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        1200
+      ],
+      "id": "90b40491-eeff-4987-b0de-6949a97cf291",
+      "name": "Embeddings OpenAI2",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Recherche dans le vector store Qdrant “assets-media-petiscope” les vidéos dont la description textuelle est la plus proche sémantiquement du texte fourni.\nRenvoie les métadonnées associées (title, description, url, environnement, effet_wow, observation, acteurs_principaux) pour aider à identifier les vidéos pertinentes comme référence créative.",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "assets-media-petiscope",
+          "mode": "list",
+          "cachedResultName": "assets-media-petiscope"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.3,
+      "position": [
+        128,
+        992
+      ],
+      "id": "12818394-31d6-4596-83dd-b6471d368cb5",
+      "name": "search_assets",
+      "credentials": {
+        "qdrantApi": {
+          "id": "CWQS0tGNBZLw6emi",
+          "name": "QdrantApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pageId": {
+          "__rl": true,
+          "value": "https://www.notion.so/Demo-Scenario-28fec02978cc80178d55ebd11c7ece3c",
+          "mode": "url"
+        },
+        "title": "Brief Creatif",
+        "blockUi": {
+          "blockValues": [
+            {
+              "textContent": "={{ $json.output }}"
+            },
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        656,
+        784
+      ],
+      "id": "fe4a732e-e5cd-4f88-94ea-7d777e8c2d53",
+      "name": "Create a page",
+      "credentials": {
+        "notionApi": {
+          "id": "uGGfhoyO7gvYd8RO",
+          "name": "Abqari Personal Account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {
+    "AI Agent": [
+      {
+        "json": {
+          "output": "---\n\n# 📱 **RÉSUMÉ CRÉATIF - EXTÉRIEUR PETISCOPE**\n\n## **🎬 VIDÉOS RÉFÉRENCES CLÉS :**\n\n### **1. \"Un enfant observe des pinces d'insecte avec son microscope\"**\n- **URL** : https://next.frame.io/project/fe2251e6-e721-42be-8045-220bece5321f/view/7b3d030e-e32e-48b7-b33d-999d8867d116\n- **Pourquoi** : Parfait pour l'émerveillement authentique d'un enfant découvrant les détails fascinants d'un insecte\n- **Effet wow** : ✅ Oui\n\n### **2. \"Le Petiscope, compagnon d'aventure et d'apprentissage pour enfant\"**\n- **URL** : https://next.frame.io/project/fe2251e6-e721-42be-8045-220bece5321f/view/8f32f173-24bb-4a2b-b806-785cb549bd35\n- **Pourquoi** : Démontre l'utilisation ludique et éducative en extérieur\n- **Effet wow** : ✅ Oui\n\n### **3. \"Exploration en famille avec le microscope Petiscope en forêt\"**\n- **URL** : https://next.frame.io/project/fe2251e6-e721-42be-8045-220bece5321f/view/5bd7f2f9-3b16-47e8-9a27-a5fe9d68fc90\n- **Pourquoi** : Illustre parfaitement le lien parent-enfant dans la découverte\n- **Acteurs** : Parent & enfant\n\n---\n\n## **🎯 SCRIPT PUBLICITAIRE SYNTHÈSE :**\n\n**\"L'extérieur devient un laboratoire géant\"**\n\n**ACCROCHE** : \"Et si chaque balade devenait une aventure scientifique ?\"\n\n**SÉQUENCE** :\n1. **Plan d'ouverture** : Famille qui se promène (inspiration vidéo #3)\n2. **Transition** : Enfant qui sort son Petiscope (inspiration vidéo #2)\n3. **Émerveillement** : Découverte des pinces d'insecte (inspiration vidéo #1)\n4. **Partage** : Moments de complicité parent-enfant autour des découvertes\n\n**CTA** : \"Petiscope - Transforme le quotidien en extraordinaire\"\n\nCes vidéos offrent une base parfaite pour créer du contenu UGC authentique ou des pubs Facebook/TikTok mettant en avant l'aspect aventure et découverte en plein air ! 🌿🔬"
+        }
+      }
+    ],
+    "When chat message received": [
+      {
+        "json": {
+          "sessionId": "1c2c03ef05a0456cbe97a5d8e7959cc7",
+          "action": "sendMessage",
+          "chatInput": "Suggere moi des idees des Creatives en lien avec l'exterieur "
+        }
+      }
+    ]
+  },
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-17T17:54:12.000Z",
+  "versionId": "05582d82-4fe1-4be8-9d46-1eb2bca5a275"
+}
