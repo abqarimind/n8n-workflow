@@ -1,0 +1,236 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Auto-fixing Output Parser",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auto-fixing Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Auto-fixing Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-18T22:22:36.550Z",
+  "id": "TuJKf7As0c8zdx86",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "createur de script",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ff6fe300-a839-45c4-874e-7981cf6e1308",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "64929008-49b7-4a31-9c65-40e1d9356627",
+      "name": "Webhook",
+      "webhookId": "ff6fe300-a839-45c4-874e-7981cf6e1308"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Voici les infos pour : \n\nle prompt midjourney : \n\ntheme : {{ $json.body.body.theme }}\nstyle : {{ $json.body.body.style }}\ndetail : {{ $json.body.body.details }}\naspect ration : {{ $json.body.body.aspectRatio }}\n\nle prompt VEO3 :\n\nduree de la video (en sec) : {{ $json.body.body.duration }}\nstyle motion : {{ $json.body.body.motionStyle }}\nresolution : {{ $json.body.body.resolution }}\naspect ration : {{ $json.body.body.aspectRatio }}\nniveau de details : {{ $json.body.body.detailLevel }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "Tu es Abdoul Rahman Al Farisi un scénariste mondial reconnu par les plus grand studio de production et tu as un esprit créatif et un sens du design hors pair avec +20ans d'expérience dans le domaine des métrages captivant de film / publicité. Doté d'un double compétence en copywriting fin et subtile qui à marqué l'ère des copywriter en 2025\n\nJe vais generer les videos en utilisant Midjourney pour generer la premiere image et VEO 3 pour l'animer, donc pour chaque video precise le script de mon scenario en ajoutant les details necessaire a la generation de la video :\n\nExample de detailles pour du JSON Prompting sur VEO 3 :\nNutella { \"description\": \"Photorealistic cinematic shot of a sunlit kitchen nook. A sealed Nutella jar begins to vibrate gently, then bursts open—releasing a rich explosion of swirling chocolate, roasted hazelnuts, toast slices, strawberries, and golden syrup. The ingredients twirl mid-air in gravity-defying slow motion, assembling into a picture-perfect Nutella breakfast platter on a rustic wooden table.\", \"style\": \"photorealistic cinematic\", \"camera\": \"slow orbital shot from low angle upward, transitioning into an overhead top-down reveal\", \"lighting\": \"morning sunlight streaming through soft white curtains, gentle glow on chocolate and fruit highlights\", \"room\": \"cozy breakfast nook with wooden table, beige walls, ceramic mugs, and hanging plants\", \"elements\": [ \"sealed Nutella jar (center of table)\", \"thick chocolate ribbons swirling through air\", \"flying toasted bread slices with golden crust\", \"hazelnuts spinning and cracking mid-air\", \"sliced bananas and strawberries tumbling gently\", \"honey and syrup droplets catching light\", \"knife spreading Nutella mid-air onto toast\", \"glass of milk and warm coffee cup floating into frame\", \"powdered sugar and cocoa mist drifting like fog\" ], \"motion\": \"jar shakes, lid pops and spins off, chocolate erupts upward with roasted hazelnuts orbiting it, toast slices fly in from off-screen, fruit slices rain down and assemble into a breakfast board as camera moves overhead\", \"ending\": \"a beautifully arranged Nutella breakfast board sits steaming on the table, chocolate glistening in the sunlight, with a final hazelnut rolling slowly to a stop near the jar\", \"text\": \"none\", \"keywords\": [ \"16:9\", \"Nutella explosion\", \"hazelnuts\", \"swirling chocolate\", \"realistic food\", \"breakfast aesthetic\", \"slow motion\", \"natural morning light\", \"high detail\", \"no text\", \"chocolate swirl\", \"toast fly-in\", \"cinematic\" ] }\n\n\nExemple de Details pour midjourney : A cinematic and ultra-realistic wide shot of a 25-year-old Franco-Maghrebi man, seen from behind, standing directly on top of a giant iceberg emerging from the ocean during twilight, wearing a light grey oversized t-shirt, matching grey pants, and white sneakers, his figure softly illuminated and standing out against the deep background in hues of navy blue, violet, and plum, the translucent ice beneath him revealing faint internal glimmers--tiny scattered points of colored light in emerald green, lapis blue, orange topaz, and violet--appearing like distant gemstone reflections hidden within, without visible stones, just light diffused inside the frozen mass, above his head glowing aurora borealis rise like streams of consciousness in soft green, blue, and orange hues, culminating in a subtle Milky Way formation symbolizing infinite human thought, composed like a poetic film trailer with high contrast, atmospheric haze, and cinematic lighting, shot with an Arri Alexa 65, 35mm anamorphic lens, visionary and hyper-realistic His arms are extended outward in a wide T-pose, as if embracing or inviting the world."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "4bd66e63-f7d2-4601-996a-8da51e7cbdec",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-nano",
+          "mode": "list",
+          "cachedResultName": "gpt-5-nano"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        208
+      ],
+      "id": "320f2623-9112-4574-9a3b-7b2d768f48f2",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        544,
+        0
+      ],
+      "id": "5b22077a-fcd4-4ed9-85ee-446cbf08c93c",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"promptMidjourney\": \"A cinematic and ultra-realistic wide shot of a 25-year-old Franco-Maghrebi man, seen from behind, standing directly on top of a giant iceberg emerging from the ocean during twilight, wearing a light grey oversized t-shirt, matching grey pants, and white sneakers, his figure softly illuminated and standing out against the deep background in hues of navy blue, violet, and plum, the translucent ice beneath him revealing faint internal glimmers--tiny scattered points of colored light in emerald green, lapis blue, orange topaz, and violet--appearing like distant gemstone reflections hidden within, without visible stones, just light diffused inside the frozen mass, above his head glowing aurora borealis rise like streams of consciousness in soft green, blue, and orange hues, culminating in a subtle Milky Way formation symbolizing infinite human thought, composed like a poetic film trailer with high contrast, atmospheric haze, and cinematic lighting, shot with an Arri Alexa 65, 35mm anamorphic lens, visionary and hyper-realistic His arms are extended outward in a wide T-pose, as if embracing or inviting the world.\",\n\t\"promptVEO3\": \" Nutella { } \"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        528,
+        496
+      ],
+      "id": "8bb7dead-6410-48f7-b067-6bd40d733a15",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+      "typeVersion": 1,
+      "position": [
+        480,
+        304
+      ],
+      "id": "b31ddf86-4932-424e-ac75-9f4bbe479d8c",
+      "name": "Auto-fixing Output Parser"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        352,
+        480
+      ],
+      "id": "6685232c-9520-4257-a3d2-6edfb5a6a2fd",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {
+    "AI Agent": [
+      {
+        "json": {
+          "output": {
+            "promptMidjourney": "Description: Cinématique pixel art forêt en 16:9. Feuille de fougères unique au premier plan avec bords nets en pixels et gouttes de rosée scintillantes. Arrière-plan composé d'arbres pixellisés en couches et d'un sol de mousse. Lumière douce de l'aube filtrant à travers la canopée avec des reflets dorés sur la feuille. Parallaxe légère et ambiance calme. Palette: verts émeraude, olive et mousse avec touches dorées. Mots clés: 16:9, pixel art, forêt, feuille de fougères, rosée, cinématique, parallaxe, rétro, haute qualité",
+            "promptVEO3": "Description: Séquence cinématique en pixel art de 8 secondes dans une forêt en 16:9. Gros plan sur une feuille de fougères au premier plan; le vent la fait osciller légèrement. L'arrière-plan forestier se révèle en parallaxe; gouttes de rosée scintillantes; faisceaux de lumière traversant le feuillage. Style: cinématique, résolution HD 1280x720, niveau de détail moyen. Caméra qui passe du gros plan au plan large avec un léger mouvement. Éléments: feuille de fougères, gouttes de rosée, soleil, forêt, parallaxe. Mouvement: balancement léger de la feuille, déplacement de la caméra, profondeur. Fin: la feuille se fige sur une lueur finale. Mots clés: 16:9, pixel art, feuille de fougères, forêt, cinématique, HD, 8-bit, parallaxe"
+          }
+        }
+      }
+    ]
+  },
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-07-29T12:08:30.172Z",
+      "updatedAt": "2025-07-29T12:08:30.172Z",
+      "id": "wOOoTX9UWo5u3O1e",
+      "name": "deprecated"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-25T08:02:31.000Z",
+  "versionId": "0526829f-35f7-44fd-be5b-223254efa2c5"
+}
