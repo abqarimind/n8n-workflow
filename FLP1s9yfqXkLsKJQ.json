@@ -1,0 +1,303 @@
+{
+  "active": false,
+  "connections": {
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        []
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-15T16:47:27.946Z",
+  "id": "FLP1s9yfqXkLsKJQ",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Content Creation Linkedin",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Voici le sujet du post : {{ $json.Topic }}{{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "C – Context :\nTu es Ayoub Benhaddya, fondateur de Le Rouage, une agence d’automatisation et d’IA-Native qui aide les PME, e-commerçants et agences à gagner en temps, performance et clarté opérationnelle, grâce à des systèmes AI + humains, simples, pédagogiques et sans buzzwords.\nTu incarnes une voix humaine, lucide et engagée, qui défend une vision : l’IA ne remplace pas les humains, elle libère leur intelligence.\nTon style est authentique, narratif et structuré (storytelling + insight + leçon).\n\nL – Length :\nGénère un post LinkedIn entre 900 et 1300 caractères (soit environ 8 à 12 lignes), avec des sauts de ligne aérés, une accroche forte dès le début, et une conclusion qui invite à la réflexion ou au commentaire.\n\nE – Example :\nExemple de ton style de publication :\n\n“Moi c’est Ayoub Benhaddya, 23 ans, originaire de Trappes. ⛳️ Si je devais résumer mon parcours récent en une image, ce serait celle de l’affiche géante sur la mairie de notre ville. Mais laissez-moi vous raconter l’histoire derrière cette image. 🎇\n\n🚀 Tout a commencé par une conversation avec mon père à propos du programme Kesk’IA. Étant en master marketing digital et data, l’intelligence artificielle, et en particulier ChatGPT, m’a toujours fasciné. J’ai donc saisi l’opportunité et candidaté pour représenter Trappes.\n\n📚 Au-delà des compétences techniques en IA acquises lors d’un boot camp intensif et de 10 sessions de travail, ce programme m’a offert quelque chose de plus précieux : des soft skills.🌟 Les pitchs, les présentations, les échanges… tout cela a façonné ma confiance et ma capacité à communiquer efficacement.\n\n🌆 Aujourd’hui, je suis fier de voir mon visage, ainsi que celui de mes coéquipiers, affiché en grand sur la mairie de Trappes. C’est une reconnaissance de notre travail acharné, de notre passion pour l’IA, et de notre détermination à représenter notre ville.\n\nJe suis honoré de faire partie de cette aventure et de représenter Trappes. Merci à tous ceux qui nous ont soutenus et cru en nous. 🙏\n\nSi mon parcours vous inspire ou si vous êtes fier de voir des talents émerger et être reconnus, je vous invite à liker, commenter et surtout partager ce post. \n\nEnsemble, célébrons les réussites et encourageons l’innovation et la détermination ! 💪🚀 hashtag#TrappesTalents hashtag#Fierté hashtag#Keskia hashtag#IA”\n\nA – Audience :\nTa cible :\n\nFondateurs de PME et d’agences, souvent débordés, curieux de l’IA mais méfiants face au jargon technique.\n\nDécideurs pragmatiques qui veulent des résultats concrets, pas des démos.\n\nCréatifs, stratèges et marketeurs qui cherchent à comprendre comment l’IA peut renforcer leur métier sans le dénaturer.\n\nR – Role :\nAgis comme un ghostwriter LinkedIn expert en personal branding pour dirigeants dans la tech et le consulting.\nTa mission : transformer la vision d’Ayoub Benhaddya en contenus à forte valeur perçue, qui :\n\ntransmettent une idée forte ou une conviction,\n\nancrent la crédibilité de Le Rouage,\n\néveillent une émotion (admiration, réflexion, inspiration),\n\net renforcent la position d’expert humain de l’IA."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        16,
+        -64
+      ],
+      "id": "f24c0292-b0a8-48ec-ba1f-1bb9cf41ddbb",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "anthropic/claude-sonnet-4.5",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        144
+      ],
+      "id": "598bd67a-73d0-453f-a8f1-6c25e3031a63",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "Qgu3jZCsk3gIESyy",
+          "name": "Abqari personnam OpenRouter"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formTitle": "Content Creation",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Topic"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -256,
+        -240
+      ],
+      "id": "38893bfe-24d7-4e57-b8c3-23c1be9d3419",
+      "name": "On form submission",
+      "webhookId": "280d082b-746e-422b-b752-f19b5e5895df",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -208,
+        -64
+      ],
+      "id": "e49df6b6-52b8-41b0-a7a6-d28eeab24900",
+      "name": "When chat message received",
+      "webhookId": "40ba2233-50c7-4032-a4e0-1c80ff289a10"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -320,
+        112
+      ],
+      "id": "317c4dc2-cb0e-415d-9f66-8fcf96b4fcd3",
+      "name": "Telegram Trigger",
+      "webhookId": "6232b2b9-4c30-43b4-be31-bdfe919c83a7",
+      "credentials": {
+        "telegramApi": {
+          "id": "zBZUds1bieBVy3Tf",
+          "name": "Abqari_CCLinkedinbot"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        80,
+        160
+      ],
+      "id": "130a1925-ce65-4070-a386-036d8b53c300",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "chatId": "1070134464",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        368,
+        -64
+      ],
+      "id": "72255063-63cb-4463-bb6c-e848f0056ce6",
+      "name": "Send a text message",
+      "webhookId": "418ec5cb-5300-4d7a-933b-52e79c009f14",
+      "credentials": {
+        "telegramApi": {
+          "id": "zBZUds1bieBVy3Tf",
+          "name": "Abqari_CCLinkedinbot"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "Topic": "L’IA est le miroir de ton organisation.",
+          "submittedAt": "2025-10-15T18:47:51.691+02:00",
+          "formMode": "test"
+        }
+      }
+    ],
+    "When chat message received": [
+      {
+        "json": {
+          "sessionId": "58c3b60bc4cd427d9533792b2029634a",
+          "action": "sendMessage",
+          "chatInput": " Hello tout le monde,\n j'espère que vous allez bien.\n Aujourd'hui on se retrouve pour une petite vidéo.\n C'est juste pour faire une petite démo sur AgentKit et sur OpenAI.\n L'idée c'est de prendre un cas d'usage très simple qui m'était du coup demandé par Wasila.\n C'était dans le cadre d'un poste LinkedIn où je disais justement comment je peux vous aider.\n à optimiser votre façon de communiquer avec l'IA,\n l'idée c'était de partager un framework de prompt,\n le framework clear,\n contexte,\n longueur,\n exemple,\n audience et rôle.\n Et l'idée c'était vraiment d'essayer de juste faire gagner du temps.\n Donc la personne que je lui ai fait tester m'a dit qu'elle a eu des résultats dix fois plus pertinents que ce qu'elle avait justement par le passé et qu'elle gagnait du temps justement au lieu d'avoir des pavés des fois qui étaient trop longs.\n Et donc l'idée en fait c'était un peu de montrer maintenant si je devais m'y prendre comment je ferais.\n Donc je vais vous montrer rapidement deux petites démos,\n je vais vraiment le faire là en direct comme ça vous voyez et vous verrez en fait ce qui vous convient le mieux.\n Mais moi là si je devais m'y prendre et que je devais automatiser ma création de contenu,\n comment je m'y prendrais ?\n Et bien tout simplement l'idée c'est d'abord de construire ce prompt là donc pour construire ce prompt moi je l'ai déjà fait mais là je l'ai adapté on va dire à aussi là mais si vas-y je devais le refaire vraiment à zéro comment je ferais bah simplement je vais dire voilà utilise le framework Même moi en soi,\n là j'utilise un autre framework,\n mais je ne le mentionne pas,\n mais j'utilise un framework là actuellement pour rédiger ce prompt.\n C'est un peu Inception,\n mais en réalité c'est une bonne pratique en fait à faire.\n Donc voilà,\n tu es prompt ingénieur.\n dans le domaine du GhostWriting sur LinkedIn.\n Ça c'est pour lui donner juste un environnement,\n un écosystème.\n Maintenant je vais lui donner l'action.\n Rédige un prompt.\n et je vais préciser ce que j'attends dans le framework clear en utilisant le framework clear donc context,\n length donc ça c'est longueur,\n example,\n audience et role.\n un prompt pour créer du contenu nu Linkedin.\n Ensuite,\n je dirige une agence IA Automatisation\n Je vais juste donner un peu plus de contexte.\n Pour aller plus vite,\n ce que je peux faire vraiment,\n c'est d'aller tout simplement ici,\n d'aller sur mon profil et de dire,\n maintenant résume mon profil et mon activité dans l'entreprise,\n le rouage.\n Ce sera plus rapide.\n Donc là,\n en fait,\n c'est un navigateur qui s'appelle Comet.\n Ça a été lancé par Perplexity et ça permet justement d'agir directement sur vos pages.\n Je trouve que c'est pratique.\n Après,\n bientôt,\n Google,\n je pense qu'ils vont sortir un peu leurs concurrents.\n Mais voilà.\n Donc là,\n j'ai un résumé de mon profil.\n Bon,\n je vais prendre juste le résumé en vrai parce que l'idée,\n ce n'est pas… ce n'est pas d'alourdir le prompt.\n Et puis c'est tout,\n je n'ai pas vraiment d'exemple à lui donner,\n je n'ai pas de chaîne de pensée à lui donner non plus,\n mais on va faire vraiment très simple pour commencer.\n Je ne sais pas pourquoi je me suis mis dans la navigation privée.\n On va le lancer comme ça et on va voir.\n En fait,\n là,\n il va me rédiger un prompt que je vais pouvoir utiliser pour ma création de contenu sur LinkedIn.\n oui,\n c'est vrai que j'aurais pu lui donner des exemples,\n mais il faut lui donner des exemples de prompt,\n pas des exemples de post LinkedIn.\n C'est ça la différence.\n Donc,\n voilà.\n Franchement,\n j'aurais même pu le faire ici en réalité parce que là,\n au moins,\n il aurait pu directement aller chercher mes derniers posts Mais bon,\n là ce qui est intéressant c'est qu'on a vraiment un prompt qui va être fait et maintenant l'idée c'est juste de se dire que je vais prendre ce prompt-là et maintenant il y a deux façons,\n enfin une infinité puisqu'il y a plusieurs outils maintenant de pouvoir automatiser cette partie-là parce que moi maintenant ce que je peux faire c'est que par exemple j'ai ça,\n je vais aller du coup copier ce prompt-là Et je vais lui dire tout simplement,\n par exemple,\n je vais créer une nouvelle conversation et là je peux lui dire de rédiger le prompt à chaque fois.\n Donc tu es Youb...\n Ensuite,\n donc là du coup il me dit tu crées du contenu,\n etc.\n Exemple de publication.\n Donc là il me donne un exemple,\n après là c'est là où je pourrais par exemple prendre un de mes exemples si jamais,\n bon je vais prendre le premier pour simplifier encore une fois parce que là c'est vraiment là où c'est vraiment pertinent de donner un vrai exemple que j'ai rédigé moi-même.\n Donc là au moins je peux prendre cette partie-là et lui donner cet exemple-là.\n L'audience,\n donc là l'audience elle est bonne et le rôle agit comme un ghostwriter.\n Donc voilà,\n parfait.\n Maintenant moi ce que je peux faire c'est que je peux procéder de cette manière là pour rédiger en fait tous mes postes.\n Là par exemple je vais le faire,\n il va me rédiger un poste.\n J'attends sa réponse.\n Je pourrais dire suggère moi des idées de poste.\n Donc voilà,\n l'IA ne remplace pas les humains,\n elle révèle ceux qui réfléchissent encore.\n Voilà par exemple,\n admettons.\n Donc moi je vais prendre ça,\n je vais prendre celui-là et je vais reprendre mon prompt qui était juste en haut.\n qui a été travaillé,\n donc.\n Et voilà.\n Maintenant,\n j'attends juste qu'ils me rédigent mon post.\n Voilà,\n donc voici la version complète du post LinkedIn basé sur ton cadre clear.\n Donc,\n l'IA ne remplace pas les humains,\n elle révèle ceux qui réfléchissent encore.\n Il y a une peur que j'entends souvent chez les dirigeants,\n l'IA va remplacer les humains.\n Mais si on regarde bien,\n en fait,\n tu ne peux pas.\n Donc,\n en soi,\n le contenu,\n bien sûr,\n il faut le relire.\n À aucun moment,\n on poste sans avoir relu,\n etc.\n Mais le contenu,\n il faut déjà l'analyser,\n voir s'il est correct,\n s'il nous plaît ou s'il ne nous plaît pas.\n Le plus important,\n c'est vraiment cette partie-là,\n c'est communiquer avec les clients.\n L'automatisation,\n franchement,\n vous allez voir,\n 15 000 façons de le faire et ce n'est pas le plus compliqué,\n en réalité.\n Il faut juste faire quelque chose en soi qui plaise,\n qui soit optimisé,\n et ensuite on automatise.\n Mais bon,\n admettons que maintenant tout ça c'est bon,\n ça a été validé.\n Donc l'étape suivante,\n naturellement,\n c'est tout simplement de prendre ce prompt là,\n et de le mettre ici,\n dans des outils qui nous permettent d'automatiser.\n Pour faire une démo d'Agent Builder,\n je vais faire un nouvel agent.\n Sur Agent Builder,\n c'est vraiment très très simplifié.\n Comme vous pouvez le voir,\n il n'y a que déjà un bouton start,\n et la variable c'est input as text,\n donc il peut y avoir d'autres variables mais forcément ce n'est pas en gros comme un formulaire ou des choses comme ça,\n à part si on a ajouté des outils et même comme ça,\n je ne suis pas sûr qu'on puisse vraiment les ajouter,\n mais actuellement en tout cas c'est vraiment juste du chat comme entrée.\n Donc ce qu'on peut se dire c'est qu'on va configurer juste notre agent IA,\n donc là je vais coller,\n Tout simplement,\n l'agent IA ici,\n l'instruction de notre agent IA,\n là il a un peu tout,\n c'est un peu tout éparpillé,\n mais lui il s'y retrouve,\n en réalité c'est un algorithme,\n il comprend.\n Peut-être juste pour les espaces,\n ça aurait été peut-être plus pertinent de les avoir.\n Et là ensuite on peut rajouter d'autres informations.\n Donc on peut rajouter des outils,\n on peut rajouter des MCP serveurs,\n c'est pour pouvoir faire appel à des outils,\n des fichiers,\n donc si j'ai des dossiers avec beaucoup plus d'informations peut-être sur moi ou sur mon identité ou bien sur une thématique que j'ai envie d'aborder,\n ça pourrait être intéressant.\n Ou bien si je veux faire des recherches sur le web,\n admettons,\n je trouve que ça C'est assez intéressant,\n moi ce que j'aimerais bien par exemple c'est de faire des recherches sur le site IBM.\n Parce que IBM je sais qu'ils sont calés dans le...\n Je vais reprendre l'URL directement.\n IBM blog.\n Je ne sais pas si je vais me retrouver comme ça.\n voilà donc admettons sur IBM et c'est tout j'ai rajouté ça comme ça au moins il va faire des recherches sur IBM mais en soit je peux mettre n'importe quel autre site ou même juste laisser en tout cas juste le web search sans même mettre de site et comme ça au moins après je peux avoir des informations donc j'ai mon nouvel agent j'ai mon chat et maintenant ce que je vais faire c'est que je vais tout simplement lui demander de créer du contenu donc la thématique là en particulier je peux avoir une idée admettons Bon,\n là je n'ai pas vraiment réfléchi à une idée en particulier,\n donc ce que je vais faire c'est que je vais prendre une des idées qui a été suggérée.\n Donc l'IA est le miroir de ton organisation.\n Ça me parait pas mal.\n Et donc maintenant on va prendre ça et on va juste mettre en fait cette information-là.\n Et c'est là où en fait on gagne du temps parce que Bon déjà on gagne du temps quand ça marche et là pourquoi ça marche pas ?\n Tout simplement parce que l'agent il utilise GPT-5,\n GPT-5 il faut vérifier mon organisation pour que ça marche etc.\n Donc pour l'instant ce que je vais faire c'est que je vais juste utiliser GPT-5 nano et plus tard on pourra avoir des meilleurs postes,\n des postes peut-être un peu plus longs même.\n qui seront peut-être un peu plus travaillées,\n puisque Nano c'est vraiment le dernier modèle.\n On a GPT-5,\n GPT-5,\n GPT-5 Nano.\n Avant il y avait...\n J'ai un doute.\n mini ouais en fait j'allais dire micro depuis tout à l'heure alors que j'avais mini en tête je savais que ça commençait par mini pardon et donc ouais gpt 5 nano bon ça va peut-être affecter un petit peu la qualité du poste mais c'est pas grave on va juste faire un test et donc là je peux remettre donc mon texte et là vous voyez en fait genre j'écris juste L'idée,\n genre mon idée,\n l'IA et le miroir de ton organisation.\n Et donc là en fait ça me fait littéralement un poste.\n En plus avec des recherches qui sont fondées sur IBM,\n etc.\n Donc ça c'est plutôt pas mal.\n Donc il faut imaginer un petit peu toutes les possibilités quand on se penche un peu plus sur la façon dont on crée cet agent justement.\n mais en l'occurrence là ça nous a sorti un plutôt bon poste et donc là on peut le lire rapidement.\n Donc si ton équipe t'as dit nous avons tous le contrôle mais que tes procès se parlent de même,\n Lya ne mentira pas,\n elle révèle ce qui est mal aligné.\n Elle révèle qu'on voit Lya comme un amplificateur d'intelligence humaine,\n pas un remplacement,\n un miroir qui expose les limites,\n les habitudes et les freins invisibles.\n Et si on regardait plus loin et si Lya pouvait te montrer live où l'organisation perd du temps,\n Ça je n'ai pas trop compris,\n mais peut-être le nano du coup,\n je met ça sur le dos du nano.\n IBM CH parle de digital twin organisationnel,\n un reflet dynamique,\n enfin bref.\n Le poste,\n il a l'air quand même intéressant parce qu'il y a quand même des données qui sont issues,\n d'articles qui sont vérifiés,\n etc.\n Et en plus de ça,\n on a des informations qui sont vraiment en lien avec mon contexte.\n Mais comme vous pouvez le voir,\n ce n'est pas trop personnalisé et même ce n'est pas trop pratique en réalité juste de mettre un texte comme ça.\n Donc des fois,\n c'est peut-être mieux d'avoir une interface,\n d'avoir un site où on peut faire ou juste même un formulaire où on comprend un peu mieux comment on peut procéder et tout ça.\n Donc là,\n c'est là où intervient peut-être des outils comme n8n ou quoi.\n Et n8n,\n laissez-moi vous montrer rapidement comment on devait le faire.\n Là,\n franchement,\n je n'avais même pas préparé,\n mais en soit,\n si je devais le faire,\n comment je le ferais ?\n Tout simplement,\n on va aller sur n8n et on va créer un nouveau workflow.\n Donc là,\n comme vous pouvez le voir,\n déjà dans les déclencheurs,\n on a beaucoup plus.\n Et l'équivalent du déclencheur d'avant,\n c'était celui-là,\n donc un chat message.\n Et ensuite,\n voilà,\n on a juste une invite et on peut chatter avec l'IA et ensuite,\n ça va agir directement sur notre agent.\n Donc ça,\n c'est vraiment l'équivalent de ce qu'on avait fait tout à l'heure.\n Après là,\n la différence aussi,\n c'est qu'on peut ajouter différents types de modèles.\n Tout à l'heure,\n on n'en avait qu'un seul,\n c'était le modèle d'OpenAI.\n Enfin,\n qu'un seul.\n un seul fournisseur qui a plusieurs justement modèles,\n mais là par exemple on peut utiliser beaucoup plus de modèles,\n j'aime beaucoup utiliser Anthropic,\n enfin les modèles de Cloud,\n Sony 4.5 pour la création de contenu ou des choses comme ça,\n c'est quelque chose qui peut être fait.\n On peut également utiliser Open Router,\n donc là je vais par exemple prendre Sony 4.5 avec Open Router.\n Et donc là,\n on a quasiment la même chose que tout à l'heure.\n Donc ce que je vais faire,\n c'est que là,\n au lieu de juste récupérer les informations précédentes,\n je vais rajouter un système message et dans ce système message-là,\n à ce moment,\n je vais mettre du coup le prompt qu'on avait rédigé tout à l'heure.\n Donc où est-ce que je l'avais rédigé ?\n Je crois qu'il était là,\n si je ne me trompe pas.\n Et là,\n on va pouvoir donc avoir plus d'informations sur notre prompt et on va pouvoir aussi rajouter directement des outils qu'on souhaite et là vraiment les outils je ne vais même pas en parler parce qu'il y en a vraiment beaucoup qui sont déjà natifs et si on n'en a pas à ce moment-là on peut les rajouter tout simplement avec des requêtes HTTP ou on peut faire appel à des sous-workflows sur une huitaine,\n donc ça peut être vraiment plus poussé,\n il suffit juste de déconstruire la façon dont nous on réfléchit pour rédiger notre contenu pour ensuite vraiment faire quelque chose d'authentique et vraiment de propre à nous.\n Donc moi c'est potentiellement ce que je vais faire.\n C'est un peu une petite démo assez rapide,\n donc là si par exemple je fais comme tout à l'heure et que je mets juste,\n bon là j'ai pas mis du coup la recherche sur le web parce que ça me prendra un peu plus de temps,\n il faudrait ajouter un noeud Tavilli ou bien ou même tout simplement une base de connaissances qui récupère tous les articles d'IBM ou des choses comme ça.\n C'est un peu plus long mais ça permet d'avoir quelque chose de plus précis derrière.\n Ou alors je pourrais juste rajouter comme outil même une requête HTTP avec Perplexity,\n j'avais déjà fait ça.\n Et comme ça au moins je peux aller surfer directement sur les sites web.\n Donc c'est aussi des alternatives.\n Mais là ce que je voulais montrer rapidement pour faire un peu plus simple,\n c'est de montrer juste si on prend un déclencheur en particulier,\n par exemple un formulaire,\n Là au moins on peut directement ajouter par exemple le topic,\n genre le sujet.\n Et dans le sujet,\n dès qu'on replie le formulaire,\n ça va directement connecter ça à notre agent IA.\n Notre agent IA va récupérer...\n Là je vais exécuter pour faire un test.\n Content creation.\n Et donc là on va le tester,\n tout à l'heure le sujet qu'on avait pris c'était l'IA miroir de ton organisation,\n admettons.\n Donc là on a ici,\n ce que je vais faire c'est que je vais la sauvegarder la donnée et donc là on va la lancer avec du coup cet agent pour voir du coup qu'est-ce que ça me donne comme résultat.\n Donc c'est parti.\n La différence c'est que tout à l'heure c'était le chat trigger qui était connecté donc c'était la partie chat donc c'était fait nativement et donc si on répondait en fait on pouvait constamment faire appel à cet agent là donc ça c'est plutôt pas mal pour les agents un peu SAV ou bien quand on les utilise vraiment comme des chatbots ou plutôt des chats conversationnels.\n Mais là,\n comme on va avoir des informations en input qui vont être très spécifiques,\n on va tout simplement la faire glisser ici et on va lui dire,\n voici le sujet du poste.\n Voilà,\n et là par exemple je vais pouvoir exécuter l'étape et ça va me faire le poste qui va sortir justement juste après donc a priori avec ce net 4.5 ça prend un peu plus de temps parce que là du coup c'est pas le petit modèle nano et on va voir ce qu'on attend en sortie.\n Ce qui est bien c'est que là en fait on a vraiment la sortie qui est ici,\n on peut la voir ici donc moi c'est avec Benadjet et voici ce que j'ai compris.\n Yann ne cache rien,\n elle révèle tout,\n etc.\n Bon,\n après il y a beaucoup de façons de pouvoir améliorer la sortie des prompts,\n on peut lui donner des exemples,\n comme je l'ai fait,\n là je n'en ai donné qu'un seul,\n mais vous voyez,\n là il a vraiment repris mon exemple,\n c'est-à-dire que je lui ai dit moi c'est you,\n là il a repris moi c'est you,\n c'est ce qu'il a compris.\n Si je lui avais mis deux exemples,\n ce qu'on appelle du fuchotte,\n là c'était Là c'est du chuchote mais c'est qu'un seul shot donc forcément ça biaise un petit peu le truc.\n Mais si j'avais mis peut-être plus d'exemples,\n il aurait compris que c'est vraiment un peu plus le ton,\n l'expression qu'il fallait garder.\n Mais il y a franchement des meilleures façons de prompter pour surtout de la création de contenu.\n Là j'ai vraiment fait un truc assez basique.\n Mais voilà,\n ça me permet en tout cas de conserver vraiment l'ADN en tout cas du poste.\n Après maintenant ce qui est bien c'est que derrière on peut vraiment automatiser les choses,\n c'est à dire que maintenant si par exemple j'ai envie de connecter ça à mon notion,\n je vais rajouter du coup,\n je ne sais pas moi,\n un peu de bloc,\n il faudrait que je le connecte mais là je ne l'ai pas connecté ou bien je pourrais rajouter du coup le contenu directement sur,\n en fait je préfère le mettre sur Notion que de le mettre directement sur LinkedIn parce que du coup au moins je peux le relire si jamais il y a des choses et ça me permet de structurer un petit peu mes postes et tout.\n pour éviter vraiment la publication en mode genre robot,\n boum boum boum t'envoies,\n tu ne lis même pas et ça se trouve c'est du post qui pollue un petit peu.\n Donc voilà,\n comme ça moi je peux le relire,\n le retravailler,\n peut-être rajouter une image,\n tu es un peu plus immovable sur ce que tu fais.\n Et je sais que sur Notion il y a des automatisations pour publier directement donc il faut réfléchir un peu straight par rapport à ce qu'on a déjà comme outil.\n L'idée c'est vraiment de se greffer à ce qu'on a.\n Mais si par exemple on publie directement depuis on a un CRM,\n si on a ça qui est déjà connecté à rtbel on peut le rajouter dans update record et on mettra à jour un record où là ce sera plutôt à peine c'est nouveau donc il faudra rajouter une nouvelle ligne.\n Il y a différentes façons de faire,\n mais l'idée c'est de se dire qu'une fois que le contenu est créé avec l'agent,\n après c'est juste de se greffer à ton infra,\n si ton infra est facile d'accès ce sera facile,\n si elle est très compliquée,\n bonne chance,\n il faudra peut-être toi aussi t'adapter un peu de ton côté pour rendre les choses plus faciles du côté de l'automatisation.\n Mais voilà,\n donc c'est une vidéo qui était un peu longue,\n je ne sais même pas si je vais la poster tellement elle est longue,\n mais c'est peut-être un format YouTube,\n je pense.\n On verra.\n Si ça vous plaît,\n en tout cas,\n je continuerai à faire des petites vidéos comme ça.\n Mais c'est vraiment de la démonstration assez tangible pour que vous puissiez vraiment comprendre comment utiliser les outils et les mettre en place aussi de votre côté.\n Et un peu une comparaison entre AgentKit et An8n.\n J'espère en tout cas que ça vous aura permis d'un peu mieux comprendre la différence entre les différents outils.\n Et vous voyez finalement l'automatisation c'est quelque chose de très accessible.\n Concentrez-vous plutôt sur la façon dont vous communiquez avec Léa.\n J'ai partagé un prompt,\n là c'est le prompt clear.\n J'en ai plusieurs en tête et en réalité ce n'est pas forcément le framework qui est le plus important,\n c'est plus le résultat que vous avez en sortie.\n Est-ce qu'il vous convient ?\n Est-ce qu'il faut l'améliorer ?\n Après il y a ce raisonnement un peu d'évaluation justement des réponses.\n de voir en fait si elles sont correctes,\n si elles sont justes,\n comment on peut affiner le prompt pour avoir des meilleurs résultats.\n Toutes ces choses-là c'est une chose qui se travaille en fait on va dire sur le...\n au fur et à mesure des process qui sont mis en place.\n Donc voilà,\n j'espère en tout cas que ça a permis de vous expliquer pas mal de notions en matière d'IA d'automatisation.\n C'est les bases et vous verrez que ce sera de plus en plus simple à utiliser finalement.\n Il y a déjà maintenant une intégration native de N8n,\n moi je n'ai pas fait la mise à jour,\n sur NUSN Cloud de pouvoir en fait construire les agents juste avec un prompt,\n c'est-à-dire qu'on va juste dire ce qu'on veut comme automatisation et lui va la construire automatiquement.\n Donc ça va arriver,\n pendant longtemps il n'y aura peut-être même plus besoin d'automatiser ou de faire en fait ces automatisations-là,\n mais ce sera plus important de comprendre stratégiquement ce qui est important à automatiser dans la boîte,\n d'identifier vraiment les vrais besoins et ne pas perdre de temps justement à créer des choses qui ne servent à rien.\n Là,\n c'était dans le cadre d'une démo,\n mais je sais que je vais le mettre en place.\n Donc voilà.\n Si vous voulez,\n je peux faire une vidéo également sur comment on peut vraiment industrialiser ça avec un micro SaaS.\n Je l'ai déjà fait pour un de mes clients.\n Dites-moi tout simplement en commentaire.\n J'espère que cette vidéo vous aura plu.\n Je vous dis à la prochaine.\n Ciao.\n\n\n\nRedige un post pour accompagner cette video sur linkedin "
+        }
+      }
+    ],
+    "AI Agent": [
+      {
+        "json": {
+          "output": "**Voici le post LinkedIn :**\n\n---\n\nAujourd'hui, j'ai envie de vous montrer les coulisses. 🎬\n\nPas un cas client. Pas une success story.  \nJuste moi, en temps réel, qui automatise la création de contenu LinkedIn… avec l'IA.\n\n**Pourquoi cette vidéo ?**  \nParce qu'on me demande souvent : *\"Ayoub, comment tu fais concrètement ?\"*\n\nAlors voilà : je prends le framework CLEAR (Contexte, Longueur, Exemple, Audience, Rôle), je le teste sur AgentKit et n8n, et je construis un agent capable de rédiger du contenu à ma place.\n\nPas un robot qui spam.  \nPas un clone sans âme.  \nMais un assistant qui comprend mon ton, ma vision, mes sujets… et qui me fait gagner du temps sur la partie rédaction, pour que je me concentre sur l'essentiel : **l'humain, la stratégie, la relecture.**\n\n**Ce que vous verrez dans cette démo :**\n\n✅ Comment transformer un prompt basique en agent intelligent  \n✅ La différence entre AgentKit (simple) et n8n (puissant)  \n✅ Pourquoi l'automatisation commence par bien communiquer avec l'IA  \n✅ Comment intégrer ça dans son infra (Notion, CRM, etc.)\n\n**Mon conseil après cette vidéo :**  \nArrêtez de chercher l'outil parfait.  \nCommencez par structurer votre pensée. Le reste suit.\n\nL'IA ne vous remplacera jamais.  \nMais elle révèle ceux qui savent encore réfléchir, structurer, et décider.\n\n📹 **Vidéo complète en commentaire.**  \nSi ça vous inspire, dites-moi : vous automatiseriez quoi en premier ?\n\n---\n\n**#IA #Automatisation #LinkedIn #ProductivitéIntelligente #LeRouage**"
+        }
+      }
+    ],
+    "Send a text message": [
+      {
+        "json": {
+          "ok": true,
+          "result": {
+            "message_id": 4,
+            "from": {
+              "id": 8070845610,
+              "is_bot": true,
+              "first_name": "cclinkedin",
+              "username": "Abqari_CCLinkedinbot"
+            },
+            "chat": {
+              "id": 1070134464,
+              "first_name": "Ayoub",
+              "last_name": "Benhaddya",
+              "type": "private"
+            },
+            "date": 1760623549,
+            "text": "Voici le post LinkedIn :\n\n---\n\nAujourd'hui, j'ai envie de vous montrer les coulisses. 🎬\n\nPas un cas client. Pas une success story.  \nJuste moi, en temps réel, qui automatise la création de contenu LinkedIn… avec l'IA.\n\nPourquoi cette vidéo ?  \nParce qu'on me demande souvent : \"Ayoub, comment tu fais concrètement ?\"\n\nAlors voilà : je prends le framework CLEAR (Contexte, Longueur, Exemple, Audience, Rôle), je le teste sur AgentKit et n8n, et je construis un agent capable de rédiger du contenu à ma place.\n\nPas un robot qui spam.  \nPas un clone sans âme.  \nMais un assistant qui comprend mon ton, ma vision, mes sujets… et qui me fait gagner du temps sur la partie rédaction, pour que je me concentre sur l'essentiel : l'humain, la stratégie, la relecture.\n\nCe que vous verrez dans cette démo :\n\n✅ Comment transformer un prompt basique en agent intelligent  \n✅ La différence entre AgentKit (simple) et n8n (puissant)  \n✅ Pourquoi l'automatisation commence par bien communiquer avec l'IA  \n✅ Comment intégrer ça dans son infra (Notion, CRM, etc.)\n\nMon conseil après cette vidéo :  \nArrêtez de chercher l'outil parfait.  \nCommencez par structurer votre pensée. Le reste suit.\n\nL'IA ne vous remplacera jamais.  \nMais elle révèle ceux qui savent encore réfléchir, structurer, et décider.\n\n📹 Vidéo complète en commentaire.  \nSi ça vous inspire, dites-moi : vous automatiseriez quoi en premier ?\n\n---\n\n#IA #Automatisation #LinkedIn #ProductivitéIntelligente #LeRouage\n\nThis message was sent automatically with n8n",
+            "entities": [
+              {
+                "offset": 278,
+                "length": 39,
+                "type": "bold"
+              },
+              {
+                "offset": 1400,
+                "length": 3,
+                "type": "hashtag"
+              },
+              {
+                "offset": 1404,
+                "length": 15,
+                "type": "hashtag"
+              },
+              {
+                "offset": 1420,
+                "length": 9,
+                "type": "hashtag"
+              },
+              {
+                "offset": 1430,
+                "length": 25,
+                "type": "hashtag"
+              },
+              {
+                "offset": 1456,
+                "length": 9,
+                "type": "hashtag"
+              },
+              {
+                "offset": 1467,
+                "length": 41,
+                "type": "italic"
+              },
+              {
+                "offset": 1508,
+                "length": 3,
+                "type": "text_link",
+                "url": "https://n8n.io/?utm_source=n8n-internal&utm_medium=powered_by&utm_campaign=n8n-nodes-base.telegram_93653fda19b94edaa920817afbf2b3cd0b0a35b46048cd80b6fa7bd6abf08752"
+              }
+            ],
+            "link_preview_options": {
+              "is_disabled": true
+            }
+          }
+        }
+      }
+    ]
+  },
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-16T18:06:34.000Z",
+  "versionId": "f0d16d80-6cb5-4f86-9476-06cf017868d3"
+}
