@@ -1,0 +1,74 @@
+{
+  "active": true,
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-14T21:11:28.208Z",
+  "id": "xT81PfXUBFtnyuoz",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Alerte Erreur Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        0
+      ],
+      "id": "5bd451fc-646a-469c-9604-c345bc24dc97",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "=601958186345380",
+        "recipientPhoneNumber": "=+33781932299",
+        "textBody": "=Erreur sur un Workflow :\nurl : {{ $json.execution.url }}\nmessage : {{ $json.execution.error.message }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        160,
+        0
+      ],
+      "id": "0f720849-1a74-432e-a2a6-7bf0d14becd3",
+      "name": "Send message",
+      "webhookId": "7db10a47-a004-44ee-9ca4-4d58743414f0",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "q2qfSQXn6Z9IVbzG",
+          "name": "WhatsApp account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-29T11:25:31.000Z",
+  "versionId": "101bad9a-8eda-4154-8ced-362c2f6869dd"
+}
