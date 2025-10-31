@@ -1,0 +1,443 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get many products",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many products": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Analyze image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze image": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-25T08:46:45.323Z",
+  "id": "ZBLOgT3CfrUrz6DJ",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "WF5 - Satyn Product Visual Descriptions",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        64
+      ],
+      "id": "ac7c6f1b-2cbb-4c7a-860f-acc4d37aac6b",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "resource": "product",
+        "operation": "getAll",
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.shopify",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        64
+      ],
+      "id": "88383f4d-ea5f-48af-b396-88b332bc84cc",
+      "name": "Get many products",
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "Jxp99tiXVo1RIoFD",
+          "name": "Satyn.fr Shopify Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ab04145e-b517-425b-9c04-bdf45a667096",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "number"
+            },
+            {
+              "id": "fbcbd55b-5a2a-4deb-868e-1b20d1786fb7",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "d7673dc4-3c92-417a-b5b0-c0f3321d2c05",
+              "name": "description",
+              "value": "={{ $json.body_html }}",
+              "type": "string"
+            },
+            {
+              "id": "e88a2aff-cfc1-4ec5-bd99-161e46279e61",
+              "name": "image_url",
+              "value": "={{ $json.image.src }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        176,
+        64
+      ],
+      "id": "9549ae7c-c9d6-436c-ad9f-ab03eef075d1",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        624,
+        64
+      ],
+      "id": "9e4ed846-9430-4e21-90f1-9d32d369fa53",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "text": "=Role —\nYou are a visual product analyst for e-commerce. Your task is to provide factual, objective, product-only descriptions with no marketing language.\n\nAction —\nDescribe only the product visible in the image. Focus strictly on: colors, materials/textures, shape/fit/silhouette, construction and features (hood, pockets, zippers, lining, patterns, graphics), and any branding or text if clearly visible (quote exactly).  \nDo not mention people, models, mannequins, or anything wearing/holding the product.  \nDo not speculate on features not clearly visible.  \nMention background/lighting only if it directly affects the visibility of the product’s appearance (e.g., shadow hides part of it).\n\nContext —\nProduct title: {{ $json.title }}  \nInput: catalog-style product photo from an e-commerce store.  \nGoal: produce a one-paragraph, product-centric visual description that can be reused for automated analysis.\n\nExample —\n“Oversized washed-green hoodie, matte cotton texture, hood lined with shiny olive satin visible along the edge, small ‘Satyn’ embroidery in light-brown script on the left chest, front kangaroo pocket, ribbed cuffs and hem.”\n",
+        "imageUrls": "={{ $json.main_image_url }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        848,
+        -16
+      ],
+      "id": "5a313c09-ceac-47f4-813a-33180d16291a",
+      "name": "Analyze image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ny4MRPhHqLPpNzoo",
+          "name": "Satyn API Gemini (My First Project) "
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1tC7NJafcFAzg4Eu9x7LcmUcDOeRhMxzroTluwQAl9Js",
+          "mode": "list",
+          "cachedResultName": "Satyn Shopify Product List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tC7NJafcFAzg4Eu9x7LcmUcDOeRhMxzroTluwQAl9Js/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Product List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tC7NJafcFAzg4Eu9x7LcmUcDOeRhMxzroTluwQAl9Js/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID_shopify_product": "={{ $('Loop Over Items').item.json.ID_shopify_product }}",
+            "visual_description": "={{ $json.content.parts[0].text }}"
+          },
+          "matchingColumns": [
+            "ID_shopify_product"
+          ],
+          "schema": [
+            {
+              "id": "ID_shopify_product",
+              "displayName": "ID_shopify_product",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "marketing_description",
+              "displayName": "marketing_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "main_image_url",
+              "displayName": "main_image_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "visual_description",
+              "displayName": "visual_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1072,
+        -16
+      ],
+      "id": "ea4891a5-907b-42ce-8b84-7cb717dac0c6",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4Wm2Xjg29dAttfqc",
+          "name": "Satyn - Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1tC7NJafcFAzg4Eu9x7LcmUcDOeRhMxzroTluwQAl9Js",
+          "mode": "list",
+          "cachedResultName": "Satyn Shopify Product List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tC7NJafcFAzg4Eu9x7LcmUcDOeRhMxzroTluwQAl9Js/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Product List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1tC7NJafcFAzg4Eu9x7LcmUcDOeRhMxzroTluwQAl9Js/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "title": "={{ $json.title }}",
+            "marketing_description": "={{ $json.description }}",
+            "main_image_url": "={{ $json.image_url }}",
+            "ID_shopify_product": "={{ $json.id }}"
+          },
+          "matchingColumns": [
+            "ID_shopify_product"
+          ],
+          "schema": [
+            {
+              "id": "ID_shopify_product",
+              "displayName": "ID_shopify_product",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "marketing_description",
+              "displayName": "marketing_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "main_image_url",
+              "displayName": "main_image_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "visual_description",
+              "displayName": "visual_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        400,
+        64
+      ],
+      "id": "cba9ec48-1f4c-4693-bd1b-96e893cf1ee5",
+      "name": "Append or update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4Wm2Xjg29dAttfqc",
+          "name": "Satyn - Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 30
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1296,
+        64
+      ],
+      "id": "f3ee5152-5031-49e8-81d3-c5bde0016596",
+      "name": "Wait",
+      "webhookId": "1f861d6e-8d9c-415c-b778-8dcb3bc5e19a"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-27T09:02:45.000Z",
+  "versionId": "144bf9bf-b44f-46f5-ad24-19dcafbaa948"
+}
