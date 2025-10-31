@@ -1,0 +1,2133 @@
+{
+  "active": false,
+  "connections": {
+    "Cron Trigger - Every 5 min": {
+      "main": [
+        [
+          {
+            "node": "Read Assets READY_FOR_ANALYSIS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Assets READY_FOR_ANALYSIS": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Update Status to ANALYZING",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer Renommage": {
+      "main": [
+        [
+          {
+            "node": "Update metadata Frameio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update metadata Frameio": {
+      "main": [
+        [
+          {
+            "node": "Update asset name",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Status to ERROR Metadata assignement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mapping": {
+      "main": [
+        [
+          {
+            "node": "Préparer Renommage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Status to ANALYZING": {
+      "main": [
+        [
+          {
+            "node": "Analyse Vidéo/Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update asset name": {
+      "main": [
+        [
+          {
+            "node": "Needs Drive Operations?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Needs Drive Operations?": {
+      "main": [
+        [],
+        []
+      ]
+    },
+    "Analyse Vidéo/Image": {
+      "main": [
+        [
+          {
+            "node": "Agent Nomenclature",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Status to ERROR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agent Nomenclature",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent Nomenclature": {
+      "main": [
+        [
+          {
+            "node": "Mapping",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-30T09:15:51.989Z",
+  "id": "7UD8uAbdafxWMvZd",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "PS - WF2 - Video Analysis & Metadata Update",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "90d92216-d49f-4cab-9a2e-6d9c08342eb5",
+              "leftValue": "={{ $('Read Assets READY_FOR_ANALYSIS').item.json.requires_drive_ops }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f895344a-1a7d-4f6f-bafb-2a85e9816080",
+      "name": "Needs Drive Operations?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2848,
+        288
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1qRJ-_Isus6u_uo7huiwKbjOq14VUZiUVPg_kWUL1zXU",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qRJ-_Isus6u_uo7huiwKbjOq14VUZiUVPg_kWUL1zXU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "frameio_asset_id": "={{ $json.data.id }}",
+            "status": "READY_FOR_FINALIZE",
+            "updated_at": "={{ new Date().toISOString() }}",
+            "video_title": "={{ $('Agent Nomenclature').item.json.output.video_title }}",
+            "detailed_concept_description": "={{ $('Agent Nomenclature').item.json.output.detailed_concept_description }}",
+            "observation": "={{ $('Agent Nomenclature').item.json.output.observation }}",
+            "acteurs_principaux": "={{ $('Agent Nomenclature').item.json.output.acteurs_principaux }}",
+            "effet_wow": "={{ $('Agent Nomenclature').item.json.output.effet_wow }}",
+            "environnement": "={{ $('Agent Nomenclature').item.json.output.environnement }}"
+          },
+          "matchingColumns": [
+            "frameio_asset_id"
+          ],
+          "schema": [
+            {
+              "id": "frameio_asset_id",
+              "displayName": "frameio_asset_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "frameio_project_id",
+              "displayName": "frameio_project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "drive_file_id",
+              "displayName": "drive_file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "idempotency_key",
+              "displayName": "idempotency_key",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "requires_drive_ops",
+              "displayName": "requires_drive_ops",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_name_original",
+              "displayName": "file_name_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_size_bytes",
+              "displayName": "file_size_bytes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "mime_type",
+              "displayName": "mime_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_efficient_url",
+              "displayName": "frameio_efficient_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_thumb_url",
+              "displayName": "frameio_thumb_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "retry_count",
+              "displayName": "retry_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_code",
+              "displayName": "last_error_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_message",
+              "displayName": "last_error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "next_retry_at",
+              "displayName": "next_retry_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "video_title",
+              "displayName": "video_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "environnement",
+              "displayName": "environnement",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "effet_wow",
+              "displayName": "effet_wow",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "observation",
+              "displayName": "observation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "acteurs_principaux",
+              "displayName": "acteurs_principaux",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "detailed_concept_description",
+              "displayName": "detailed_concept_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "48dee500-f3bf-42c8-9738-6b2cc7687d6e",
+      "name": "Update READY_FOR_FINALIZE",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        3072,
+        192
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ETr6k2zwcHMayxLu",
+          "name": "Petiscope Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1qRJ-_Isus6u_uo7huiwKbjOq14VUZiUVPg_kWUL1zXU",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qRJ-_Isus6u_uo7huiwKbjOq14VUZiUVPg_kWUL1zXU/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "status",
+              "lookupValue": "READY_FOR_ANALYSIS"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        240,
+        288
+      ],
+      "id": "447a4c3c-c8c8-4a56-ac60-4bb5f5983ef2",
+      "name": "Read Assets READY_FOR_ANALYSIS",
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ETr6k2zwcHMayxLu",
+          "name": "Petiscope Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        16,
+        288
+      ],
+      "id": "42cc3fda-e26b-4ab6-9ce1-e68c79637b78",
+      "name": "Cron Trigger - Every 5 min"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4b183fe2-866c-40bf-8e6d-4acb25e9454e",
+              "leftValue": "={{ $json.next_retry_at }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "b307854d-888e-4ada-8507-e03647b5fa58",
+              "leftValue": "={{ $json.next_retry_at }}",
+              "rightValue": "={{ new Date().toISOString() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "before"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        288
+      ],
+      "id": "4f869aec-1dc1-446c-8855-076891b6f6b6",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "=1qRJ-_Isus6u_uo7huiwKbjOq14VUZiUVPg_kWUL1zXU",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qRJ-_Isus6u_uo7huiwKbjOq14VUZiUVPg_kWUL1zXU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "frameio_asset_id": "={{ $json.frameio_asset_id }}",
+            "frameio_efficient_url": "={{ $json.frameio_efficient_url }}",
+            "updated_at": "={{ new Date().toISOString() }}",
+            "status": "ANALYZING"
+          },
+          "matchingColumns": [
+            "frameio_asset_id"
+          ],
+          "schema": [
+            {
+              "id": "frameio_asset_id",
+              "displayName": "frameio_asset_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "frameio_project_id",
+              "displayName": "frameio_project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "drive_file_id",
+              "displayName": "drive_file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "idempotency_key",
+              "displayName": "idempotency_key",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "requires_drive_ops",
+              "displayName": "requires_drive_ops",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_name_original",
+              "displayName": "file_name_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_size_bytes",
+              "displayName": "file_size_bytes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "mime_type",
+              "displayName": "mime_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_efficient_url",
+              "displayName": "frameio_efficient_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "frameio_thumb_url",
+              "displayName": "frameio_thumb_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "retry_count",
+              "displayName": "retry_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_code",
+              "displayName": "last_error_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_message",
+              "displayName": "last_error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "next_retry_at",
+              "displayName": "next_retry_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "video_title",
+              "displayName": "video_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "environnement",
+              "displayName": "environnement",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "effet_wow",
+              "displayName": "effet_wow",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "observation",
+              "displayName": "observation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "acteurs_principaux",
+              "displayName": "acteurs_principaux",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "detailed_concept_description",
+              "displayName": "detailed_concept_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "eb66e9bc-2711-4194-afac-2037632c462a",
+      "name": "Update Status to ANALYZING",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        896,
+        288
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ETr6k2zwcHMayxLu",
+          "name": "Petiscope Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5e20f2c7-6c48-42a2-a8d4-2a9017dce4d5",
+              "name": "ouput",
+              "value": "={{ $json.data }}",
+              "type": "string"
+            },
+            {
+              "id": "61e1caa1-e568-457f-9ab0-cc8987007884",
+              "name": "asset_name",
+              "value": "={{ $('Agent Nomenclature').item.json.output.video_title }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "id": "5597c679-1a39-4c11-b348-6988b565781d",
+      "name": "Préparer Renommage",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2176,
+        288
+      ],
+      "typeVersion": 3.4,
+      "notes": "Prépare les données pour le renommage et conserve l'extension originale"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.frame.io/v4/accounts/a0b0cdd9-b669-482f-bad5-90ac9fc873a4/projects/fe2251e6-e721-42be-8045-220bece5321f/metadata/values",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"data\": {{ $json.ouput }}\n} ",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2400,
+        288
+      ],
+      "id": "c8b15d89-1964-4b94-bfaf-a831b4077d99",
+      "name": "Update metadata Frameio",
+      "alwaysOutputData": false,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "fc7ISO03jVgnnRIM",
+          "name": "Petiscope Frame.io"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://api.frame.io/v4/accounts/a0b0cdd9-b669-482f-bad5-90ac9fc873a4/files/{{ $('Read Assets READY_FOR_ANALYSIS').first().json.frameio_asset_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api-version",
+              "value": "4.0"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"name\": \"{{ $('Préparer Renommage').item.json.asset_name }}\"\n  }\n}",
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2624,
+        288
+      ],
+      "id": "12058a3b-03c8-4208-83b7-ec835e511d5d",
+      "name": "Update asset name",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "fc7ISO03jVgnnRIM",
+          "name": "Petiscope Frame.io"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// ================\n// INPUTS\n// ================\nconst assetId = $('Read Assets READY_FOR_ANALYSIS').first().json.frameio_asset_id;\nconst data = $input.first().json.output || {}; \n// data = sortie du node \"Agent Nomenclature\", ex:\n// {\n//   video_title: \"...\",\n//   environnement: \"Intérieur - Maison\",\n//   effet_wow: true,\n//   observation: \"Commune\",\n//   acteurs_principaux: \"Parent seul\",\n//   anti_ecran: true,\n//   microscope_view_only: false,\n//   angle_produit: \"Scène de vie\",\n//   format_marketing: \"UGC\",\n//   detailed_concept_description: \"....\"\n// }\n\n\n// ================\n// HELPERS\n// ================\nconst lower = (s) => String(s ?? '').trim().toLowerCase();\nconst isEmpty = (v) => v === null || v === undefined || String(v).trim() === '';\n\n/**\n * Normalise un booléen venant de l'agent\n * - si déjà bool -> retourne tel quel\n * - si string \"true\"/\"false\"/\"yes\"/\"no\" -> convertit\n * - sinon -> false par défaut (Frame.io toggle attend un bool, pas null)\n */\nfunction toBool(v) {\n\tif (typeof v === 'boolean') return v;\n\tconst s = lower(v);\n\tif (s === 'true' || s === 'yes') return true;\n\tif (s === 'false' || s === 'no') return false;\n\tif (isEmpty(v)) return false;\n\treturn false;\n}\n\n/**\n * Prend une valeur textuelle + dictionnaire {labelOfficiel: optionId}\n * essaie de trouver la meilleure correspondance par mots-clés\n * renvoie l'ID correspondant, ou l'ID 'NA' si dispo\n */\nfunction mapSelect(value, dict, fallbackLabelIfNotFound) {\n\tif (!value) value = fallbackLabelIfNotFound;\n\tconst raw = String(value).trim();\n\n\t// Essai correspondance directe (sensible à la casse)\n\tif (dict[raw]) {\n\t\treturn dict[raw];\n\t}\n\n\t// Essai correspondance insensible à la casse\n\tconst rawLower = lower(raw);\n\tfor (const label of Object.keys(dict)) {\n\t\tif (lower(label) === rawLower) {\n\t\t\treturn dict[label];\n\t\t}\n\t}\n\n\t// Essai \"par proximité sémantique légère\"\n\t// Exemple: \"Intérieur - Maison\" -> \"Intérieur\"\n\tif (rawLower.includes('intérieur')) {\n\t\tif (dict['Intérieur']) return dict['Intérieur'];\n\t\tif (dict['Intérieur - Maison']) return dict['Intérieur - Maison'];\n\t}\n\tif (rawLower.includes('maison')) {\n\t\tif (dict['Intérieur']) return dict['Intérieur'];\n\t}\n\tif (rawLower.includes('extérieur') || rawLower.includes('exterieur') || rawLower.includes('outdoor')) {\n\t\tif (dict['Extérieur']) return dict['Extérieur'];\n\t}\n\tif (rawLower.includes('entrepôt') || rawLower.includes('entrepot') || rawLower.includes('warehouse')) {\n\t\tif (dict['Entrepôt']) return dict['Entrepôt'];\n\t}\n\tif (rawLower.includes('focus')) {\n\t\tif (dict['Focus produit']) return dict['Focus produit'];\n\t}\n\tif (rawLower.includes('scène') || rawLower.includes('scene') || rawLower.includes('vie') || rawLower.includes('lifestyle')) {\n\t\tif (dict['Scène de vie']) return dict['Scène de vie'];\n\t}\n\tif (rawLower.includes('microscope')) {\n\t\tif (dict['Vue microscope seulement']) return dict['Vue microscope seulement'];\n\t}\n\tif (rawLower.includes('ugc')) {\n\t\tif (dict['UGC']) return dict['UGC'];\n\t}\n\tif (rawLower.includes('pov')) {\n\t\tif (dict['POV']) return dict['POV'];\n\t}\n\tif (rawLower.includes('podcast') || rawLower.includes('facecam') || rawLower.includes('talk')) {\n\t\tif (dict['Podcast']) return dict['Podcast'];\n\t}\n\tif (rawLower.includes('entrepôt') || rawLower.includes('warehouse')) {\n\t\tif (dict['Entrepôt']) return dict['Entrepôt'];\n\t}\n\tif (rawLower.includes('parent seul')) {\n\t\tif (dict['Parent seul']) return dict['Parent seul'];\n\t}\n\tif (rawLower.includes('parent') && rawLower.includes('enfant')) {\n\t\tif (dict['Parent et enfant']) return dict['Parent et enfant'];\n\t\tif (dict['Parent & enfant']) return dict['Parent & enfant'];\n\t}\n\tif (rawLower.includes('groupe') || rawLower.includes('group')) {\n\t\tif (dict['Groupe d’enfants']) return dict['Groupe d’enfants'];\n\t}\n\tif (rawLower.includes('enfant') || rawLower.includes('kid') || rawLower.includes('child')) {\n\t\tif (dict['Enfant seul']) return dict['Enfant seul'];\n\t}\n\n\t// fallback\n\tif (fallbackLabelIfNotFound && dict[fallbackLabelIfNotFound]) {\n\t\treturn dict[fallbackLabelIfNotFound];\n\t}\n\n\t// sinon on essaie \"NA\" si présent\n\tif (dict['NA']) {\n\t\treturn dict['NA'];\n\t}\n\n\t// dernier recours: première option trouvée\n\tconst firstId = Object.values(dict)[0];\n\treturn firstId;\n}\n\n/**\n * Pour un select_multi Frame.io, on doit envoyer:\n * { field_definition_id, value: [optionId, ...] }\n * On va mapper une seule valeur dominante (acteur principal) en un tableau à 1 ID.\n */\nfunction mapSelectMulti(singleValue, dict) {\n\tif (isEmpty(singleValue)) return [];\n\tconst id = mapSelect(singleValue, dict);\n\treturn id ? [id] : [];\n}\n\n\n// ================\n// CONFIG DES CHAMPS FRAME.IO\n// (issus de l'export fourni)\n// ================\n\n// --- Environnement (select)\nconst ENV_FIELD = {\n\tfield_definition_id: \"4032a9b3-3a14-419d-97b7-f6692b5420fa\",\n\toptions: {\n\t\t\"Intérieur\": \"23eef415-30d5-49dd-bca5-20715abb0dcf\",\n\t\t\"Extérieur\": \"f443b5aa-89e6-4e9f-9c5f-e13118a6b8b5\",\n\t\t\"Entrepôt\": \"1241b02a-030c-4790-a4f6-1252ff15a997\",\n\t\t\"NA\": \"b60c0705-39a5-43ca-a53a-7db055b34e73\"\n\t}\n};\n\n// --- Effet WOW (toggle)\nconst WOW_FIELD = {\n\tfield_definition_id: \"fcd687ae-370f-4ec9-8dbf-f1f661d5cb34\"\n};\n\n// --- Observation (select)\nconst OBS_FIELD = {\n\tfield_definition_id: \"cf1df693-341f-4c7f-a236-561c596a63b7\",\n\toptions: {\n\t\t\"Commune\": \"ce5aa287-7f1e-4063-b213-0da4e6516293\",\n\t\t\"Insolite\": \"06fea0bc-0744-4b93-b6ec-e543a9e697c1\",\n\t\t\"NA\": \"a1aff645-a00b-4690-8bf5-dd803f6ddccd\"\n\t}\n};\n\n// --- Acteurs principaux (select_multi)\nconst ACTEURS_FIELD = {\n\tfield_definition_id: \"a7b7ba87-88ac-4d70-b356-d3d0188c9254\",\n\toptions: {\n\t\t\"Enfant seul\": \"28363841-a9b3-4153-b9e9-a28e7880a859\",\n\t\t\"Parent seul\": \"08cac13a-2d57-404b-ac99-daac900e2cfb\",\n\t\t\"Parent et enfant\": \"42781e73-11cb-4687-b8ff-59fe9fd399a8\",\n\t\t\"Parent & enfant\": \"42781e73-11cb-4687-b8ff-59fe9fd399a8\", // alias\n\t\t\"Groupe d’enfants\": \"2498d62b-5ab9-4977-96d0-ddb7650dd60a\"\n\t}\n};\n\n// --- Anti Ecran (toggle)\nconst ANTI_ECRAN_FIELD = {\n\tfield_definition_id: \"538a5af0-9e4f-4489-b5aa-383c92717ee6\"\n};\n\n// --- Microscope View Only (toggle)\nconst MICROSCOPE_ONLY_FIELD = {\n\tfield_definition_id: \"fa9890cb-d733-4458-ab12-c63b76869bf1\"\n};\n\n// --- Angle Produit (select)\nconst ANGLE_FIELD = {\n\tfield_definition_id: \"ab83a8c2-d6a1-4907-af21-9a4e4ca7f8d3\",\n\toptions: {\n\t\t\"Focus produit\": \"3fe32074-0321-438f-af87-0a5abe3c2790\",\n\t\t\"Scène de vie\": \"43403670-84f5-4e9d-82b6-8489117f6f4a\",\n\t\t\"Vue microscope seulement\": \"ecdd1f65-775f-4d8b-b900-9b5aafbfbfe0\"\n\t}\n};\n\n// --- Format Marketing (select)\nconst FORMAT_FIELD = {\n\tfield_definition_id: \"a473e63c-b17f-42ca-999b-6a7860a029c0\",\n\toptions: {\n\t\t\"UGC\": \"afa96b12-73c7-4d49-9e87-29540c7c6846\",\n\t\t\"POV\": \"facf7f2d-db1f-4945-a03a-799eb0160b17\",\n\t\t\"Podcast\": \"6ac1624f-e70a-4349-8e99-7888a8c85bf9\",\n\t\t\"Entrepôt\": \"d6bbed20-5130-4e62-8f57-eb48f824ce8c\",\n\t\t\"Autre\": \"a940846f-f098-4044-9b0b-e0ea34d12416\"\n\t}\n};\n\n// --- Notes (long_text) = detailed_concept_description\nconst NOTES_FIELD = {\n\tfield_definition_id: \"818646b3-152a-48bd-93ac-d64838a601d7\"\n};\n\n// ================\n// LOGIQUE MÉTIER AVANT MAPPING\n// ================\n\n// 1. format_marketing influence environnement\n// si le format est \"Entrepôt\", on force l'environnement à \"Entrepôt\"\nlet environnementVal = data.environnement;\nif (lower(data.format_marketing) === 'entrepôt' || lower(data.format_marketing) === 'entrepot') {\n\tenvironnementVal = 'Entrepôt';\n}\n\n// 2. Observation fallback\nlet observationVal = data.observation;\nif (isEmpty(observationVal)) {\n\tobservationVal = 'NA';\n} else {\n\tconst o = lower(observationVal);\n\tif (o.includes('insolite') || o.includes('unusual')) {\n\t\tobservationVal = 'Insolite';\n\t} else if (o.includes('commune') || o.includes('common')) {\n\t\tobservationVal = 'Commune';\n\t} else if (o === 'na') {\n\t\tobservationVal = 'NA';\n\t} else if (o !== 'commune' && o !== 'insolite' && o !== 'na') {\n\t\t// valeur exotique => NA\n\t\tobservationVal = 'NA';\n\t}\n}\n\n// 3. Acteurs principaux normalisation\nlet acteursVal = data.acteurs_principaux;\nif (!isEmpty(acteursVal)) {\n\tconst a = lower(acteursVal);\n\tif (a.includes('parent seul') || a.includes('single parent')) {\n\t\tacteursVal = 'Parent seul';\n\t} else if (a.includes('parent') && a.includes('enfant')) {\n\t\tacteursVal = 'Parent et enfant';\n\t} else if (a.includes('groupe') || a.includes('group')) {\n\t\tacteursVal = 'Groupe d’enfants';\n\t} else if (a.includes('enfant') || a.includes('kid') || a.includes('child')) {\n\t\tacteursVal = 'Enfant seul';\n\t}\n}\n\n// 4. Angle produit normalisation\nlet angleVal = data.angle_produit;\nif (!isEmpty(angleVal)) {\n\tconst ap = lower(angleVal);\n\tif (ap.includes('focus')) {\n\t\tangleVal = 'Focus produit';\n\t} else if (ap.includes('microscope')) {\n\t\tangleVal = 'Vue microscope seulement';\n\t} else if (\n\t\tap.includes('scène') || ap.includes('scene') ||\n\t\tap.includes('vie')   || ap.includes('lifestyle')\n\t) {\n\t\tangleVal = 'Scène de vie';\n\t}\n}\n\n// 5. Format marketing normalisation\nlet formatVal = data.format_marketing;\nif (isEmpty(formatVal)) {\n\tformatVal = 'Autre';\n} else {\n\tconst fm = lower(formatVal);\n\tif (fm.includes('ugc')) formatVal = 'UGC';\n\telse if (fm.includes('pov')) formatVal = 'POV';\n\telse if (fm.includes('podcast') || fm.includes('facecam') || fm.includes('talk')) formatVal = 'Podcast';\n\telse if (fm.includes('entrepôt') || fm.includes('entrepot') || fm.includes('warehouse')) formatVal = 'Entrepôt';\n\telse formatVal = 'Autre';\n}\n\n\n// ================\n// CONSTRUCTION DU PAYLOAD FRAME.IO\n// (dans l'ordre que tu préfères pousser)\n// ================\nconst values = [\n\t// Environnement (select -> expects array of option IDs)\n\t{\n\t\tfield_definition_id: ENV_FIELD.field_definition_id,\n\t\tvalue: [\n\t\t\tmapSelect(environnementVal, ENV_FIELD.options, 'NA')\n\t\t]\n\t},\n\n\t// Effet WOW (toggle -> expects boolean)\n\t{\n\t\tfield_definition_id: WOW_FIELD.field_definition_id,\n\t\tvalue: toBool(data.effet_wow)\n\t},\n\n\t// Observation (select)\n\t{\n\t\tfield_definition_id: OBS_FIELD.field_definition_id,\n\t\tvalue: [\n\t\t\tmapSelect(observationVal, OBS_FIELD.options, 'NA')\n\t\t]\n\t},\n\n\t// Acteurs principaux (select_multi -> expects array of option IDs)\n\t{\n\t\tfield_definition_id: ACTEURS_FIELD.field_definition_id,\n\t\tvalue: mapSelectMulti(acteursVal, ACTEURS_FIELD.options)\n\t},\n\n\t// Anti Ecran (toggle)\n\t{\n\t\tfield_definition_id: ANTI_ECRAN_FIELD.field_definition_id,\n\t\tvalue: toBool(data.anti_ecran)\n\t},\n\n\t// Microscope View Only (toggle)\n\t{\n\t\tfield_definition_id: MICROSCOPE_ONLY_FIELD.field_definition_id,\n\t\tvalue: toBool(data.microscope_view_only)\n\t},\n\n\t// Angle Produit (select)\n\t{\n\t\tfield_definition_id: ANGLE_FIELD.field_definition_id,\n\t\tvalue: [\n\t\t\tmapSelect(angleVal, ANGLE_FIELD.options, 'Focus produit')\n\t\t]\n\t},\n\n\t// Format Marketing (select)\n\t{\n\t\tfield_definition_id: FORMAT_FIELD.field_definition_id,\n\t\tvalue: [\n\t\t\tmapSelect(formatVal, FORMAT_FIELD.options, 'Autre')\n\t\t]\n\t},\n\n\t// Notes / description détaillée (long_text)\n\t{\n\t\tfield_definition_id: NOTES_FIELD.field_definition_id,\n\t\tvalue: isEmpty(data.detailed_concept_description)\n\t\t\t? ''\n\t\t\t: String(data.detailed_concept_description)\n\t}\n];\n\n// Sécurité basique: s'assurer qu'on a bien généré chaque bloc\nif (values.some(v => v == null)) {\n\tthrow new Error('Frame.io Mapping Error: a value block is null/undefined');\n}\n\n// OUTPUT vers le node suivant (Update Metadata in Frame.io)\nreturn [\n\t{\n\t\tjson: {\n\t\t\tdata: {\n\t\t\t\tfile_ids: [assetId],\n\t\t\t\tvalues\n\t\t\t}\n\t\t}\n\t}\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1952,
+        288
+      ],
+      "id": "a30bb420-7c60-4ca6-94ed-306e040ece91",
+      "name": "Mapping"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1qRJ-_Isus6u_uo7huiwKbjOq14VUZiUVPg_kWUL1zXU",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qRJ-_Isus6u_uo7huiwKbjOq14VUZiUVPg_kWUL1zXU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "frameio_asset_id": "={{ $json.data.id }}",
+            "updated_at": "={{ new Date().toISOString() }}",
+            "detailed_concept_description": "={{ $('Agent Nomenclature').item.json.output.detailed_concept_description }}",
+            "acteurs_principaux": "={{ $('Agent Nomenclature').item.json.output.acteurs_principaux }}",
+            "observation": "={{ $('Agent Nomenclature').item.json.output.observation }}",
+            "effet_wow": "={{ $('Agent Nomenclature').item.json.output.effet_wow }}",
+            "environnement": "={{ $('Agent Nomenclature').item.json.output.environnement }}",
+            "video_title": "={{ $('Agent Nomenclature').item.json.output.video_title }}",
+            "status": "DONE"
+          },
+          "matchingColumns": [
+            "frameio_asset_id"
+          ],
+          "schema": [
+            {
+              "id": "frameio_asset_id",
+              "displayName": "frameio_asset_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "frameio_project_id",
+              "displayName": "frameio_project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "drive_file_id",
+              "displayName": "drive_file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "idempotency_key",
+              "displayName": "idempotency_key",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "requires_drive_ops",
+              "displayName": "requires_drive_ops",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_name_original",
+              "displayName": "file_name_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_size_bytes",
+              "displayName": "file_size_bytes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "mime_type",
+              "displayName": "mime_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_efficient_url",
+              "displayName": "frameio_efficient_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_thumb_url",
+              "displayName": "frameio_thumb_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "retry_count",
+              "displayName": "retry_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_code",
+              "displayName": "last_error_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_message",
+              "displayName": "last_error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "next_retry_at",
+              "displayName": "next_retry_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "video_title",
+              "displayName": "video_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "environnement",
+              "displayName": "environnement",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "effet_wow",
+              "displayName": "effet_wow",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "observation",
+              "displayName": "observation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "acteurs_principaux",
+              "displayName": "acteurs_principaux",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "detailed_concept_description",
+              "displayName": "detailed_concept_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "a419603b-f0fa-4671-84ba-e03df856967e",
+      "name": "Update Status to DONE",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        3072,
+        384
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ETr6k2zwcHMayxLu",
+          "name": "Petiscope Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "text": "=## 🧠 Prompt — Node “Analyse Vidéo/Image (Gemini V3 – Petiscope)”\n\n---\n\n### 🎬 Context\n\nYou are an **AI video content analyst** specialized in **children-focused e-commerce footage**.\nYour role is to **analyze the provided video** and extract structured metadata for **Petiscope**, a brand that sells an educational microscope for children.\n\nYour analysis supports an automated classification and creative insight system, so:\n\n* Every field must **always be filled** (no missing keys).\n* Booleans must be **true** or **false** (never “Yes/No”).\n* The **description** (`detailed_concept_description`) must be **enriched and detailed**, giving a complete understanding of what happens in the video — context, people, actions, emotions, camera style, and product interaction.\n\n---\n\n### 🧩 OUTPUT FORMAT (Markdown)\n\nReturn your answer **in Markdown format** exactly as shown below:\n\n```\n### Video Metadata\n\n- **video_title:** [Concise title of the video, max 100 characters]\n- **environnement:** [Intérieur - Maison | Extérieur | Entrepôt]\n- **effet_wow:** [true or false]\n- **observation:** [Commune | Insolite | NA]  *(Commune = observation habituelle ou attendue, Insolite = observation surprenante ou rare, NA = aucune observation identifiable)*\n- **acteurs_principaux:** [Enfant seul | Parent seul | Parent & enfant | Groupe d’enfants]\n- **anti_ecran:** [true or false] *(true = no screen visible, real-world interaction like microscope or nature)*\n- **microscope_view_only:** [true or false] *(true = the entire video shows only the microscopic view)*\n- **angle_produit:** [Focus produit | Scène de vie | Vue microscope seulement]\n- **format_marketing:** [UGC | POV | Podcast | Entrepôt | Autre]\n- **detailed_concept_description:** [Rich and complete description of the video — 5–10 sentences describing everything happening, including context, characters, emotions, camera movements, environment, and product use.]\n```\n\n---\n\n### 🧠 Guidelines\n\n* Always output **every field**, even if the value is `false` or `Autre`.\n* Keep the **video_title** concise yet descriptive (max 100 characters).\n* For boolean fields, write strictly `true` or `false`.\n* For `detailed_concept_description`, write a full narrative paragraph:\n\n  * What happens in the scene?\n  * Who is visible and what do they do?\n  * What emotions or reactions appear?\n  * What’s the environment (home, outdoor, warehouse)?\n  * Is the product visible, used, or explained?\n  * Any interesting angles, actions, or observations?\n* Ignore music, subtitles, or branding.\n* Focus only on **visible content** and **meaningful actions**.\n\n---\n\n### 🧩 Example Output\n\n```\n### Video Metadata\n\n- **video_title:** Parent seul présentant le microscope Petiscope\n- **environnement:** Intérieur - Maison\n- **effet_wow:** false\n- **observation:** false\n- **acteurs_principaux:** Parent seul\n- **anti_ecran:** true\n- **microscope_view_only:** false\n- **angle_produit:** Focus produit\n- **format_marketing:** Podcast\n- **detailed_concept_description:**  \n  La vidéo montre un parent assis à une table, expliquant calmement le fonctionnement du microscope Petiscope.  \n  La caméra est fixe, cadrée à hauteur du visage, avec des plans de coupe sur le produit.  \n  Aucun enfant n’apparaît à l’écran, et aucune réaction émotionnelle forte n’est visible.  \n  Le ton est informatif, typique d’un format podcast ou tutoriel.  \n  L’environnement intérieur est sobre et lumineux, avec le microscope posé sur un bureau en bois clair.  \n  L’objectif principal est de mettre en valeur les fonctionnalités et la facilité d’utilisation du produit.\n```\n\n---",
+        "videoUrls": "={{ $json.frameio_efficient_url }}",
+        "options": {}
+      },
+      "id": "e494f007-5f4e-41c5-83e6-c7667210fba9",
+      "name": "Analyse Vidéo/Image",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "position": [
+        1120,
+        288
+      ],
+      "typeVersion": 1,
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "3mQaVwAcpH4oQZX2",
+          "name": "Petiscope Google Gemini(PaLM) Api account"
+        }
+      },
+      "onError": "continueErrorOutput",
+      "notes": "Gemini analyse le contenu vidéo et extrait les caractéristiques"
+    },
+    {
+      "parameters": {
+        "content": "## 🧠 WF2 - Analysis & Metadata\n├── Cron Trigger → Read Sheets (READY_FOR_ANALYSIS)\n├── Update Status → Gemini Analysis\n├── Agent Nomenclature → Map to Frame.io IDs\n├── PATCH Frame.io Metadata → Rename Asset\n└── Route: Drive Operations? → Update Status",
+        "height": 176,
+        "width": 448
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "9361f4b0-8fc2-4c6e-9c6b-b91da53e4251",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        448,
+        288
+      ],
+      "id": "fc059cbf-d616-4ebb-b77a-fe8b52ad2768",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4.1-nano",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1648,
+        448
+      ],
+      "id": "68e6cb9c-1599-45bb-bdbf-371c88c25e3b",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "16qMAkZWTUyOAHbE",
+          "name": "Petiscope OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "=Here is the video analysis for Petiscope footage: {{ $json.content.parts[0].text }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "video_title",
+              "description": "Concise title of the video (max 100 characters). Must be short but meaningful.",
+              "required": true
+            },
+            {
+              "name": "environnement",
+              "description": "Type of environment visible in the scene. Choose one of: Intérieur - Maison, Extérieur, Entrepôt.",
+              "required": true
+            },
+            {
+              "name": "effet_wow",
+              "type": "boolean",
+              "description": "Does the child show a visible 'wow' reaction of amazement or surprise?",
+              "required": true
+            },
+            {
+              "name": "observation",
+              "description": "Type of observation visible in the video. Choose one of: Commune (common/expected observation), Insolite (surprising/unusual observation), NA (no identifiable observation).",
+              "required": true
+            },
+            {
+              "name": "acteurs_principaux",
+              "description": "Main visible subjects in the video. Choose one of: Enfant seul, Parent seul, Parent & enfant, Groupe d’enfants.",
+              "required": true
+            },
+            {
+              "name": "anti_ecran",
+              "type": "boolean",
+              "description": "Does the video show real-world interaction (microscope, nature, materials) with no screen or tablet visible? Boolean true/false.\"",
+              "required": true
+            },
+            {
+              "name": "microscope_view_only",
+              "type": "boolean",
+              "description": "Is the entire video shown through the microscope view, without any visible humans? Boolean true/false.\"",
+              "required": true
+            },
+            {
+              "name": "angle_produit",
+              "description": "Main storytelling angle. Choose one of: Focus produit (product close-up or emphasis), Scène de vie (product used by people), Vue microscope seulement (scene entirely through microscope lens).",
+              "required": true
+            },
+            {
+              "name": "format_marketing",
+              "description": "Creative marketing format. Choose one of: UGC (user-generated, selfie or testimonial), POV (point of view), Podcast (talking to camera), Entrepôt (warehouse or stock tone), Autre.",
+              "required": true
+            },
+            {
+              "name": "detailed_concept_description",
+              "description": "A rich, detailed, narrative description (5–10 sentences) of the video. Must include context, actions, emotions, environment, camera style, and product interaction."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "typeVersion": 1.2,
+      "position": [
+        1568,
+        288
+      ],
+      "id": "efb0d383-1066-4faf-8875-4303c5e167d2",
+      "name": "Agent Nomenclature"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "=1qRJ-_Isus6u_uo7huiwKbjOq14VUZiUVPg_kWUL1zXU",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qRJ-_Isus6u_uo7huiwKbjOq14VUZiUVPg_kWUL1zXU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "frameio_asset_id": "={{ $('Update Status to ANALYZING').json.frameio_asset_id }}",
+            "updated_at": "={{ new Date().toISOString() }}",
+            "status": "ERROR",
+            "notes": "Limited quotas for analyses (free tier)"
+          },
+          "matchingColumns": [
+            "frameio_asset_id"
+          ],
+          "schema": [
+            {
+              "id": "frameio_asset_id",
+              "displayName": "frameio_asset_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "frameio_project_id",
+              "displayName": "frameio_project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "drive_file_id",
+              "displayName": "drive_file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "idempotency_key",
+              "displayName": "idempotency_key",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "requires_drive_ops",
+              "displayName": "requires_drive_ops",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_name_original",
+              "displayName": "file_name_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_size_bytes",
+              "displayName": "file_size_bytes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "mime_type",
+              "displayName": "mime_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_efficient_url",
+              "displayName": "frameio_efficient_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_thumb_url",
+              "displayName": "frameio_thumb_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "retry_count",
+              "displayName": "retry_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_code",
+              "displayName": "last_error_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_message",
+              "displayName": "last_error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "next_retry_at",
+              "displayName": "next_retry_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "video_title",
+              "displayName": "video_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "environnement",
+              "displayName": "environnement",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "effet_wow",
+              "displayName": "effet_wow",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "observation",
+              "displayName": "observation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "acteurs_principaux",
+              "displayName": "acteurs_principaux",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "detailed_concept_description",
+              "displayName": "detailed_concept_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "de76806b-d5e4-4ab7-bfb9-57c48801f6cd",
+      "name": "Update Status to ERROR",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1600,
+        656
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ETr6k2zwcHMayxLu",
+          "name": "Petiscope Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "=1qRJ-_Isus6u_uo7huiwKbjOq14VUZiUVPg_kWUL1zXU",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "assets_template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1qRJ-_Isus6u_uo7huiwKbjOq14VUZiUVPg_kWUL1zXU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "frameio_asset_id": "={{ $('Mapping').item.json.data.file_ids[0] }}",
+            "updated_at": "={{ new Date().toISOString() }}",
+            "status": "ERROR",
+            "notes": "={{ $json.error.code }} - {{ $json.error.status }}"
+          },
+          "matchingColumns": [
+            "frameio_asset_id"
+          ],
+          "schema": [
+            {
+              "id": "frameio_asset_id",
+              "displayName": "frameio_asset_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "frameio_project_id",
+              "displayName": "frameio_project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "drive_file_id",
+              "displayName": "drive_file_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "idempotency_key",
+              "displayName": "idempotency_key",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "requires_drive_ops",
+              "displayName": "requires_drive_ops",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_name_original",
+              "displayName": "file_name_original",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "file_size_bytes",
+              "displayName": "file_size_bytes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "mime_type",
+              "displayName": "mime_type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_efficient_url",
+              "displayName": "frameio_efficient_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "frameio_thumb_url",
+              "displayName": "frameio_thumb_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "retry_count",
+              "displayName": "retry_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_code",
+              "displayName": "last_error_code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "last_error_message",
+              "displayName": "last_error_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "next_retry_at",
+              "displayName": "next_retry_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "video_title",
+              "displayName": "video_title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "environnement",
+              "displayName": "environnement",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "effet_wow",
+              "displayName": "effet_wow",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "observation",
+              "displayName": "observation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "acteurs_principaux",
+              "displayName": "acteurs_principaux",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "detailed_concept_description",
+              "displayName": "detailed_concept_description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "125bdbc9-0aa9-498d-a59b-446d5837ffc3",
+      "name": "Update Status to ERROR Metadata assignement",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        2656,
+        592
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ETr6k2zwcHMayxLu",
+          "name": "Petiscope Google Sheets account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Cron Trigger - Every 5 min": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2025-07-07T17:04:32.733Z",
+      "updatedAt": "2025-07-29T12:08:01.871Z",
+      "id": "MsNN7NfDxicUYrVv",
+      "name": "draft"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-10-25T14:26:02.000Z",
+  "versionId": "3f9309c0-8281-4f87-85ad-70621562f6b5"
+}
