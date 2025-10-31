@@ -1,0 +1,419 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Initiate Call",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ElevenLabs New Call Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Call Purpose",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Call Purpose": {
+      "main": [
+        [
+          {
+            "node": "Fetch Contact Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Contact Details": {
+      "main": [
+        [
+          {
+            "node": "Remove from pending calls",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove from pending calls": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-11T21:39:58.790Z",
+  "id": "YebDgFe4ELdNLbFZ",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Make_Calls",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "phone"
+            },
+            {
+              "name": "notes"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        340,
+        -160
+      ],
+      "id": "4b2b7953-2be2-422b-bb39-ba099f7e0ff0",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "base": {
+          "__rl": true,
+          "value": "appKHWL0qw1mtrVlN",
+          "mode": "list",
+          "cachedResultName": "Assistant",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblsAfMm4iTd6Ph7l",
+          "mode": "list",
+          "cachedResultName": "PendingCalls",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN/tblsAfMm4iTd6Ph7l"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Phone": "={{ $json.phone }}",
+            "Notes": "={{ $json.notes }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        560,
+        -160
+      ],
+      "id": "ae3d06d4-f124-449a-afb1-15883c71af98",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "jNWGLwmFGYku7Ncy",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.elevenlabs.io/v1/convai/twilio/outbound-call",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "agent_id",
+              "value": "agent_01jxz8y0y8esnskj14nn7pcr8r"
+            },
+            {
+              "name": "agent_phone_number_id",
+              "value": "phnum_01jy4804bnedz87jadhshqrk5q"
+            },
+            {
+              "name": "to_number",
+              "value": "={{ $json.fields.Phone }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        -160
+      ],
+      "id": "36e69ac9-2da1-412a-9d53-1911a71d4f74",
+      "name": "Initiate Call",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "DnFv2GiMeiA9xJdx",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "elevenlabs",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        340,
+        200
+      ],
+      "id": "1022b12e-9166-4478-a4b2-211678fef37d",
+      "name": "ElevenLabs New Call Webhook",
+      "webhookId": "1daa7f34-2d57-4f53-918d-e1b83167940b"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"type\": \"conversation_initiation_client_data\",\n  \"dynamic_variables\": {\n    \"Name\": \"{{ $json.Name }}\",\n    \"Phone\": \"{{ $json.Contact }}\",\n    \"sub_prompt\": \"{{ $('Get Call Purpose').first().json.Notes }}\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.2,
+      "position": [
+        1240,
+        200
+      ],
+      "id": "9842857e-275c-408d-999e-bae2a7108264",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appKHWL0qw1mtrVlN",
+          "mode": "list",
+          "cachedResultName": "Assistant",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHcoAfq8b25BRuG",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN/tblHcoAfq8b25BRuG"
+        },
+        "filterByFormula": "=FIND(\"{{ $('ElevenLabs New Call Webhook').first().json.body.called_number }}\", {Contact}) > 0",
+        "returnAll": false,
+        "limit": 1,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        780,
+        200
+      ],
+      "id": "c5fc7b7d-f1fe-4baa-bddd-59f9691c88e7",
+      "name": "Fetch Contact Details",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "jNWGLwmFGYku7Ncy",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appKHWL0qw1mtrVlN",
+          "mode": "list",
+          "cachedResultName": "Assistant",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblsAfMm4iTd6Ph7l",
+          "mode": "list",
+          "cachedResultName": "PendingCalls",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN/tblsAfMm4iTd6Ph7l"
+        },
+        "filterByFormula": "=FIND(\"{{ $json.body.called_number }}\", {Phone}) > 0",
+        "returnAll": false,
+        "limit": 1,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        560,
+        200
+      ],
+      "id": "2486961d-8655-4966-b6e1-4891298bf1fc",
+      "name": "Get Call Purpose",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "jNWGLwmFGYku7Ncy",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteRecord",
+        "base": {
+          "__rl": true,
+          "value": "appKHWL0qw1mtrVlN",
+          "mode": "list",
+          "cachedResultName": "Assistant",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblsAfMm4iTd6Ph7l",
+          "mode": "list",
+          "cachedResultName": "PendingCalls",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN/tblsAfMm4iTd6Ph7l"
+        },
+        "id": "={{ $('Get Call Purpose').first().json.id }}"
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1020,
+        200
+      ],
+      "id": "b3137626-2961-48b3-8615-72f8086489c9",
+      "name": "Remove from pending calls",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "jNWGLwmFGYku7Ncy",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Initiate Call",
+        "height": 280,
+        "width": 460,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        520,
+        -240
+      ],
+      "id": "f6a61338-bfb9-4c17-9ff3-500a8d63658e",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Inject Contact name and message to the call",
+        "height": 300,
+        "width": 940,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        520,
+        120
+      ],
+      "id": "8866a46c-5567-43f9-b910-6d377c6abca4",
+      "name": "Sticky Note1"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-09-06T14:31:52.000Z",
+  "versionId": "4475651b-a71c-4d4e-8f11-f5b8a5b04f7a"
+}
