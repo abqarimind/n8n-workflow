@@ -1,0 +1,902 @@
+{
+  "active": false,
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Refined Content ",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Refined Content ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update page in sheet Done": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Pages": {
+      "main": [
+        [
+          {
+            "node": "Filter : Chapter Page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get All Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter : Chapter Page": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auto-fixing Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Refined Content ",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Auto-fixing Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Auto-fixing Output Parser",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Refined Content ": {
+      "main": [
+        [
+          {
+            "node": "Update page in sheet Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-02T08:34:23.682Z",
+  "id": "7wcwYvcAxQxnd0Bw",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Book-GPT - WF2 - Raffinement Intelligent V2",
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1264,
+        224
+      ],
+      "id": "d04a99ca-8a4f-4aba-b405-588d967d7406",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4",
+          "mode": "list",
+          "cachedResultName": "New_Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "In Progress",
+            "Updated At": "={{$now.toISO()}}",
+            "row_number": "={{ $json.row_number }}",
+            "Chapter": "={{ $json.Chapter }}",
+            "Chapter Description": "={{ $json['Chapter Description'] }}",
+            "Title": "={{ $json.Title }}",
+            "Subtitle": "={{ $json.Subtitle }}",
+            "Pro Tip": "={{ $json['Pro Tip'] }}",
+            "Educational Content": "={{ $json['Educational Content'] }}",
+            "Business Story": "={{ $json['Business Story'] }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Chapter",
+              "displayName": "Chapter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Chapter Description",
+              "displayName": "Chapter Description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Subtitle",
+              "displayName": "Subtitle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Educational Content",
+              "displayName": "Educational Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Pro Tip",
+              "displayName": "Pro Tip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Business Story",
+              "displayName": "Business Story",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "New Chapter",
+              "displayName": "New Chapter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "New Chapter Description",
+              "displayName": "New Chapter Description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "New  Title",
+              "displayName": "New  Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "New Subtitle",
+              "displayName": "New Subtitle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "New Educational Content",
+              "displayName": "New Educational Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "New Pro Tip",
+              "displayName": "New Pro Tip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "New Business Story",
+              "displayName": "New Business Story",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Prompt Image",
+              "displayName": "Prompt Image",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Image URL",
+              "displayName": "Image URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Page Compilation",
+              "displayName": "Page Compilation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Updated At",
+              "displayName": "Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Created At",
+              "displayName": "Created At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        944,
+        16
+      ],
+      "id": "861da7cd-b248-42e6-9ac9-d55bc71e9865",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4",
+          "mode": "list",
+          "cachedResultName": "New_Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Update row in sheet').item.json.row_number }}",
+            "Status": "Done",
+            "New Chapter": "={{ $json.output.newChapter }}",
+            "New Chapter Description": "={{ $json.output.newChapterDescription }}",
+            "New  Title": "={{ $json.output.newTitle }}",
+            "New Subtitle": "={{ $json.output.newSubtitle }}",
+            "New Educational Content": "={{ $json.output.newEducationalContent }}",
+            "New Pro Tip": "={{ $json.output.newProTip }}",
+            "New Business Story": "={{ $json.output.newBusinessStory }}",
+            "Updated At": "={{$now.toISO()}}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Chapter",
+              "displayName": "Chapter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Chapter Description",
+              "displayName": "Chapter Description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Subtitle",
+              "displayName": "Subtitle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Educational Content",
+              "displayName": "Educational Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Pro Tip",
+              "displayName": "Pro Tip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Business Story",
+              "displayName": "Business Story",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "New Chapter",
+              "displayName": "New Chapter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "New Chapter Description",
+              "displayName": "New Chapter Description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "New  Title",
+              "displayName": "New  Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "New Subtitle",
+              "displayName": "New Subtitle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "New Educational Content",
+              "displayName": "New Educational Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "New Pro Tip",
+              "displayName": "New Pro Tip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "New Business Story",
+              "displayName": "New Business Story",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Prompt Image",
+              "displayName": "Prompt Image",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Image URL",
+              "displayName": "Image URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Page Compilation",
+              "displayName": "Page Compilation",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Updated At",
+              "displayName": "Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Created At",
+              "displayName": "Created At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1696,
+        16
+      ],
+      "id": "eaef27f0-c369-48ac-8df9-1ba2bb82a366",
+      "name": "Update page in sheet Done",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        672,
+        0
+      ],
+      "id": "3c96aced-5c54-464d-81a4-773b61f3bca9",
+      "name": "Loop Over Items",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4",
+          "mode": "list",
+          "cachedResultName": "New_Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eS8vwCbPnqtZ5xkUW4pLvINq0MiGWFRrFOwAvgEA7K4/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status",
+              "lookupValue": "To Do"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -112,
+        0
+      ],
+      "id": "3539acc3-260f-4e53-a755-77b662c0898b",
+      "name": "Get All Pages",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        0
+      ],
+      "id": "b16bc012-455a-4412-832b-4bf7effb37a5",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7d14ece2-81a3-4f1e-9aef-154cdffd1b4b",
+              "leftValue": "={{ $json.Chapter }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        192,
+        0
+      ],
+      "id": "7736b3a9-a401-4cfe-9b2a-69d6a8ca59c6",
+      "name": "Filter : Chapter Page",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserAutofixing",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        224
+      ],
+      "id": "94056d3c-261e-4ada-ae0e-26b70f63a60b",
+      "name": "Auto-fixing Output Parser"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-nano",
+          "mode": "list",
+          "cachedResultName": "gpt-5-nano"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1232,
+        432
+      ],
+      "id": "e2c053f5-b076-4f3b-9812-f92045a8f5d7",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"newChapter\": \"AI Foundations for Real-World Strategy\",\n  \"newChapterDescription\": \"This chapter explains the fundamentals of artificial intelligence and how leaders can turn vague ideas into practical, trusted initiatives. It bridges technical concepts with business clarity, offering a pragmatic roadmap to align teams and move from uncertainty to action.\",\n  \"newTitle\": \"What AI Really Means at Work\",\n  \"newSubtitle\": \"From buzzword to business reality\",\n  \"newEducationalContent\": \"Artificial intelligence is often misunderstood as a monolithic concept, but in reality it is a set of methods that allow systems to learn from data, recognize patterns, and support decision-making. To make AI useful in practice, leaders must clarify terms and expectations across teams. Begin by defining the decision to improve, mapping inputs and outputs, and verifying whether reliable data exists. Then, start with a small pilot that demonstrates measurable value while limiting risk. Always communicate AI’s boundaries: it does not replace sound processes, governance, or human expertise. Instead, it enhances capabilities when embedded into a clear business workflow. Keeping the scope narrow, transparent, and measurable allows organizations to test quickly, learn from results, and scale responsibly. With shared definitions and disciplined pilots, AI becomes less of a vague buzzword and more of a practical tool for business performance.\",\n  \"newBusinessStory\": \"At a large retail chain, executives demanded an 'AI transformation.' Rather than pursue dozens of scattered experiments, the analytics director reframed the initiative around one clear decision: store replenishment. The team identified inputs such as point-of-sale data, inventory records, and promotional calendars, then defined a target: reduce stockouts by 15 percent. After cleaning and validating the data, they built a simple demand forecast model and ran a pilot in ten stores. Within weeks, stockouts dropped by 17 percent, with only minimal excess inventory. The CFO approved a phased rollout, while the COO praised the speed and clarity of the approach. By focusing narrowly on a real business pain point, the company not only proved AI’s value but also earned the trust needed to expand responsibly. This story illustrates how disciplined framing turns hype into concrete results.\",\n  \"newProTip\": \"Before starting any AI project, write a concise one-page brief capturing the business decision to improve, the success metric, the scope of the pilot, and the data you will rely on. Share this document with stakeholders and keep it fixed throughout the pilot. This practice prevents scope creep, aligns expectations, and accelerates approvals. A clear brief ensures that everyone—from executives to engineers—works toward the same measurable outcome.\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1504,
+        432
+      ],
+      "id": "e8904b6d-a2a9-413f-9732-6599a6484ab7",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1696,
+        432
+      ],
+      "id": "80393285-bde5-4dda-9ed8-56f38ff4e412",
+      "name": "Wait",
+      "webhookId": "1f31017e-8972-45be-9880-3480a148456f"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Here is Contents of each Page\n\nchapter : {{ $json.Chapter }}\n\nchapterDescription : {{ $json['Chapter Description'] }}\n\ntitle : {{ $json.Title }}\n\nsubtitle : {{ $json.Subtitle }}\n\neducationalContent : {{ $json['Educational Content'] }}\n\nbusinessStory : {{ $json['Business Story'] }}\n\nproTip : {{ $json['Pro Tip'] }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "Role\nYou are a Senior Business Book Editor with 15+ years of experience publishing best-selling management and strategy books. You write in a style that is clear, practical, and engaging, similar to New York Times bestsellers.\n\nContext\nYou receive JSON objects that represent fragments of a draft business book. Each object contains up to 7 fields (some may be empty):\n\nchapter\n\nchapterDescription\n\ntitle\n\nsubtitle\n\neducationalContent\n\nbusinessStory\n\nproTip\n\nYour task is to refine only the fields that contain text. If a field is empty or missing, you must return an empty string \"\" for its corresponding “New …” field.\n\nLength\n\nnewChapter: ≤ 12 words\n\nnewChapterDescription: 35–55 words\n\nnewTitle: ≤ 12 words\n\nnewSubtitle: ≤ 16 words\n\nnewEducationalContent: 150–170 words\n\nnewBusinessStory: 130–150 words\n\nnewProTip: ~80 words\n\nAudience\nExecutives, professionals, and business readers seeking actionable clarity. Tone: Business Book, Easy Read, NYT Best Seller.\n\nExamples\nReturn only one JSON object, with these keys in this exact order:\n\nnewChapter\n\nnewChapterDescription\n\nnewTitle\n\nnewSubtitle\n\nnewEducationalContent\n\nnewBusinessStory\n\nnewProTip\n\nConstraints\n\nDo not invent facts beyond the input.\n\nWrite in English.\n\nNo lists, bullets, quotes, emojis, URLs, or markdown.\n\nImprove clarity, flow, and style while preserving meaning."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1168,
+        16
+      ],
+      "id": "744c4e21-9e51-4cf8-8fbf-fbef25ab43da",
+      "name": "Refined Content "
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-07-07T17:04:32.733Z",
+      "updatedAt": "2025-07-29T12:08:01.871Z",
+      "id": "MsNN7NfDxicUYrVv",
+      "name": "draft"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-02T14:20:55.000Z",
+  "versionId": "3032184b-9e9b-41f5-9069-eadc1854ded9"
+}
