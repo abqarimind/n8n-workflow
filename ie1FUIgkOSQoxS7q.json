@@ -1,0 +1,649 @@
+{
+  "active": false,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Page Ready for Refine",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Page Ready for Refine": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Refined Content to Markdown (2-en-1)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Refined Content to Markdown (2-en-1)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Refined Content to Markdown (2-en-1)": {
+      "main": [
+        [
+          {
+            "node": "Update page in sheet Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-08-27T15:28:55.363Z",
+  "id": "ie1FUIgkOSQoxS7q",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Book-GPT - WF2 - Raffinement Intelligent",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -192,
+        0
+      ],
+      "id": "ea4b079e-8ea9-4c36-a632-066850404c1e",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI",
+          "mode": "list",
+          "cachedResultName": "Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status",
+              "lookupValue": "Ready for Refine"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        32,
+        0
+      ],
+      "id": "e13ee993-805a-43a5-8ca9-7c442471d6d4",
+      "name": "Get Page Ready for Refine",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "gpt-5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        784,
+        224
+      ],
+      "id": "e7630399-e5dd-4b22-a61e-b742d11001ec",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        256,
+        0
+      ],
+      "id": "8be70c09-aa43-47bd-9d52-9456b2653349",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI",
+          "mode": "list",
+          "cachedResultName": "Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Page ID": "={{ $json['Page ID'] }}",
+            "Status": "In Progress",
+            "Updated At": "={{$now.toISO()}}",
+            "New Pro Tip": "={{ $json['New Pro Tip'] }}",
+            "Subtitle": "={{ $json.Subtitle }}",
+            "Title": "={{ $json.Title }}",
+            "Educational Content": "={{ $json['Educational Content'] }}",
+            "Business Story": "={{ $json['Business Story'] }}"
+          },
+          "matchingColumns": [
+            "Page ID"
+          ],
+          "schema": [
+            {
+              "id": "Page ID",
+              "displayName": "Page ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Chapter",
+              "displayName": "Chapter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Remaining Content",
+              "displayName": "Remaining Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Raw Content",
+              "displayName": "Raw Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Subtitle",
+              "displayName": "Subtitle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Pro Tip",
+              "displayName": "Pro Tip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "New Pro Tip",
+              "displayName": "New Pro Tip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Educational Content",
+              "displayName": "Educational Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Business Story",
+              "displayName": "Business Story",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Prompt Image",
+              "displayName": "Prompt Image",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Image URL",
+              "displayName": "Image URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "New Raw Content",
+              "displayName": "New Raw Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Updated At",
+              "displayName": "Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Created At",
+              "displayName": "Created At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        480,
+        0
+      ],
+      "id": "5f781346-f0fd-40c6-9c28-daf3b73e0147",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI",
+          "mode": "list",
+          "cachedResultName": "Book_Processing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_xCkXcfOslUPWcv9kBA6oYVfFm7nUZWY-qhtTX7D6PI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Done ",
+            "Updated At": "={{$now.toISO()}}",
+            "New Raw Content": "={{ $json.output }}",
+            "Page ID": "={{ $('Update row in sheet').item.json['Page ID'] }}"
+          },
+          "matchingColumns": [
+            "Page ID"
+          ],
+          "schema": [
+            {
+              "id": "Page ID",
+              "displayName": "Page ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Chapter",
+              "displayName": "Chapter",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Remaining Content",
+              "displayName": "Remaining Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Raw Content",
+              "displayName": "Raw Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Subtitle",
+              "displayName": "Subtitle",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Pro Tip",
+              "displayName": "Pro Tip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "New Pro Tip",
+              "displayName": "New Pro Tip",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Educational Content",
+              "displayName": "Educational Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Business Story",
+              "displayName": "Business Story",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Prompt Image",
+              "displayName": "Prompt Image",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Image URL",
+              "displayName": "Image URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "New Raw Content",
+              "displayName": "New Raw Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Updated At",
+              "displayName": "Updated At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Created At",
+              "displayName": "Created At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1104,
+        0
+      ],
+      "id": "1232ee03-9776-45b6-a92e-4e2ddae16763",
+      "name": "Update page in sheet Done",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "L3VVYCipjZMZeLe6",
+          "name": "Google Sheets Ayoub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Here is Contents of each Page\n\nTitle : {{ $json.Title }}\nSubtitle : {{ $json.Subtitle }}\nExplanations, Educational Content (160 w) : {{ $json['Educational Content'] }}\nPro Tip (80 w) : {{ $json['New Pro Tip'] }}\nBusiness Story (140 w) : {{ $json['Business Story'] }}",
+        "options": {
+          "systemMessage": "You are an expert business book content specialist creating New York Times bestseller-quality content. Your task is to refine and format content directly into publication-ready Markdown for busy executives.\n\nWRITING STYLE - Business Book Standards:\n- Clear, conversational tone that respects reader intelligence\n- Short, actionable sentences mixed with explanatory context\n- Practical insights over theory\n- Professional but approachable language\n- Active voice, minimal jargon\n- Immediately applicable advice\n\nCONTENT REFINEMENT & FORMATTING:\nAnalyze the provided content and create a complete, refined Markdown page that includes:\n\n1. **Compelling Title** (H1) - Clear benefit-focused heading\n2. **Value Proposition Subtitle** (H2) - 6-8 words maximum\n3. **Educational Content** (~160 words) - Structured explanation with clear takeaways\n4. **Pro Tip Section** (~80 words) - Immediately actionable advice\n5. **Business Story** (~140 words) - Relatable scenario with lessons\n\nMARKDOWN FORMATTING REQUIREMENTS:\n- Use proper heading hierarchy (# ## ###)\n- Strategic white space for scannability\n- Bold for key concepts\n- Clean paragraph breaks (2-4 sentences max)\n- Professional structure suitable for publication\n- Mobile-friendly layout\n\nTONE GUIDELINES:\n- Confident without arrogance\n- Helpful without patronizing\n- Direct without being blunt\n- Evidence-based but accessible\n\nReturn ONLY the complete formatted Markdown content - no JSON, no explanations, just the final publication-ready page that can go directly into the \"New Raw Content\" column.\n\nExpected output format:\n# [Refined Title]\n\n## [6-8 Word Subtitle]\n\n[~160 word educational content with clear structure and takeaways]\n\n**Pro tip:** [~80 word actionable advice that readers can implement immediately]\n\n### Business Story\n\n[~140 word relatable business scenario with clear lessons and practical applications]"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        704,
+        0
+      ],
+      "id": "5fc52ef7-d187-48a1-aa3e-bca7872cdc64",
+      "name": "Refined Content to Markdown (2-en-1)"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-02T08:38:14.000Z",
+  "versionId": "ed764d27-6dd8-41c9-871c-d4ef9e3a2ded"
+}
