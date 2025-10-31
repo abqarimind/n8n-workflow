@@ -1,0 +1,232 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Research Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Research Agent": {
+      "main": [
+        [
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Try Again",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Research Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tavily1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Research Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-11T21:40:56.621Z",
+  "id": "2tJU63UIyYkTLSkM",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "ResearchAgent",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "14d9076e-27ea-4846-8b44-f83cf4022b9e",
+              "name": "response",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -260,
+        -160
+      ],
+      "id": "34c23c23-ad11-4a5c-a1dd-5b241392cc09",
+      "name": "Response"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f2a8ff2d-6b59-4ad6-a2e7-8705354f4105",
+              "name": "response",
+              "value": "Error occurred. Please try again.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -260,
+        80
+      ],
+      "id": "9e146ffa-be87-480c-8bd0-80d71faf2d5e",
+      "name": "Try Again"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1060,
+        -40
+      ],
+      "id": "75209598-66c8-4026-91a8-1e447f55aba1",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query}}",
+        "options": {
+          "systemMessage": "=Current date/time: {{ $now }}\n\n## Core Function\nYou conduct web research using Tavily to find accurate, relevant information.\n\n## Capabilities\n- Perform web searches on any topic\n- Summarize findings from multiple sources\n- Extract key information\n- Compare different perspectives\n- Find recent news and developments\n- Answer factual questions\n\n## Research Guidelines\n1. **Query Formulation**:\n   - Break complex questions into search components\n   - Use precise keywords\n   - Include necessary context\n   - Apply search operators when helpful\n\n2. **Source Evaluation**:\n   - Prioritize authoritative sources\n   - Consider recency for time-sensitive topics\n   - Evaluate source credibility\n   - Note potential biases\n\n3. **Information Synthesis**:\n   - Combine findings from multiple sources\n   - Highlight consensus views\n   - Note significant disagreements\n   - Distinguish facts from opinions\n\n## Response Format\n1. **Direct Answer**: Concise response to the query\n2. **Key Findings**: Important discovered information\n3. **Sources**: Attribution for all information\n4. **Confidence Level**: Indication of information reliability\n\n## Error Handling\n- For ambiguous queries, request clarification\n- For limited results, explain constraints\n- For contradictory information, present multiple perspectives\n\n## Example Response\n\"Based on my research, the latest AI regulation in the EU (Digital Services Act) takes effect June 2023. Key provisions include: 1) Mandatory risk assessments, 2) Transparency requirements, 3) Human oversight mechanisms. Sources: European Commission (official site), MIT Technology Review (May 2023 article).\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -760,
+        -40
+      ],
+      "id": "6df6de0e-8e65-4fba-8276-fa69ad1fa264",
+      "name": "Research Agent",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-3-5-sonnet-20241022",
+          "mode": "list",
+          "cachedResultName": "Claude 3.5 Sonnet (New)"
+        },
+        "options": {
+          "maxTokensToSample": 200
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        -820,
+        240
+      ],
+      "id": "dc918433-79a0-4aa0-8f82-1096699629b1",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": "HvX2s13mqSlZk632",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Use this tool to search the internet",
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n    \"api_key\": \"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\",\n    \"query\": \"{searchTerm}\",\n    \"search_depth\": \"basic\",\n    \"include_answer\": true,\n    \"include_raw_content\": true,\n    \"max_results\": 3\n} ",
+        "placeholderDefinitions": {
+          "values": [
+            {
+              "name": "searchTerm",
+              "description": "What the user has requested to write a blog about",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -560,
+        240
+      ],
+      "id": "818253ec-0bb5-4290-ac6b-88f43c1e1593",
+      "name": "Tavily1"
+    },
+    {
+      "parameters": {
+        "content": "## Research Agent",
+        "height": 280,
+        "width": 460,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -820,
+        -120
+      ],
+      "id": "e313924a-8039-4c4c-9d86-06e925cc1d34",
+      "name": "Sticky Note"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-18T08:01:29.000Z",
+  "versionId": "5dd29223-60dc-4fe7-ae41-a26473f4e256"
+}
