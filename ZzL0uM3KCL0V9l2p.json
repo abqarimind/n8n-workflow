@@ -1,0 +1,1582 @@
+{
+  "active": false,
+  "connections": {
+    "4o": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Manager",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manager": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "researchAgent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Manager",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "emailAgent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Manager",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "calendarAgent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Manager",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "notesAgent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Manager",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "reminderAgent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Manager",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "getContactsTool": {
+      "ai_tool": [
+        [
+          {
+            "node": "Manager",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "updateContactTool": {
+      "ai_tool": [
+        [
+          {
+            "node": "Manager",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "Redirect Message Types1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Redirect Message Types1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Audio URL": {
+      "main": [
+        [
+          {
+            "node": "Download Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Audio": {
+      "main": [
+        [
+          {
+            "node": "Transcribe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe": {
+      "main": [
+        [
+          {
+            "node": "Format Response1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image URL": {
+      "main": [
+        [
+          {
+            "node": "Download Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Image": {
+      "main": [
+        [
+          {
+            "node": "Image Explainer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Image Explainer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image Explainer": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redirect Message Types1": {
+      "main": [
+        [
+          {
+            "node": "Get Image URL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Audio URL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Format Response3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Format Response3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Format Response3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Response": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Response3": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Manager",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Business Cloud",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "makeOutboundCall": {
+      "ai_tool": [
+        [
+          {
+            "node": "Manager",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Response1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Manager",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-11T21:34:30.874Z",
+  "id": "ZzL0uM3KCL0V9l2p",
+  "isArchived": false,
+  "meta": null,
+  "name": "Manager",
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1504,
+        944
+      ],
+      "id": "2ccd6f68-c62a-4e32-904f-ffcfc9132854",
+      "name": "4o",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Main AI Agent\n",
+        "height": 280,
+        "width": 520,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1760,
+        288
+      ],
+      "typeVersion": 1,
+      "id": "2e7ba054-c309-4c21-8dc3-f428ffbe711d",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message }}\ntoday : {{ $now }}",
+        "options": {
+          "systemMessage": "=## Core Function\nYou are Maya, an advanced personal assistant that routes user requests to specialized tools. Your primary responsibility is intelligent request routing and result presentation - not direct task execution.\nIf any tool call fails, analyze the error and if it failed because of invalid parameters, retry with corrected parameters until it's successfull.\n\n## Available Tools\n- **calendarAgent**: Manage Google Calendar (events, schedules, availability)\n- **emailAgent**: Handle Gmail operations (send, read, search, draft).\n- **researchAgent**: Find information online via Tavily\n- **notesAgent**: Store and retrieve information in Airtable\n- **reminderAgent**: Set and manage time-based reminders\n- **addOrUpdateContact**: Add or update contact info of a person\n- **getContactsTool**: Get the contact details such as Name, phone, email (or multiple contacts), these may be required while sending a contact email or calendar invite etc.\n- **updateContactTool**: Add or update the contact details\n- **makeOutboundCall**: Make outbound call. To get the phone number, first use getContactsTool.\n\n## Additional Tools Instructions:\n1. For calendarAgent, emailAgent and makeOutboundCall tools:\n- If any contact is referenced, first use getContactsTool and use the received contact's email to send email to them or add them to cc/bcc or attendees.\n2. For calendarAgent, emailAgent and researchAgent tools:\n- In the query parameter pass the detailed information of the user's request, what exactly needs to be done and other details to complete the request.\n\n\n## Operational Guidelines\n1. **Request Analysis**: Precisely identify user intent and required tool(s)\n2. **Context Management**: Maintain conversation history for contextual understanding\n3. **Sequential Operations**: For multi-step tasks:\n   - Plan the complete sequence before execution\n   - Execute tools in logical order\n   - Verify each step's success before proceeding\n   - Adapt if steps fail\n   - Provide clear progress updates\n\n4. **Information Integrity**: Never fabricate data - rely exclusively on tool responses\n5. **Error Handling**: When tools return errors:\n   - Explain the issue in simple terms\n   - Suggest specific alternatives\n   - Offer to retry with modified parameters\n\n6. **Response Format**:\n   - Concise, direct answers\n   - Highlight key information\n   - Confirm completed actions with specific details\n\n## Prerequisite Checks\nFor certain operations, gather required information first:\n- **Email operations**: To verify an email or to find a contact, use getContactsTool\n- **Calendar events with attendees**: To verfiy attendee details, user getContactsTool\n- **Research on specific topics**: Clarify search parameters before execution\n\n## Example Interactions\n**User**: \"Email Sarah about tomorrow's meeting\"\n**You**: [Internal planning: Need contact info first]\n[Use contactAgent to get Sarah's email]\n[Use emailAgent with complete information]\n**Response**: \"I've sent an email to Sarah Jones (sarah@example.com) about tomorrow's meeting. Anything else you need?\"\n\n**User**: \"Find recent news about AI regulation and save it to my research notes\"\n**You**: [Internal planning: Research first, then save notes]\n[Use researchAgent for AI regulation news]\n[Use notesAgent to save findings in \"Research\" category]\n**Response**: \"I've saved 5 key points about recent AI regulation to your Research notes in Airtable (Note #127). The most significant development is [key finding].\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1888,
+        384
+      ],
+      "id": "195a3ffc-9bcb-4756-aee1-99d763a3f665",
+      "name": "Manager"
+    },
+    {
+      "parameters": {
+        "content": "## Sub-Agent Workflows & Tools\n",
+        "height": 280,
+        "width": 1260,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1824,
+        848
+      ],
+      "typeVersion": 1,
+      "id": "3f8460ff-8cb6-4f43-9a91-020aac0dc9cb",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to do online searches and researches.",
+        "workflowId": {
+          "__rl": true,
+          "value": "2tJU63UIyYkTLSkM",
+          "mode": "list",
+          "cachedResultName": "ResearchAgent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "query"
+          ],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        2160,
+        944
+      ],
+      "id": "f514bd84-d87d-426a-b622-2ce62f56c987",
+      "name": "researchAgent"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool for any email related actions.",
+        "workflowId": {
+          "__rl": true,
+          "value": "f79ZMvczrHxTtCtx",
+          "mode": "list",
+          "cachedResultName": "EmailAgent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', `Complete instructions on the action to be performed, along with all the user/attendees, message, description, title etc`, 'string') }}"
+          },
+          "matchingColumns": [
+            "query"
+          ],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        2032,
+        944
+      ],
+      "id": "69f2bb63-8d93-4577-a8d2-b62efa6244e4",
+      "name": "emailAgent"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool for any calendar related actions.",
+        "workflowId": {
+          "__rl": true,
+          "value": "mSs3YSjtut22sgdJ",
+          "mode": "list",
+          "cachedResultName": "CalendarAgent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('query', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1888,
+        944
+      ],
+      "id": "40415729-2c86-4a5d-b107-6a31397d848a",
+      "name": "calendarAgent"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool for saving and fetching notes/tasks.",
+        "workflowId": {
+          "__rl": true,
+          "value": "kV8lbAFM9gsNwwzU",
+          "mode": "list",
+          "cachedResultName": "NoteTakingAgent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "noteDetails": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('noteDetails', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "noteDetails",
+              "displayName": "noteDetails",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        2288,
+        944
+      ],
+      "id": "b00747ab-d906-42fe-a5e1-f8fa1f48700c",
+      "name": "notesAgent"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to setup and fetch reminders.",
+        "workflowId": {
+          "__rl": true,
+          "value": "ZPtql8WUY4VCq39w",
+          "mode": "list",
+          "cachedResultName": "RemindersAgent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "noteDetails": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('noteDetails', `Complete details of the reminder to be set along with scheduled time`, 'string') }}"
+          },
+          "matchingColumns": [
+            "noteDetails"
+          ],
+          "schema": [
+            {
+              "id": "noteDetails",
+              "displayName": "noteDetails",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        2432,
+        944
+      ],
+      "id": "0b3d4f8b-f873-48ec-8c0e-c6034541715f",
+      "name": "reminderAgent"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appKHWL0qw1mtrVlN",
+          "mode": "list",
+          "cachedResultName": "Assistant",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHcoAfq8b25BRuG",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN/tblHcoAfq8b25BRuG"
+        },
+        "filterByFormula": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Filter_By_Formula', ``, 'string') }}",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        2752,
+        944
+      ],
+      "id": "e613b858-c3a7-48e1-90db-e1949d4e78e5",
+      "name": "getContactsTool",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "jNWGLwmFGYku7Ncy",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "base": {
+          "__rl": true,
+          "value": "appKHWL0qw1mtrVlN",
+          "mode": "list",
+          "cachedResultName": "Assistant",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblHcoAfq8b25BRuG",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN/tblHcoAfq8b25BRuG"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Name__using_to_match_', ``, 'string') }}",
+            "Email": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Email', ``, 'string') }}",
+            "Contact": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Contact', ``, 'string') }}",
+            "Role": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Role', ``, 'string') }}",
+            "Notes": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Notes', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Contact",
+              "displayName": "Contact",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Role",
+              "displayName": "Role",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        2592,
+        944
+      ],
+      "id": "438cb5fb-9ba0-4c44-b237-ca74cd7fe259",
+      "name": "updateContactTool",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "jNWGLwmFGYku7Ncy",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -240,
+        224
+      ],
+      "id": "cb577619-e161-4409-9909-09c5fff3613c",
+      "name": "When chat message received",
+      "webhookId": "a8ad846b-de6a-4d89-8e02-01072101cfe6",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -240,
+        640
+      ],
+      "id": "add05148-322c-415b-8b09-c2ed9cfc1924",
+      "name": "Telegram Trigger",
+      "webhookId": "78187c16-977b-48e3-be0a-16f991f319c0",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {
+          "messageStatusUpdates": [
+            "all"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        432
+      ],
+      "id": "58e76077-ca3d-4648-9c44-20f5fa69a87b",
+      "name": "WhatsApp Trigger",
+      "webhookId": "d06cb83d-5eb9-4dca-bb89-3ee45d668486",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "9gIMTPaz7S3a9ckR",
+          "name": "WhatsApp OAuth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "=601958186345380",
+        "recipientPhoneNumber": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+        "textBody": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        2784,
+        160
+      ],
+      "id": "5555993b-75b9-4f14-a356-fcf033ea5387",
+      "name": "WhatsApp Business Cloud",
+      "webhookId": "7db10a47-a004-44ee-9ca4-4d58743414f0",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "q2qfSQXn6Z9IVbzG",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "mediaUrlGet",
+        "mediaGetId": "={{ $json.messages[0].audio.id }}"
+      },
+      "id": "73343441-e337-45b4-9054-b2947c411421",
+      "name": "Get Audio URL",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [
+        384,
+        384
+      ],
+      "typeVersion": 1,
+      "webhookId": "e6f5f394-bed2-4c6b-a249-83d1dbbc72e9",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "q2qfSQXn6Z9IVbzG",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "options": {}
+      },
+      "id": "7771435d-57bc-435a-8e8d-96ca70122c13",
+      "name": "Download Audio",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        640,
+        384
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "whatsAppApi": {
+          "id": "q2qfSQXn6Z9IVbzG",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "id": "ab766e20-bd73-4d54-846c-25ce08d833c5",
+      "name": "Transcribe",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.7,
+      "position": [
+        912,
+        384
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "id": "05b30af4-967b-4824-abdc-84a8292ac0e5",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.messages && $json.messages[0].type == 'image' }}",
+                    "rightValue": ""
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "WhatsApp Image Message"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "version": 2,
+                  "leftValue": "",
+                  "caseSensitive": true,
+                  "typeValidation": "strict"
+                },
+                "conditions": [
+                  {
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "leftValue": "={{ $json.messages && $json.messages[0].type == 'audio' }}",
+                    "rightValue": "audio",
+                    "id": "da70f20b-14e9-4467-bded-d33586ce18a5"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "WhatsApp Audio Message"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5764fddc-2b64-46cf-a283-9cb4b3fdcd90",
+                    "leftValue": "={{ $json.messages && $json.messages[0].type == \"text\" }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "WhatsApp Text Message"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5cc2e537-aa66-40cb-9fdc-faabd33b5700",
+                    "leftValue": "={{ $json.chatInput }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Chat Input Message"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "4ce2c769-fcbe-4b9e-ae8f-d71c84f834a0",
+                    "leftValue": "={{ $json.message != null }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Telegram Message"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7e8e6df8-11f2-432b-a3d8-3ebf75d1877f",
+      "name": "Redirect Message Types1",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        0,
+        384
+      ],
+      "typeVersion": 3.2
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "mediaUrlGet",
+        "mediaGetId": "={{ $json.messages[0].image.id }}"
+      },
+      "id": "a677322a-8c40-492d-9a46-40e8ed51394d",
+      "name": "Get Image URL",
+      "type": "n8n-nodes-base.whatsApp",
+      "position": [
+        384,
+        -48
+      ],
+      "typeVersion": 1,
+      "webhookId": "b9cbd71a-f0d6-4000-8dcf-79005c6b6525",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "q2qfSQXn6Z9IVbzG",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "options": {}
+      },
+      "id": "e66c6716-4fe1-4a50-a37a-4730fbc99e05",
+      "name": "Download Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        592,
+        -48
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "whatsAppApi": {
+          "id": "q2qfSQXn6Z9IVbzG",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "fdf28bd2-8509-40e3-85d4-a608ec8f1a11",
+      "name": "OpenAI Chat Model3",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        768,
+        128
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account Abqari"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2ec0e573-373b-4692-bfae-86b6d3b9aa9a",
+              "name": "=message",
+              "type": "string",
+              "value": "=User shared the image with the text: \"{{ $json.text }}\""
+            },
+            {
+              "id": "cfb93eca-69e3-4f8b-82d8-25310ae9aeb5",
+              "name": "source",
+              "value": "whatsapp",
+              "type": "string"
+            },
+            {
+              "id": "d4c3596c-9cfb-42e8-888d-f1e9b9e564f6",
+              "name": "sessionId",
+              "value": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5f0809ba-8c36-4ffd-bbe1-64b450009a98",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1120,
+        -48
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Here is an image sent by the user. Extract all the information out of it, format it properly.",
+        "messages": {
+          "messageValues": [
+            {
+              "type": "HumanMessagePromptTemplate",
+              "messageType": "imageBinary"
+            }
+          ]
+        }
+      },
+      "id": "f1ba32f4-1944-4cf8-9f32-b7bfe66b7012",
+      "name": "Image Explainer",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "position": [
+        784,
+        -48
+      ],
+      "typeVersion": 1.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "df32f470-dfb9-4018-8666-8fab9f7d93bf",
+              "name": "message",
+              "value": "={{ ($json.message && $json.message.text) || $json.chatInput ||  ($json.messages && $json.messages[0].text.body )}}",
+              "type": "string"
+            },
+            {
+              "id": "2251356b-d6fb-449a-a135-4f04bce8982c",
+              "name": "=source",
+              "value": "={{ $json.message ? \"telegram\" : ($json.chatInput ? \"chatInput\" : ($json.messages ? \"whatsapp\" : \"unknown\"))}}",
+              "type": "string"
+            },
+            {
+              "id": "90f59f04-d117-47bb-b1d5-aca7e3867315",
+              "name": "sessionId",
+              "value": "={{ $json.message ? $json.message.chat.id : ($json.chatInput ? \"chatInput\" : ($json.messages ? $json.messages[0].from : \"unknown\"))}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "016735f3-a44d-43c8-8587-9eb4fffe9685",
+      "name": "Format Response3",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        784,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "27af5f17-654e-42f5-9bdf-5e9c780dd3ff",
+              "name": "message",
+              "value": "={{ $json.message }}",
+              "type": "string"
+            },
+            {
+              "id": "f71ba1cd-4ce6-441b-aa90-bd43a66af812",
+              "name": "source",
+              "value": "={{ $json.source }}",
+              "type": "string"
+            },
+            {
+              "id": "d096b70a-e115-4bdb-94fe-3c5c7f902bff",
+              "name": "sessionId",
+              "value": "={{ $json.sessionId || \"\"}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1472,
+        384
+      ],
+      "id": "490b5ae0-5f85-4eee-9706-1cdb0c121e69",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Edit Fields').item.json.source }}",
+                    "rightValue": "whatsapp",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "53b0fdad-9b94-45f9-86a7-63e65a1fe60f"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Send On WhatsApp"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "8ed1c8f4-baf4-4b7d-8e90-5e09ed420cdd",
+                    "leftValue": "={{ $('Edit Fields').item.json.source }}",
+                    "rightValue": "telegram",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Send On Telegram"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        2400,
+        384
+      ],
+      "id": "ee8247d8-ac75-4999-9f4b-2f9d2db3e7dd",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2ec0e573-373b-4692-bfae-86b6d3b9aa9a",
+              "name": "message",
+              "type": "string",
+              "value": "=User sent an audio message: \"{{$json.text }}\""
+            },
+            {
+              "id": "377d993f-c547-4676-821c-7381d3f9b207",
+              "name": "source",
+              "value": "whatsapp",
+              "type": "string"
+            },
+            {
+              "id": "34a36373-1f51-4102-87dd-048b1af6c49f",
+              "name": "sessionId",
+              "value": "={{ $('WhatsApp Trigger').item.json.contacts[0].wa_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4c621136-516f-4252-b335-72caf93045f4",
+      "name": "Format Response1",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1120,
+        384
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $('Manager').item.json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2784,
+        512
+      ],
+      "id": "5469a13e-bd4b-4d60-828a-af487ff838b8",
+      "name": "Telegram",
+      "webhookId": "8805955c-6b5b-4082-b5c6-73477e61fbc5",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to make outbound calls.",
+        "workflowId": {
+          "__rl": true,
+          "value": "YebDgFe4ELdNLbFZ",
+          "mode": "list",
+          "cachedResultName": "Make_Calls"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "phone": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('phone', `phone number for the outbound call`, 'string') }}",
+            "notes": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('notes', `Complete instructions for the purpose of the call and what all needs to be communicated/discussed.`, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "phone",
+              "displayName": "phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "notes",
+              "displayName": "notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        2928,
+        944
+      ],
+      "id": "406e32ce-39db-4670-9dc3-53b610197eff",
+      "name": "makeOutboundCall"
+    },
+    {
+      "parameters": {
+        "content": "# WhatsApp Image message\n",
+        "height": 420,
+        "width": 1080,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        288,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "bc2bc90c-2bb2-471c-8a4f-ad5f72ad1efd",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "# Whatsapp Voice message",
+        "height": 280,
+        "width": 1080,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        288,
+        304
+      ],
+      "typeVersion": 1,
+      "id": "385854fe-f085-40f9-9e29-d441a21b24f1",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "# Text Message",
+        "height": 280,
+        "width": 1080,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        288,
+        624
+      ],
+      "typeVersion": 1,
+      "id": "a932d53c-8099-4d1d-a201-17afd3239109",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {
+          "messageStatusUpdates": [
+            "all"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        352
+      ],
+      "id": "5740b438-1144-4e33-8ffe-45d25c9415c0",
+      "name": "WhatsApp Trigger1",
+      "webhookId": "d06cb83d-5eb9-4dca-bb89-3ee45d668486",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "9gIMTPaz7S3a9ckR",
+          "name": "WhatsApp OAuth account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "tableName": "n8n_chat_assistant_histories"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        1664,
+        944
+      ],
+      "id": "4a6a7376-ee8a-4239-a8a3-3def19e95ea9",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "lqRkXt7z1DtXsaUx",
+          "name": "Postgres account Abqari"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {
+    "Telegram Trigger": [
+      {
+        "json": {
+          "update_id": 161865037,
+          "message": {
+            "message_id": 18,
+            "from": {
+              "id": 1164831179,
+              "is_bot": false,
+              "first_name": "NK",
+              "username": "futurmds",
+              "language_code": "en"
+            },
+            "chat": {
+              "id": 1164831179,
+              "first_name": "NK",
+              "username": "futurmds",
+              "type": "private"
+            },
+            "date": 1748282581,
+            "text": "Can you remind me tomorrow at 10 am to take my laptop charger with me before leaving for office."
+          }
+        }
+      }
+    ],
+    "WhatsApp Trigger1": [
+      {
+        "json": {
+          "messaging_product": "whatsapp",
+          "metadata": {
+            "display_phone_number": "15551764238",
+            "phone_number_id": "474203415781208"
+          },
+          "contacts": [
+            {
+              "profile": {
+                "name": "Digital Ignyte"
+              },
+              "wa_id": "918180985555"
+            }
+          ],
+          "messages": [
+            {
+              "from": "918180985555",
+              "id": "wamid.HBgMOTE4MTgwOTg1MTcxFQIAEhgWM0VCMDk5MjNBODMzMzcxMTI4NjQ1NgA=",
+              "timestamp": "1748272159",
+              "type": "audio",
+              "audio": {
+                "mime_type": "audio/ogg; codecs=opus",
+                "sha256": "ekpL3cC0+xMAr+N1/p+aLoz9PNJFbijJiqDyXmiLAfc=",
+                "id": "1942646359873064",
+                "voice": true
+              }
+            }
+          ],
+          "field": "messages"
+        }
+      }
+    ]
+  },
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-09-06T14:31:53.000Z",
+  "versionId": "3ffca387-9588-4858-a84e-9a5fe4ce1bc1"
+}
