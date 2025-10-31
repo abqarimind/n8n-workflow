@@ -1,0 +1,31 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-07-07T17:04:27.379Z",
+  "id": "XBFoocApLVjhWdEO",
+  "isArchived": true,
+  "meta": null,
+  "name": "Sandbox",
+  "nodes": [],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-07-07T17:04:32.733Z",
+      "updatedAt": "2025-07-29T12:08:01.871Z",
+      "id": "MsNN7NfDxicUYrVv",
+      "name": "draft"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-29T11:25:20.000Z",
+  "versionId": "8ff89cc0-ce3c-4380-ad1d-23c04053b77f"
+}
