@@ -1,0 +1,329 @@
+{
+  "active": false,
+  "connections": {
+    "Note Taking Agent": {
+      "main": [
+        [
+          {
+            "node": "Response1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Try Again",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Note Taking Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Note Taking Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Note Taking Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create": {
+      "ai_tool": [
+        [
+          {
+            "node": "Note Taking Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-11T21:42:46.315Z",
+  "id": "kV8lbAFM9gsNwwzU",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "NoteTakingAgent",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.noteDetails }}",
+        "options": {
+          "systemMessage": "=Current date/time: {{ $now }}\n\nMake sure to pass Title, Notes and Category to the tools while creating a new note. If all the tool calls succeed, tell the user that you successfully performed the given task. If any tool call fails, say you failed to perform the task along with some details.\n\nYou manage notes in Airtable. Your responsibilities:\n1. Interpret what information should be saved\n2. Categorize information appropriately\n3. Structure notes for easy retrieval\n4. Confirm successful storage\n5. Retrieve relevant notes when requested\n\n**Record Deletion**:\n   - To delete an entry, we need to first fetch the records, find the matching record and use that record's id to delete it.\n\nMake sure to pass the correct field names and values to the tool.\n\nUse predefined categories when possible. If information spans multiple categories, create separate entries or use tags. Always confirm note creation with record ID."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -200,
+        -100
+      ],
+      "id": "1a9c8312-33cd-4b35-bfe2-48c84cda90e9",
+      "name": "Note Taking Agent",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "noteDetails"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -500,
+        -100
+      ],
+      "id": "f4076c18-40b3-471a-b514-91211ef99db1",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4f360190-a717-4a93-8336-d03ea65975d5",
+              "name": "response",
+              "value": "={{ $json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        -200
+      ],
+      "id": "802cb64b-cfe1-4b8f-a6f0-c9127e9067f5",
+      "name": "Response1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4f360190-a717-4a93-8336-d03ea65975d5",
+              "name": "response",
+              "value": "An error occurred. Please try again.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        -20
+      ],
+      "id": "165431fb-7237-4115-8d9a-f1c119cc805b",
+      "name": "Try Again"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -320,
+        200
+      ],
+      "id": "a8374d32-9a6f-4a9c-b944-4866968d40bc",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "z9uix07wQ4zbWtZl",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appKHWL0qw1mtrVlN",
+          "mode": "list",
+          "cachedResultName": "Assistant",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblJTmWlluswghs7X",
+          "mode": "list",
+          "cachedResultName": "Notes",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN/tblJTmWlluswghs7X"
+        },
+        "filterByFormula": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Filter_By_Formula', ``, 'string') }}",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "options": {}
+      },
+      "id": "2a8df90c-8cb9-4caa-bffd-10247f1cc221",
+      "name": "Search",
+      "type": "n8n-nodes-base.airtableTool",
+      "position": [
+        -100,
+        200
+      ],
+      "typeVersion": 2.1,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "jNWGLwmFGYku7Ncy",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appKHWL0qw1mtrVlN",
+          "mode": "list",
+          "cachedResultName": "Assistant",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblJTmWlluswghs7X",
+          "mode": "list",
+          "cachedResultName": "Notes",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN/tblJTmWlluswghs7X"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Title": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Title', ``, 'string') }}",
+            "Notes": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Notes', ``, 'string') }}",
+            "Category": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Category', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "f8f84878-8582-4902-8691-d5a18cfba609",
+      "name": "Create",
+      "type": "n8n-nodes-base.airtableTool",
+      "position": [
+        40,
+        200
+      ],
+      "typeVersion": 2.1,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "jNWGLwmFGYku7Ncy",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Note Taking Agent",
+        "height": 280,
+        "width": 460,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        -200
+      ],
+      "id": "df72b06e-9c01-48ef-b64e-e454ee69de39",
+      "name": "Sticky Note"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-06-19T15:29:39.000Z",
+  "versionId": "37a6e26d-2244-4cd8-8da9-a8a3fffea5f8"
+}
