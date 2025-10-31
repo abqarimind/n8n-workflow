@@ -1,0 +1,2194 @@
+{
+  "active": false,
+  "connections": {
+    "Topic Insights & Core Angle Synthesizer": {
+      "main": [
+        [
+          {
+            "node": "Competitor Identification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Data": {
+      "main": [
+        [
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SEvO Keyword & Content Strategy Synthesizer": {
+      "main": [
+        [
+          {
+            "node": "Deep-Dive Keyword Analyst",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Competitor Identification": {
+      "main": [
+        [
+          {
+            "node": "Authoritative Resource Link Finder Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "prepare data": {
+      "main": [
+        [
+          {
+            "node": "Create Document Article",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare email": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini 2.5 pro": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "SEvO Keyword & Content Strategy Synthesizer",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Deep-Dive Keyword Analyst",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini 2.5 Pro": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Topic Insights & Core Angle Synthesizer",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Competitor Identification",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Authoritative Resource Link Finder Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "keyword_deep_research": {
+      "ai_tool": [
+        [
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Deep-Dive Keyword Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "pro_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "simple_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "url_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Master Research & Synthesis Agent": {
+      "main": [
+        [
+          {
+            "node": "SEvO Keyword & Content Strategy Synthesizer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Submit Form": {
+      "main": [
+        [
+          {
+            "node": "🦺 Set Client Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔗 Set API Credentials": {
+      "main": [
+        [
+          {
+            "node": "Set Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🦺 Set Client Data": {
+      "main": [
+        [
+          {
+            "node": "🔗 Set API Credentials",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "SEvO Keyword & Content Strategy Synthesizer",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OUtput Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OUtput ParseR": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Deep-Dive Keyword Analyst",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deep-Dive Keyword Analyst": {
+      "main": [
+        [
+          {
+            "node": "Get All Research",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Research": {
+      "main": [
+        [
+          {
+            "node": "Topic Insights & Core Angle Synthesizer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Competitor Identification",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Authoritative Resource Link Finder Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pro_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Competitor Identification",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Authoritative Resource Link Finder Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "url_Search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Competitor Identification",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Authoritative Resource Link Finder Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Output Parse": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Competitor Identification",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "output parse": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Authoritative Resource Link Finder Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Output parse": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Topic Insights & Core Angle Synthesizer",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Authoritative Resource Link Finder Agent": {
+      "main": [
+        [
+          {
+            "node": "Get All Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "content_structure": {
+      "ai_tool": [
+        [
+          {
+            "node": "Outline Architect",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini 2.5 pRo": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Outline Architect",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Final Article Generation",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "HTML Format",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Data": {
+      "main": [
+        [
+          {
+            "node": "Article Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Article Brief": {
+      "main": [
+        [
+          {
+            "node": "Structure Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Outline Architect": {
+      "main": [
+        [
+          {
+            "node": "Final Article Generation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Final Article Generation": {
+      "main": [
+        [
+          {
+            "node": "HTML Format",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structure Input": {
+      "main": [
+        [
+          {
+            "node": "Outline Architect",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML Format": {
+      "main": [
+        [
+          {
+            "node": "Get all data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get all data": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "prepare data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Research HTML": {
+      "main": [
+        [
+          {
+            "node": "Create Research Document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Research Document": {
+      "main": [
+        [
+          {
+            "node": "Create HTML Article",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Document Article": {
+      "main": [
+        [
+          {
+            "node": "Create Research HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create HTML Article": {
+      "main": [
+        [
+          {
+            "node": "Prepare email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-02T12:51:37.019Z",
+  "id": "BTxypsyYf8e2mSob",
+  "isArchived": false,
+  "meta": null,
+  "name": "SEO Rank V8 Pro",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{JSON.stringify($json)}}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=## ROLE & GOAL\nYou are a Master Content Strategist and Editor-in-Chief, renowned for your ability to distill complex, multi-faceted research into a singular, powerful vision for content that dominates search rankings and captivates readers.\n\n## CONTEXT & MISSION\nYour input is a single, consolidated JSON object named `full_research_data`. This object contains three key sections: `original_campaign_details`, `initial_broad_research_synthesis`, and `deep_dive_keyword_analysis`.\n\nYour critical task is to synthesize insights from ALL THREE data sources to define the strategic direction for the upcoming article. Your analysis must be insightful, actionable, and laser-focused on creating the definitive #1 resource. You are looking for recurring themes, overarching user needs, and a unique angle that ties everything together.\n\n## EXECUTION PLAN\nBased on the entirety of the provided data, you MUST produce the following strategic elements:\n\n1.  **overarching_article_topic:** From the collective research, infer and state the primary, overarching topic the planned article should address.\n2.  **critical_themes_to_cover:** Analyze the key themes from both the broad and deep-dive research to identify the 3-5 most critical pillars that must form the main sections of the article.\n3.  **core_article_angle_uvp:** This is paramount. Define a compelling and unique Core Article Angle or Unique Value Proposition (UVP). This angle must differentiate the article, address the most significant user pain points, and offer a clear promise of value to the reader.\n4.  **primary_target_audience_persona:** Synthesize all available audience information to describe the primary target reader for this article in 2-3 sentences.\n5.  **top_user_pain_points_to_solve:** Review all research to list the top 3-5 most significant and recurring user problems that the article MUST comprehensively address.\n6.  **most_sought_after_solutions_to_detail:** Review all research to list the top 3-5 most important solutions or methods the article MUST explain.\n7.  **key_eeat_opportunities:** Identify the 2-3 most impactful E-E-A-T opportunities, leveraging the client's specific strengths and the authoritative sources discovered during research.\n\n**## FINAL OUTPUT INSTRUCTION**\n\nAfter completing all steps and tool invocations, your *only* response must be the complete structured output."
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        880,
+        420
+      ],
+      "id": "18d315b1-6404-4a76-ac34-1161f25a3f08",
+      "name": "Topic Insights & Core Angle Synthesizer"
+    },
+    {
+      "parameters": {
+        "content": "## 📚 Reference Links:\n🧠 Google AI Studio – https://ai.google.dev/aistudio \n🌐 Google Cloud API - https://cloud.google.com/apis/docs/overview\n🟡 Perplexity API - https://docs.perplexity.ai/home\n🟡 Tavily API - https://docs.tavily.com/documentation",
+        "height": 140,
+        "width": 500,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        260,
+        860
+      ],
+      "id": "95b3035c-c705-4981-ac07-9f1d81d03284",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c16b31cc-5ed1-4695-b62d-7466f2cb5980",
+              "name": "CampaignGoal",
+              "value": "={{ $('Submit Form').item.json['Campaign goal'] }}",
+              "type": "string"
+            },
+            {
+              "id": "56787f24-ee91-4555-8587-b8ac622715d0",
+              "name": "MainContentTopic",
+              "value": "={{ $('Submit Form').item.json['Main content topic'] }}",
+              "type": "string"
+            },
+            {
+              "id": "6d1df5cb-7303-4973-b3f8-4d0c29957b6d",
+              "name": "MasterContentFormat",
+              "value": "={{ $('Submit Form').item.json['Content Format'] }}",
+              "type": "string"
+            },
+            {
+              "id": "6d96176f-a149-43e6-8e19-ebc0e52c19b6",
+              "name": "SeedKeywords",
+              "value": "={{ $('Submit Form').item.json['Seed keyword'] }}",
+              "type": "string"
+            },
+            {
+              "id": "1cdb8275-2f42-4826-8756-a44aac55a417",
+              "name": "TargetWordCount",
+              "value": "={{ $('Submit Form').item.json['Target Word Count'] }}",
+              "type": "number"
+            },
+            {
+              "id": "95c97071-fbc8-4537-9ac8-7df93be5b193",
+              "name": "AudienceKnowledgeLevel",
+              "value": "={{ $('Submit Form').item.json['Target audience knowledge level'] }}",
+              "type": "string"
+            },
+            {
+              "id": "84713e9f-70e1-4fee-89b3-649213da01b9",
+              "name": "Internal Linking Pages",
+              "value": "={{ $('Submit Form').item.json['Internal Linking Pages'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1460,
+        -60
+      ],
+      "id": "5c463614-475d-4961-826f-48d78da5dc96",
+      "name": "Set Data"
+    },
+    {
+      "parameters": {
+        "content": "### API Documentation:\n🟡 https://docs.perplexity.ai/home\n🟡 https://docs.tavily.com/documentation",
+        "height": 80,
+        "width": 320,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1100,
+        120
+      ],
+      "id": "d19038af-dc64-40fc-9368-43f389bebc4e",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "# 🔵 Input & Research",
+        "height": 440,
+        "width": 2160
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        800,
+        -220
+      ],
+      "id": "0e74b1a7-1466-425d-b173-e4273fcbe0e5",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "# 🔵 Analysis & Verification",
+        "height": 480,
+        "width": 1120,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        800,
+        220
+      ],
+      "id": "5eb3040e-23cc-4072-8797-f1990f90eb90",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ JSON.stringify($json) }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You are an elite SEvO (Search Everywhere Optimization) Content Strategist. You are a master at interpreting raw research data and transforming it into a precise, actionable, and comprehensive content strategy.\n\n## CONTEXT & GOAL\n\nYour input is a complete JSON object from a research agent. This object contains pre-compiled data including initial_keyword_research, detailed research_summary_by_angle, and aggregated_insights.\n\nYour mission is to meticulously analyze this entire JSON input and synthesize it into a strategic report. This report will define the core keyword clusters and platform-specific content angles needed to create top-ranking, authoritative content.\n\nYou will only use the data provided in the input. Do not use external tools.\n\n## YOUR TASK\n\nAnalyze Input Data: Thoroughly examine the provided research data. Focus on initial_keyword_research (for search volumes and foundational terms), research_summary_by_angle (for user pain points, solutions, and key entities), and aggregated_insights (for themes, content gaps, and competitor signals).\n\nSynthesize Keyword Strategy: From your analysis, generate the master_keyword_clusters. Each keyword must have its search intent and a strategic rationale explaining why it was chosen based on the research data.\n\nDevelop SEvO Content Angles: For each platform provided in the input (e.g., Blog, YouTube, TikTok), create a tailored content recommendation. This includes the best keywords for that platform, relevant hashtags, a specific content angle that fills a gap or meets user needs, and a format/style tip.\n\n**## FINAL OUTPUT INSTRUCTION**\nAfter completing all steps, your *only* response must be the complete structured output."
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        2020,
+        -60
+      ],
+      "id": "e3ffb456-7b28-4e2e-b593-2c0b4f9de648",
+      "name": "SEvO Keyword & Content Strategy Synthesizer"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Client Name: {{ $('🦺 Set Client Data').item.json['Client/Brand Name'] }},\n---\nClient Website: {{ $('🦺 Set Client Data').item.json['Website url'] }},\n---\nMain Content Topic: {{ $('Set Data').item.json.MainContentTopic }},\n---\nOverarching article topic: {{ $json.output.overarching_article_topic }}\nCore Article Angle UVP: {{ $json.output.core_article_angle_uvp }}\n---\nCritical Themes to Cover: \n{{ $json.output.critical_themes_to_cover }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=## ROLE & GOAL\nYou are an Expert SEvO Competitor Intelligence Analyst. Your mission is to identify and analyze the top 3-5 organic competitor articles that directly vie for user attention on your planned topic. You will use the provided strategic brief to guide your search and analysis, producing a structured JSON report detailing their content angles, strengths, weaknesses, and strategic gaps our content can exploit.\n\n## CONTEXT\nYour input is a `strategic_brief` object containing the core vision for the article we plan to create. You will use the `overarching_article_topic` and `core_article_angle_uvp` to formulate your search queries.\n\n## YOUR AVAILABLE TOOLS\n- `simple_search`\n- `pro_search`\n- `url_search`\n\n**Input Format:** All tool inputs must be clean, natural language strings (or a URL for `url_search`). They must not contain symbols like '{[\"'\\/]}'.\n\n## MISSION PLAN\n\n1.  **Formulate Search Queries:** Based on the `overarching_article_topic` and `core_article_angle_uvp` from the brief, formulate 2-3 precise search queries to find the top-ranking competitive content.\n    *   *Example Query Idea:* `reviews of certified shower filters for eczema`\n    *   *Example Query Idea:* `science behind hard water effects on hair`\n2.  **Execute Searches & Initial Filtering:**\n    *   Internally decide which queries to run with `simple_search` and/or `pro_search`.\n    *   From the results, identify a preliminary list of 5-10 potential competitor URLs.\n    *   **Filter Out:** Your client's own domain, social media, forums, and pure e-commerce category pages. Prioritize in-depth articles and guides.\n3.  **Deep Analysis of Top Competitors:**\n    *   Select the 3-5 most promising URLs from your preliminary list for deep content analysis.\n    *   For EACH selected URL, execute `url_search` to analyze its content.\n4.  **Synthesize Findings & Final Report:**\n    *   Consolidate your findings into the final JSON report.\n    *   Your strategic recommendations must be based on the weaknesses you observed and should align with the unique angle (`core_article_angle_uvp`) provided in the brief.\n\n**## FINAL OUTPUT INSTRUCTION**\n\nAfter completing all research steps and tool invocations, your *only* response must be the complete structured output.\n",
+          "maxIterations": 20
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1240,
+        420
+      ],
+      "id": "23a8539f-6312-4bdf-a13b-2cb85e9852a6",
+      "name": "Competitor Identification"
+    },
+    {
+      "parameters": {
+        "content": "![n8n Creator Profile](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTNiMXQ5Zm13cHhya3oyMDhmdjh6cnpmdmkyMTlucWJheHg1ZXJpNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/2wh8AaMZ2jtRseDQ3C/giphy.gif)",
+        "height": 200,
+        "width": 180
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2720,
+        -200
+      ],
+      "id": "0d644edb-8bfa-4f70-b7f8-98f29d05505a",
+      "name": "Sticky Note21"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "39f4b0c3-ba94-434c-ba5b-347f94c2b6fe",
+              "name": "document_name",
+              "value": "={{ $('Get all data').item.json['Master Research & Synthesis'].initial_keyword_research.primary_keyword }} {{ $now.format('yyyyMMddHHmmss') }}\n\n",
+              "type": "string"
+            },
+            {
+              "id": "6f5b7a00-4604-40a8-8ef0-60ef230a8e24",
+              "name": "html_content",
+              "value": "={{ $('HTML Format').item.json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "999dde95-9c84-4c47-94e3-788644b95a7c",
+              "name": "drive_folder_id",
+              "value": "<<GOOGLE DRIvE FOLDER ID, MAKE SURE \"VIEW\" ACCESS IS ON>>",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1280,
+        800
+      ],
+      "id": "edb322b0-c337-4541-bbef-05f0a024b528",
+      "name": "prepare data"
+    },
+    {
+      "parameters": {
+        "content": "## 🚀 N8N Workflow: Quick Setup Guide\n### 1. Connect APIs: In the 'API Credentials' node, input API for Tavily  & Perplexity.\n_ _ _\n### 2. Check LLM: Ensure all language models are connected.\n_ _ _\n### 3. Connect Google Drive & Docs (http request nodes at the end).\n_ _ _\n### ⚠️ IMPORTANT: TEST EVERYTHING!\nBefore activating, test each node individually. To save credits, press 'P' on a successful node to Pin its data for the next steps.\n\n*The stars will guide your way ✨*",
+        "height": 260,
+        "width": 640,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        120,
+        480
+      ],
+      "id": "0faa5881-ba18-44d7-a396-d0f7760bbc98",
+      "name": "Sticky Note23"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Submit Form').item.json['Email (to send the research & article)'] }}",
+        "subject": "=Research & Article ready - {{ $('Set Data').item.json.MainContentTopic }}",
+        "emailType": "text",
+        "message": "=Heeeey!\n\nThe content's all set! 🎉 It's ready for your review.\nCheck it out! I hope you like it ^_^\n\n    * 🌐 Article (html):\n{{ $json.html_article_file }}\n\n    * 📄 Article (doc):\n{{ $json.doc_article_file }}\n\n    * 🌐 Research (html):\n{{ $json.html_research_file }}\n\n    * 📄 Research (doc):\n{{ $json.doc_research_file }}\n\n\nBest,\nRankenstein",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2740,
+        800
+      ],
+      "id": "1750c424-f4b0-4466-b792-f71b4ea221ff",
+      "name": "Gmail",
+      "webhookId": "fe0f3d8a-1f72-4c5e-b81f-11e553d8605c"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "83e1e91d-4b86-4ae6-8866-cf358592dcaa",
+              "name": "html_article_file",
+              "value": "=https://drive.google.com/file/d/{{ $json.id }}/view?usp=sharing",
+              "type": "string"
+            },
+            {
+              "id": "a8663637-695e-4d15-a107-67c0fc8cb705",
+              "name": "doc_article_file",
+              "value": "=https://docs.google.com/document/d/{{ $('Create Document Article').item.json.id }}/edit?usp=sharing",
+              "type": "string"
+            },
+            {
+              "id": "c6a4fa37-3eb7-460d-97c9-be9949b47e71",
+              "name": "doc_research_file",
+              "value": "=https://drive.google.com/file/d/{{ $('Create Research Document').item.json.id }}/view?usp=sharing",
+              "type": "string"
+            },
+            {
+              "id": "17289a8b-8e24-4dbb-808a-196477758dcd",
+              "name": "html_research_file",
+              "value": "=https://drive.google.com/file/d/{{ $('Create Research HTML').item.json.id }}/view?usp=sharing",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2500,
+        800
+      ],
+      "id": "87080f62-5cba-422a-9f3a-9fa0865cc889",
+      "name": "Prepare email"
+    },
+    {
+      "parameters": {
+        "content": "# 🔵 Doc Creation and Email Notification",
+        "height": 300,
+        "width": 2160,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        800,
+        700
+      ],
+      "id": "e94a3f33-0aa6-4a23-9d49-b6d03b4c7bfb",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "### How to connect your google credentials:\nhttps://www.youtube.com/watch?v=3Ai1EPznlAc",
+        "height": 80,
+        "width": 380,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1860,
+        980
+      ],
+      "id": "42d115c5-6c36-4744-a3d4-fa1de4313964",
+      "name": "Sticky Note25"
+    },
+    {
+      "parameters": {
+        "content": "  ![n8n Creator Profile](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTluOGx3NWxxc2NmbDV3ZTB6bm90b3V6Y2V2bG5jazFlcGE3MHduaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/h7uTwqEHysbd2lhyDP/giphy.gif)",
+        "height": 220,
+        "width": 430,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        -100
+      ],
+      "id": "78e54c84-488e-4208-be22-3b1c7ef8f6e0",
+      "name": "Sticky Note26"
+    },
+    {
+      "parameters": {
+        "content": "![n8n Creator Profile](https://pub-6e4b77b888bc4422963711caabeb1953.r2.dev/download%20(2).png)",
+        "height": 600,
+        "width": 660,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        100,
+        -180
+      ],
+      "id": "63679e23-e215-4555-b4eb-4a5ea1ac23a2",
+      "name": "Sticky Note15"
+    },
+    {
+      "parameters": {
+        "content": "### Rankenstein is an autonomous SEvO engine that transforms a single campaign goal into a comprehensive strategic analysis and a publication-ready article. By leveraging a multi-agent system, it dissects the competitive landscape, uncovers high-value keyword opportunities, and synthesizes all findings into a final, data-driven draft designed to dominate search rankings.",
+        "height": 140,
+        "width": 660,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        100,
+        320
+      ],
+      "id": "7ce2ca37-095b-45c9-a17c-12c6836789c9",
+      "name": "Sticky Note22"
+    },
+    {
+      "parameters": {
+        "content": "  ![n8n Creator Profile](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTluOGx3NWxxc2NmbDV3ZTB6bm90b3V6Y2V2bG5jazFlcGE3MHduaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/h7uTwqEHysbd2lhyDP/giphy.gif)",
+        "height": 200,
+        "width": 210,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1480,
+        760
+      ],
+      "id": "a0423cf2-8047-4e12-9692-47fefdc24866",
+      "name": "Sticky Note28"
+    },
+    {
+      "parameters": {
+        "content": "  ![n8n Creator Profile](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTluOGx3NWxxc2NmbDV3ZTB6bm90b3V6Y2V2bG5jazFlcGE3MHduaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/h7uTwqEHysbd2lhyDP/giphy.gif)",
+        "width": 160,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2760,
+        400
+      ],
+      "id": "6659843a-9518-4b21-989e-03e42132bb13",
+      "name": "Sticky Note33"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro",
+        "options": {
+          "temperature": 0.8
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2120,
+        60
+      ],
+      "id": "fea112c5-e302-415a-a86e-7f9ce8cdb0dc",
+      "name": "Gemini 2.5 pro"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro",
+        "options": {
+          "temperature": 0.8
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        980,
+        540
+      ],
+      "id": "8a4335f1-7d53-448d-9d88-c6a26e4070b4",
+      "name": "Gemini 2.5 Pro"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.perplexity.ai/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "=Authorization",
+              "value": "=Bearer {{ $('🔗 Set API Credentials').first().json['Perplexity API Key'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sonar\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a Local SERP Analyst. Your function is to provide a concise, factual summary of the top search results for a local query. Identify the primary companies and the type of content ranking (e.g., service pages, directories). Be objective and data-focused.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $fromAI('simple_search') }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1640,
+        60
+      ],
+      "id": "0d2ce077-2bd1-43b4-82bd-05eccbf7f50d",
+      "name": "simple_search"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.perplexity.ai/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('🔗 Set API Credentials').first().json['Perplexity API Key'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sonar-pro\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are an investigative researcher. Answer the user's specific question directly and factually based on web search results. CITE YOUR SOURCES. Provide only the direct answer and its source.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $fromAI('pro_search') }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1820,
+        60
+      ],
+      "id": "c028a727-f812-4f16-a682-8398b448374e",
+      "name": "pro_search"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.perplexity.ai/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('🔗 Set API Credentials').first().json['Perplexity API Key'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sonar-deep-research\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are an expert SEO research assistant. Your sole purpose is to perform a deep and comprehensive keyword analysis based on the user's query. Provide a wide-ranging list of related keywords, long-tail keywords, common questions, search intent data, and an analysis of the top-ranking content. Focus on providing a large volume of raw data and facts. The user, an expert analyst, will handle the final strategic filtering and interpretation.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $fromAI('deep_keyword_research') }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        2560,
+        60
+      ],
+      "id": "a9e16e39-5c01-40df-a8dd-0340d44954de",
+      "name": "keyword_deep_research"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/extract",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('🔗 Set API Credentials').first().json['Tavily API Key'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "urls",
+              "value": "={{ $fromAI('url_extract') }}"
+            },
+            {
+              "name": "include_images",
+              "value": "false"
+            },
+            {
+              "name": "extract_depth",
+              "value": "advanced"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        2380,
+        60
+      ],
+      "id": "914be505-7c48-4026-81bb-47a82738d015",
+      "name": "url_search"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Request data:\nCampaign Goal: {{ $json.CampaignGoal }}\nMain Content Topic: {{ $json.MainContentTopic }}\nContent Format: {{ $json.MasterContentFormat }}\nSeed Keywords: {{ $json.SeedKeywords }}\nAudience Knowledge Level: {{ $json.AudienceKnowledgeLevel }}\n---\nClient Data:\nClient/Brand Name: {{ $('🦺 Set Client Data').item.json['Client/Brand Name'] }}\nWebsite url: {{ $('🦺 Set Client Data').item.json['Website url'] }}\nBrand voice tone: {{ $('🦺 Set Client Data').item.json['Brand voice tone'] }}\nEEAT Highlights: {{ $('🦺 Set Client Data').item.json['EEAT highlights'] }}\nInternal Linking Pages:\n{{ $json['Internal Linking Pages'] }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are an expert research analyst system operating in an n8n automation workflow.\n\n## PRIMARY DIRECTIVE\nExecute comprehensive research using the provided tools. Output findings that map directly to the structured schema - no explanations, no commentary, only data.\n\n## RESEARCH EXECUTION PLAN\n\n**STEP 1: Keyword Research**\nTool: keyword_deep_research\nInput: Extract primary keyword from \"Main Content Topic\" + \"Seed Keywords\"\nPurpose: Establish research foundation\n\n**STEP 2: Multi-Angle Analysis**\nDefine 3-4 angles → Execute for each:\n- Tool: simple_search (broad insights)\n- Tool: pro_search (deep insights)\nPurpose: Comprehensive market understanding\n\n**STEP 3: Competitor Analysis**\nTool: simple_search → Find 5 competitor URLs\nTool: url_search → Analyze each competitor\nPurpose: Competitive intelligence\n\n## CRITICAL TOOL PARAMETERS\nEXACT parameter names required:\n- simple_search → param: simple_search\n- pro_search → param: pro_search  \n- keyword_deep_research → param: keyword_deep_research\n- url_search → param: url_search\n\nTools Input format: Clean text strings, no special characters like {['\"\"']} (except url_search, urls for 'url_search')\n\n## DATA QUALITY STANDARDS\n- Factual accuracy: Verify across sources\n- Relevance: Align with campaign goals\n- Completeness: Fill all applicable schema fields\n- Objectivity: No opinions or recommendations unless schema requires\n\nFINAL REMINDER: Your output feeds directly into a structured parser. Provide only the researched data that maps to the schema fields. No preambles, no conclusions, no explanations.",
+          "maxIterations": 40
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1640,
+        -60
+      ],
+      "id": "c6f32a5c-1e3f-4d44-b42a-e1189077baa1",
+      "name": "Master Research & Synthesis Agent"
+    },
+    {
+      "parameters": {
+        "formTitle": "Search Everywhere Optimization (SEvO) Strategy",
+        "formDescription": "SEVo is a digital marketing strategy that ensures your brand, content, and products are discoverable across all platforms where users search—not just traditional search engines like Google, but also social media, e-commerce marketplaces, voice assistants, video platforms, and AI tools like ChatGPT—by optimizing content specifically for each platform’s unique search behaviors and algorithms",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Campaign goal",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Increase Brand Awareness"
+                  },
+                  {
+                    "option": "Drive Website Traffic"
+                  },
+                  {
+                    "option": "Generate Leads"
+                  },
+                  {
+                    "option": "Boost Sales/Conversions"
+                  },
+                  {
+                    "option": "Improve SEO Rankings"
+                  },
+                  {
+                    "option": "Build Thought Leadership"
+                  },
+                  {
+                    "option": "Customer Education"
+                  },
+                  {
+                    "option": "Product Launch"
+                  },
+                  {
+                    "option": "Crisis Management"
+                  },
+                  {
+                    "option": "Other"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Main content topic",
+              "placeholder": "e.g., Benefits of Filtered Water"
+            },
+            {
+              "fieldLabel": "Content Format",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Blog Post / Article"
+                  },
+                  {
+                    "option": "How-to Guide"
+                  },
+                  {
+                    "option": "Case Study"
+                  },
+                  {
+                    "option": "Product Review"
+                  },
+                  {
+                    "option": "White Paper"
+                  },
+                  {
+                    "option": "Newsletter"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Seed keyword",
+              "placeholder": "e.g., Shower Filter",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Target Word Count",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1000 Words"
+                  },
+                  {
+                    "option": "1500 Words"
+                  },
+                  {
+                    "option": "2000 Words"
+                  },
+                  {
+                    "option": "2500 Words"
+                  },
+                  {
+                    "option": "3000 Words"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Target audience knowledge level",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Beginner (Little to no prior knowledge)"
+                  },
+                  {
+                    "option": "Intermediate (Some familiarity)"
+                  },
+                  {
+                    "option": "Advanced (High expertise)"
+                  },
+                  {
+                    "option": "Mixed Audience"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Internal Linking Pages",
+              "placeholder": "https://example.com"
+            },
+            {
+              "fieldLabel": "Email (to send the research & article)",
+              "placeholder": "example@gmail.com",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        860,
+        -60
+      ],
+      "id": "5c1c042f-328b-427f-b6e3-6501af24642e",
+      "name": "Submit Form",
+      "webhookId": "8867867c-f205-4237-a51c-db85a23e3571"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a542ec5e-0afb-4382-9195-e9cc48040dd2",
+              "name": "Tavily API Key",
+              "value": "<<YOUR API KEY>>",
+              "type": "string"
+            },
+            {
+              "id": "8e4bece0-4b34-423b-86d2-826b2eaecb7d",
+              "name": "Perplexity API Key",
+              "value": "<<YOUR API KEY>>",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1260,
+        -60
+      ],
+      "id": "ae40bb0d-ac09-4dd9-8382-336e9978340a",
+      "name": "🔗 Set API Credentials"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "affe2c16-7e54-49f7-ab77-1e3ca0e55162",
+              "name": "Client/Brand Name",
+              "value": "Rankenstein",
+              "type": "string"
+            },
+            {
+              "id": "7f4d534a-d98e-46b3-8851-1179a467adbf",
+              "name": "Website url",
+              "value": "https://rankenstein.org/",
+              "type": "string"
+            },
+            {
+              "id": "e5e9679e-c3c0-402f-be9a-23ac65127e29",
+              "name": "Brand voice tone",
+              "value": "Confident, expert, and solutions-driven  Straight-talking, no-nonsense",
+              "type": "string"
+            },
+            {
+              "id": "82e9b5ea-31f6-4045-a3cf-eb89092718e9",
+              "name": "EEAT highlights",
+              "value": "=10 years of expertise in the SEO Field.\n5+ years of experience with ai & automation.",
+              "type": "string"
+            },
+            {
+              "id": "ef7fa28f-91cd-4b47-a55d-6d897b79bd3c",
+              "name": "Internal linking pages",
+              "value": "={{ $json['Internal Linking Pages'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1060,
+        -60
+      ],
+      "id": "a34b394a-4130-457b-adec-3bb816156bab",
+      "name": "🦺 Set Client Data"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"master_keyword_clusters\": {\n    \"core_topic_keywords\": [\n      {\n        \"keyword\": \"filtered showerhead\",\n        \"search_intent\": \"Informational/Commercial\",\n        \"strategic_rationale\": \"This is the primary topic with high search volume. It's the central pillar for all content, targeting users at the top and middle of the funnel.\"\n      },\n      {\n        \"keyword\": \"hard water filter\",\n        \"search_intent\": \"Informational/Problem-Aware\",\n        \"strategic_rationale\": \"Directly addresses a primary pain point (hard water) identified in the research, capturing users actively seeking a solution.\"\n      }\n    ],\n    \"long_tail_specific_queries\": [\n      {\n        \"keyword\": \"do filtered shower heads help with eczema\",\n        \"search_intent\": \"Informational/Solution-Seeking\",\n        \"strategic_rationale\": \"A specific user question from PAA data. Answering this directly positions the brand as an expert resource for a high-pain-point audience.\"\n      },\n      {\n        \"keyword\": \"best shower filter for dry skin\",\n        \"search_intent\": \"Commercial/Transactional\",\n        \"strategic_rationale\": \"Targets users who have identified their problem and are now comparing products, indicating high purchase intent.\"\n      }\n    ],\n    \"user_pain_point_keywords\": [\n      {\n        \"keyword\": \"reduce chlorine in shower water\",\n        \"search_intent\": \"Problem-Aware/Informational\",\n        \"strategic_rationale\": \"Addresses the core scientific reason for skin/hair issues found in the research. Targets users who understand the root cause.\"\n      },\n      {\n        \"keyword\": \"stop hair color fading from water\",\n        \"search_intent\": \"Problem-Aware/Solution-Seeking\",\n        \"strategic_rationale\": \"A specific, high-value pain point for an audience segment that invests in hair treatments. Offers a clear ROI for the user.\"\n      }\n    ],\n    \"competitive_landscape_keywords\": [\n      {\n        \"keyword\": \"jolie shower head alternative\",\n        \"search_intent\": \"Commercial/Comparative\",\n        \"strategic_rationale\": \"Targets users aware of a major competitor (Jolie) but seeking other options, potentially due to price or features. This allows for direct comparison.\"\n      },\n      {\n        \"keyword\": \"aquabliss vs filter oasis\",\n        \"search_intent\": \"Commercial/Comparative\",\n        \"strategic_rationale\": \"Creates an opportunity for a direct, feature-by-feature comparison against another key competitor, capturing bottom-of-funnel traffic.\"\n      }\n    ]\n  },\n  \"sevo_content_angle_recommendations\": [\n    {\n      \"platform\": \"Main Website Blog\",\n      \"suggested_keywords_for_platform\": [\n        \"best shower filter for hard water\",\n        \"do filtered shower heads help with eczema\",\n        \"kdf vs carbon filter\"\n      ],\n      \"suggested_hashtags\": [],\n      \"proposed_content_angle\": \"The Ultimate Guide to Choosing a Shower Filter for Your Home. This comprehensive article should address the science behind filtration (KDF, Carbon), help users diagnose their water type (hard vs. soft), and provide a detailed breakdown of benefits for specific conditions like eczema and dry skin, leveraging the client's certifications as proof points.\",\n      \"content_format_and_style_tip\": \"Create a long-form, data-driven article featuring an interactive 'Find Your Filter' quiz. Use clear headings, bullet points, and high-quality images. Embed customer testimonials and links to the scientific studies mentioned in the research.\"\n    },\n    {\n      \"platform\": \"YouTube\",\n      \"suggested_keywords_for_platform\": [\n        \"filtered shower head review\",\n        \"shower filter installation\",\n        \"hard water hair before and after\"\n      ],\n      \"suggested_hashtags\": [\n        \"#showerfilter\",\n        \"#hardwater\",\n        \"#haircare\",\n        \"#skincare\"\n      ],\n      \"proposed_content_angle\": \"We Tested a Filtered Showerhead for 30 Days: SEE The Results! This video should visually demonstrate the 'before and after' effects on hair (frizz, shine) and skin. Include a simple installation guide and a clear explanation of how the filter works to combat chlorine and minerals.\",\n      \"content_format_and_style_tip\": \"Create a visually engaging, fast-paced video (5-7 minutes). Use on-screen text callouts to highlight key benefits. Feature a relatable host and show close-ups of the water flow and filter components.\"\n    },\n    {\n      \"platform\": \"TikTok\",\n      \"suggested_keywords_for_platform\": [\n        \"tiktok made me buy it shower filter\",\n        \"what's in my tap water\",\n        \"dry skin hack\"\n      ],\n      \"suggested_hashtags\": [\n        \"#tiktokmademebuyit\",\n        \"#beautytips\",\n        \"#skinhacks\",\n        \"#cleantok\"\n      ],\n      \"proposed_content_angle\": \"The Gross Reason Your Skin is So Dry. A short, impactful video showing a water quality test (e.g., chlorine test strips turning a dark color) on regular tap water vs. water from the filtered showerhead. The contrast provides a 'shock factor' that drives engagement and highlights the problem.\",\n      \"content_format_and_style_tip\": \"A quick, vertical video (under 60 seconds) using trending audio. Focus on a single, powerful visual and use bold, easy-to-read text overlays. End with a clear call-to-action linking to the product.\"\n    }\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        2120,
+        -180
+      ],
+      "id": "5ecbaa7f-8764-4261-bbe4-f623d4ed762b",
+      "name": "Output Parser"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"initial_keyword_research\": {\n    \"primary_keyword\": \"Hard Water Effects\",\n    \"related_terms\": [\"hard water hair loss\", \"shower filter for dry skin\"],\n    \"user_questions\": [\"Does hard water cause acne?\"]\n  },\n  \"research_summary_by_angle\": [\n    {\n      \"research_angle\": \"User Pain Points\",\n      \"synthesized_summary\": \"Users consistently report issues like dry, itchy skin, dull and brittle hair, and exacerbation of eczema after showering in hard water areas. The primary complaints center around mineral buildup (limescale) and the effects of chlorine.\",\n      \"extracted_elements\": {\n        \"key_entities_mentioned\": [\"limescale\", \"chlorine\", \"eczema\"],\n        \"key_pain_points_addressed\": [\"dry skin\", \"itchy scalp\", \"brittle hair\", \"faded hair color\"],\n        \"key_solutions_or_benefits_highlighted\": [\"water softeners\", \"clarifying shampoos\", \"shower head filters\"],\n        \"prominent_questions_raised\": [\"How to know if I have hard water?\", \"Can hard water cause hair loss?\"],\n        \"notable_statistics_or_data_points\": [\"Over 85% of US homes have hard water.\"],\n        \"relevant_source_urls\": [\n          \"https://www.healthline.com/health/hard-water-hair\",\n          \"https://www.medicalnewstoday.com/articles/hard-water-and-skin\"\n        ]\n      }\n    }\n  ],\n  \"aggregated_insights\": {\n    \"overall_main_themes\": [\n      \"Mineral Buildup & Residue\",\n      \"Chlorine and its Irritating Effects\",\n      \"Skin & Hair Health Impact\"\n    ],\n    \"all_unique_paa_questions\": [\n      \"What are the signs of hard water on skin?\",\n      \"Can you reverse hard water hair damage?\"\n    ],\n    \"all_unique_related_searches\": [\n      \"best shower filter for hard water\",\n      \"hard water vs soft water\"\n    ],\n    \"potential_content_gaps_or_opportunities\": [\n      \"Detailed comparison of different filter technologies (KDF, Vitamin C, Carbon).\",\n      \"Content focused on specific regional hard water issues (e.g., 'Texas hard water solutions').\"\n    ],\n    \"emerging_trends_or_innovations\": [\n      \"Shower filters incorporating aromatherapy.\",\n      \"Smart filters that track water usage and filter life.\"\n    ],\n    \"client_brand_mentions_context\": [\n      {\n        \"brand\": \"Filter Oasis\",\n        \"context\": \"Frequently referenced for its vitamin C filters designed to reduce chlorine impact on skin.\"\n      }\n    ],\n    \"key_competitor_signals\": [\n      {\n        \"competitor_name\": \"AquaBliss\",\n        \"context_snippet\": \"The AquaBliss SF220 is often reviewed as a top choice for its multi-stage filtration...\",\n        \"source_url\": \"https://www.forbes.com/vetted/best-shower-filters/\",\n        \"source_tool\": \"google_search\"\n      }\n    ]\n  }\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        1740,
+        -180
+      ],
+      "id": "bc496f0d-c0a9-4150-9d63-017952b25a18",
+      "name": "OUtput Parser"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"top_10_keyword_opportunities\": [\n    {\n      \"keyword\": \"string\",\n      \"search_intent\": \"Informational | Commercial | Transactional\",\n      \"estimated_monthly_volume\": \"number\",\n      \"competition_level\": \"Low | Medium | High\",\n      \"strategic_value_to_client\": \"string // Explain WHY this keyword is valuable. E.g., 'Targets users with eczema, a core pain point, and allows us to leverage our testing certifications as a trust signal.'\",\n      \"opportunity_score\": \"number // Score from 1-10\"\n    }\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        2480,
+        -180
+      ],
+      "id": "fdbb10e5-bcaf-418b-86a0-3e08b8ce6168",
+      "name": "OUtput ParseR"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Primary Keyword: {{ $('Master Research & Synthesis Agent').item.json.output.initial_keyword_research.primary_keyword }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=## ROLE & GOAL\n\nYou are a world-class SEO strategist and data analyst specializing in identifying high-value keyword opportunities. Your mission is to take a single seed keyword, execute a deep research query, and from the results, identify the **top 10 most valuable and winnable keywords** for your client, \"Filter Oasis\". Your final output MUST be a single, valid JSON object containing only these top 10 opportunities.\n\n## CONTEXT\n\n*   **Your Client:** {{ $('🦺 Set Client Data').item.json['Client/Brand Name'] }}\n*   **Client's Unique Strengths (E-E-A-T):** \n{{ $('🦺 Set Client Data').item.json['EEAT highlights'] }}\n*   **Core Audience Pain Points:** \n{{ $('Master Research & Synthesis Agent').item.json.output.research_summary_by_angle[0].extracted_elements.key_pain_points_addressed }}\n\n*   **Seed Keyword for Research:** {{ $('Set Data').item.json.SeedKeywords }}\n\n## CRITICAL RULE: TOOL QUERY FORMATTING\n\nThe query sent to your tool MUST be a clean, simple, natural language string. It CANNOT contain special characters like quotes (`\"`), brackets (`[]`), or colons (`:`).\n*   **WRONG QUERY:** `\"deep keyword research\" for [filtered showerhead benefits]`\n*   **CORRECT QUERY:** `deep keyword research for filtered showerhead benefits`\n\n## MISSION PLAN\n\n1.  **Execute Research:** Call your single tool, `Deep_keyword_research`, with a clean query based on the seed keyword to gather a comprehensive list of keywords, search volumes, competition data, and SERP details.\n2.  **Analyze & Filter:** From the large list of keywords returned by your tool, you must select the **10 best opportunities**. A \"best opportunity\" is a keyword with clear commercial or informational intent that directly addresses a core audience pain point and has low-to-medium competition.\n3.  **Conduct Detailed Analysis:** For each of the 10 keywords you selected, you must perform a detailed analysis to determine the value for each field in the final JSON report.\n4.  **Calculate Opportunity Score:** The \"Score\" is the most important field. Calculate it on a 1-10 scale, where 10 is the best possible opportunity. Base the score on these factors:\n    *   **Higher Score:** Lower competition, high relevance to Filter Oasis's unique strengths (e.g., keywords about *certified* or *tested* filters), directly targets a known pain point.\n    *   **Lower Score:** Higher competition, more generic, less relevance to the client's specific value proposition.\n5.  **Final Report:** Assemble your findings for the top 10 keywords into the final structure defined.\n\n**## FINAL OUTPUT INSTRUCTION**\nAfter completing all research steps and tool invocations, your *only* response must be the complete structured output.\nRefer to the schema you are programmed to follow for the exact structure.",
+          "maxIterations": 30
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        2380,
+        -60
+      ],
+      "id": "a7065d4a-492c-4030-8438-2ca98d3e7f55",
+      "name": "Deep-Dive Keyword Analyst"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "10c355bc-15cf-49f6-8495-8515e65ec060",
+              "name": "Deep-Dive Keyword Analyst",
+              "value": "={{ $json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "7ade0622-5738-43df-99c5-c0f976d0df2a",
+              "name": "SEvO Keyword & Content Strategy Synthesizer",
+              "value": "={{ $('SEvO Keyword & Content Strategy Synthesizer').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "9c7c5ca5-f790-4e51-9aaa-3de68829818a",
+              "name": "Master Research & Synthesis Agent",
+              "value": "={{ $('Master Research & Synthesis Agent').item.json.output }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2760,
+        40
+      ],
+      "id": "f6467d61-b1d8-4181-bb6f-3ef8b9b74a5d",
+      "name": "Get All Research"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.perplexity.ai/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "=Authorization",
+              "value": "=Bearer {{ $('🔗 Set API Credentials').first().json['Perplexity API Key'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sonar\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a Local SERP Analyst. Your function is to provide a concise, factual summary of the top search results for a local query. Identify the primary companies and the type of content ranking (e.g., service pages, directories). Be objective and data-focused.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $fromAI('simple_search') }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1240,
+        540
+      ],
+      "id": "0e01e3bb-5fbc-4a03-bb6a-c287ce3f5caf",
+      "name": "Simple_search"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.perplexity.ai/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('🔗 Set API Credentials').first().json['Perplexity API Key'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sonar-pro\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are an investigative researcher. Answer the user's specific question directly and factually based on web search results. CITE YOUR SOURCES. Provide only the direct answer and its source.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $fromAI('pro_search') }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1420,
+        540
+      ],
+      "id": "c2e7f24c-cbad-44a5-8585-1bbef74692ab",
+      "name": "Pro_search"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.tavily.com/extract",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('🔗 Set API Credentials').first().json['Tavily API Key'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "urls",
+              "value": "={{ $fromAI('url_extract') }}"
+            },
+            {
+              "name": "include_images",
+              "value": "false"
+            },
+            {
+              "name": "extract_depth",
+              "value": "advanced"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1700,
+        540
+      ],
+      "id": "605f7605-0141-4915-a799-3f697dd2784a",
+      "name": "url_Search"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"overall_competitor_landscape_summary\": \"string // A 1-2 sentence summary of the competitive intensity and common strategies observed.\",\n  \"top_identified_competitors\": [\n    {\n      \"competitor_name\": \"string // Brand/Site Name (if identifiable, otherwise domain)\",\n      \"url\": \"string // The competitor's article URL\",\n      \"content_main_angle_and_focus\": \"string // What is their core message/angle for this piece?\",\n      \"key_subtopics_covered_by_competitor\": [\"string\"],\n      \"observed_strengths\": [\"string // e.g., 'Comprehensive data backed by studies,' 'Excellent visuals,' 'Strong author E-E-A-T'\"],\n      \"observed_weaknesses_or_gaps\": [\"string // e.g., 'Outdated information,' 'Lacks practical examples,' 'Misses the topic of certification entirely'\"]\n    }\n  ],\n  \"strategic_recommendations_to_outperform\": [\n    \"string // e.g., 'Emphasize our client's unique testing certifications, as no competitor provides this level of proof.'\",\n    \"string // e.g., 'Create a detailed section on 'The Science of Filtration,' as top competitors only mention it superficially.'\",\n    \"string // e.g., 'Use higher quality before-and-after visuals for hair/skin to outperform the stock imagery used by others.'\"\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        1340,
+        300
+      ],
+      "id": "5d987b98-70af-485f-8d34-738beb96d5b5",
+      "name": "Output Parse"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"approved_authoritative_external_links\": [\n    {\n      \"url\": \"string // The full, verified URL\",\n      \"title\": \"string // The actual page title from the source\",\n      \"source_name\": \"string // The name of the organization (e.g., 'U.S. Environmental Protection Agency')\",\n      \"brief_justification_for_inclusion\": \"string // A 1-2 sentence explanation of why this source is authoritative and relevant. e.g., 'Official .gov resource providing research-backed data on water contaminants relevant to shower quality.'\",\n      \"suggested_contextual_anchor_text\": \"string // A concise, descriptive anchor text. e.g., 'EPA guidelines on water contaminants'\"\n    }\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        1700,
+        300
+      ],
+      "id": "a2abeece-316d-4502-9bff-72d38e151458",
+      "name": "output parse"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"overarching_article_topic\": \"string // A clear, concise statement of the article's main subject. e.g., 'The Comprehensive Impact of Hard Water on Skin and Hair Health and the Role of Certified Filtration Systems.'\",\n  \"critical_themes_to_cover\": [\n    \"string // e.g., 'The Science of Water Contaminants (Chlorine & Minerals)'\",\n    \"string // e.g., 'Proven Health & Beauty Benefits of Filtration'\",\n    \"string // e.g., 'Understanding and Choosing the Right Filter Technology'\",\n    \"string // e.g., 'The Importance of Third-Party Certification for Trust'\"\n  ],\n  \"core_article_angle_uvp\": \"string // The unique value proposition. e.g., 'Beyond Marketing Claims: A Data-Driven Guide to How Certified Shower Filters Protect Your Hair and Skin, Featuring Verifiable Testing and Real-World Results.'\",\n  \"primary_target_audience_persona\": \"string // 2-3 sentence description. e.g., 'Health-conscious individuals likely experiencing persistent skin or hair issues. They are beginners on the topic of water filtration but are analytical and value scientific evidence and trusted certifications over hype.'\",\n  \"top_user_pain_points_to_solve\": [\n    \"string // e.g., 'Persistent dry, itchy, or sensitive skin (eczema, acne)'\",\n    \"string // e.g., 'Dull, frizzy, or brittle hair that breaks easily'\",\n    \"string // e.g., 'Costly color-treated hair fading too quickly'\"\n  ],\n  \"most_sought_after_solutions_to_detail\": [\n    \"string // e.g., 'Effective removal of chlorine and its irritating effects'\",\n    \"string // e.g., 'Neutralizing the negative impact of hard water minerals (limescale)'\",\n    \"string // e.g., 'Finding a trustworthy, certified, and tested filtration product'\"\n  ],\n  \"key_eeat_opportunities\": [\n    \"string // e.g., 'Leverage client's specific testing (Centre Testing Int., Hechuan) as a key differentiator against competitors who only cite general NSF standards.'\",\n    \"string // e.g., 'Structure the article to directly answer the top 5 'People Also Ask' questions discovered in the research, establishing topical authority.'\",\n    \"string // e.g., 'Cite the health.com and dermatology-focused articles found in the research to build credibility with external, authoritative sources.'\"\n  ]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        980,
+        300
+      ],
+      "id": "b0aedfd3-b17f-4a0d-89ed-e8ea767858a1",
+      "name": "Output parse"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=overarching article topic: {{ $('Topic Insights & Core Angle Synthesizer').first().json.output.overarching_article_topic }}\n---\ncritical themes to explore: {{ $('Topic Insights & Core Angle Synthesizer').item.json.output.critical_themes_to_cover }}\n---\ncompetitor urls to avoid\": {{ $('Competitor Identification').item.json.output.top_identified_competitors.map(x => x.url) }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=## ROLE & GOAL\nYou are an Expert E-E-A-T Resource Curation Specialist and Digital Librarian. Your mission is to identify 3-5 highly authoritative, non-commercial, and non-competitor external URLs that would serve as excellent citations or \"further reading\" for an article on the provided topic.\n\n## CONTEXT\nYour input is a `resource_finding_brief` object. You will use the `overarching_article_topic` and `critical_themes_to_explore` to formulate search queries. You MUST avoid any URLs from the `competitor_urls_to_avoid` list.\n\n## YOUR AVAILABLE TOOLS\n- `simple_search`\n- `pro_search`\n- `url_search`\n\n**Input Format:** All tool inputs must be clean, natural language strings (or a URL for `url_search`). They must not contain symbols like '{[\"'\\/]}'.\n\n## MISSION PLAN\n\n1.  **Formulate Search Queries:** Create 2-3 precise queries for `simple_search` or `pro_search`. Focus on finding official informational pages from government bodies (.gov), academic institutions (.edu), and respected non-profit organizations (.org). The input querry in 'simple_search' and 'pro_search' should be natural, like human written, without any symbols [{'\"\"'}].\n    *   *Example Query:* `scientific study hard water effects on atopic dermatitis site:.gov`\n    *   *Example Query:* `NSF ANSI 177 standard for chlorine reduction explained`\n2.  **Search & Filter:** Execute your queries. From the results, create a preliminary list of 5-10 promising and unique URLs. Immediately discard any URLs matching the domains listed in `competitor_urls_to_avoid`.\n3.  **Verify with `url_search` (Critical Step):**\n    *   For EACH promising URL, you MUST execute `url_search` to analyze its content and verify that it meets these strict criteria:\n        *   **Authoritative:** Is the source a government agency (e.g., EPA, CDC), academic institution, or leading non-profit?\n        *   **Non-Commercial:** Is the page's primary purpose informational/educational? Does it avoid heavily promoting a specific product?\n        *   **Relevant:** Does the content provide substantial, trustworthy information directly related to the `critical_themes_to_explore`?\n4.  **Synthesize Final Report:** After diligent verification, compile the final list of 3-5 approved URLs into the JSON format below. If you cannot find at least 3 high-quality sources, provide what you have found. Quality is paramount.\n\n**## FINAL OUTPUT INSTRUCTION**\n\nAfter completing all research steps and tool invocations, your *only* response must be the complete structured output.",
+          "maxIterations": 20
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1600,
+        420
+      ],
+      "id": "551682bc-83ad-482d-af23-8e9a0c8d68fe",
+      "name": "Authoritative Resource Link Finder Agent"
+    },
+    {
+      "parameters": {
+        "content": "# 🔵 Content Creation",
+        "height": 480,
+        "width": 1040,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        220
+      ],
+      "id": "cd1ad359-a0b1-4749-9b24-e8fa28510775",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "content": "### Content Structure doc:\nhttps://docs.google.com/document/d/1ShskKK61T4RKi4fI2sug2KIBv_6Msup3TQ9f3HC7a7o/edit?usp=sharing",
+        "height": 80,
+        "width": 300,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2640,
+        560
+      ],
+      "id": "a8d26509-19b1-4fc1-a7b7-ed46d9384c6c",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1ShskKK61T4RKi4fI2sug2KIBv_6Msup3TQ9f3HC7a7o/edit?usp=sharing",
+        "simple": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Simplify', ``, 'boolean') }}"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        2800,
+        420
+      ],
+      "id": "0498b46a-1081-43a2-bb8d-402dd985f633",
+      "name": "content_structure"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro",
+        "options": {
+          "temperature": 0.8
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2600,
+        420
+      ],
+      "id": "ed639721-ee49-4b82-aa1b-97e035105894",
+      "name": "Gemini 2.5 pRo"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7d5675ae-a097-4f99-9f9d-64fb88b93640",
+              "name": "Master Research & Synthesis Agent",
+              "value": "={{ $('Master Research & Synthesis Agent').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "142e5875-e8b9-4169-b7b3-9d6c1c22356b",
+              "name": "SEvO Keyword & Content Strategy Synthesizer",
+              "value": "={{ $('SEvO Keyword & Content Strategy Synthesizer').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "246727f0-93bf-4f19-8ac4-637969eaf29b",
+              "name": "Deep-Dive Keyword Analyst",
+              "value": "={{ $('Deep-Dive Keyword Analyst').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "a43f08f4-9f94-4176-8713-c58953287fb5",
+              "name": "Topic Insights & Core Angle Synthesizer",
+              "value": "={{ $('Topic Insights & Core Angle Synthesizer').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "a43addbd-b7b5-4037-bef1-dda1a7ad45ea",
+              "name": "Competitor Identification",
+              "value": "={{ $('Competitor Identification').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "f72e7a07-7951-4805-92ed-80c17f555865",
+              "name": "Authoritative Resource Link Finder Agent",
+              "value": "={{ $json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "744569fa-0246-447a-9622-898252916e36",
+              "name": "Campaign input",
+              "value": "={{ $('Set Data').all() }}",
+              "type": "string"
+            },
+            {
+              "id": "71531b4d-3c75-4449-b164-4832b66e40f9",
+              "name": "Client Data",
+              "value": "={{ $('🦺 Set Client Data').all() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1980,
+        300
+      ],
+      "id": "fb15b1d0-63ba-4d7f-afba-7d8f90e006b2",
+      "name": "Get All Data"
+    },
+    {
+      "parameters": {
+        "jsCode": "// This is the definitive, corrected code for the 'Prepare Data' node.\n// It maps every field to its correct source agent from the consolidated input.\n\nconst allData = items[0].json;\n\n// --- Helper function to safely get data blocks ---\n// This handles cases where an agent's output is nested inside an \"output\" key.\nfunction getDataBlock(agentData) {\n  if (!agentData) return {};\n  return agentData.output && typeof agentData.output === 'object' ? agentData.output : agentData;\n}\n\n// --- Helper function to parse stringified JSON arrays ---\nfunction parseJsonString(jsonString) {\n  try {\n    const parsedArray = JSON.parse(jsonString);\n    return parsedArray[0]?.json || {};\n  } catch (e) {\n    return {};\n  }\n}\n\n// --- Extract data from the CORRECT source agents ---\nconst campaignInput = parseJsonString(allData[\"Campaign input\"]);\nconst clientData = parseJsonString(allData[\"Client Data\"]);\n\n// The high-level strategy comes from the \"Topic Insights\" agent\nconst topicInsights = getDataBlock(allData[\"Topic Insights & Core Angle Synthesizer\"]);\n\n// The deep dive keywords come from the \"Deep-Dive\" agent\nconst keywordAnalysis = getDataBlock(allData[\"Deep-Dive Keyword Analyst\"]);\n\n// The competitor info comes from the \"Competitor Identification\" agent\nconst competitorAnalysis = getDataBlock(allData[\"Competitor Identification\"]);\n\n// The E-E-A-T links come from the \"Authoritative Resource\" agent\nconst eeatLinks = getDataBlock(allData[\"Authoritative Resource Link Finder Agent\"]);\n\n\n// --- Construct the Final Article Brief ---\nconst finalArticleBrief = {\n  \"article_brief\": {\n    \"content_requirements\": {\n      \"target_word_count\": campaignInput.TargetWordCount || \"2000\",\n      \"primary_campaign_goal\": campaignInput.CampaignGoal || \"Drive Website Traffic\"\n    },\n    \"strategic_direction\": {\n      // These fields come from the 'Topic Insights' agent\n      \"overarching_article_topic\": topicInsights.overarching_article_topic || \"N/A\",\n      \"core_article_angle_uvp\": topicInsights.core_article_angle_uvp || \"N/A\",\n      \"primary_target_audience_persona\": topicInsights.primary_target_audience_persona || \"N/A\"\n    },\n    \"seo_elements\": {\n      // Critical themes also come from 'Topic Insights'\n      \"critical_themes_to_cover\": topicInsights.critical_themes_to_cover || [],\n      // Keyword opportunities come from the 'Deep-Dive' analyst\n      \"top_10_keyword_opportunities\": keywordAnalysis.top_10_keyword_opportunities || []\n    },\n    \"eeat_elements\": {\n      // Key opportunities come from 'Topic Insights'\n      \"key_eeat_opportunities\": topicInsights.key_eeat_opportunities || [],\n      // Approved links come from the 'Authoritative Resource' finder\n      \"approved_authoritative_external_links\": eeatLinks.approved_authoritative_external_links || []\n    },\n    \"competitor_analysis\": {\n      \"overall_competitor_landscape_summary\": competitorAnalysis.overall_competitor_landscape_summary || \"N/A\",\n      \"top_identified_competitors\": competitorAnalysis.top_identified_competitors || [],\n      \"strategic_recommendations_to_outperform\": competitorAnalysis.strategic_recommendations_to_outperform || []\n    },\n    \"client_details\": {\n      \"client_brand_name\": clientData[\"Client/Brand Name\"] || \"N/A\",\n      \"brand_voice_tone\": clientData[\"Brand voice tone\"] || \"N/A\",\n      \"eeat_highlights\": clientData[\"EEAT highlights\"] || \"N/A\",\n      \"internal_linking_pages\": (clientData[\"Internal linking pages\"] || \"\").split('\\n').filter(url => url.trim() !== '')\n    }\n  }\n};\n\n// Return the final brief for the next agent\nreturn {\n  json: finalArticleBrief\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2180,
+        300
+      ],
+      "id": "6e3e82fa-4f6e-4669-bcde-1037d65391f3",
+      "name": "Article Brief"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.comprehensive_research_report }}",
+        "options": {
+          "systemMessage": "=ROLE & GOAL\n\nYou are a Master Content Architect and Senior SEO Editor. Your mission is to deconstruct a comprehensive strategic brief, use your content_structure tool to retrieve a full methodology document, and then synthesize a final, detailed article outline based on the correct template within that document.\n\nCONTEXT & MISSION\n\nYour Input: You will receive a single, human-readable text document, the \"Final SEvO Research & Strategy Report\". This is your complete strategic brief.\n\nYour Tool: You have access to one tool: content_structure. This tool contains the complete set of structural templates for articles of different lengths.\n\nYour Task: To create a detailed, SEO-optimized article outline in Markdown format.\n\nEXECUTION PLAN: A 3-STEP PROCESS\n\nDeconstruct the Brief:\n\nFirst, thoroughly read and understand the entire input text (Final SEvO Research & Strategy Report).\n\nIdentify and internally note all critical strategic elements, especially the Target Word Count and the list of Internal linking pages.\n\nRetrieve Methodology & Select Template:\n\nYour first and only tool call MUST be to the content_structure tool to retrieve the entire methodology document.\n\nAfter retrieving the document, you must read it and identify the specific structural template that matches the Target Word Count from your input brief.\n\nSynthesize the Final Outline:\n\nUsing the correct template you selected, create the complete Markdown outline.\n\nYou must populate the sections of the template with the specific strategic details from the brief. This includes:\n\nKeywords: For each section, select and specify the most relevant keywords.\n\nE-E-A-T Notes: Specify where to cite external sources and client credentials.\n\nInternal Links (NEW INSTRUCTION): Analyze the list of Internal linking pages from the brief. For each URL, find the most contextually relevant section of the outline and insert a clear [INTERNAL_LINK: ...] tag as an instruction for the final writer.\n\nOUTPUT REQUIREMENT & EXAMPLE\n\nYour entire response MUST be a single, well-formatted Markdown document. Do not add any commentary or JSON syntax. Your output should follow the format and quality of the example below.\n\nEXAMPLE OF EXPECTED MARKDOWN OUTPUT\nGenerated markdown\n# **Article Outline: The Certified Solution: Your Guide to an NSF Certified Shower Filter**\n\n## **Introduction**\n*   **Hook:** Are you spending a fortune on creams and treatments but still struggling with persistent dry skin? The problem might not be your products, but your water.\n*   **Introduce Problem & Solution:** This guide explains how a `certified shower head filter` offers a scientifically proven solution.\n*   **Primary Keyword:** `certified shower head filter`\n\n---\n## **H2: The Proof is in the Proof: Your Guide to Certifications**\n*   **Core Point:** To establish trust by focusing on certification.\n*   **Sub-topics:**\n    *   ### **H3: What \"Certified\" Really Means**\n        *   **Instruction:** Explain what the NSF/ANSI 177 standard means for consumers.\n        *   **Keywords to use:** `certified shower head filter`\n        *   **E-E-A-T Note:** Cite the **NSF.org** article here. **[INTERNAL_LINK: https://www.filteroasis.com/about-us]**\n\n---\n## **Conclusion**\n*   **Summary:** Recap that a certified filter is the only way to ensure performance.\n*   **Proposed CTA:** Explore our range of independently certified shower filters today."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        2600,
+        300
+      ],
+      "id": "14424849-815b-4e68-a316-cf0c18dafeab",
+      "name": "Outline Architect"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output }}\n\n---\n\n{{ $('Structure Input').item.json.comprehensive_research_report }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=ROLE & GOAL\n\nYou are an expert SEO Content Writer and a meticulous Chief Editor. Your mission is to execute a detailed strategic brief to produce a final, publication-ready article that flawlessly adheres to every constraint, including structure, E-E-A-T citations, internal links, and word count.\n\nCONTEXT & MISSION\n\nYour Input: You will receive a single, comprehensive, human-readable text document. This is your Final Writing Brief. It contains all the strategy, the full outline, and all supporting research data you will need.\n\nYour Task: To write a complete article that is a perfect execution of the brief.\n\nTHE THREE ABSOLUTE RULES OF THIS TASK\n\nWORD COUNT IS A STRICT LIMIT: Your top priority is to ensure the final article is approximately 2000 words. This is a strict constraint. To achieve this, you must be concise and summarize the points in the outline. Do not exceed the word count. If you write a section that is too long, you must edit it down.\n\nTHE OUTLINE IS A PRECISE BLUEPRINT: You must follow the structure provided in PART 2 of the brief exactly. Use the specified H1, H2s, and H3s. Every instruction, keyword, and note within the outline must be addressed in its designated section.\n\nALL CITATIONS AND LINKS ARE MANDATORY: You must include every single E-E-A-T note and [INTERNAL_LINK] tag specified in the outline.\n\nFor E-E-A-T Note:, you must correctly cite the specified external source or client credential.\n\nFor [INTERNAL_LINK: ...], you must create a hyperlink to the specified URL using contextually appropriate anchor text.\n\nFailure to follow these three rules means the entire task is a failure.\n\nEXECUTION PLAN\n\nInternalize the Brief: Thoroughly analyze the entire input document.\n\nWrite the Article: Following the Three Absolute Rules, write the complete article. The tone must be Professional and Authoritative. The narrative must be built around the Core Article Angle (UVP).\n\nReview Your Work: Before concluding, review your generated article to ensure every keyword is placed, every link is included, and the total word count is respected.\n\nFINAL OUTPUT REQUIREMENT\n\nYour entire response MUST be the complete article formatted as a single Markdown document. Do not include any other commentary or notes. Your response should begin directly with the H1 title."
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        1980,
+        520
+      ],
+      "id": "2747a3d8-b202-438d-b386-305a82c88850",
+      "name": "Final Article Generation"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=ROLE & GOAL\n\nYou are an expert Web Publisher and HTML Formatting Specialist. Your mission is to take a complete article written in Markdown and convert it into a clean, semantic, and professionally polished HTML document. Your focus is on structure, readability, and strategic emphasis.\n\nCONTEXT & MISSION\n\nYour Input: You will receive a single, complete article formatted in Markdown.\n\nYour Task: To meticulously translate this Markdown into a high-quality HTML document, following the specific rules of professional web formatting. You are not writing new content; you are formatting existing content.\n\nCRITICAL EXECUTION INSTRUCTIONS\n\nSEMANTIC STRUCTURE IS MANDATORY: You must use the correct HTML tags for their intended purpose.\n\nThe main title must be an <h1>.\n\nMain section titles must be <h2> tags.\n\nSub-section titles must be <h3> tags.\n\nAll regular paragraphs must be wrapped in <p> tags.\n\nAll bulleted lists must use a <ul> container with <li> tags for each item.\n\nCREATE A FUNCTIONAL TABLE OF CONTENTS:\n\nFor each <h2> tag in the article, you must generate a clean, URL-friendly id attribute. (e.g., ## Why Your Shower Water... becomes <h2 id=\"why-your-shower-water\">...</h2>).\n\nAt the beginning of the article, under the Table of Contents heading, you must create an unordered list (<ul>) where each list item (<li>) is a hyperlink (<a>) pointing to the corresponding id of the <h2> section.\n\nAPPLY STRATEGIC BOLDING (<strong>): Do not overuse bolding. Apply <strong> tags only to the following elements to maximize their impact:\n\nThe term being defined in a \"Myth vs. Fact\" section (e.g., <strong>Fact:</strong>).\n\nKey terminology being introduced for the first time (e.g., <strong>KDF (Kinetic Degradation Fluxion)</strong>).\n\nThe most critical phrase or takeaway in the final conclusion paragraph.\n\nFORMAT ALL HYPERLINKS CORRECTLY:\n\nAll links, both internal and external, must be created using the <a> tag with a proper href attribute.\n\nFor External Links, you MUST include target=\"_blank\" and rel=\"noopener noreferrer\".\n\nFor Internal Links, do not add a target attribute.\n\nFINAL OUTPUT REQUIREMENT\n\nYour entire response MUST be the complete, raw HTML code for the article. Do not wrap it in JSON, Markdown code fences (like ```html), or any other formatting. Your response should start exactly with the <h1> tag and end with the final closing tag of the document.\n\nEXAMPLE OF EXPECTED OUTPUT FORMAT\nGenerated html\n<h1>The Certified Solution: A Science-Backed Guide...</h1>\n<p>Are you investing in premium skin and hair care products...</p>\n<h2>Table of Contents</h2>\n<ul>\n    <li><a href=\"#the-hidden-damage-in-your-shower-water\">The Hidden Damage in Your Shower Water</a></li>\n    <li><a href=\"#the-science-of-filtration...\">The Science of Filtration...</a></li>\n</ul>\n<h2 id=\"the-hidden-damage-in-your-shower-water\">The Hidden Damage in Your Shower Water</h2>\n<p>...the EPA's <a href=\"https://www.epa.gov/...\" target=\"_blank\" rel=\"noopener noreferrer\">National Primary Drinking Water Regulations</a>. While vital...</p>\n"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        2300,
+        520
+      ],
+      "id": "eac5db5d-b7aa-4688-ac16-cb4757dd4db8",
+      "name": "HTML Format"
+    },
+    {
+      "parameters": {
+        "jsCode": "// This is the complete and corrected code for the 'Final Report Formatter' node.\n// It will take the final 'article_brief' JSON and format it into a single,\n// clean, human-readable Markdown text string.\n\nconst brief = items[0].json.article_brief;\n\n// Helper function to format arrays into clean bulleted lists\nfunction formatList(items) {\n  if (!items || items.length === 0) {\n    return \"  * N/A\";\n  }\n  // This handles both simple string arrays and arrays of objects with a 'name' property\n  return items.map(item => {\n    if (typeof item === 'string') {\n        return `*   ${item}`;\n    }\n    return `*   ${item.name || JSON.stringify(item)}`; // Fallback for unexpected object structures\n  }).join('\\n');\n}\n\n// Helper function for Competitor Strengths/Weaknesses which are also arrays\nfunction formatCompetitorLists(items) {\n  if (!items || items.length === 0) {\n    return \"N/A\";\n  }\n  return '\\n' + items.map(item => `        *   ${item}`).join('\\n');\n}\n\n\n// Main function to build the report string\nfunction generateReport(data) {\n  // This line was missing from the snippet, causing the error.\n  const reportLines = [];\n\n  // --- Section 1: Core Strategy ---\n  reportLines.push('# **Final SEvO Research & Strategy Report**', '---');\n  reportLines.push('## **SECTION 1: CORE CONTENT STRATEGY & ANGLE**\\n');\n  reportLines.push('### **Overarching Article Topic:**', `*   ${data.strategic_direction.overarching_article_topic}\\n`);\n  reportLines.push('### **Core Article Angle & Unique Value Proposition (UVP):**', `*   ${data.strategic_direction.core_article_angle_uvp}\\n`);\n  reportLines.push('### **Primary Target Audience Persona:**', `*   ${data.strategic_direction.primary_target_audience_persona}\\n`);\n  reportLines.push('### **Critical Themes to Cover:**', formatList(data.seo_elements.critical_themes_to_cover) + '\\n');\n  \n  // --- Section 2: SEO Keyword Blueprint ---\n  reportLines.push('---', '## **SECTION 2: SEO KEYWORD BLUEPRINT**\\n');\n  reportLines.push('### **Top 10 High-Value Keyword Opportunities:**');\n  (data.seo_elements.top_10_keyword_opportunities || []).forEach(kw => {\n    reportLines.push(`*   **Keyword:** \\`${kw.keyword}\\``);\n    reportLines.push(`    *   **Intent:** ${kw.search_intent}`);\n    reportLines.push(`    *   **Est. Volume:** ${kw.estimated_monthly_volume}`);\n    reportLines.push(`    *   **Competition:** ${kw.competition_level}`);\n    reportLines.push(`    *   **Strategic Value:** ${kw.strategic_value_to_client}`);\n    reportLines.push(`    *   **Opportunity Score:** ${kw.opportunity_score}\\n`);\n  });\n\n  // --- Section 3: Competitor Analysis ---\n  reportLines.push('---', '## **SECTION 3: COMPETITIVE LANDSCAPE ANALYSIS**\\n');\n  reportLines.push('### **Overall Competitor Landscape Summary:**', `${data.competitor_analysis.overall_competitor_landscape_summary}\\n`);\n  reportLines.push('### **Top Identified Competitors (Deep Analysis):**');\n  (data.competitor_analysis.top_identified_competitors || []).forEach(comp => {\n    reportLines.push(`*   **Competitor:** ${comp.competitor_name} (${comp.url})`);\n    reportLines.push(`    *   **Main Angle:** ${comp.content_main_angle_and_focus}`);\n    reportLines.push(`    *   **Strengths:** ${formatCompetitorLists(comp.observed_strengths)}`);\n    reportLines.push(`    *   **Weaknesses/Gaps:** ${formatCompetitorLists(comp.observed_weaknesses_or_gaps)}\\n`);\n  });\n  reportLines.push('### **Strategic Recommendations to Outperform:**', formatList(data.competitor_analysis.strategic_recommendations_to_outperform) + '\\n');\n\n  // --- Section 4: E-E-A-T Resources ---\n  reportLines.push('---', '## **SECTION 4: E-E-A-T & AUTHORITY RESOURCES**\\n');\n  reportLines.push('### **Key E-E-A-T Opportunities:**', formatList(data.eeat_elements.key_eeat_opportunities) + '\\n');\n  reportLines.push('### **Approved Authoritative External Links for Citation:**');\n  (data.eeat_elements.approved_authoritative_external_links || []).forEach(link => {\n    reportLines.push(`*   **Source:** ${link.source_name} - *${link.title}*`);\n    reportLines.push(`    *   **URL:** ${link.url}`);\n    reportLines.push(`    *   **Justification:** ${link.brief_justification_for_inclusion}`);\n    reportLines.push(`    *   **Suggested Anchor Text:** \"${link.suggested_contextual_anchor_text}\"\\n`);\n  });\n\n  return reportLines.join('\\n');\n}\n\n// Execute the function and prepare the final output\nconst finalReportText = generateReport(brief);\n\n// Return the final report as a single text field\nreturn {\n  json: {\n    \"comprehensive_research_report\": finalReportText\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2380,
+        300
+      ],
+      "id": "05e04310-3e5e-4b3a-983c-9c0749997562",
+      "name": "Structure Input"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "71531b4d-3c75-4449-b164-4832b66e40f9",
+              "name": "Client Data",
+              "value": "={{ $('🦺 Set Client Data').all() }}",
+              "type": "string"
+            },
+            {
+              "id": "744569fa-0246-447a-9622-898252916e36",
+              "name": "Campaign input",
+              "value": "={{ $('Set Data').all() }}",
+              "type": "string"
+            },
+            {
+              "id": "7d5675ae-a097-4f99-9f9d-64fb88b93640",
+              "name": "Master Research & Synthesis",
+              "value": "={{ $('Master Research & Synthesis Agent').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "142e5875-e8b9-4169-b7b3-9d6c1c22356b",
+              "name": "SEvO Keyword & Content Strategy",
+              "value": "={{ $('SEvO Keyword & Content Strategy Synthesizer').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "246727f0-93bf-4f19-8ac4-637969eaf29b",
+              "name": "Deep-Dive Keyword Analysis",
+              "value": "={{ $('Deep-Dive Keyword Analyst').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "a43f08f4-9f94-4176-8713-c58953287fb5",
+              "name": "Topic Insights & Core Angle Synthesizer",
+              "value": "={{ $('Topic Insights & Core Angle Synthesizer').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "a43addbd-b7b5-4037-bef1-dda1a7ad45ea",
+              "name": "Competitor Identification",
+              "value": "={{ $('Competitor Identification').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "f72e7a07-7951-4805-92ed-80c17f555865",
+              "name": "Authoritative Resources",
+              "value": "={{ $('Authoritative Resource Link Finder Agent').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "045f108c-cf8e-451e-9a06-5f0d5baddb92",
+              "name": "First Draft Outline",
+              "value": "={{ $('Outline Architect').item.json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "c841ce55-c472-4211-a35a-8db0abe32244",
+              "name": "First Draft Markdown Article",
+              "value": "={{ $('Final Article Generation').item.json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "b1d73e0e-4055-488f-abc1-815619e9be5d",
+              "name": "First Draft HTML Article",
+              "value": "={{ $('HTML Format').item.json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        800
+      ],
+      "id": "fcd8f98a-6947-425f-b432-3b467317b916",
+      "name": "Get all data"
+    },
+    {
+      "parameters": {
+        "jsCode": "// This code takes the complete, consolidated data and transforms it into a\n// single, well-structured, and styled HTML document.\n\nconst allData = items[0].json;\n\n// --- Helper Functions ---\n\n// Safely parses stringified JSON data, which is common in n8n workflows.\nfunction parseJsonString(jsonString) {\n  try {\n    const parsed = JSON.parse(jsonString);\n    return Array.isArray(parsed) ? parsed[0]?.json || {} : parsed;\n  } catch (e) {\n    return {};\n  }\n}\n\n// Safely gets the main data block from an agent's output, handling nested 'output' keys.\nfunction getDataBlock(agentData) {\n  if (!agentData) return {};\n  return agentData.output && typeof agentData.output === 'object' ? agentData.output : agentData;\n}\n\n// A simple but effective Markdown to HTML converter.\nfunction markdownToHtml(md) {\n  if (!md) return '<p>N/A</p>';\n  let html = md;\n  // Convert H3s\n  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');\n  // Convert H2s\n  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');\n  // Convert H1s\n  html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');\n  // Convert bold\n  html = html.replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');\n  // Convert list items\n  html = html.replace(/^\\* (.*$)/gim, '<li>$1</li>');\n  // Wrap remaining lines in paragraphs\n  html = html.split('\\n').map(line => {\n    if (line.trim() === '' || line.startsWith('<h') || line.startsWith('<li')) {\n      return line;\n    }\n    return `<p>${line}</p>`;\n  }).join('\\n');\n  return html;\n}\n\n// --- Extract and Prepare All Data Sources ---\nconst clientData = parseJsonString(allData[\"Client Data\"]);\nconst campaignInput = parseJsonString(allData[\"Campaign input\"]);\nconst masterResearch = getDataBlock(allData[\"Master Research & Synthesis\"]);\nconst sevoStrategy = getDataBlock(allData[\"SEvO Keyword & Content Strategy\"]);\nconst keywordAnalysis = getDataBlock(allData[\"Deep-Dive Keyword Analysis\"]);\nconst topicSynthesizer = getDataBlock(allData[\"Topic Insights & Core Angle Synthesizer\"]);\nconst competitorAnalysis = getDataBlock(allData[\"Competitor Identification\"]);\nconst eeatResources = getDataBlock(allData[\"Authoritative Resources\"]);\nconst firstDraftOutline = allData[\"First Draft Outline\"] || \"\";\nconst firstDraftArticle = allData[\"First Draft Markdown Article\"] || \"\";\n\n// --- Build the HTML Document ---\n\nlet html = `\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>SEvO Comprehensive Research Report</title>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 960px; margin: 20px auto; padding: 20px; background-color: #f9f9f9; }\n    h1, h2, h3, h4 { color: #1a237e; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; margin-top: 40px; }\n    h1 { font-size: 2.5em; }\n    h2 { font-size: 2em; }\n    h3 { font-size: 1.5em; border-bottom: 1px solid #eee; }\n    h4 { font-size: 1.2em; border-bottom: none; }\n    code, pre { background-color: #eee; padding: 2px 5px; border-radius: 4px; font-family: \"Courier New\", Courier, monospace; }\n    ul { list-style-type: disc; padding-left: 20px; }\n    li { margin-bottom: 10px; }\n    strong { color: #c2185b; }\n    .section { border: 1px solid #ddd; padding: 20px; margin-bottom: 30px; border-radius: 8px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }\n    .sub-section { border-left: 4px solid #3f51b5; padding-left: 15px; margin-bottom: 20px; }\n    .report-title { text-align: center; border-bottom: 4px solid #1a237e; }\n  </style>\n</head>\n<body>\n  <div class=\"report-title\">\n    <h1>SEvO Comprehensive Research Report</h1>\n    <p><strong>Client:</strong> ${clientData[\"Client/Brand Name\"] || 'N/A'}</p>\n    <p><strong>Main Topic:</strong> ${campaignInput.MainContentTopic || 'N/A'}</p>\n  </div>\n\n  <!-- Client & Campaign Data Section -->\n  <div class=\"section\">\n    <h2>Campaign & Client Details</h2>\n    <div class=\"sub-section\">\n      <h3>Campaign Input</h3>\n      <ul>\n        <li><strong>Goal:</strong> ${campaignInput.CampaignGoal}</li>\n        <li><strong>Content Format:</strong> ${campaignInput.MasterContentFormat}</li>\n        <li><strong>Seed Keyword:</strong> <code>${campaignInput.SeedKeywords}</code></li>\n        <li><strong>Target Word Count:</strong> ${campaignInput.TargetWordCount}</li>\n        <li><strong>Audience Knowledge:</strong> ${campaignInput.AudienceKnowledgeLevel}</li>\n      </ul>\n    </div>\n    <div class=\"sub-section\">\n      <h3>Client Data</h3>\n      <ul>\n        <li><strong>Brand Voice:</strong> ${clientData[\"Brand voice tone\"]}</li>\n        <li><strong>E-E-A-T Highlights:</strong> ${clientData[\"EEAT highlights\"]}</li>\n        <li><strong>Internal Linking Pages:</strong> <ul>${(clientData[\"Internal linking pages\"] || \"\").split('\\\\n').map(url => `<li><a href=\"${url}\" target=\"_blank\">${url}</a></li>`).join('')}</ul></li>\n      </ul>\n    </div>\n  </div>\n\n  <!-- Master Research Section -->\n  <div class=\"section\">\n    <h2>Master Research & Synthesis</h2>\n    ${(masterResearch.research_summary_by_angle || []).map(angle => `\n      <div class=\"sub-section\">\n        <h3>Angle: ${angle.research_angle}</h3>\n        <p>${angle.synthesized_summary}</p>\n        <h4>Key Extracted Elements:</h4>\n        <ul>\n          <li><strong>Entities:</strong> ${angle.extracted_elements.key_entities_mentioned.join(', ')}</li>\n          <li><strong>Pain Points:</strong> ${angle.extracted_elements.key_pain_points_addressed.join(', ')}</li>\n          <li><strong>Solutions:</strong> ${angle.extracted_elements.key_solutions_or_benefits_highlighted.join(', ')}</li>\n        </ul>\n      </div>\n    `).join('')}\n  </div>\n\n  <!-- Keyword Strategy Section -->\n  <div class=\"section\">\n    <h2>SEvO Keyword & Content Strategy</h2>\n    ${Object.keys(sevoStrategy.master_keyword_clusters || {}).map(key => `\n      <div class=\"sub-section\">\n        <h3>${key.replace(/_/g, ' ').replace(/\\b\\w/g, l => l.toUpperCase())}</h3>\n        <ul>\n        ${sevoStrategy.master_keyword_clusters[key].map(kw => `\n          <li><strong>Keyword:</strong> <code>${kw.keyword}</code><br>\n          <strong>Intent:</strong> ${kw.search_intent}<br>\n          <strong>Rationale:</strong> ${kw.strategic_rationale}</li>\n        `).join('')}\n        </ul>\n      </div>\n    `).join('')}\n  </div>\n\n  <!-- Deep-Dive Keyword Analysis Section -->\n  <div class=\"section\">\n      <h2>Deep-Dive Keyword Analysis</h2>\n      <div class=\"sub-section\">\n          <h3>Top 10 Keyword Opportunities</h3>\n          <ul>\n              ${(keywordAnalysis.top_10_keyword_opportunities || []).map(kw => `\n                  <li>\n                      <strong>Keyword:</strong> <code>${kw.keyword}</code><br>\n                      <strong>Intent:</strong> ${kw.search_intent} | <strong>Volume:</strong> ${kw.estimated_monthly_volume} | <strong>Competition:</strong> ${kw.competition_level}<br>\n                      <strong>Strategic Value:</strong> ${kw.strategic_value_to_client}<br>\n                      <strong>Opportunity Score:</strong> ${kw.opportunity_score}/10\n                  </li>\n              `).join('')}\n          </ul>\n      </div>\n  </div>\n\n  <!-- Competitor Analysis Section -->\n  <div class=\"section\">\n      <h2>Competitor Identification</h2>\n      <div class=\"sub-section\">\n          <h3>Overall Summary</h3>\n          <p>${competitorAnalysis.overall_competitor_landscape_summary || 'N/A'}</p>\n      </div>\n      <div class=\"sub-section\">\n          <h3>Top Competitors</h3>\n          <ul>\n              ${(competitorAnalysis.top_identified_competitors || []).map(comp => `\n                  <li>\n                      <strong>${comp.competitor_name}</strong> (<a href=\"${comp.url}\" target=\"_blank\">View Article</a>)<br>\n                      <strong>Angle:</strong> ${comp.content_main_angle_and_focus}<br>\n                      <strong>Weaknesses to Exploit:</strong>\n                      <ul>${(comp.observed_weaknesses_or_gaps || []).map(gap => `<li>${gap}</li>`).join('')}</ul>\n                  </li>\n              `).join('')}\n          </ul>\n      </div>\n  </div>\n\n  <!-- E-E-A-T Resources Section -->\n  <div class=\"section\">\n      <h2>Authoritative E-E-A-T Resources</h2>\n      <ul>\n          ${(eeatResources.approved_authoritative_external_links || []).map(link => `\n              <li>\n                  <strong>${link.source_name}:</strong> <a href=\"${link.url}\" target=\"_blank\">${link.title}</a><br>\n                  <em>Justification:</em> ${link.brief_justification_for_inclusion}\n              </li>\n          `).join('')}\n      </ul>\n  </div>\n\n  <!-- Draft Outline Section -->\n  <div class=\"section\">\n    <h2>First Draft Outline</h2>\n    ${markdownToHtml(firstDraftOutline)}\n  </div>\n\n  <!-- Final Article Section -->\n  <div class=\"section\">\n    <h2>First Draft Markdown Article</h2>\n    ${markdownToHtml(firstDraftArticle)}\n  </div>\n\n</body>\n</html>\n`;\n\nreturn {\n  json: {\n    final_html_report: html\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1080,
+        800
+      ],
+      "id": "a1970446-9879-43e1-a175-2a217a447627",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "content": "# Rankenstein v8 Pro Research",
+        "height": 80,
+        "width": 510,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        100,
+        -220
+      ],
+      "id": "926b48b7-1b64-4d8f-9886-24e01ad692b2",
+      "name": "Sticky Note35"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.googleapis.com/upload/drive/v3/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "uploadType",
+              "value": "multipart"
+            },
+            {
+              "name": "supportsAllDrives",
+              "value": "true"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "=multipart/related; boundary=divider",
+        "body": "=--divider\nContent-Type: application/json; charset=UTF-8\n\n{\n  \"name\": \"Research DOC {{ $('prepare data').item.json.document_name }}.doc\",\n  \"mimeType\": \"application/vnd.google-apps.document\",\n  \"parents\": [\n    \"{{ $('prepare data').item.json.drive_folder_id }}\"\n  ]\n}\n\n--divider\nContent-Type: text/html\n\n{{ $('Code').item.json.final_html_report }}\n\n--divider--",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2020,
+        800
+      ],
+      "id": "9b480211-2218-4730-aa22-97d01704c787",
+      "name": "Create Research Document"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.googleapis.com/upload/drive/v3/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "uploadType",
+              "value": "multipart"
+            },
+            {
+              "name": "supportsAllDrives",
+              "value": "true"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "=multipart/related; boundary=divider",
+        "body": "=--divider\nContent-Type: application/json; charset=UTF-8\n\n{\n  \"name\": \"Research HTML {{ $('prepare data').item.json.document_name }}.html\",\n  \"mimeType\": \"text/html\",\n  \"parents\": [\n    \"{{ $('prepare data').item.json.drive_folder_id }}\"\n  ]\n}\n\n--divider\nContent-Type: text/html\n\n{{ $('Code').item.json.final_html_report }}\n\n--divider--",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1780,
+        800
+      ],
+      "id": "2a5fc830-ca41-4f54-a46f-1d25e1aa36ca",
+      "name": "Create Research HTML"
+    },
+    {
+      "parameters": {
+        "content": "  ![n8n Creator Profile](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTluOGx3NWxxc2NmbDV3ZTB6bm90b3V6Y2V2bG5jazFlcGE3MHduaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/h7uTwqEHysbd2lhyDP/giphy.gif)",
+        "height": 200,
+        "width": 210,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1720,
+        760
+      ],
+      "id": "d04381ed-4038-4550-b5f9-5dc5a04a7760",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "  ![n8n Creator Profile](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTluOGx3NWxxc2NmbDV3ZTB6bm90b3V6Y2V2bG5jazFlcGE3MHduaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/h7uTwqEHysbd2lhyDP/giphy.gif)",
+        "height": 200,
+        "width": 210,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1960,
+        760
+      ],
+      "id": "bbf0ee03-963b-436a-b43a-18bb648861ad",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.googleapis.com/upload/drive/v3/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "uploadType",
+              "value": "multipart"
+            },
+            {
+              "name": "supportsAllDrives",
+              "value": "true"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "=multipart/related; boundary=divider",
+        "body": "=--divider\nContent-Type: application/json; charset=UTF-8\n\n{\n  \"name\": \"Article HTML {{ $('prepare data').item.json.document_name }}.html\",\n  \"mimeType\": \"text/html\",\n  \"parents\": [\n    \"{{ $('prepare data').item.json.drive_folder_id }}\"\n  ]\n}\n\n--divider\nContent-Type: text/html\n\n{{ $('HTML Format').item.json.text }}\n\n--divider--",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2260,
+        800
+      ],
+      "id": "89409e44-0b43-4cc6-958d-10e4cd3ccd86",
+      "name": "Create HTML Article"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.googleapis.com/upload/drive/v3/files",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "uploadType",
+              "value": "multipart"
+            },
+            {
+              "name": "supportsAllDrives",
+              "value": "true"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "=multipart/related; boundary=divider",
+        "body": "=--divider\nContent-Type: application/json; charset=UTF-8\n\n{\n  \"name\": \"Article Doc {{ $json.document_name }}\",\n  \"mimeType\": \"application/vnd.google-apps.document\",\n  \"parents\": [\n    \"{{ $json.drive_folder_id }}\"\n  ]\n}\n\n--divider\nContent-Type: text/html\n\n{{ $json.html_content }}\n\n--divider--",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        800
+      ],
+      "id": "2de55772-9fc8-4655-9321-98c12147d47f",
+      "name": "Create Document Article"
+    },
+    {
+      "parameters": {
+        "content": "  ![n8n Creator Profile](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTluOGx3NWxxc2NmbDV3ZTB6bm90b3V6Y2V2bG5jazFlcGE3MHduaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/h7uTwqEHysbd2lhyDP/giphy.gif)",
+        "height": 200,
+        "width": 210,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2200,
+        760
+      ],
+      "id": "015601e9-634b-4803-9897-06813fe79e33",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "  ![n8n Creator Profile](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTluOGx3NWxxc2NmbDV3ZTB6bm90b3V6Y2V2bG5jazFlcGE3MHduaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/h7uTwqEHysbd2lhyDP/giphy.gif)",
+        "height": 80,
+        "width": 160,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        600,
+        -220
+      ],
+      "id": "82eb6cae-180f-4875-97e8-e66d53cfe631",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "### Full Setup Guide:\nhttps://drive.google.com/file/d/12fUPbkS_HsX0nqs02ScU9vg36aVpo7vc/view?usp=sharing ",
+        "height": 80,
+        "width": 640,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        120,
+        760
+      ],
+      "id": "9f0a3327-8582-4c1f-89b6-97a2604a485e",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "content": "  ![n8n Creator Profile](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTluOGx3NWxxc2NmbDV3ZTB6bm90b3V6Y2V2bG5jazFlcGE3MHduaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/h7uTwqEHysbd2lhyDP/giphy.gif)",
+        "height": 200,
+        "width": 210,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2680,
+        760
+      ],
+      "id": "886893ac-41d4-4b6e-89cb-a0fa78878e9c",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "  ![n8n Creator Profile](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTluOGx3NWxxc2NmbDV3ZTB6bm90b3V6Y2V2bG5jazFlcGE3MHduaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/h7uTwqEHysbd2lhyDP/giphy.gif)",
+        "height": 200,
+        "width": 210,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1220,
+        760
+      ],
+      "id": "0dddf760-7cd2-481f-bd0b-d61e48d5606f",
+      "name": "Sticky Note29"
+    },
+    {
+      "parameters": {
+        "content": "### ⬆️ Create a drive folder, make sure it is set to \"view\", input the drive folder ID in 'prepare data' node",
+        "height": 80,
+        "width": 320,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        980
+      ],
+      "id": "92e91aa2-03f9-41b6-a86b-072f2b524398",
+      "name": "Sticky Note11"
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-02T12:52:06.000Z",
+  "versionId": "702455bc-45fe-4993-b9f5-2f2d480d3481"
+}
