@@ -1,0 +1,548 @@
+{
+  "active": false,
+  "connections": {
+    "SEvO Keyword & Content Strategy Synthesizer": {
+      "main": [
+        [
+          {
+            "node": "Deep-Dive Keyword Analyst",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini 2.5 pro": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "SEvO Keyword & Content Strategy Synthesizer",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Deep-Dive Keyword Analyst",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "keyword_deep_research": {
+      "ai_tool": [
+        [
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Deep-Dive Keyword Analyst",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "pro_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "simple_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Deep-Dive Keyword Analyst",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OUtput Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OUtput ParseR": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Deep-Dive Keyword Analyst",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deep-Dive Keyword Analyst": {
+      "main": [
+        [
+          {
+            "node": "Get All Research",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "SEvO Keyword & Content Strategy Synthesizer",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Master Research & Synthesis Agent": {
+      "main": [
+        [
+          {
+            "node": "SEvO Keyword & Content Strategy Synthesizer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Master Research & Synthesis Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get All Research": {
+      "main": [
+        [
+          {
+            "node": "Return",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-15T16:27:06.473Z",
+  "id": "r4AjVisnSQ30iyfO",
+  "isArchived": true,
+  "meta": null,
+  "name": "Input and Research",
+  "nodes": [
+    {
+      "parameters": {
+        "notice": "",
+        "promptType": "define",
+        "text": "={{ JSON.stringify($json) }}",
+        "hasOutputParser": true,
+        "needsFallback": false,
+        "messages": {
+          "messageValues": [
+            {
+              "type": "SystemMessagePromptTemplate",
+              "message": "=Vous êtes un Stratège de Contenu d'élite en SEvO (Search Everywhere Optimization). Vous maîtrisez l'art d'interpréter des données de recherche brutes et de les transformer en une stratégie de contenu précise, actionnable et complète.\n\n## CONTEXTE & OBJECTIF\n\nVotre input est un objet JSON complet provenant d'un agent de recherche. Cet objet contient des données pré-compilées incluant `initial_keyword_research`, `research_summary_by_angle` détaillé, et `aggregated_insights`.\n\nVotre mission est d'analyser méticuleusement l'intégralité de cet input JSON et de le synthétiser en un rapport stratégique. Ce rapport définira les principaux clusters de mots-clés et les angles de contenu spécifiques à chaque plateforme, nécessaires pour créer un contenu qui domine les classements et fait autorité.\n\nVous utiliserez uniquement les données fournies en input. N'utilisez pas d'outils externes.\n\n## VOTRE TÂCHE\n\nAnalyser les données d'input : Examinez en profondeur les données de recherche fournies. Concentrez-vous sur `initial_keyword_research` (pour les volumes de recherche et les termes de base), `research_summary_by_angle` (pour les points de douleur des utilisateurs, les solutions et les entités clés), et `aggregated_insights` (pour les thèmes, les lacunes de contenu et les signaux des concurrents).\n\nSynthétiser la stratégie de mots-clés : À partir de votre analyse, générez les `master_keyword_clusters`. Chaque mot-clé doit avoir son intention de recherche et une justification stratégique expliquant pourquoi il a été choisi sur la base des données de recherche.\n\nDévelopper les angles de contenu SEvO : Pour chaque plateforme fournie en input (ex: Blog, YouTube, TikTok), créez une recommandation de contenu sur mesure. Cela inclut les meilleurs mots-clés pour cette plateforme, les hashtags pertinents, un angle de contenu spécifique qui comble une lacune ou répond aux besoins des utilisateurs, et un conseil de format/style.\n\n## Date & Heure Actuelles pour référence : {{ new Date($now).toLocaleString('fr-FR', {\n  day: '2-digit',\n  month: 'short',\n  year: 'numeric',\n  hour: '2-digit',\n  minute: '2-digit',\n  hour12: false,\n  timeZone: 'Europe/Paris' // Optionnel : pour l'heure locale correcte\n}).replace(',', '') }}\n\n**## INSTRUCTION FINALE DE SORTIE**\nAprès avoir complété toutes les étapes, votre *seule* réponse doit être la sortie structurée complète.\n\n**INSTRUCTION FINALE CRITIQUE : Votre réponse finale DOIT être une chaîne de caractères (string) unique contenant un bloc de code JSON. N'envoyez JAMAIS un objet JSON directement. Votre réponse doit commencer par ```json et se terminer par ```.**"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.6,
+      "position": [
+        1940,
+        160
+      ],
+      "id": "e989096d-fbbe-4a7f-bd04-5aade208fa28",
+      "name": "SEvO Keyword & Content Strategy Synthesizer"
+    },
+    {
+      "parameters": {
+        "notice": "",
+        "modelName": "models/gemini-2.5-pro",
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        2020,
+        280
+      ],
+      "id": "b94a3f7d-b9ab-4004-83da-bf5b464460fd",
+      "name": "Gemini 2.5 pro",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "IaxShIVI5GMeNwws",
+          "name": "Google Gemini(PaLM) Api account Pre Etat Date"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Makes an HTTP request and returns the response data",
+        "curlImport": "",
+        "method": "POST",
+        "url": "https://api.perplexity.ai/chat/completions",
+        "authentication": "none",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "=Authorization",
+              "value": "=Bearer {{ $('Start').first().json._firstItem['Perplexity API Key'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sonar\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a Local SERP Analyst. Your function is to provide a concise, factual summary of the top search results for a local query. Identify the primary companies and the type of content ranking (e.g., service pages, directories). Be objective and data-focused.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $fromAI('simple_search') }}\"\n    }\n  ]\n}",
+        "options": {},
+        "optimizeResponse": false,
+        "infoMessage": ""
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1600,
+        280
+      ],
+      "id": "30eab5bd-6036-4f83-b19b-b78fe25bd957",
+      "name": "simple_search"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Makes an HTTP request and returns the response data",
+        "curlImport": "",
+        "method": "POST",
+        "url": "https://api.perplexity.ai/chat/completions",
+        "authentication": "none",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Start').first().json._firstItem['Perplexity API Key'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sonar-pro\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are an investigative researcher. Answer the user's specific question directly and factually based on web search results. CITE YOUR SOURCES. Provide only the direct answer and its source.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $fromAI('pro_search') }}\"\n    }\n  ]\n}",
+        "options": {},
+        "optimizeResponse": false,
+        "infoMessage": ""
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1740,
+        280
+      ],
+      "id": "d9410e80-3cb6-4593-a4b0-dd79106cdb10",
+      "name": "pro_search"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Makes an HTTP request and returns the response data",
+        "curlImport": "",
+        "method": "POST",
+        "url": "https://api.perplexity.ai/chat/completions",
+        "authentication": "none",
+        "provideSslCertificates": false,
+        "sendQuery": false,
+        "sendHeaders": true,
+        "specifyHeaders": "keypair",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('Start').first().json._firstItem['Perplexity API Key'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"sonar-deep-research\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are an expert SEO research assistant. Your sole purpose is to perform a deep and comprehensive keyword analysis based on the user's query. Provide a wide-ranging list of related keywords, long-tail keywords, common questions, search intent data, and an analysis of the top-ranking content. Focus on providing a large volume of raw data and facts. The user, an expert analyst, will handle the final strategic filtering and interpretation.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $fromAI('deep_keyword_research') }}\"\n    }\n  ]\n}",
+        "options": {},
+        "optimizeResponse": false,
+        "infoMessage": ""
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        2380,
+        280
+      ],
+      "id": "99a9be19-662a-4ead-98fa-b81c46b8f2ad",
+      "name": "keyword_deep_research"
+    },
+    {
+      "parameters": {
+        "notice": "",
+        "schemaType": "fromJson",
+        "jsonSchemaExample": "{\n  \"initial_keyword_research\": {\n    \"primary_keyword\": \"Hard Water Effects\",\n    \"related_terms\": [\"hard water hair loss\", \"shower filter for dry skin\"],\n    \"user_questions\": [\"Does hard water cause acne?\"]\n  },\n  \"research_summary_by_angle\": [\n    {\n      \"research_angle\": \"User Pain Points\",\n      \"synthesized_summary\": \"Users consistently report issues like dry, itchy skin, dull and brittle hair, and exacerbation of eczema after showering in hard water areas. The primary complaints center around mineral buildup (limescale) and the effects of chlorine.\",\n      \"extracted_elements\": {\n        \"key_entities_mentioned\": [\"limescale\", \"chlorine\", \"eczema\"],\n        \"key_pain_points_addressed\": [\"dry skin\", \"itchy scalp\", \"brittle hair\", \"faded hair color\"],\n        \"key_solutions_or_benefits_highlighted\": [\"water softeners\", \"clarifying shampoos\", \"shower head filters\"],\n        \"prominent_questions_raised\": [\"How to know if I have hard water?\", \"Can hard water cause hair loss?\"],\n        \"notable_statistics_or_data_points\": [\"Over 85% of US homes have hard water.\"],\n        \"relevant_source_urls\": [\n          \"https://www.healthline.com/health/hard-water-hair\",\n          \"https://www.medicalnewstoday.com/articles/hard-water-and-skin\"\n        ]\n      }\n    }\n  ],\n  \"aggregated_insights\": {\n    \"overall_main_themes\": [\n      \"Mineral Buildup & Residue\",\n      \"Chlorine and its Irritating Effects\",\n      \"Skin & Hair Health Impact\"\n    ],\n    \"all_unique_paa_questions\": [\n      \"What are the signs of hard water on skin?\",\n      \"Can you reverse hard water hair damage?\"\n    ],\n    \"all_unique_related_searches\": [\n      \"best shower filter for hard water\",\n      \"hard water vs soft water\"\n    ],\n    \"potential_content_gaps_or_opportunities\": [\n      \"Detailed comparison of different filter technologies (KDF, Vitamin C, Carbon).\",\n      \"Content focused on specific regional hard water issues (e.g., 'Texas hard water solutions').\"\n    ],\n    \"emerging_trends_or_innovations\": [\n      \"Shower filters incorporating aromatherapy.\",\n      \"Smart filters that track water usage and filter life.\"\n    ],\n    \"client_brand_mentions_context\": [\n      {\n        \"brand\": \"Filter Oasis\",\n        \"context\": \"Frequently referenced for its vitamin C filters designed to reduce chlorine impact on skin.\"\n      }\n    ],\n    \"key_competitor_signals\": [\n      {\n        \"competitor_name\": \"AquaBliss\",\n        \"context_snippet\": \"The AquaBliss SF220 is often reviewed as a top choice for its multi-stage filtration...\",\n        \"source_url\": \"https://www.forbes.com/vetted/best-shower-filters/\",\n        \"source_tool\": \"google_search\"\n      }\n    ]\n  }\n}\n",
+        "autoFix": false
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        1660,
+        40
+      ],
+      "id": "96789093-dbe9-4074-87c2-4f3d9a6b129e",
+      "name": "OUtput Parser"
+    },
+    {
+      "parameters": {
+        "notice": "",
+        "schemaType": "fromJson",
+        "jsonSchemaExample": "{\n  \"top_10_keyword_opportunities\": [\n    {\n      \"keyword\": \"string\",\n      \"search_intent\": \"Informational\",\n      \"estimated_monthly_volume\": 0,\n      \"competition_level\": \"Low\",\n      \"strategic_value_to_client\": \"Targets users with eczema, a core pain point, and allows us to leverage our testing certifications as a trust signal.\",\n      \"opportunity_score\": 8\n    }\n  ]\n}\n",
+        "autoFix": false
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        2380,
+        40
+      ],
+      "id": "02018ef5-88d7-4920-a0f6-761733ae006a",
+      "name": "OUtput ParseR"
+    },
+    {
+      "parameters": {
+        "aiAgentStarterCallout": "",
+        "promptType": "define",
+        "text": "=Mot-clé principal : {{ $('Master Research & Synthesis Agent').item.json.output?.initial_keyword_research?.primary_keyword || '' }}",
+        "hasOutputParser": true,
+        "notice": "",
+        "needsFallback": false,
+        "options": {
+          "systemMessage": "=## RÔLE & OBJECTIF\nVous êtes un stratège SEO et analyste de données de classe mondiale, spécialisé dans l'identification d'opportunités de mots-clés à haute valeur. Votre mission est de prendre un unique mot-clé de base, de mener une recherche de mots-clés stratégique, et d'identifier les **10 mots-clés les plus précieux et les plus accessibles** pour votre client. Votre sortie finale DOIT être un unique objet JSON valide contenant seulement ces 10 opportunités.\n\n## CONTEXTE\n* **Votre client :** {{ $('Start').item.json.?.['Client/Brand Name'] || 'Client' }}\n* **Forces uniques du client (E-E-A-T) :**\n{{ $('Start').item.json.?.['EEAT highlights'] || 'Non spécifié' }}\n* **Principaux points de douleur de l'audience :**\n{{ $('Master Research & Synthesis Agent').item.json.output?.research_summary_by_angle?.[0]?.extracted_elements?.key_pain_points_addressed || 'Non spécifié' }}\n* **Mot-clé de base pour la recherche :** {{ $('Start').item.json.Set_Data_?.SeedKeywords || '' }}\n\n## VOTRE OUTIL DISPONIBLE\n- `Deep_keyword_research` - pour une analyse de mots-clés complète\n\n### LIMITES D'UTILISATION DES OUTILS\n**CRITIQUE :** Vous avez un budget strict de **MAXIMUM 2 appels d'outils**. Utilisez-les de manière stratégique.\n\n### RÈGLES DE FORMATAGE POUR L'INPUT DES OUTILS\nLa requête envoyée à votre outil DOIT être uniquement du texte pur :\n- Utilisez UNIQUEMENT le mot-clé de base ou ses variations\n- **N'INCLUEZ PAS :** de guillemets (`\"`), de crochets (`[]`), de deux-points (`:`), ou tout autre caractère spécial\n- **Bon exemple :** `remplacement filtre à eau`\n- **Mauvais exemple :** `remplacement \"filtre à eau\"`\n\n## PLAN DE MISSION STRATÉGIQUE\n\n### APPROCHE 1 : Analyse approfondie unique (Recommandée)\n1.  **Mener une recherche complète :**\n    -   Appelez `Deep_keyword_research` UNE SEULE FOIS avec le mot-clé de base\n    -   Cela devrait retourner un grand volume de données de mots-clés associés avec leurs métriques\n\n2.  **Analyser l'ensemble des données :**\n    -   À partir des résultats, identifiez TOUTES les opportunités potentielles\n    -   Filtrez les mots-clés avec une intention commerciale ou informationnelle claire\n    -   Donnez la priorité aux mots-clés qui ciblent directement les principaux points de douleur de l'audience\n    -   Sélectionnez les 10 meilleurs mots-clés absolus issus de cette analyse complète\n\n### APPROCHE 2 : Recherche en deux étapes (À utiliser uniquement si nécessaire)\n1.  **Premier appel - Recherche primaire :**\n    -   Utilisez le mot-clé de base exact pour une couverture large\n\n2.  **Deuxième appel - Affinement (UNIQUEMENT s'il existe des lacunes critiques) :**\n    -   Si les premiers résultats manquent de diversité ou omettent des angles clés, faites UN appel supplémentaire\n    -   Utilisez une variation ou un modificateur très proche du mot-clé de base\n    -   Exemple : Si le mot-clé de base est `filtre à eau`, essayez `système de filtration d'eau`\n\n## CRITÈRES DE SÉLECTION DES MOTS-CLÉS\n\nPour chaque opportunité de mot-clé, évaluez sur la base de :\n\n1.  **Intention commerciale/informationnelle :** Indique-t-elle une intention d'achat ou un besoin de résolution de problème ?\n2.  **Alignement avec les points de douleur :** Cible-t-elle directement les points de douleur spécifiés de l'audience ?\n3.  **Niveau de concurrence :** Donnez la priorité aux mots-clés à concurrence faible ou moyenne\n4.  **Pertinence par rapport aux forces du client :** S'aligne-t-elle avec les avantages E-E-A-T du client ?\n5.  **Volume de recherche :** Trouvez un équilibre entre le volume et la concurrence\n\n## CADRE DE NOTATION DES OPPORTUNITÉS\n\nCalculez le \"opportunity_score\" (de 1 à 10) pour chaque mot-clé :\n\n**Score élevé (8-10) :**\n-   Niveau de concurrence : \"Faible\"\n-   Haute pertinence par rapport aux forces E-E-A-T du client\n-   Cible directement un point de douleur principal\n-   Intention de recherche : \"Commerciale\" ou \"Transactionnelle\" (pour les mots-clés axés sur la conversion)\n\n**Score moyen (5-7) :**\n-   Niveau de concurrence : \"Moyenne\"\n-   Pertinence modérée par rapport aux forces du client\n-   Cible indirectement les points de douleur\n-   Intention de recherche : Tout type avec un besoin utilisateur clair\n\n**Score faible (1-4) :**\n-   Niveau de concurrence : \"Élevée\"\n-   Mots-clés génériques avec peu de différenciation\n-   Faible lien avec la proposition de valeur du client\n-   Intention utilisateur peu claire\n\n## CORRESPONDANCE DU NIVEAU DE CONCURRENCE\nBasé sur la difficulté du mot-clé issue de votre recherche :\n- **Faible** : Score de difficulté 0-30\n- **Moyenne** : Score de difficulté 31-60\n- **Élevée** : Score de difficulté 61-100\n\n## CLASSIFICATION DE L'INTENTION DE RECHERCHE\n- **Informationnelle** : L'utilisateur cherche de la connaissance, des réponses ou de l'éducation\n- **Commerciale** : L'utilisateur recherche/compare des produits ou services\n- **Transactionnelle** : L'utilisateur est prêt à acheter ou à passer à l'action\n\n## EXIGENCES DE LA STRUCTURE DE SORTIE\n\nVotre sortie finale DOIT être un objet JSON valide avec CETTE structure EXACTE :\n\n\n{\n  \"top_10_keyword_opportunities\": [\n    {\n      \"keyword\": \"expression de mot-clé exacte\",\n      \"search_intent\": \"choisir UN : Informational | Commercial | Transactional\",\n      \"estimated_monthly_volume\": valeur_numerique,\n      \"competition_level\": \"choisir UN : Low | Medium | High\",\n      \"strategic_value_to_client\": \"Expliquez POURQUOI ce mot-clé est précieux, en référençant les forces du client et les points de douleur\",\n      \"opportunity_score\": valeur_numerique_de_1_a_10\n    }\n  ]\n}\n\nSpécifications des champs :\nkeyword : L'expression de mot-clé exacte sous forme de chaîne de caractères\n\nsearch_intent : Doit être EXACTEMENT l'un des suivants : \"Informational\", \"Commercial\", ou \"Transactional\"\n\nestimated_monthly_volume : Une valeur numérique (sans guillemets, sans virgules)\n\ncompetition_level : Doit être EXACTEMENT l'un des suivants : \"Low\", \"Medium\", ou \"High\"\n\nstrategic_value_to_client : Une chaîne de caractères détaillée expliquant pourquoi ce mot-clé est précieux (ex: \"Cible les utilisateurs souffrant d'eczéma, un point de douleur principal, et nous permet de mettre en avant nos certifications de test comme signal de confiance.\")\n\nopportunity_score : Un nombre de 1 à 10 (sans guillemets)\n\nRègles de formatage JSON :\nLe tableau doit contenir EXACTEMENT 10 objets de mots-clés\n\nUtilisez une syntaxe JSON correcte (guillemets pour les chaînes, pas de guillemets pour les nombres)\n\nPas de virgules finales\n\nPas de commentaires dans le JSON final\n\nDate & Heure Actuelles pour référence :\n{{ new Date($now).toLocaleString('fr-FR', {\n  day: '2-digit',\n  month: 'short',\n  year: 'numeric',\n  hour: '2-digit',\n  minute: '2-digit',\n  hour12: false,\n  timeZone: 'Europe/Paris' // Optionnel : pour l'heure locale correcte\n}).replace(',', '') }}\n\nINSTRUCTION FINALE DE SORTIE\nAprès avoir complété toutes les étapes de recherche (en utilisant PAS PLUS de 2 appels d'outils), produisez UNIQUEMENT la structure JSON ci-dessus avec exactement 10 opportunités de mots-clés. \n\n**INSTRUCTION FINALE CRITIQUE : Votre réponse finale DOIT être une chaîne de caractères (string) unique contenant un bloc de code JSON. N'envoyez JAMAIS un objet JSON directement. Votre réponse doit commencer par ```json et se terminer par ```.**",
+          "maxIterations": 30
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        2280,
+        160
+      ],
+      "id": "5cfb9c20-8c11-4a91-bdc2-8e5d790caf27",
+      "name": "Deep-Dive Keyword Analyst"
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "10c355bc-15cf-49f6-8495-8515e65ec060",
+              "name": "Deep-Dive Keyword Analyst",
+              "value": "={{ $json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "7ade0622-5738-43df-99c5-c0f976d0df2a",
+              "name": "SEvO Keyword & Content Strategy Synthesizer",
+              "value": "={{ $('SEvO Keyword & Content Strategy Synthesizer').item.json.output }}",
+              "type": "object"
+            },
+            {
+              "id": "9c7c5ca5-f790-4e51-9aaa-3de68829818a",
+              "name": "Master Research & Synthesis Agent",
+              "value": "={{ $('Master Research & Synthesis Agent').item.json.output }}",
+              "type": "object"
+            }
+          ]
+        },
+        "includeOtherFields": false,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2660,
+        260
+      ],
+      "id": "51afbcbd-73b2-4121-bae7-c9c465e9cb9d",
+      "name": "Get All Research"
+    },
+    {
+      "parameters": {
+        "notice": "",
+        "schemaType": "fromJson",
+        "jsonSchemaExample": "{\n  \"master_keyword_clusters\": {\n    \"core_topic_keywords\": [\n      {\n        \"keyword\": \"filtered showerhead\",\n        \"search_intent\": \"Informational/Commercial\",\n        \"strategic_rationale\": \"This is the primary topic with high search volume. It's the central pillar for all content, targeting users at the top and middle of the funnel.\"\n      },\n      {\n        \"keyword\": \"hard water filter\",\n        \"search_intent\": \"Informational/Problem-Aware\",\n        \"strategic_rationale\": \"Directly addresses a primary pain point (hard water) identified in the research, capturing users actively seeking a solution.\"\n      }\n    ],\n    \"long_tail_specific_queries\": [\n      {\n        \"keyword\": \"do filtered shower heads help with eczema\",\n        \"search_intent\": \"Informational/Solution-Seeking\",\n        \"strategic_rationale\": \"A specific user question from PAA data. Answering this directly positions the brand as an expert resource for a high-pain-point audience.\"\n      },\n      {\n        \"keyword\": \"best shower filter for dry skin\",\n        \"search_intent\": \"Commercial/Transactional\",\n        \"strategic_rationale\": \"Targets users who have identified their problem and are now comparing products, indicating high purchase intent.\"\n      }\n    ],\n    \"user_pain_point_keywords\": [\n      {\n        \"keyword\": \"reduce chlorine in shower water\",\n        \"search_intent\": \"Problem-Aware/Informational\",\n        \"strategic_rationale\": \"Addresses the core scientific reason for skin/hair issues found in the research. Targets users who understand the root cause.\"\n      },\n      {\n        \"keyword\": \"stop hair color fading from water\",\n        \"search_intent\": \"Problem-Aware/Solution-Seeking\",\n        \"strategic_rationale\": \"A specific, high-value pain point for an audience segment that invests in hair treatments. Offers a clear ROI for the user.\"\n      }\n    ],\n    \"competitive_landscape_keywords\": [\n      {\n        \"keyword\": \"jolie shower head alternative\",\n        \"search_intent\": \"Commercial/Comparative\",\n        \"strategic_rationale\": \"Targets users aware of a major competitor (Jolie) but seeking other options, potentially due to price or features. This allows for direct comparison.\"\n      },\n      {\n        \"keyword\": \"aquabliss vs filter oasis\",\n        \"search_intent\": \"Commercial/Comparative\",\n        \"strategic_rationale\": \"Creates an opportunity for a direct, feature-by-feature comparison against another key competitor, capturing bottom-of-funnel traffic.\"\n      }\n    ]\n  },\n  \"sevo_content_angle_recommendations\": [\n    {\n      \"platform\": \"Main Website Blog\",\n      \"suggested_keywords_for_platform\": [\n        \"best shower filter for hard water\",\n        \"do filtered shower heads help with eczema\",\n        \"kdf vs carbon filter\"\n      ],\n      \"suggested_hashtags\": [],\n      \"proposed_content_angle\": \"The Ultimate Guide to Choosing a Shower Filter for Your Home. This comprehensive article should address the science behind filtration (KDF, Carbon), help users diagnose their water type (hard vs. soft), and provide a detailed breakdown of benefits for specific conditions like eczema and dry skin, leveraging the client's certifications as proof points.\",\n      \"content_format_and_style_tip\": \"Create a long-form, data-driven article featuring an interactive 'Find Your Filter' quiz. Use clear headings, bullet points, and high-quality images. Embed customer testimonials and links to the scientific studies mentioned in the research.\"\n    },\n    {\n      \"platform\": \"YouTube\",\n      \"suggested_keywords_for_platform\": [\n        \"filtered shower head review\",\n        \"shower filter installation\",\n        \"hard water hair before and after\"\n      ],\n      \"suggested_hashtags\": [\n        \"#showerfilter\",\n        \"#hardwater\",\n        \"#haircare\",\n        \"#skincare\"\n      ],\n      \"proposed_content_angle\": \"We Tested a Filtered Showerhead for 30 Days: SEE The Results! This video should visually demonstrate the 'before and after' effects on hair (frizz, shine) and skin. Include a simple installation guide and a clear explanation of how the filter works to combat chlorine and minerals.\",\n      \"content_format_and_style_tip\": \"Create a visually engaging, fast-paced video (5-7 minutes). Use on-screen text callouts to highlight key benefits. Feature a relatable host and show close-ups of the water flow and filter components.\"\n    },\n    {\n      \"platform\": \"TikTok\",\n      \"suggested_keywords_for_platform\": [\n        \"tiktok made me buy it shower filter\",\n        \"what's in my tap water\",\n        \"dry skin hack\"\n      ],\n      \"suggested_hashtags\": [\n        \"#tiktokmademebuyit\",\n        \"#beautytips\",\n        \"#skinhacks\",\n        \"#cleantok\"\n      ],\n      \"proposed_content_angle\": \"The Gross Reason Your Skin is So Dry. A short, impactful video showing a water quality test (e.g., chlorine test strips turning a dark color) on regular tap water vs. water from the filtered showerhead. The contrast provides a 'shock factor' that drives engagement and highlights the problem.\",\n      \"content_format_and_style_tip\": \"A quick, vertical video (under 60 seconds) using trending audio. Focus on a single, powerful visual and use bold, easy-to-read text overlays. End with a clear call-to-action linking to the product.\"\n    }\n  ]\n}",
+        "autoFix": false
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        2040,
+        40
+      ],
+      "id": "5b6e89e5-eb13-4604-bc3d-991bf58477da",
+      "name": "Output Parser"
+    },
+    {
+      "parameters": {
+        "aiAgentStarterCallout": "",
+        "agent": "toolsAgent",
+        "promptType": "define",
+        "text": "=Objectif de la campagne : {{ $json.CampaignGoal || '' }}\nSujet principal du contenu : {{ $json.MainContentTopic || '' }}\nFormat du contenu : {{ $json.MasterContentFormat || '' }}\nMots-clés de base : {{ $json.SeedKeywords || '' }}\nNiveau de connaissance de l'audience : {{ $json.AudienceKnowledgeLevel || '' }}\n---\nNom du client/de la marque : {{ $('Start').item.json.?.['Client/Brand Name'] || '' }}\nURL du site web : {{ $('Start').item.json.?.['Website url'] || '' }}\nTon de la marque : {{ $('Start').item.json.?.['Brand voice tone'] || '' }}\nPoints forts E-E-A-T : {{ $('Start').item.json.?.['EEAT highlights'] || '' }}\nPages pour le maillage interne : {{ $('Start').item.json.?.['Internal linking pages'] || 'none' }}",
+        "hasOutputParser": true,
+        "notice": "",
+        "options": {
+          "systemMessage": "=RÔLE & DIRECTIVE PRINCIPALE\nVous êtes un système expert en analyse et recherche opérant dans un workflow d'automatisation n8n. Menez une recherche complète en utilisant les outils fournis, en respectant strictement les limites d'utilisation. Produisez UNIQUEMENT une structure JSON valide qui correspond directement au schéma requis — aucune explication, aucun commentaire, uniquement des données.\n\nCOMPRÉHENSION DES DONNÉES D'ENTRÉE\nVous recevrez :\n\nObjectif de la campagne : L'objectif principal (ex: \"Générer du trafic sur le site web\")\n\nSujet principal du contenu : Le thème central\n\nFormat du contenu : Le format de sortie souhaité (ex: \"Article de blog\")\n\nMots-clés de base : Les mots-clés primaires pour la recherche\n\nNiveau de connaissance de l'audience : Le niveau d'expertise du public cible\n\nNom du client/marque : Le nom de l'entreprise cliente\n\nURL du site web : Le domaine du client\n\nTon de la marque : Le style de communication\n\nPoints forts E-E-A-T : L'expertise, l'expérience, l'autorité et la confiance du client\n\nPages pour le maillage interne : Les URLs pour les opportunités de liens internes\n\nLIMITES D'UTILISATION DES OUTILS\nBudget strict pour les appels d'outils - NE PAS DÉPASSER :\n\nkeyword_deep_research : 1 appel maximum\n\nsimple_search : 3 appels maximum\n\npro_search : 2 appels maximum\n\nPARAMÈTRES CRITIQUES DES OUTILS\nRègles de format pour l'input des outils :\n\nUtilisez UNIQUEMENT des chaînes de texte pures (lettres, chiffres, espaces)\n\nAUCUN caractère spécial : {['\"\"']} ou symboles\n\nExemples :\n\n✅ Correct : IA dans les bénéfices ITAM\n\n❌ Incorrect : \"IA dans l'ITAM\" bénéfices\n\nPLAN D'EXÉCUTION DE LA RECHERCHE\nÉTAPE 1 : Recherche de Mots-clés\nOutil : keyword_deep_research\n\nInput : Combiner \"Sujet principal du contenu\" + \"Mots-clés de base\" (supprimer les doublons)\n\nObjectif de sortie : Extraire le mot-clé principal, les termes associés et les questions des utilisateurs\n\nUtilisation : UN seul appel\n\nÉTAPE 2 : Recherche Multi-Angles\nDéfinir 2-3 angles de recherche basés sur l'objectif de la campagne et le niveau de l'audience :\n\nPour les objectifs de génération de trafic :\n\nAngle 1 : Points de douleur & problèmes des utilisateurs\n\nAngle 2 : Solutions & avantages\n\nAngle 3 : Paysage concurrentiel\n\nPour les objectifs de conversion :\n\nAngle 1 : Comparaisons de produits/services\n\nAngle 2 : ROI & propositions de valeur\n\nAngle 3 : Mise en œuvre & meilleures pratiques\n\nUtilisation des outils :\n\nUtiliser simple_search pour chaque angle (max 3 appels)\n\nUtiliser pro_search pour une analyse approfondie des angles les plus critiques\n\nÉTAPE 3 : Synthèse & Veille Concurrentielle\nAgréger toutes les découvertes en informations structurées\n\nIdentifier les lacunes de contenu et les opportunités\n\nNoter toute mention ou tout signal des concurrents\n\nRechercher les tendances émergentes pertinentes pour le sujet\n\nEXIGENCES DE LA STRUCTURE DE SORTIE\nVotre réponse DOIT être UNIQUEMENT cette structure JSON :\n\n\n{\n  \"initial_keyword_research\": {\n    \"primary_keyword\": \"mot-clé principal\",\n    \"related_terms\": [\"tableau de mots-clés associés\"],\n    \"user_questions\": [\"tableau de questions posées par les utilisateurs\"]\n  },\n  \"research_summary_by_angle\": [\n    {\n      \"research_angle\": \"nom de l'angle\",\n      \"synthesized_summary\": \"résumé des découvertes en 2-3 phrases\",\n      \"extracted_elements\": {\n        \"key_entities_mentioned\": [\"entités trouvées\"],\n        \"key_pain_points_addressed\": [\"points de douleur découverts\"],\n        \"key_solutions_or_benefits_highlighted\": [\"solutions trouvées\"],\n        \"prominent_questions_raised\": [\"questions trouvées\"],\n        \"notable_statistics_or_data_points\": [\"statistiques avec sources\"],\n        \"relevant_source_urls\": [\"URL faisant autorité\"]\n      }\n    }\n  ],\n  \"aggregated_insights\": {\n    \"overall_main_themes\": [\"3-5 thèmes principaux\"],\n    \"all_unique_paa_questions\": [\"questions 'Les gens demandent aussi'\"],\n    \"all_unique_related_searches\": [\"termes de recherche associés\"],\n    \"potential_content_gaps_or_opportunities\": [\"lacunes à combler\"],\n    \"emerging_trends_or_innovations\": [\"nouvelles tendances\"],\n    \"client_brand_mentions_context\": [\n      {\n        \"brand\": \"nom de la marque\",\n        \"context\": \"comment/où mentionnée\"\n      }\n    ],\n    \"key_competitor_signals\": [\n      {\n        \"competitor_name\": \"nom\",\n        \"context_snippet\": \"extrait pertinent\",\n        \"source_url\": \"URL\",\n        \"source_tool\": \"outil utilisé\"\n      }\n    ]\n  }\n}\n\n\nNORMES DE QUALITÉ DES DONNÉES\nPrécision : Croiser les informations entre plusieurs sources\n\nPertinence : Aligner toutes les données avec les objectifs de la campagne et le niveau de l'audience\n\nComplétude : Remplir TOUS les champs du schéma (utiliser des tableaux vides si aucune donnée)\n\nObjectivité : Rapporter uniquement des faits, pas d'opinions\n\nADAPTATION AU NIVEAU DE L'AUDIENCE\nAjuster le focus de la recherche en fonction du \"Niveau de connaissance de l'audience\" :\n\nDébutant : Se concentrer sur les bases, les définitions, les explications simples\n\nIntermédiaire : Inclure des comparaisons, des meilleures pratiques, la mise en œuvre\n\nExpert : Mettre l'accent sur les innovations, les détails techniques, les cas d'usage spécifiques\n\n## Date & Heure Actuelles pour référence : {{ new Date($now).toLocaleString('fr-FR', {\n  day: '2-digit',\n  month: 'short',\n  year: 'numeric',\n  hour: '2-digit',\n  minute: '2-digit',\n  hour12: false,\n  timeZone: 'Europe/Paris' // Optionnel : pour l'heure locale correcte\n}).replace(',', '') }}\n\n**INSTRUCTION FINALE CRITIQUE : Votre réponse finale DOIT être une chaîne de caractères (string) unique contenant un bloc de code JSON. N'envoyez JAMAIS un objet JSON directement. Votre réponse doit commencer par ```json et se terminer par ```.**",
+          "maxIterations": 40
+        },
+        "credentials": ""
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1580,
+        160
+      ],
+      "id": "4e9773c8-0d07-4acb-b88e-e1d7a6ae8b52",
+      "name": "Master Research & Synthesis Agent"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cdba8b20-137a-44b2-bde3-0ddfa72f8f39",
+              "name": "output",
+              "value": "={{ $('Master Research & Synthesis Agent').item.json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "dc94c338-e90b-4d1f-bca5-115939e0349b",
+              "name": "SEvO_Keyword__Content_Strategy_Synthesizer_output_1",
+              "value": "={{ $('SEvO Keyword & Content Strategy Synthesizer').item.json.output }}",
+              "type": "string"
+            },
+            {
+              "id": "0020468b-59f4-483f-85fc-1752a44e0662",
+              "name": "DeepDive_Keyword_Analyst_output_1",
+              "value": "={{ $('Deep-Dive Keyword Analyst').item.json.output }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2880,
+        260
+      ],
+      "id": "5d53f071-19cf-43f8-8342-af811a204511",
+      "name": "Return"
+    },
+    {
+      "id": "34eb9403-d54c-49fe-87a3-ebe9464cbb64",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        1360,
+        160
+      ],
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "_firstItem",
+              "type": "any"
+            },
+            {
+              "name": "",
+              "type": "any"
+            },
+            {
+              "name": "Set_Data_",
+              "type": "any"
+            },
+            {
+              "name": "AudienceKnowledgeLevel",
+              "type": "any"
+            },
+            {
+              "name": "MasterContentFormat",
+              "type": "any"
+            },
+            {
+              "name": "MainContentTopic",
+              "type": "any"
+            },
+            {
+              "name": "CampaignGoal",
+              "type": "any"
+            },
+            {
+              "name": "SeedKeywords",
+              "type": "any"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": null,
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-16T13:22:54.000Z",
+  "versionId": "9c3c0718-8616-4b25-acb0-eb383f96405d"
+}
