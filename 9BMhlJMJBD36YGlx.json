@@ -1,0 +1,441 @@
+{
+  "active": false,
+  "connections": {
+    "Filtrer Vidéos": {
+      "main": [
+        [
+          {
+            "node": "Analyse Vidéo Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log: Mapping Partiel/Échec": {
+      "main": [
+        [
+          {
+            "node": "Renommer Fichier Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mapping des IDs réussi ?": {
+      "main": [
+        [
+          {
+            "node": "Préparer Renommage (Succès)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notification: Mapping ID Échec",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyse Vidéo Gemini": {
+      "main": [
+        [
+          {
+            "node": "Code Node: Agent Nomenclature IA - Mapping des IDs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Préparer Renommage (Succès)": {
+      "main": [
+        [
+          {
+            "node": "Renommer Fichier Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notification: Mapping ID Échec": {
+      "main": [
+        [
+          {
+            "node": "Log: Mapping Partiel/Échec",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code Node: Agent Nomenclature IA - Mapping des IDs": {
+      "main": [
+        [
+          {
+            "node": "Mapping des IDs réussi ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Renommer Fichier Drive": {
+      "main": [
+        [
+          {
+            "node": "✅ Notification Succès",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Surveillance Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Filtrer Vidéos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-07-27T10:23:22.929Z",
+  "id": "9BMhlJMJBD36YGlx",
+  "isArchived": true,
+  "meta": null,
+  "name": "Satyn - Workflow Anti-Fragile Créatives Facebook Ads",
+  "nodes": [
+    {
+      "id": "drive_trigger",
+      "name": "Surveillance Google Drive",
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "notes": "Déclenchement automatique sur nouvelles vidéos",
+      "position": [
+        100,
+        300
+      ],
+      "parameters": {
+        "event": "fileCreated",
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "mode": "list",
+          "value": "REMPLACER_PAR_FOLDER_ID_VIDEOS"
+        },
+        "authentication": "oAuth2"
+      },
+      "typeVersion": 1
+    },
+    {
+      "id": "filter_videos",
+      "name": "Filtrer Vidéos",
+      "type": "n8n-nodes-base.filter",
+      "notes": "Filtre uniquement les fichiers vidéo",
+      "position": [
+        300,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "video_filter",
+              "operator": {
+                "type": "string",
+                "operation": "startsWith"
+              },
+              "leftValue": "={{ $json.mimeType }}",
+              "rightValue": "video/"
+            }
+          ]
+        }
+      },
+      "typeVersion": 2.2
+    },
+    {
+      "id": "gemini_analysis",
+      "name": "Analyse Vidéo Gemini",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "notes": "Analyse IA avec gestion d'erreurs intégrée",
+      "position": [
+        500,
+        300
+      ],
+      "parameters": {
+        "prompt": "Analyse cette vidéo créative Facebook Ads et retourne un JSON strict :\n{\n  \"product_type\": \"bonnet|skullcap|accessoire\",\n  \"hook_angle\": \"testimonial|demo|lifestyle|unboxing|problem_solution\",\n  \"format\": \"square|vertical|horizontal\",\n  \"audience\": \"homme|femme|unisexe\",\n  \"tone\": \"professionnel|decontracte|energique|elegant\",\n  \"keywords\": [\"mot1\", \"mot2\"],\n  \"confidence\": 0.95,\n  \"analysis_success\": true\n}\n\nSi l'analyse échoue, retourne:\n{\n  \"analysis_success\": false,\n  \"error\": \"description_erreur\",\n  \"fallback_data\": {\n    \"product_type\": \"bonnet\",\n    \"hook_angle\": \"demo\",\n    \"format\": \"square\"\n  }\n}",
+        "modelId": {
+          "mode": "list",
+          "value": "gemini-1.5-pro"
+        },
+        "options": {
+          "temperature": 0.2
+        },
+        "resource": "video",
+        "operation": "analyze",
+        "inputDataFieldName": "={{ $json.name }}"
+      },
+      "typeVersion": 1
+    },
+    {
+      "id": "mapping_validation",
+      "name": "Code Node: Agent Nomenclature IA - Mapping des IDs",
+      "type": "n8n-nodes-base.code",
+      "notes": "Validation robuste avec fallback automatique",
+      "position": [
+        700,
+        300
+      ],
+      "parameters": {
+        "jsCode": "// === AGENT NOMENCLATURE IA - MAPPING DES IDS ===\n// Logique anti-fragile pour validation et mapping\n\nconst items = $input.all();\nconst results = [];\n\nfor (const item of items) {\n  try {\n    const driveData = item.json;\n    const geminiOutput = driveData.output;\n    \n    // Tentative de parsing JSON Gemini\n    let analysisData;\n    let mappingSuccess = false;\n    let errorDetails = null;\n    \n    try {\n      // Parse la réponse Gemini\n      if (typeof geminiOutput === 'string') {\n        analysisData = JSON.parse(geminiOutput);\n      } else {\n        analysisData = geminiOutput;\n      }\n      \n      // Validation des champs requis\n      if (analysisData.analysis_success === false) {\n        throw new Error(`Analyse Gemini échouée: ${analysisData.error}`);\n      }\n      \n      // Mapping des IDs avec validation\n      const productMapping = {\n        'bonnet': 'BONNET',\n        'skullcap': 'SKULLCAP', \n        'accessoire': 'ACCESSOIRE'\n      };\n      \n      const hookMapping = {\n        'testimonial': 'TESTIMONIAL',\n        'demo': 'DEMO',\n        'lifestyle': 'LIFESTYLE',\n        'unboxing': 'UNBOXING',\n        'problem_solution': 'PROBLEM_SOL'\n      };\n      \n      const formatMapping = {\n        'square': 'SQ',\n        'vertical': 'VERT',\n        'horizontal': 'HORIZ'\n      };\n      \n      // Validation et mapping\n      const mappedProduct = productMapping[analysisData.product_type?.toLowerCase()];\n      const mappedHook = hookMapping[analysisData.hook_angle?.toLowerCase()];\n      const mappedFormat = formatMapping[analysisData.format?.toLowerCase()];\n      \n      if (!mappedProduct || !mappedHook || !mappedFormat) {\n        throw new Error(`Mapping incomplet: product=${mappedProduct}, hook=${mappedHook}, format=${mappedFormat}`);\n      }\n      \n      // Génération de la nomenclature\n      const dateStr = new Date().toLocaleDateString('fr-FR', { month: '2-digit', day: '2-digit' }).replace('/', '');\n      const nomenclature = `SATYN_${mappedProduct}_VID_${mappedFormat}_${mappedHook}_V1_${dateStr}`;\n      \n      mappingSuccess = true;\n      \n      results.push({\n        json: {\n          mapping_success: true,\n          nomenclature_final: nomenclature,\n          analysis_data: analysisData,\n          mapped_values: {\n            product: mappedProduct,\n            hook: mappedHook,\n            format: mappedFormat\n          },\n          original_file: {\n            name: driveData.name,\n            id: driveData.id,\n            createdTime: driveData.createdTime\n          },\n          confidence_score: analysisData.confidence || 0.8,\n          processing_timestamp: new Date().toISOString()\n        }\n      });\n      \n    } catch (parseError) {\n      // Échec du mapping - utilisation du fallback\n      errorDetails = parseError.message;\n      \n      // Fallback avec nomenclature par défaut\n      const dateStr = new Date().toLocaleDateString('fr-FR', { month: '2-digit', day: '2-digit' }).replace('/', '');\n      const fallbackNomenclature = `SATYN_BONNET_VID_SQ_DEMO_V1_${dateStr}_FALLBACK`;\n      \n      results.push({\n        json: {\n          mapping_success: false,\n          nomenclature_final: fallbackNomenclature,\n          error_type: 'mapping_failure',\n          error_details: errorDetails,\n          fallback_used: true,\n          original_analysis: geminiOutput,\n          original_file: {\n            name: driveData.name,\n            id: driveData.id,\n            createdTime: driveData.createdTime\n          },\n          processing_timestamp: new Date().toISOString()\n        }\n      });\n    }\n    \n  } catch (globalError) {\n    // Erreur critique - création d'un fallback minimal\n    const dateStr = new Date().toLocaleDateString('fr-FR', { month: '2-digit', day: '2-digit' }).replace('/', '');\n    const emergencyNomenclature = `SATYN_UNKNOWN_VID_SQ_DEMO_V1_${dateStr}_ERROR`;\n    \n    results.push({\n      json: {\n        mapping_success: false,\n        nomenclature_final: emergencyNomenclature,\n        error_type: 'critical_failure',\n        error_details: globalError.message,\n        fallback_used: true,\n        processing_timestamp: new Date().toISOString()\n      }\n    });\n  }\n}\n\nreturn results;",
+        "language": "javascript"
+      },
+      "typeVersion": 2
+    },
+    {
+      "id": "check_mapping_success",
+      "name": "Mapping des IDs réussi ?",
+      "type": "n8n-nodes-base.if",
+      "notes": "Point de décision anti-fragile",
+      "position": [
+        900,
+        300
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "mapping_check",
+              "operator": {
+                "type": "boolean",
+                "operation": "equal"
+              },
+              "leftValue": "={{ $json.mapping_success }}",
+              "rightValue": true
+            }
+          ]
+        }
+      },
+      "typeVersion": 2.2
+    },
+    {
+      "id": "success_prepare_rename",
+      "name": "Préparer Renommage (Succès)",
+      "type": "n8n-nodes-base.set",
+      "notes": "Chemin de succès - nomenclature IA",
+      "position": [
+        1100,
+        200
+      ],
+      "parameters": {
+        "mode": "manual",
+        "options": {},
+        "assignments": {
+          "fields": [
+            {
+              "id": "new_filename",
+              "name": "new_filename",
+              "type": "string",
+              "value": "{{ $json.nomenclature_final }}"
+            },
+            {
+              "id": "file_id",
+              "name": "file_id",
+              "type": "string",
+              "value": "{{ $json.original_file.id }}"
+            },
+            {
+              "id": "operation_status",
+              "name": "operation_status",
+              "type": "string",
+              "value": "success"
+            }
+          ]
+        },
+        "includeOtherFields": true
+      },
+      "typeVersion": 3.4
+    },
+    {
+      "id": "error_notification",
+      "name": "Notification: Mapping ID Échec",
+      "type": "n8n-nodes-base.slack",
+      "notes": "Notification d'échec sur Slack",
+      "position": [
+        1100,
+        400
+      ],
+      "parameters": {
+        "text": "🚨 ALERTE SATYN - Échec Mapping Nomenclature",
+        "select": "channel",
+        "resource": "message",
+        "operation": "post",
+        "channelId": {
+          "mode": "list",
+          "value": "general"
+        },
+        "attachments": [
+          {
+            "color": "danger",
+            "title": "Détails de l'échec",
+            "fields": [
+              {
+                "title": "Fichier original",
+                "value": "{{ $json.original_file.name }}",
+                "short": true
+              },
+              {
+                "title": "Nomenclature fallback",
+                "value": "{{ $json.nomenclature_final }}",
+                "short": true
+              }
+            ]
+          }
+        ]
+      },
+      "typeVersion": 2.3
+    },
+    {
+      "id": "error_logging",
+      "name": "Log: Mapping Partiel/Échec",
+      "type": "n8n-nodes-base.set",
+      "notes": "Logging détaillé pour debugging",
+      "position": [
+        1300,
+        400
+      ],
+      "parameters": {
+        "mode": "manual",
+        "options": {},
+        "assignments": {
+          "fields": [
+            {
+              "id": "log_entry",
+              "name": "log_entry",
+              "type": "string",
+              "value": "Mapping Error - {{ $json.error_details }}"
+            },
+            {
+              "id": "new_filename",
+              "name": "new_filename",
+              "type": "string",
+              "value": "{{ $json.nomenclature_final }}"
+            },
+            {
+              "id": "file_id",
+              "name": "file_id",
+              "type": "string",
+              "value": "{{ $json.original_file.id }}"
+            },
+            {
+              "id": "operation_status",
+              "name": "operation_status",
+              "type": "string",
+              "value": "partial_success"
+            }
+          ]
+        },
+        "includeOtherFields": true
+      },
+      "typeVersion": 3.4
+    },
+    {
+      "id": "final_rename",
+      "name": "Renommer Fichier Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "notes": "Renommage final - succès OU fallback",
+      "position": [
+        1500,
+        300
+      ],
+      "parameters": {
+        "fileId": {
+          "mode": "list",
+          "value": "={{ $json.file_id }}"
+        },
+        "resource": "file",
+        "operation": "update",
+        "updateFields": {
+          "name": "{{ $json.new_filename }}"
+        },
+        "authentication": "oAuth2"
+      },
+      "typeVersion": 3
+    },
+    {
+      "id": "success_notification",
+      "name": "✅ Notification Succès",
+      "type": "n8n-nodes-base.slack",
+      "notes": "Notification de succès",
+      "position": [
+        1700,
+        200
+      ],
+      "parameters": {
+        "text": "✅ SATYN - Nomenclature Générée avec Succès",
+        "select": "channel",
+        "resource": "message",
+        "operation": "post",
+        "channelId": {
+          "mode": "list",
+          "value": "general"
+        },
+        "attachments": [
+          {
+            "color": "good",
+            "title": "Détails de l'analyse",
+            "fields": [
+              {
+                "title": "Produit détecté",
+                "value": "{{ $json.mapped_values.product }}",
+                "short": true
+              },
+              {
+                "title": "Hook/Angle",
+                "value": "{{ $json.mapped_values.hook }}",
+                "short": true
+              }
+            ]
+          }
+        ]
+      },
+      "typeVersion": 2.3
+    }
+  ],
+  "origin": "n8n",
+  "pinData": null,
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Paris",
+    "saveManualExecutions": true,
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-07-29T12:01:59.000Z",
+  "versionId": "cb20bd4a-9343-4fc9-a695-9a4a2317b10f"
+}
