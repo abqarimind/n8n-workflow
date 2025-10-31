@@ -1,0 +1,168 @@
+{
+  "active": false,
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "WhatsApp Business Cloud1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Business Cloud1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-06-11T21:41:51.884Z",
+  "id": "ohDF6aeBb4SL7dPY",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Send_Reminders",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 6
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -540,
+        -120
+      ],
+      "id": "aac263a5-5ba5-45ef-a4cb-88c9c47cc126",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appKHWL0qw1mtrVlN",
+          "mode": "list",
+          "cachedResultName": "Assistant",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblec9lFpO3FS456x",
+          "mode": "list",
+          "cachedResultName": "Reminders",
+          "cachedResultUrl": "https://airtable.com/appKHWL0qw1mtrVlN/tblec9lFpO3FS456x"
+        },
+        "filterByFormula": "AND(   IS_AFTER({ScheduledTime}, NOW()),   IS_BEFORE({ScheduledTime}, DATEADD(NOW(), 1, 'days')) )",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -320,
+        -120
+      ],
+      "id": "632980cf-996a-4082-8020-a1d437877eff",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "jNWGLwmFGYku7Ncy",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -100,
+        -120
+      ],
+      "id": "8120d7c2-ecde-4519-a3b4-35f66a4f3303",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "=601958186345380",
+        "recipientPhoneNumber": "=+33781932299",
+        "textBody": "=Reminder: {{ $json.Title }}. {{ $json.Notes }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -100
+      ],
+      "id": "9adfe882-8354-4821-9120-1c2836d2820f",
+      "name": "WhatsApp Business Cloud1",
+      "webhookId": "7db10a47-a004-44ee-9ca4-4d58743414f0",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "q2qfSQXn6Z9IVbzG",
+          "name": "WhatsApp account"
+        }
+      }
+    }
+  ],
+  "origin": "n8n",
+  "pinData": {},
+  "repo": {
+    "owner": "abqarimind",
+    "name": "n8n-workflow"
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-09-06T14:31:43.000Z",
+  "versionId": "9041c0b0-6dd8-4602-9609-38d877863f3c"
+}
